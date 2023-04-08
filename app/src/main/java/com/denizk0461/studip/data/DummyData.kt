@@ -1,5 +1,7 @@
 package com.denizk0461.studip.data
 
+import com.denizk0461.studip.model.StudIPEvent
+
 object DummyData {
 
     val events: Array<StudIPEvent> = arrayOf(

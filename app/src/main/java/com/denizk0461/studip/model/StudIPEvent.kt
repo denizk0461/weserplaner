@@ -1,4 +1,4 @@
-package com.denizk0461.studip.data
+package com.denizk0461.studip.model
 
 import androidx.room.Entity
 import androidx.room.Ignore

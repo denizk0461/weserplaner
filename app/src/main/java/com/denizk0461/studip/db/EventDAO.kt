@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.denizk0461.studip.data.StudIPEvent
+import com.denizk0461.studip.model.StudIPEvent
 
 @Dao
 interface EventDAO {

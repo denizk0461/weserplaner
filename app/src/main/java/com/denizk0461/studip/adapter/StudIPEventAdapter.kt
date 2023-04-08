@@ -3,7 +3,7 @@ package com.denizk0461.studip.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.denizk0461.studip.data.StudIPEvent
+import com.denizk0461.studip.model.StudIPEvent
 import com.denizk0461.studip.databinding.ItemEventBinding
 
 class StudIPEventAdapter(private val events: List<StudIPEvent>) : RecyclerView.Adapter<StudIPEventAdapter.EventViewHolder>() {

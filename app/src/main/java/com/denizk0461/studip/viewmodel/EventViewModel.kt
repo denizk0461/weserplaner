@@ -2,7 +2,7 @@ package com.denizk0461.studip.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.LiveData
-import com.denizk0461.studip.data.StudIPEvent
+import com.denizk0461.studip.model.StudIPEvent
 
 class EventViewModel(app: Application) : TemplateViewModel(app) {
 

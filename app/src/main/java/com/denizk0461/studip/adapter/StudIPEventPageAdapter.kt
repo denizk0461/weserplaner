@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.denizk0461.studip.data.StudIPEvent
+import com.denizk0461.studip.model.StudIPEvent
 import com.denizk0461.studip.databinding.ItemEventPageBinding
 
 class StudIPEventPageAdapter(private val events: List<StudIPEvent>) : RecyclerView.Adapter<StudIPEventPageAdapter.EventPageViewHolder>() {

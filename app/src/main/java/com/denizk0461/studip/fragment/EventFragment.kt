@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.denizk0461.studip.adapter.StudIPEventPageAdapter
 import com.denizk0461.studip.data.DummyData
+import com.denizk0461.studip.data.StudIPScraper
 import com.denizk0461.studip.databinding.FragmentEventBinding
 import com.denizk0461.studip.viewmodel.EventViewModel
 
@@ -46,6 +47,8 @@ class EventFragment : Fragment() {
             PagerSnapHelper().attachToRecyclerView(binding.recyclerView)
             binding.recyclerView.scheduleLayoutAnimation()
         }
+
+        viewModel.doAsync { StudIPScraper().parse(requireContext()) }
 
 //        binding.buttonFirst.setOnClickListener {
 //            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)

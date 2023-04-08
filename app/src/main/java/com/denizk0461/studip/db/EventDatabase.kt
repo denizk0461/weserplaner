@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.denizk0461.studip.data.StudIPEvent
+import com.denizk0461.studip.model.StudIPEvent
 
 @Database(entities = [StudIPEvent::class], version = 1)
 abstract class EventDatabase : RoomDatabase() {
