@@ -11,7 +11,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import com.denizk0461.studip.R
+import com.denizk0461.studip.data.Dependencies
 import com.denizk0461.studip.databinding.ActivityMainBinding
+import com.denizk0461.studip.db.EventRepository
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,8 +24,11 @@ class MainActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
 
+        Dependencies.repo = EventRepository(application)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         setSupportActionBar(binding.toolbar)
 
