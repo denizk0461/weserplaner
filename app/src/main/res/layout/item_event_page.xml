@@ -5,12 +5,11 @@
     android:layout_height="match_parent"
     android:scrollbars="vertical">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/page_layout"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/page_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.core.widget.NestedScrollView>
