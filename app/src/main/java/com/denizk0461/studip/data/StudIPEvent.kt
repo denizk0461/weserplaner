@@ -13,7 +13,7 @@ data class StudIPEvent(
     private val timeSlotEndTimes: List<String> = listOf("09:45", "11:45", "13:45", "15:45", "17:45", "19:45")
 
     val timeslot: String =
-        "${timeSlotStartTimes[timeslotStart]} – ${timeSlotEndTimes[timeslots - 1]}"
+        "${timeSlotStartTimes[timeslotStart]} – ${timeSlotEndTimes[timeslotStart + timeslots - 1]}"
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

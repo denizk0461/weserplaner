@@ -8,11 +8,11 @@ import com.denizk0461.studip.data.StudIPEvent
 import com.denizk0461.studip.databinding.ItemEventBinding
 import com.denizk0461.studip.databinding.ItemEventPageBinding
 
-class StudIPEventAdapter(private val events: List<StudIPEvent>) : RecyclerView.Adapter<StudIPEventAdapter.EventViewHolder>() {
+class StudIPEventPageAdapter(private val events: List<StudIPEvent>) : RecyclerView.Adapter<StudIPEventPageAdapter.EventPageViewHolder>() {
 
-    class EventViewHolder(val binding: ItemEventPageBinding) : RecyclerView.ViewHolder(binding.root)
+    class EventPageViewHolder(val binding: ItemEventPageBinding) : RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder = EventViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventPageViewHolder = EventPageViewHolder(
         ItemEventPageBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
@@ -22,7 +22,7 @@ class StudIPEventAdapter(private val events: List<StudIPEvent>) : RecyclerView.A
 
     override fun getItemCount(): Int = 5
 
-    override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: EventPageViewHolder, position: Int) {
         var itemCount = 0
         events.filter { it.day == position }.forEach { event ->
             val newView = ItemEventBinding.inflate(

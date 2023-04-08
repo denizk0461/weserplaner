@@ -9,5 +9,6 @@ object DummyData {
         StudIPEvent("Key Moments", arrayOf("Esders-Angermund"), "GW2 B2890", 2, 2, 1),
         StudIPEvent("ULS-1", arrayOf("Herrmann"), "GW2 B2890", 2, 3, 1),
         StudIPEvent("Gesellschaft und Raum", arrayOf("Lossau", "Mossig"), "GW2 B1820", 3, 1, 1),
+        StudIPEvent("Gesellschaft und Raum2", arrayOf("Lossau", "Mossig"), "GW2 B1820", 4, 4, 2),
     )
 }
