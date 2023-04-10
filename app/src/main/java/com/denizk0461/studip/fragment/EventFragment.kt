@@ -6,9 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
+import com.denizk0461.studip.R
 import com.denizk0461.studip.adapter.StudIPEventPageAdapter
 import com.denizk0461.studip.data.DummyData
 import com.denizk0461.studip.data.StudIPScraper
@@ -50,6 +51,10 @@ class EventFragment : Fragment() {
 
         viewModel.doAsync { StudIPScraper().parse(requireContext()) }
 
+        binding.fab.setOnClickListener { view ->
+            launchWebview()
+        }
+
 //        binding.buttonFirst.setOnClickListener {
 //            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
 //        }
@@ -58,5 +63,9 @@ class EventFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun launchWebview() {
+        findNavController(this).navigate(R.id.action_FirstFragment_to_SecondFragment)
     }
 }
