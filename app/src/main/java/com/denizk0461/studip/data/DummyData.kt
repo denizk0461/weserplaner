@@ -14,7 +14,7 @@ object DummyData {
         StudIPEvent(7, "Gesellschaft und Raum2", "Lossau, Mossig", "GW2 B1820", 4, 4, 2),
     )
 
-    val timeslotStartMap: Map<String, Int> = mapOf(
+    private val timeslotStartMap: Map<String, Int> = mapOf(
         "6:00" to 0,
         "6:15" to 0,
         "8:00" to 1,
@@ -31,7 +31,7 @@ object DummyData {
         "18:15" to 6,
     )
 
-    val timeslotEndMap: Map<String, Int> = mapOf(
+    private val timeslotEndMap: Map<String, Int> = mapOf(
         "8:00" to 0,
         "7:45" to 0,
         "10:00" to 1,

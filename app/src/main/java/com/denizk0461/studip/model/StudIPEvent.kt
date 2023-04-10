@@ -16,22 +16,10 @@ data class StudIPEvent(
     val timeslotEnd: Int, // 1 = 09:45 etc.
 ) {
 
-//    constructor(
-//        val title: String,
-//        val lecturer: String,
-//        val room: String,
-//        val day: Int,
-//        val
-//    ) : this(title, lecturer, room, day, 1, 1)
-
     @Ignore private val timeSlotStartTimes: List<String> = listOf("06:15", "08:15", "10:15", "12:15", "14:15", "16:15", "18:15")
     @Ignore private val timeSlotEndTimes: List<String> = listOf("07:45", "09:45", "11:45", "13:45", "15:45", "17:45", "19:45")
 
-    fun timeslot(): String {
-        Log.d("HELLO3", title)
-        Log.d("HELLO3", "s $timeslotStart st $timeslotEnd")
-        return "${timeSlotStartTimes[timeslotStart]} – ${timeSlotEndTimes[timeslotEnd]}"
-    }
+    fun timeslot(): String = "${timeSlotStartTimes[timeslotStart]} – ${timeSlotEndTimes[timeslotEnd]}"
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
