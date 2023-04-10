@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import com.denizk0461.studip.R
 import com.denizk0461.studip.adapter.StudIPEventPageAdapter
 import com.denizk0461.studip.data.DummyData
-import com.denizk0461.studip.data.StudIPScraper
+import com.denizk0461.studip.data.StudIPParser
 import com.denizk0461.studip.databinding.FragmentEventBinding
 import com.denizk0461.studip.viewmodel.EventViewModel
 
@@ -40,16 +40,17 @@ class EventFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.allEvents.observe(viewLifecycleOwner) { events ->
-            recyclerViewAdapter = StudIPEventPageAdapter(DummyData.events.toList())
+            recyclerViewAdapter = StudIPEventPageAdapter(events)//DummyData.events.toList())
             binding.recyclerView.adapter = recyclerViewAdapter
             recyclerViewLayoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             binding.recyclerView.layoutManager = recyclerViewLayoutManager
+            binding.recyclerView.onFlingListener = null
             PagerSnapHelper().attachToRecyclerView(binding.recyclerView)
             binding.recyclerView.scheduleLayoutAnimation()
         }
 
-        viewModel.doAsync { StudIPScraper().parse(requireContext()) }
+//        viewModel.doAsync { StudIPParser().parse(requireContext()) }
 
         binding.fab.setOnClickListener { view ->
             launchWebview()

@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.denizk0461.studip.model.StudIPEvent
 
-@Database(entities = [StudIPEvent::class], version = 1)
+@Database(entities = [StudIPEvent::class], version = 2)
 abstract class EventDatabase : RoomDatabase() {
 
     abstract fun dao(): EventDAO
@@ -21,7 +21,7 @@ abstract class EventDatabase : RoomDatabase() {
                         context.applicationContext,
                         EventDatabase::class.java,
                         "event_db"
-                    ).build()
+                    ).fallbackToDestructiveMigration().build()
                 }
             }
             return instance!!

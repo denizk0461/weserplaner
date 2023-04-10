@@ -1,30 +1,32 @@
 package com.denizk0461.studip.fragment
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.ValueCallback
-import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.navigation.fragment.findNavController
-import com.denizk0461.studip.R
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.denizk0461.studip.data.StudIPParser
 import com.denizk0461.studip.databinding.FragmentSecondBinding
+import com.denizk0461.studip.viewmodel.ParserViewModel
+import java.net.URLDecoder
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
-class SecondFragment : Fragment() {
+class ParserFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
+    private var html = "" // temporary storage for the website HTML
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    private val viewModel: ParserViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,13 +45,21 @@ class SecondFragment : Fragment() {
 //            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
 //        }
 
-        binding.webview.settings.javaScriptEnabled = true
+        binding.webview.settings.apply {
+            javaScriptEnabled = true
+        }
         binding.webview.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(
-                view: WebView?,
-                request: WebResourceRequest?
+                view: WebView,
+                request: WebResourceRequest
             ): Boolean {
                 return false
+            }
+            override fun onPageFinished(view: WebView, url: String) {
+                binding.webview.loadUrl(
+                    "javascript:window.HtmlViewer.showHTML" +
+                            "('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>');"
+                )
             }
         }
 
@@ -57,10 +67,16 @@ class SecondFragment : Fragment() {
 
         binding.fab.setOnClickListener { view ->
             binding.webview.evaluateJavascript(
-                "(function(){return window.document.body.outerHTML})();"
+                "(function(){return encodeURI(document.getElementsByTagName('html')[0].innerHTML)})();"
             ) { p0 ->
-                Log.d("HELLO", p0 ?: "nothing returned")
+                viewModel.nukeEvents()
+                StudIPParser().parse(URLDecoder.decode(p0, "UTF-8")) { events ->
+                    viewModel.insertEvents(events)
+                }
             }
+//            html.chunked(3000).forEach {
+//                Log.d("HELLO", it)
+//            }
         }
     }
 

@@ -12,4 +12,5 @@ class EventRepository(app: Application) {
 
     fun nukeEvents() { dao.nukeEvents() }
     fun insertEvent(event: StudIPEvent) { dao.insertEvent(event) }
+    fun insertEvents(events: List<StudIPEvent>) { dao.insertEvents(events) }
 }

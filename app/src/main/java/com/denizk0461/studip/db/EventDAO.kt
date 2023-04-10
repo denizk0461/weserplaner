@@ -15,6 +15,9 @@ interface EventDAO {
     @Insert
     fun insertEvent(event: StudIPEvent)
 
+    @Insert
+    fun insertEvents(event: List<StudIPEvent>)
+
     @Query("DELETE FROM events")
     fun nukeEvents()
 }

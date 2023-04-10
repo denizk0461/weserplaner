@@ -26,7 +26,7 @@ class StudIPEventAdapter(private val events: List<StudIPEvent>) : RecyclerView.A
         holder.binding.textTitle.text = currentItem.title
         holder.binding.textLecturers.text = currentItem.lecturer
         holder.binding.textRoom.text = currentItem.room
-        holder.binding.textTimeslot.text = currentItem.timeslot
+        holder.binding.textTimeslot.text = currentItem.timeslot()
 
         // TODO inflate view saying "no events!" or sth
 
