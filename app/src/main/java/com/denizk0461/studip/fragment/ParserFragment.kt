@@ -10,7 +10,7 @@ import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.denizk0461.studip.data.StudIPParser
-import com.denizk0461.studip.databinding.FragmentSecondBinding
+import com.denizk0461.studip.databinding.FragmentParserBinding
 import com.denizk0461.studip.viewmodel.ParserViewModel
 import java.net.URLDecoder
 
@@ -19,7 +19,7 @@ import java.net.URLDecoder
  */
 class ParserFragment : Fragment() {
 
-    private var _binding: FragmentSecondBinding? = null
+    private var _binding: FragmentParserBinding? = null
     private var html = "" // temporary storage for the website HTML
 
     // This property is only valid between onCreateView and
@@ -33,7 +33,7 @@ class ParserFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        _binding = FragmentParserBinding.inflate(inflater, container, false)
         return binding.root
 
     }

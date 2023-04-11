@@ -1,6 +1,7 @@
 package com.denizk0461.studip.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,12 +10,16 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.denizk0461.studip.R
 import com.denizk0461.studip.adapter.StudIPEventPageAdapter
 import com.denizk0461.studip.data.DummyData
 import com.denizk0461.studip.data.StudIPParser
 import com.denizk0461.studip.databinding.FragmentEventBinding
 import com.denizk0461.studip.viewmodel.EventViewModel
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.LocalTime
@@ -31,8 +36,10 @@ class EventFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
     private lateinit var recyclerViewAdapter: StudIPEventPageAdapter
-    private lateinit var recyclerViewLayoutManager: LinearLayoutManager
+    private lateinit var layoutManager: LinearLayoutManager
     private var dayOfWeek: Int = 0
+    private val pagerSnapHelper = PagerSnapHelper()
+    private var isUserScrolling = false
 
     private val viewModel: EventViewModel by viewModels()
 
@@ -55,20 +62,47 @@ class EventFragment : Fragment() {
         viewModel.allEvents.observe(viewLifecycleOwner) { events ->
             recyclerViewAdapter = StudIPEventPageAdapter(events)//DummyData.events.toList())
             binding.recyclerView.adapter = recyclerViewAdapter
-            recyclerViewLayoutManager =
-                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            binding.recyclerView.layoutManager = recyclerViewLayoutManager
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            binding.recyclerView.layoutManager = layoutManager
             binding.recyclerView.onFlingListener = null
-            PagerSnapHelper().attachToRecyclerView(binding.recyclerView)
+            pagerSnapHelper.attachToRecyclerView(binding.recyclerView)
 //            binding.recyclerView.scheduleLayoutAnimation()
             binding.recyclerView.scrollToPosition(dayOfWeek)
         }
 
-//        viewModel.doAsync { StudIPParser().parse(requireContext()) }
-
         binding.fab.setOnClickListener { view ->
             launchWebview()
         }
+
+        binding.recyclerView.addOnScrollListener(object : OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                isUserScrolling = true
+                val i = if (dx < 0) {
+                    layoutManager.findFirstVisibleItemPosition()
+                } else {
+                    layoutManager.findLastVisibleItemPosition()
+                }
+                binding.dayTabs.getTabAt(i)?.select()
+            }
+        })
+
+        binding.dayTabs.addOnTabSelectedListener(object : OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                if (!isUserScrolling) {
+                    binding.recyclerView.smoothScrollToPosition(tab.position)
+                    Log.d("HELLO4", binding.recyclerView.scrollY.toString())
+                } // TODO where to set isUserScrolling back to true?
+            }
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
+        })
+
+//        binding.daytabmonday.setOnClickListener { binding.recyclerView.scrollToPosition(0) }
+//        binding.daytabtuesday.setOnClickListener { binding.recyclerView.scrollToPosition(1) }
+//        binding.daytabwednesday.setOnClickListener { binding.recyclerView.scrollToPosition(2) }
+//        binding.daytabthursday.setOnClickListener { binding.recyclerView.scrollToPosition(3) }
+//        binding.daytabfriday.setOnClickListener { binding.recyclerView.scrollToPosition(4) }
 
 //        binding.buttonFirst.setOnClickListener {
 //            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
