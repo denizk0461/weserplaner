@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.denizk0461.studip.model.StudIPEvent
 
-@Database(entities = [StudIPEvent::class], version = 2)
+@Database(entities = [StudIPEvent::class], version = 3)
 abstract class EventDatabase : RoomDatabase() {
 
     abstract fun dao(): EventDAO

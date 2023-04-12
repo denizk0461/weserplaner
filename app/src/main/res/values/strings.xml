@@ -19,6 +19,8 @@
     <string name="nav_food">Food</string>
     <string name="nav_settings">Settings</string>
 
+    <string name="toast_fetch_finished">Your schedule has been refreshed!</string>
+
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus

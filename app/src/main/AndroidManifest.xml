@@ -21,9 +21,13 @@
             android:theme="@style/Theme.StudIPTimetable">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.FetcherActivity"
+            android:exported="false"
+            android:theme="@style/Theme.StudIPTimetable">
         </activity>
     </application>
 

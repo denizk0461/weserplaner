@@ -9,7 +9,7 @@ class StudIPParser {
         var id = 0
         val doc = Jsoup.parse(html)
         val newEvents = mutableListOf<StudIPEvent>()
-        val columns = arrayOf(
+        val columns = arrayOf( // TODO THIS NEEDS TO BE DYNAMIC!
             doc.getElementById("calendar_view_1_column_0"),
             doc.getElementById("calendar_view_1_column_1"),
             doc.getElementById("calendar_view_1_column_2"),
@@ -24,7 +24,8 @@ class StudIPParser {
                 val parsedLecturers = entryHeader.substring(delimiter + 1 until entryHeader.length - 1)
 
                 val entryInfos = entry.getElementsByTag("dd")[0].text().split(", ", limit = 2)
-                val timeSlot = Misc.parseTimeslot(entryInfos[0])
+//                val timeSlot = Misc.parseTimeslot(entryInfos[0])
+                val timeSlot = entryInfos[0].split(" - ")
 
                 val event = StudIPEvent(
                 id = id,
@@ -32,8 +33,8 @@ class StudIPParser {
                 lecturer = parsedLecturers,
                 room = entryInfos[1],
                 day = index,
-                timeslotStart = timeSlot.first,
-                timeslotEnd = timeSlot.second,
+                timeslotStart = timeSlot[0],
+                timeslotEnd = timeSlot[1],
                 )
                 newEvents.add(event)
                 id += 1

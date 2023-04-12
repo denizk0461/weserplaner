@@ -1,49 +1,36 @@
-package com.denizk0461.studip.fragment
+package com.denizk0461.studip.activity
 
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import com.denizk0461.studip.R
 import com.denizk0461.studip.data.StudIPParser
-import com.denizk0461.studip.databinding.FragmentParserBinding
+import com.denizk0461.studip.databinding.ActivityFetcherBinding
 import com.denizk0461.studip.viewmodel.FetcherViewModel
 import java.net.URLDecoder
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
-class ParserFragment : Fragment() {
+class FetcherActivity : Activity() {
 
-    private var html = "" // temporary storage for the website HTML
+    private lateinit var binding: ActivityFetcherBinding
+    private lateinit var viewModel: FetcherViewModel
 
-    private var _binding: FragmentParserBinding? = null
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    /*
+     * Enabling JavaScript is necessary to get the HTML source in this context. As the HTML can only
+     * be accessed once the user has logged in, a simple HTML request would not suffice here.
+     */
+    @SuppressLint("SetJavaScriptEnabled")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-    private val viewModel: FetcherViewModel by viewModels()
+        viewModel = ViewModelProvider.AndroidViewModelFactory(this.application).create(FetcherViewModel::class.java)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-
-        _binding = FragmentParserBinding.inflate(inflater, container, false)
-        return binding.root
-
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-//        binding.buttonSecond.setOnClickListener {
-//            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
-//        }
+        binding = ActivityFetcherBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         binding.webview.settings.apply {
             javaScriptEnabled = true
@@ -72,16 +59,10 @@ class ParserFragment : Fragment() {
                 viewModel.nukeEvents()
                 StudIPParser().parse(URLDecoder.decode(p0, "UTF-8")) { events ->
                     viewModel.insertEvents(events)
+                    Toast.makeText(this, R.string.toast_fetch_finished, Toast.LENGTH_SHORT).show()
+                    finish()
                 }
             }
-//            html.chunked(3000).forEach {
-//                Log.d("HELLO", it)
-//            }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
