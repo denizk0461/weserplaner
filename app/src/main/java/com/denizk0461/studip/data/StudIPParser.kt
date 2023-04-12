@@ -1,6 +1,5 @@
 package com.denizk0461.studip.data
 
-import android.util.Log
 import com.denizk0461.studip.model.StudIPEvent
 import org.jsoup.Jsoup
 

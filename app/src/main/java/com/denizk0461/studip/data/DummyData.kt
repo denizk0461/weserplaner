@@ -29,6 +29,8 @@ object DummyData {
         "16:15" to 5,
         "18:00" to 6,
         "18:15" to 6,
+        "20:00" to 7,
+        "20:15" to 7,
     )
 
     private val timeslotEndMap: Map<String, Int> = mapOf(
@@ -46,6 +48,8 @@ object DummyData {
         "17:45" to 5,
         "20:00" to 6,
         "19:45" to 6,
+        "22:00" to 7,
+        "21:45" to 7,
     )
 
     fun parseTimeslot(time: String): Pair<Int, Int> {

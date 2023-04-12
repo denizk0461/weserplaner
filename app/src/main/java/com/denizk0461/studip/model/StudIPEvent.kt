@@ -1,6 +1,5 @@
 package com.denizk0461.studip.model
 
-import android.util.Log
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
@@ -16,8 +15,8 @@ data class StudIPEvent(
     val timeslotEnd: Int, // 1 = 09:45 etc.
 ) {
 
-    @Ignore private val timeSlotStartTimes: List<String> = listOf("06:15", "08:15", "10:15", "12:15", "14:15", "16:15", "18:15")
-    @Ignore private val timeSlotEndTimes: List<String> = listOf("07:45", "09:45", "11:45", "13:45", "15:45", "17:45", "19:45")
+    @Ignore private val timeSlotStartTimes: List<String> = listOf("06:15", "08:15", "10:15", "12:15", "14:15", "16:15", "18:15", "20:15")
+    @Ignore private val timeSlotEndTimes: List<String> = listOf("07:45", "09:45", "11:45", "13:45", "15:45", "17:45", "19:45", "21:45")
 
     fun timeslot(): String = "${timeSlotStartTimes[timeslotStart]} – ${timeSlotEndTimes[timeslotEnd]}"
 

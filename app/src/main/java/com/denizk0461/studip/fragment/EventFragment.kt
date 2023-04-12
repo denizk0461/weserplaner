@@ -14,15 +14,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.denizk0461.studip.R
 import com.denizk0461.studip.adapter.StudIPEventPageAdapter
-import com.denizk0461.studip.data.DummyData
-import com.denizk0461.studip.data.StudIPParser
 import com.denizk0461.studip.databinding.FragmentEventBinding
 import com.denizk0461.studip.viewmodel.EventViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
-import java.time.DayOfWeek
-import java.time.LocalDate
-import java.time.LocalTime
 import java.util.*
 
 /**
