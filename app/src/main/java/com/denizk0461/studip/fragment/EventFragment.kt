@@ -67,8 +67,8 @@ class EventFragment : Fragment() {
             binding.recyclerView.onFlingListener = null
             pagerSnapHelper.attachToRecyclerView(binding.recyclerView)
 //            binding.recyclerView.scheduleLayoutAnimation()
-            binding.recyclerView.scrollToPosition(dayOfWeek)
-            binding.dayTabs.getTabAt(dayOfWeek)?.select()
+
+            switchToCurrentDayView()
         }
 
         binding.fab.setOnClickListener { view ->
@@ -107,12 +107,29 @@ class EventFragment : Fragment() {
 //        }
     }
 
+    override fun onResume() {
+        super.onResume()
+        switchToCurrentDayView()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
+    private fun switchToCurrentDayView() {
+        binding.recyclerView.scrollToPosition(dayOfWeek)
+        binding.dayTabs.getTabAt(dayOfWeek)?.select()
+    }
+
     private fun launchWebview() {
         findNavController(this).navigate(R.id.action_FirstFragment_to_SecondFragment)
+    }
+
+    /**
+     * Highlights the current or next course.
+     */
+    private fun highlightCurrentCourse() {
+
     }
 }

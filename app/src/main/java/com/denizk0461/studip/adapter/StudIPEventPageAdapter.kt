@@ -25,7 +25,7 @@ class StudIPEventPageAdapter(private val events: List<StudIPEvent>) : RecyclerVi
 
         holder.binding.pageRecyclerView.apply {
             layoutManager = LinearLayoutManager(holder.binding.root.context, LinearLayoutManager.VERTICAL, false)
-            adapter = StudIPEventAdapter(events.filter { it.day == position }) // TODO check if empty
+            adapter = StudIPEventAdapter(events, currentDay = position) // TODO check if empty
             scheduleLayoutAnimation()
         }
     }

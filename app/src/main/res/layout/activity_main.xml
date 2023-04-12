@@ -7,6 +7,14 @@
     android:fitsSystemWindows="true"
     tools:context=".activity.MainActivity">
 
-    <include layout="@layout/content_main" />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom" />
+
+    <include layout="@layout/content_main"
+        android:layout_marginBottom="56dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
