@@ -2,7 +2,7 @@ package com.denizk0461.studip.data
 
 import com.denizk0461.studip.model.StudIPEvent
 
-object DummyData {
+object Misc {
 
     val events: Array<StudIPEvent> = arrayOf(
         StudIPEvent(1, "Literatures", "Nittel", "MZH 1380/1400", 0, 3, 1),
@@ -58,4 +58,6 @@ object DummyData {
         val length = (timeslotEndMap[splitTime[1]] ?: 0)
         return Pair(start, length)
     }
+
+    val mysteryLink = "https://www.youtube.com/watch?v=nhIQMCXJzLI"
 }

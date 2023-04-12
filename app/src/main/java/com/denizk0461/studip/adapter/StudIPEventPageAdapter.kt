@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.denizk0461.studip.model.StudIPEvent
 import com.denizk0461.studip.databinding.ItemEventPageBinding
 
-class StudIPEventPageAdapter(private val events: List<StudIPEvent>) : RecyclerView.Adapter<StudIPEventPageAdapter.EventPageViewHolder>() {
+class StudIPEventPageAdapter(private var events: List<StudIPEvent>) : RecyclerView.Adapter<StudIPEventPageAdapter.EventPageViewHolder>() {
 
     class EventPageViewHolder(val binding: ItemEventPageBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -28,5 +28,10 @@ class StudIPEventPageAdapter(private val events: List<StudIPEvent>) : RecyclerVi
             adapter = StudIPEventAdapter(events, currentDay = position) // TODO check if empty
             scheduleLayoutAnimation()
         }
+    }
+
+    fun setNewItems(items: List<StudIPEvent>) {
+        events = items
+        notifyDataSetChanged()
     }
 }

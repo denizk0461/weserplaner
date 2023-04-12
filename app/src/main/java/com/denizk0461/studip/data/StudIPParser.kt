@@ -24,7 +24,7 @@ class StudIPParser {
                 val parsedLecturers = entryHeader.substring(delimiter + 1 until entryHeader.length - 1)
 
                 val entryInfos = entry.getElementsByTag("dd")[0].text().split(", ", limit = 2)
-                val timeSlot = DummyData.parseTimeslot(entryInfos[0])
+                val timeSlot = Misc.parseTimeslot(entryInfos[0])
 
                 val event = StudIPEvent(
                 id = id,

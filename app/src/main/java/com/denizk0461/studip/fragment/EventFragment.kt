@@ -1,23 +1,17 @@
 package com.denizk0461.studip.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.PagerSnapHelper
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.denizk0461.studip.R
 import com.denizk0461.studip.adapter.StudIPEventPageAdapter
 import com.denizk0461.studip.databinding.FragmentEventBinding
 import com.denizk0461.studip.viewmodel.EventViewModel
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import com.google.android.material.tabs.TabLayoutMediator
 import java.util.*
 
 /**
@@ -30,11 +24,16 @@ class EventFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private lateinit var recyclerViewAdapter: StudIPEventPageAdapter
-    private lateinit var layoutManager: LinearLayoutManager
+
+    private lateinit var viewPagerAdapter: StudIPEventPageAdapter
     private var dayOfWeek: Int = 0
-    private val pagerSnapHelper = PagerSnapHelper()
-    private var isUserScrolling = false
+    private val dayStrings = listOf(
+        R.string.monday,
+        R.string.tuesday,
+        R.string.wednesday,
+        R.string.thursday,
+        R.string.friday,
+    )
 
     private val viewModel: EventViewModel by viewModels()
 
@@ -54,15 +53,15 @@ class EventFragment : Fragment() {
             else -> 0
         }
 
-        viewModel.allEvents.observe(viewLifecycleOwner) { events ->
-            recyclerViewAdapter = StudIPEventPageAdapter(events)//DummyData.events.toList())
-            binding.recyclerView.adapter = recyclerViewAdapter
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            binding.recyclerView.layoutManager = layoutManager
-            binding.recyclerView.onFlingListener = null
-            pagerSnapHelper.attachToRecyclerView(binding.recyclerView)
-//            binding.recyclerView.scheduleLayoutAnimation()
+        viewPagerAdapter = StudIPEventPageAdapter(listOf())//DummyData.events.toList())
+        binding.viewPager.adapter = viewPagerAdapter
 
+        TabLayoutMediator(binding.dayTabLayout, binding.viewPager) { tab, position ->
+            tab.text = getString(dayStrings[position])
+        }.attach()
+
+        viewModel.allEvents.observe(viewLifecycleOwner) { events ->
+            viewPagerAdapter.setNewItems(events)
             switchToCurrentDayView()
         }
 
@@ -70,42 +69,15 @@ class EventFragment : Fragment() {
             launchWebview()
         }
 
-        binding.recyclerView.addOnScrollListener(object : OnScrollListener() {
-
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    binding.dayTabs.getTabAt(layoutManager.findFirstVisibleItemPosition())?.select()
-                }
-            }
-        })
-
-        binding.dayTabs.addOnTabSelectedListener(object : OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                isUserScrolling = false
-                binding.recyclerView.smoothScrollToPosition(tab.position)
-                Log.d("HELLO4", binding.recyclerView.scrollY.toString())
-                 // TODO where to set isUserScrolling back to true?
-            }
-            override fun onTabUnselected(tab: TabLayout.Tab?) {}
-            override fun onTabReselected(tab: TabLayout.Tab?) {}
-        })
-
-//        binding.daytabmonday.setOnClickListener { binding.recyclerView.scrollToPosition(0) }
-//        binding.daytabtuesday.setOnClickListener { binding.recyclerView.scrollToPosition(1) }
-//        binding.daytabwednesday.setOnClickListener { binding.recyclerView.scrollToPosition(2) }
-//        binding.daytabthursday.setOnClickListener { binding.recyclerView.scrollToPosition(3) }
-//        binding.daytabfriday.setOnClickListener { binding.recyclerView.scrollToPosition(4) }
-
 //        binding.buttonFirst.setOnClickListener {
 //            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
 //        }
     }
 
-    override fun onResume() {
-        super.onResume()
-        switchToCurrentDayView()
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        switchToCurrentDayView()
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -113,8 +85,8 @@ class EventFragment : Fragment() {
     }
 
     private fun switchToCurrentDayView() {
-        binding.recyclerView.scrollToPosition(dayOfWeek)
-        binding.dayTabs.getTabAt(dayOfWeek)?.select()
+//        binding.viewpager.currentItem = dayOfWeek
+        binding.dayTabLayout.getTabAt(dayOfWeek)?.select()
     }
 
     private fun launchWebview() {
