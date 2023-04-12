@@ -1,14 +1,15 @@
 package com.denizk0461.studip.adapter
 
-import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.denizk0461.studip.R
 import com.denizk0461.studip.model.StudIPEvent
 import com.denizk0461.studip.databinding.ItemEventBinding
 
-class StudIPEventAdapter(events: List<StudIPEvent>, private val currentDay: Int) : RecyclerView.Adapter<StudIPEventAdapter.EventViewHolder>() {
+class StudIPEventAdapter(
+    events: List<StudIPEvent>, private val currentDay: Int, private val onClickListener: OnClickListener
+) : RecyclerView.Adapter<StudIPEventAdapter.EventViewHolder>() {
 
     private val filteredEvents: List<StudIPEvent> = events.filter { it.day == currentDay }
 
@@ -41,7 +42,20 @@ class StudIPEventAdapter(events: List<StudIPEvent>, private val currentDay: Int)
 //            holder.binding.cardBackground.cardForegroundColor = Color.TRANSPARENT
         }
 
+        holder.binding.cardBackground.setOnClickListener {
+            onClickListener.onClick(currentItem)
+        }
+        holder.binding.cardBackground.setOnLongClickListener {
+            onClickListener.onLongClick(currentItem)
+            true
+        }
+
         // TODO inflate view saying "no events!" or sth
 
+    }
+
+    interface OnClickListener {
+        fun onClick(event: StudIPEvent)
+        fun onLongClick(event: StudIPEvent)
     }
 }

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.denizk0461.studip.model.StudIPEvent
 import com.denizk0461.studip.databinding.ItemEventPageBinding
 
-class StudIPEventPageAdapter(private var events: List<StudIPEvent>) : RecyclerView.Adapter<StudIPEventPageAdapter.EventPageViewHolder>() {
+class StudIPEventPageAdapter(private var events: List<StudIPEvent>, private val onClickListener: StudIPEventAdapter.OnClickListener) : RecyclerView.Adapter<StudIPEventPageAdapter.EventPageViewHolder>() {
 
     class EventPageViewHolder(val binding: ItemEventPageBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -25,7 +25,7 @@ class StudIPEventPageAdapter(private var events: List<StudIPEvent>) : RecyclerVi
 
         holder.binding.pageRecyclerView.apply {
             layoutManager = LinearLayoutManager(holder.binding.root.context, LinearLayoutManager.VERTICAL, false)
-            adapter = StudIPEventAdapter(events, currentDay = position) // TODO check if empty
+            adapter = StudIPEventAdapter(events, currentDay = position, onClickListener) // TODO check if empty
             scheduleLayoutAnimation()
         }
     }

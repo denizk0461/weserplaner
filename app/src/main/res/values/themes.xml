@@ -6,8 +6,16 @@
         <item name="fontFamily">@font/lato_regular</item>
 
         <!-- colour -->
-        <item name="colorPrimary">@color/primaryLight</item>
+        <item name="colorPrimary">@color/primaryDark</item>
+        <item name="rippleColor">@color/primaryDark</item>
+
+        <item name="colorNavHighlight">@color/highlightDark</item>
+<!--        <item name="colorPrimaryOnContrast">@color/colorPrimaryOnContrastLight</item>-->
     </style>
 
     <style name="Theme.StudIPTimetable" parent="Base.Theme.StudIPTimetable" />
+
+    <style name="NavigationViewItemIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/primaryDark</item>
+    </style>
 </resources>

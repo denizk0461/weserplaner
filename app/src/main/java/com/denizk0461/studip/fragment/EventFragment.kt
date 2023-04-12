@@ -10,8 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import com.denizk0461.studip.R
 import com.denizk0461.studip.activity.FetcherActivity
+import com.denizk0461.studip.adapter.StudIPEventAdapter
 import com.denizk0461.studip.adapter.StudIPEventPageAdapter
 import com.denizk0461.studip.databinding.FragmentEventBinding
+import com.denizk0461.studip.model.StudIPEvent
 import com.denizk0461.studip.viewmodel.EventViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import java.util.*
@@ -55,7 +57,14 @@ class EventFragment : Fragment() {
             else -> 0
         }
 
-        viewPagerAdapter = StudIPEventPageAdapter(listOf())//DummyData.events.toList())
+        viewPagerAdapter = StudIPEventPageAdapter(listOf(), object : StudIPEventAdapter.OnClickListener {
+            override fun onClick(event: StudIPEvent) {
+                // do nothing
+            }
+            override fun onLongClick(event: StudIPEvent) {
+
+            }
+        })//DummyData.events.toList())
         binding.viewPager.adapter = viewPagerAdapter
 
         TabLayoutMediator(binding.dayTabLayout, binding.viewPager) { tab, position ->

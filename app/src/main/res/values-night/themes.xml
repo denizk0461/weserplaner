@@ -3,6 +3,14 @@
     <style name="Base.Theme.StudIPTimetable" parent="Theme.Material3.DayNight.NoActionBar">
 
         <!-- colour -->
-         <item name="colorPrimary">@color/primaryDark</item>
+        <item name="colorPrimary">@color/primaryLight</item>
+        <item name="rippleColor">@color/primaryLight</item>
+
+        <item name="colorNavHighlight">@color/highlightLight</item>
+<!--        <item name="colorPrimaryOnContrast">@color/colorPrimaryOnContrastDark</item>-->
+    </style>
+
+    <style name="NavigationViewItemIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/primaryLight</item>
     </style>
 </resources>
