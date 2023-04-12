@@ -68,6 +68,7 @@ class EventFragment : Fragment() {
             pagerSnapHelper.attachToRecyclerView(binding.recyclerView)
 //            binding.recyclerView.scheduleLayoutAnimation()
             binding.recyclerView.scrollToPosition(dayOfWeek)
+            binding.dayTabs.getTabAt(dayOfWeek)?.select()
         }
 
         binding.fab.setOnClickListener { view ->
@@ -75,24 +76,21 @@ class EventFragment : Fragment() {
         }
 
         binding.recyclerView.addOnScrollListener(object : OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                isUserScrolling = true
-                val i = if (dx < 0) {
-                    layoutManager.findFirstVisibleItemPosition()
-                } else {
-                    layoutManager.findLastVisibleItemPosition()
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    binding.dayTabs.getTabAt(layoutManager.findFirstVisibleItemPosition())?.select()
                 }
-                binding.dayTabs.getTabAt(i)?.select()
             }
         })
 
         binding.dayTabs.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                if (!isUserScrolling) {
-                    binding.recyclerView.smoothScrollToPosition(tab.position)
-                    Log.d("HELLO4", binding.recyclerView.scrollY.toString())
-                } // TODO where to set isUserScrolling back to true?
+                isUserScrolling = false
+                binding.recyclerView.smoothScrollToPosition(tab.position)
+                Log.d("HELLO4", binding.recyclerView.scrollY.toString())
+                 // TODO where to set isUserScrolling back to true?
             }
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabReselected(tab: TabLayout.Tab?) {}
