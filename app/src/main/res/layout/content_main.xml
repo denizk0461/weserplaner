@@ -15,9 +15,10 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
+            android:id="@+id/app_title_bar"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:text="@string/your_schedule"
+            android:text="@string/title_schedule"
             android:textSize="32sp"
             android:fontFamily="@font/lato_bolditalic"
             android:layout_marginHorizontal="16dp"
@@ -25,7 +26,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment_content_main"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
@@ -42,6 +43,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:menu="@menu/nav_view_items"
+        app:labelVisibilityMode="selected"
         app:itemActiveIndicatorStyle="@style/NavigationViewItemIndicator"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

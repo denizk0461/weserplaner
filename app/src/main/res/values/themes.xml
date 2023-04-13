@@ -18,4 +18,9 @@
     <style name="NavigationViewItemIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@color/primaryDark</item>
     </style>
+
+    <style name="SelectableItemTheme">
+<!--        <item name="colorControlHighlight">?attr/colorPrimary</item>-->
+        <item name="colorControlHighlight">@color/primaryLight</item>
+    </style>
 </resources>

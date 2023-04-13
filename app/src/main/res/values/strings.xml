@@ -13,13 +13,24 @@
     <string name="thursday">THURSDAY</string>
     <string name="friday">FRIDAY</string>
 
-    <string name="your_schedule">Your Schedule</string>
+    <string name="title_schedule">Your Schedule</string>
+    <string name="title_food">Canteen Plans</string>
+    <string name="title_settings">App Settings</string>
 
     <string name="nav_schedule">Schedule</string>
     <string name="nav_food">Food</string>
     <string name="nav_settings">Settings</string>
 
     <string name="toast_fetch_finished">Your schedule has been refreshed!</string>
+
+    <string name="settings_general">General</string>
+    <string name="settings_misc">Miscellaneous</string>
+
+    <string name="settings_quarter_title">Show academic quarter</string>
+    <string name="settings_quarter_subtitle">Where applicable</string>
+    <string name="settings_app_version">App Version</string>
+
+    <string name="with_love">with ♡️ from Osterholz\nMade by Deniz \\__*</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris

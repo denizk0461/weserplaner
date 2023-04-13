@@ -85,10 +85,10 @@ class EventFragment : Fragment() {
 //        }
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//        switchToCurrentDayView()
-//    }
+    override fun onResume() {
+        super.onResume()
+        switchToCurrentDayView()
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -96,8 +96,8 @@ class EventFragment : Fragment() {
     }
 
     private fun switchToCurrentDayView() {
-//        binding.viewpager.currentItem = dayOfWeek
-        binding.dayTabLayout.getTabAt(dayOfWeek)?.select()
+        binding.viewPager.currentItem = dayOfWeek
+//        binding.dayTabLayout.getTabAt(dayOfWeek)?.select()
     }
 
     private fun launchWebview() {
