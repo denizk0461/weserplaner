@@ -6,20 +6,26 @@
 <!--    <color name="primaryLight">#0F4759</color>-->
 <!--    <color name="primaryDark">#62CCE4</color>-->
 
-    <color name="primaryDay">#B82729</color>
-    <color name="primaryNight">#B2665A</color>
+    <color name="primaryDay">#B2665A</color> <!-- B82729 -->
+    <color name="primaryNight">#995348</color>
 
     <color name="highlightDay">#871D1E</color>
     <color name="highlightNight">#CB9890</color>
 
-    <color name="colorTextDay">#CB9890</color> // TODO
+    <color name="colorTextDay">#141414</color> // TODO
     <color name="colorTextNight">#CDCBCB</color>
 
-    <color name="colorTextHintDay">#CB9890</color> // TODO
+    <color name="colorTextHintDay">#2A2828</color> // TODO
     <color name="colorTextHintNight">#B9B6B6</color>
 
-    <color name="colorBackgroundDay">#151414</color> // TODO
+    <color name="colorBackgroundDay">#EBEBEB</color> // TODO
     <color name="colorBackgroundNight">#151414</color>
+
+    <color name="colorCardBackgroundDay">#E0E0E0</color> // TODO
+    <color name="colorCardBackgroundNight">#1F1E1E</color>
+
+    <color name="colorSwitchTrackDay">#D6D6D6</color>
+    <color name="colorSwitchTrackNight">#2A2828</color>
 
 <!--    <color name="colorPrimaryOnContrastLight">#E6898B</color>-->
 <!--    <color name="colorPrimaryOnContrastDark">#B77166</color>-->

@@ -1,29 +1,39 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.StudIPTimetable" parent="Theme.Material3.DayNight.NoActionBar">
+<!--        <item name="fontFamily">@font/lato_regular</item>-->
 
-        <item name="android:textColor">?attr/colorText</item>
-        <item name="android:windowBackground">@color/colorBackgroundDay</item>
-
-        <!-- customisation -->
-        <item name="fontFamily">@font/lato_regular</item>
-
-        <!-- colour -->
         <item name="colorPrimary">@color/primaryDay</item>
         <item name="rippleColor">@color/primaryDay</item>
 
+        <item name="colorOnPrimary">@color/colorBackgroundDay</item>
+
+        <item name="colorText">@color/colorTextDay</item>
+        <item name="colorTextHint">@color/colorTextHintDay</item>
+
+        <item name="colorBackground">@color/colorBackgroundDay</item>
+        <item name="colorCardBackground">@color/colorCardBackgroundDay</item>
+        <item name="colorSwitchTrack">@color/colorSwitchTrackDay</item>
+
+        <item name="android:textColor">?attr/colorText</item>
+
+        <item name="android:windowBackground">@color/colorBackgroundDay</item>
         <item name="colorNavHighlight">@color/highlightDay</item>
-<!--        <item name="colorPrimaryOnContrast">@color/colorPrimaryOnContrastLight</item>-->
     </style>
 
     <style name="Theme.StudIPTimetable" parent="Base.Theme.StudIPTimetable" />
+
+    <style name="SwitchTheme" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+        <item name="thumbTint">@color/list_switch_thumb</item>
+        <item name="trackTint">@color/list_switch_track</item>
+        <item name="trackDecorationTint">@color/list_switch_decoration</item>
+    </style>
 
     <style name="NavigationViewItemIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@color/primaryDay</item>
     </style>
 
     <style name="SelectableItemTheme">
-<!--        <item name="colorControlHighlight">?attr/colorPrimary</item>-->
         <item name="colorControlHighlight">@color/primaryDay</item>
     </style>
 </resources>
