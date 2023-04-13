@@ -2,15 +2,28 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.StudIPTimetable" parent="Theme.Material3.DayNight.NoActionBar">
 
-        <!-- colour -->
-        <item name="colorPrimary">@color/primaryLight</item>
-        <item name="rippleColor">@color/primaryLight</item>
+        <item name="android:textColor">?attr/colorText</item>
+        <item name="android:windowBackground">@color/colorBackgroundNight</item>
 
-        <item name="colorNavHighlight">@color/highlightLight</item>
+        <!-- colour -->
+        <item name="colorPrimary">@color/primaryNight</item>
+        <item name="rippleColor">@color/primaryNight</item>
+
+        <item name="colorNavHighlight">@color/highlightNight</item>
 <!--        <item name="colorPrimaryOnContrast">@color/colorPrimaryOnContrastDark</item>-->
+
+        <item name="colorText">@color/colorTextNight</item>
+        <item name="colorTextHint">@color/colorTextHintNight</item>
+
+        <item name="colorBackground">@color/colorBackgroundNight</item>
     </style>
 
     <style name="NavigationViewItemIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
-        <item name="android:color">@color/primaryLight</item>
+        <item name="android:color">@color/primaryNight</item>
+    </style>
+
+    <style name="SelectableItemTheme">
+        <!--        <item name="colorControlHighlight">?attr/colorPrimary</item>-->
+        <item name="colorControlHighlight">@color/primaryNight</item>
     </style>
 </resources>

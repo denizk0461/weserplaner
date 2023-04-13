@@ -14,7 +14,7 @@
     <string name="friday">FRIDAY</string>
 
     <string name="title_schedule">Your Schedule</string>
-    <string name="title_food">Canteen Plans</string>
+    <string name="title_food">Canteen Offers</string>
     <string name="title_settings">App Settings</string>
 
     <string name="nav_schedule">Schedule</string>
@@ -30,7 +30,7 @@
     <string name="settings_quarter_subtitle">Where applicable</string>
     <string name="settings_app_version">App Version</string>
 
-    <string name="with_love">with ♡️ from Osterholz\nMade by Deniz \\__*</string>
+    <string name="with_love">with ♡️ from Bremen-Osterholz\nmade by denizk0461 \\__*</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris

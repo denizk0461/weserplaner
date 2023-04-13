@@ -21,6 +21,8 @@ class SettingsFragment : Fragment() {
     private val binding get() = _binding!!
     private var appVersionClick = 0
 
+    private var isQuarterChecked = false
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         return binding.root
@@ -29,9 +31,18 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val toast2 = Toast.makeText(context, "2", Toast.LENGTH_SHORT)
-        val toast22 = Toast.makeText(context, "22", Toast.LENGTH_SHORT)
-        val toast222 = Toast.makeText(context, "222", Toast.LENGTH_SHORT)
+        var toast2 = makeToast("2")
+        var toast22 = makeToast("22")
+        var toast222 = makeToast("222")
+
+//        binding.layoutQuarter.setOnClickListener {
+//            isQuarterChecked = !isQuarterChecked
+//            binding.switchQuarter.isChecked = isQuarterChecked
+//        }
+
+        binding.switchQuarter.setOnClickListener {
+            isQuarterChecked = !isQuarterChecked
+        }
 
         binding.buttonAppVersion.setOnClickListener {
             when (appVersionClick) {
@@ -51,6 +62,9 @@ class SettingsFragment : Fragment() {
                 }
                 22 -> {
                     toast222.cancel()
+                    toast2 = makeToast("2")
+                    toast22 = makeToast("22")
+                    toast222 = makeToast("222")
                     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(Misc.mysteryLink)))
                     appVersionClick = 0
                 }
@@ -60,6 +74,8 @@ class SettingsFragment : Fragment() {
 
         binding.appVersionText.text = BuildConfig.VERSION_NAME
     }
+
+    private fun makeToast(text: String): Toast = Toast.makeText(context, text, Toast.LENGTH_SHORT)
 
     override fun onDestroyView() {
         super.onDestroyView()
