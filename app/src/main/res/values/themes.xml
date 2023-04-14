@@ -10,6 +10,7 @@
 
         <item name="colorText">@color/colorTextDay</item>
         <item name="colorTextHint">@color/colorTextHintDay</item>
+        <item name="colorTextHintLighter">@color/colorTextHintLighterDay</item>
 
         <item name="colorBackground">@color/colorBackgroundDay</item>
         <item name="colorCardBackground">@color/colorCardBackgroundDay</item>
@@ -35,5 +36,9 @@
 
     <style name="SelectableItemTheme">
         <item name="colorControlHighlight">@color/primaryDay</item>
+    </style>
+
+    <style name="DividerTheme" parent="Widget.Material3.MaterialDivider">
+        <item name="dividerColor">@color/colorTextHintLighterDay</item>
     </style>
 </resources>

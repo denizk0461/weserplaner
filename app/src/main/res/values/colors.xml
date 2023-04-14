@@ -2,26 +2,28 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="brightfuckingpink">#FF46BB</color> <!-- for debug purposes -->
 
-<!--    <color name="primaryLight">#0F4759</color>-->
-<!--    <color name="primaryDark">#62CCE4</color>-->
-
-    <color name="primaryDay">#B2665A</color> <!-- B82729 -->
+    <!-- colours i defined -->
+    <color name="primaryDay">#B2665A</color>
     <color name="primaryNight">#995348</color>
 
     <color name="highlightDay">#871D1E</color>
     <color name="highlightNight">#CB9890</color>
 
-    <color name="colorTextDay">#141414</color> // TODO
+    <color name="colorTextDay">#141414</color>
     <color name="colorTextNight">#CDCBCB</color>
 
-    <color name="colorTextHintDay">#2A2828</color> // TODO
+    <color name="colorTextHintDay">#2A2828</color>
     <color name="colorTextHintNight">#B9B6B6</color>
 
-    <color name="colorBackgroundDay">#EBEBEB</color> // TODO
+    <color name="colorTextHintLighterDay">#3E3C3C</color>
+    <color name="colorTextHintLighterNight">#918D8D</color>
+
+    <color name="colorBackgroundDay">#EBEBEB</color>
     <color name="colorBackgroundNight">#151414</color>
 
-    <color name="colorCardBackgroundDay">#E0E0E0</color> // TODO
+    <color name="colorCardBackgroundDay">#E0E0E0</color>
     <color name="colorCardBackgroundNight">#1F1E1E</color>
 
     <color name="colorSwitchTrackDay">#D6D6D6</color>

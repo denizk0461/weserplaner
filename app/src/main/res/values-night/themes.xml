@@ -9,6 +9,7 @@
 
         <item name="colorText">@color/colorTextNight</item>
         <item name="colorTextHint">@color/colorTextHintNight</item>
+        <item name="colorTextHintLighter">@color/colorTextHintLighterNight</item>
 
         <item name="colorBackground">@color/colorBackgroundNight</item>
         <item name="colorCardBackground">@color/colorCardBackgroundNight</item>
@@ -26,5 +27,9 @@
 
     <style name="SelectableItemTheme">
         <item name="colorControlHighlight">@color/primaryNight</item>
+    </style>
+
+    <style name="DividerTheme" parent="Widget.Material3.MaterialDivider">
+        <item name="dividerColor">@color/colorTextHintLighterNight</item>
     </style>
 </resources>

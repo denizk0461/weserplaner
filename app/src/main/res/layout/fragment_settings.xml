@@ -37,6 +37,7 @@
                     android:layout_marginHorizontal="16dp"/>
 
                 <com.google.android.material.divider.MaterialDivider
+                    style="@style/DividerTheme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"/>

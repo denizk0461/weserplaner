@@ -1,17 +1,25 @@
 package com.denizk0461.studip.adapter
 
+import android.content.res.ColorStateList
+import android.util.AttributeSet
+import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.denizk0461.studip.R
 import com.denizk0461.studip.model.StudIPEvent
 import com.denizk0461.studip.databinding.ItemEventBinding
+import java.util.*
 
 class StudIPEventAdapter(
     events: List<StudIPEvent>, private val currentDay: Int, private val onClickListener: OnClickListener
 ) : RecyclerView.Adapter<StudIPEventAdapter.EventViewHolder>() {
 
     private val filteredEvents: List<StudIPEvent> = events.filter { it.day == currentDay }
+    private val currentCalendar = Calendar.getInstance()
+    private var isAnyCourseHighlighted = false
 
     class EventViewHolder(val binding: ItemEventBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -35,10 +43,25 @@ class StudIPEventAdapter(
         holder.binding.textRoom.text = currentItem.room
         holder.binding.textTimeslot.text = currentItem.timeslot()
 
-        if (true) { // highlight
+        val colorPrimary = TypedValue()
+        val colorTextHint = TypedValue()
+        val theme = holder.binding.root.context.theme
+        theme.resolveAttribute(R.attr.colorPrimary, colorPrimary, true)
+        theme.resolveAttribute(R.attr.colorTextHintLighter, colorTextHint, true)
+
+//        Log.d("eek!", holder.binding.cardBackground.strokeWidth.toString())
+
+        if (!isAnyCourseHighlighted && currentItem.isCurrentCourse(currentCalendar)) { // highlight
+            isAnyCourseHighlighted = true
+//            holder.binding.textTitle.setTextColor(colorHighlight.data)
+            holder.binding.cardBackground.strokeColor = colorPrimary.data
+            holder.binding.cardBackground.strokeWidth = 6
 //            holder.binding.cardBackground.cardForegroundColor = holder.binding.root.context.getColorStateList(
 //                R.color.list_card_selected)
         } else { // un-highlight
+//            holder.binding.textTitle.setTextColor(colorUnhighlight.data)
+            holder.binding.cardBackground.strokeColor = colorTextHint.data
+            holder.binding.cardBackground.strokeWidth = 3
 //            holder.binding.cardBackground.cardForegroundColor = Color.TRANSPARENT
         }
 
@@ -52,6 +75,32 @@ class StudIPEventAdapter(
 
         // TODO inflate view saying "no events!" or sth
 
+    }
+
+    private fun StudIPEvent.isCurrentCourse(calendar: Calendar): Boolean {
+//        if (calendar.get(Calendar.DAY_OF_WEEK) == this.day.toCalendarDay()) {
+        if (Calendar.THURSDAY == this.day.toCalendarDay()) {
+            if ((calendar.get(Calendar.MINUTE) + calendar.get(Calendar.HOUR_OF_DAY) * 60) < this.timeslotEnd.parseToMinutes()) {
+                return true
+            }
+        }
+        return false
+    }
+
+    // Converts day as defined in StudIPEvent.kt to day from Calendar
+    private fun Int.toCalendarDay(): Int = when (this) {
+        1 -> Calendar.TUESDAY
+        2 -> Calendar.WEDNESDAY
+        3 -> Calendar.THURSDAY
+        4 -> Calendar.FRIDAY
+        5 -> Calendar.SATURDAY
+        6 -> Calendar.SUNDAY
+        else -> Calendar.MONDAY
+    }
+
+    private fun String.parseToMinutes(): Int {
+        val parts = split(":")
+        return (parts[0].toInt() * 60) + parts[1].toInt()
     }
 
     interface OnClickListener {
