@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Stud.IP Timetable</string>
+
+    <string name="monday">MONTAG</string>
+    <string name="tuesday">DIENSTAG</string>
+    <string name="wednesday">MITTWOCH</string>
+    <string name="thursday">DONNERSTAG</string>
+    <string name="friday">FREITAG</string>
+
+    <string name="title_schedule">Dein Stundenplan</string>
+    <string name="title_food">Mensen-Angebote</string>
+    <string name="title_settings">App-Einstellungen</string>
+
+    <string name="nav_schedule">Stundenplan</string>
+    <string name="nav_food">esn</string>
+    <string name="nav_settings">Einstellungen</string>
+
+    <string name="toast_fetch_finished">Dein Stundenplan wurde aktualisiert!</string>
+
+    <string name="settings_general">Allgemein</string>
+    <string name="settings_misc">Sonstiges</string>
+
+    <string name="refresh_schedule_title">Aktualisiere deinen Stud.IP-Stundenplan</string>
+    <string name="refresh_schedule_subtitle">Dies wird alle Anpassungen löschen!</string>
+    <string name="settings_quarter_title">Nutze akademisches Viertel</string>
+    <string name="settings_quarter_subtitle">Wo es passt</string>
+    <string name="settings_app_version">App-Verison</string>
+
+    <string name="with_love">mit ♡️ aus Bremen-Osterholz\von denizk0461 \\__*</string>
+
+    <string name="de4thSpirit">In our hearts, she lives forevermore</string>
+</resources>

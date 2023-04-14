@@ -1,11 +1,5 @@
 <resources>
     <string name="app_name">Stud.IP Timetable</string>
-    <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
 
     <string name="monday">MONDAY</string>
     <string name="tuesday">TUESDAY</string>
@@ -28,7 +22,7 @@
 
     <string name="refresh_schedule_title">Refresh your Stud.IP schedule</string>
     <string name="refresh_schedule_subtitle">This will clear any customisations!</string>
-    <string name="settings_quarter_title">Show academic quarter</string>
+    <string name="settings_quarter_title">Use academic quarter</string>
     <string name="settings_quarter_subtitle">Where applicable</string>
     <string name="settings_app_version">App Version</string>
 

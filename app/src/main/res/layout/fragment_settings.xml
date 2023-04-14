@@ -153,7 +153,8 @@
             android:text="@string/with_love"
             android:textSize="10sp"
             android:layout_marginTop="4dp"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            tools:ignore="SmallSp" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

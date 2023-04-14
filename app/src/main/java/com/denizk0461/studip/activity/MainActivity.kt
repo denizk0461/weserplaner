@@ -1,15 +1,11 @@
 package com.denizk0461.studip.activity
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
-import android.view.Menu
-import android.view.MenuItem
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Lifecycle
 import com.denizk0461.studip.R
@@ -86,21 +82,21 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
+//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        menuInflater.inflate(R.menu.menu_main, menu)
+//        return true
+//    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        return when (item.itemId) {
+//            R.id.action_settings -> true
+//            else -> super.onOptionsItemSelected(item)
+//        }
+//    }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
@@ -108,14 +104,14 @@ class MainActivity : AppCompatActivity() {
                 || super.onSupportNavigateUp()
     }
 
-    private fun getFragmentByType(type: FragmentType): Fragment {
-//        Log.d("AAA!", "help")
-        return when (type) {
-            FragmentType.SCHEDULE -> EventFragment()
-            FragmentType.FOOD -> FoodFragment() // TODO once this fragment has been implemented
-            FragmentType.SETTINGS -> SettingsFragment()
-        }
-    }
+//    private fun getFragmentByType(type: FragmentType): Fragment {
+////        Log.d("AAA!", "help")
+//        return when (type) {
+//            FragmentType.SCHEDULE -> EventFragment()
+//            FragmentType.FOOD -> FoodFragment()
+//            FragmentType.SETTINGS -> SettingsFragment()
+//        }
+//    }
 
     private fun bottomIdToType(id: Int): FragmentType = when (id) {
         R.id.food -> FragmentType.FOOD
