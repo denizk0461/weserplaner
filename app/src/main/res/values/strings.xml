@@ -11,8 +11,19 @@
     <string name="title_food">Canteen Offers</string>
     <string name="title_settings">App Settings</string>
 
+    <string name="mensa_uni">Uni-Mensa</string>
+    <string name="cafe_central">Café Central</string>
+    <string name="mensa_nw1">Mensa NW1</string>
+    <string name="cafeteria_gw2">Cafeteria GW2</string>
+    <string name="mensa_neustadt">Mensa Neustadtswall</string>
+    <string name="mensa_werder">Mensa Werderstraße</string>
+    <string name="mensa_airport">Mensa Airport</string>
+    <string name="mensa_bhv">Mensa Bremerhaven</string>
+    <string name="cafeteria_bhv">Cafeteria Bremerhaven</string>
+    <string name="mensa_hfk">Interimsmensa HfK</string>
+
     <string name="nav_schedule">Schedule</string>
-    <string name="nav_food">Food</string>
+    <string name="nav_food">Canteens</string>
     <string name="nav_settings">Settings</string>
 
     <string name="toast_fetch_finished">Your schedule has been refreshed!</string>

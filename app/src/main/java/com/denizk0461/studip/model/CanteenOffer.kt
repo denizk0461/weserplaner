@@ -8,6 +8,7 @@ data class CanteenOffer(
     @PrimaryKey val id: Int,
     val date: String,
     val dateId: Int, // gives every item on the same day the same ID for easier filtering
+//    val canteen: Int,
     val category: String,
     val title: String,
     val price: String, // price for students
