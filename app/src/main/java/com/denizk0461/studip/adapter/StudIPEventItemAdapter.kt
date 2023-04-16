@@ -9,9 +9,9 @@ import com.denizk0461.studip.model.StudIPEvent
 import com.denizk0461.studip.databinding.ItemEventBinding
 import java.util.*
 
-class StudIPEventAdapter(
+class StudIPEventItemAdapter(
     events: List<StudIPEvent>, private val currentDay: Int, private val onClickListener: OnClickListener
-) : RecyclerView.Adapter<StudIPEventAdapter.EventViewHolder>() {
+) : RecyclerView.Adapter<StudIPEventItemAdapter.EventViewHolder>() {
 
     private val filteredEvents: List<StudIPEvent> = events.filter { it.day == currentDay }
     private val currentCalendar = Calendar.getInstance()

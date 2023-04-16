@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.denizk0461.studip.R
-import com.denizk0461.studip.adapter.StudIPEventAdapter
+import com.denizk0461.studip.adapter.StudIPEventItemAdapter
 import com.denizk0461.studip.adapter.StudIPEventPageAdapter
 import com.denizk0461.studip.databinding.FragmentEventBinding
 import com.denizk0461.studip.model.StudIPEvent
@@ -26,7 +26,6 @@ class EventFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private lateinit var viewPagerAdapter: StudIPEventPageAdapter
     private var dayOfWeek: Int = 0
     private val dayStrings = listOf(
         R.string.monday,
@@ -36,6 +35,7 @@ class EventFragment : Fragment() {
         R.string.friday,
     )
 
+    private lateinit var viewPagerAdapter: StudIPEventPageAdapter
     private val viewModel: EventViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -54,7 +54,7 @@ class EventFragment : Fragment() {
             else -> 0
         }
 
-        viewPagerAdapter = StudIPEventPageAdapter(listOf(), object : StudIPEventAdapter.OnClickListener {
+        viewPagerAdapter = StudIPEventPageAdapter(listOf(), object : StudIPEventItemAdapter.OnClickListener {
             override fun onClick(event: StudIPEvent) {
 
             }

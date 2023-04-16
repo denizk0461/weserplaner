@@ -34,7 +34,7 @@ class StwParser {
 
     private fun parseFromPage(url: String): List<CanteenOffer> {
         val items = mutableListOf<CanteenOffer>()
-        var date = ""
+        var date: String
         var day = 0
 
         val doc = Jsoup.connect(url).get()
@@ -59,6 +59,7 @@ class StwParser {
                         val newItem = CanteenOffer(
                             id = id,
                             date = date,
+                            dateId = day,
                             category = categoryTitle,
                             title = tableRows[1].getFilteredText(),
                             price = tableRows.getTextOrEmpty(2),
@@ -75,8 +76,6 @@ class StwParser {
                         )
                         items.add(newItem)
                         id += 1
-
-                        Log.d("eek!", newItem.toString())
                     }
             }
         }
@@ -88,7 +87,7 @@ class StwParser {
         getElementsByAttributeValue("src", preference).isNotEmpty()
 
     private fun Element.getFilteredText(): String {
-        var text = html()
+        var text = html().replace("&amp;", "&")
 
         while (text.contains("<sup>")) {
             text = text.substring(0 until text.indexOf("<sup>")) + text.substring(text.indexOf("</sup>")+6 until text.length)
