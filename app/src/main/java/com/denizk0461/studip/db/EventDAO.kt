@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import com.denizk0461.studip.model.CanteenOffer
 import com.denizk0461.studip.model.StudIPEvent
 
 @Dao
@@ -20,4 +21,13 @@ interface EventDAO {
 
     @Query("DELETE FROM events")
     fun nukeEvents()
+
+    @get:Query("SELECT * FROM offers ORDER BY id")
+    val allOffers: LiveData<List<CanteenOffer>>
+
+    @Insert
+    fun insertOffers(offers: List<CanteenOffer>)
+
+    @Query("DELETE from offers")
+    fun nukeOffers()
 }

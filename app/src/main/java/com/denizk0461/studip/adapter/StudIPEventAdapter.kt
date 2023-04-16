@@ -48,11 +48,11 @@ class StudIPEventAdapter(
         if (!isAnyCourseHighlighted && currentItem.isCurrentCourse(currentCalendar)) { // highlight
             isAnyCourseHighlighted = true
             holder.binding.cardBackground.strokeColor = colorPrimary.data
-            holder.binding.cardBackground.strokeWidth = 6
+            holder.binding.cardBackground.strokeWidth = 6 // TODO replace this with proper float -> dp conversion
 //                R.color.list_card_selected)
         } else { // un-highlight
             holder.binding.cardBackground.strokeColor = colorTextHint.data
-            holder.binding.cardBackground.strokeWidth = 3
+            holder.binding.cardBackground.strokeWidth = 3 // this should (?) be 1dp
         }
 
         holder.binding.cardBackground.setOnClickListener {

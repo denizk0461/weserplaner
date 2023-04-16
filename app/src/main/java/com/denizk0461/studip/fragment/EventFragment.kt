@@ -1,15 +1,12 @@
 package com.denizk0461.studip.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import com.denizk0461.studip.R
-import com.denizk0461.studip.activity.FetcherActivity
 import com.denizk0461.studip.adapter.StudIPEventAdapter
 import com.denizk0461.studip.adapter.StudIPEventPageAdapter
 import com.denizk0461.studip.databinding.FragmentEventBinding
@@ -59,7 +56,7 @@ class EventFragment : Fragment() {
 
         viewPagerAdapter = StudIPEventPageAdapter(listOf(), object : StudIPEventAdapter.OnClickListener {
             override fun onClick(event: StudIPEvent) {
-                // do nothing
+
             }
             override fun onLongClick(event: StudIPEvent) {
 
@@ -74,10 +71,6 @@ class EventFragment : Fragment() {
         viewModel.allEvents.observe(viewLifecycleOwner) { events ->
             viewPagerAdapter.setNewItems(events)
             switchToCurrentDayView()
-        }
-
-        binding.fab.setOnClickListener { view ->
-            launchWebview()
         }
 
 //        binding.buttonFirst.setOnClickListener {
@@ -98,17 +91,5 @@ class EventFragment : Fragment() {
     private fun switchToCurrentDayView() {
         binding.viewPager.currentItem = dayOfWeek
 //        binding.dayTabLayout.getTabAt(dayOfWeek)?.select()
-    }
-
-    private fun launchWebview() {
-//        findNavController(this).navigate(R.id.action_FirstFragment_to_SecondFragment)
-        startActivity(Intent(context, FetcherActivity::class.java))
-    }
-
-    /**
-     * Highlights the current or next course.
-     */
-    private fun highlightCurrentCourse() {
-
     }
 }

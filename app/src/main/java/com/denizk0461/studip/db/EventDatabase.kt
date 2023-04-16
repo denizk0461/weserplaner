@@ -4,9 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.denizk0461.studip.model.CanteenOffer
 import com.denizk0461.studip.model.StudIPEvent
 
-@Database(entities = [StudIPEvent::class], version = 3)
+@Database(entities = [StudIPEvent::class, CanteenOffer::class], version = 6)
 abstract class EventDatabase : RoomDatabase() {
 
     abstract fun dao(): EventDAO

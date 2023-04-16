@@ -13,7 +13,7 @@ import com.denizk0461.studip.data.Dependencies
 import com.denizk0461.studip.databinding.ActivityMainBinding
 import com.denizk0461.studip.db.EventRepository
 import com.denizk0461.studip.fragment.EventFragment
-import com.denizk0461.studip.fragment.FoodFragment
+import com.denizk0461.studip.fragment.CanteenFragment
 import com.denizk0461.studip.fragment.SettingsFragment
 
 class MainActivity : AppCompatActivity() {
@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private var currentFragment = FragmentType.SCHEDULE
-    private val fragments = listOf(EventFragment(), FoodFragment(), SettingsFragment())
+    private val fragments = listOf(EventFragment(), CanteenFragment(), SettingsFragment())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)

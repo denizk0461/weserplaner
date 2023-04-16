@@ -1,7 +1,6 @@
 package com.denizk0461.studip.model
 
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "events")
@@ -13,6 +12,7 @@ data class StudIPEvent(
     val day: Int, // 0 = Monday, 1 = Tuesday, 2 = Wednesday, 3 = Thursday, 4 = Friday
     val timeslotStart: String, // the time the course starts
     val timeslotEnd: String, // the time the course ends
+    val colour: String = "000000", // user-defined colour, TODO implement this
 ) {
 
 //    @Ignore private val timeSlotStartTimes: List<String> = listOf("06:15", "08:15", "10:15", "12:15", "14:15", "16:15", "18:15", "20:15")

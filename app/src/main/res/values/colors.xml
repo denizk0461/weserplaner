@@ -17,8 +17,8 @@
     <color name="colorTextHintDay">#2A2828</color>
     <color name="colorTextHintNight">#B9B6B6</color>
 
-    <color name="colorTextHintLighterDay">#3E3C3C</color>
-    <color name="colorTextHintLighterNight">#918D8D</color>
+    <color name="colorTextHintLighterDay">#AFACAC</color>
+    <color name="colorTextHintLighterNight">#5E5A5A</color>
 
     <color name="colorBackgroundDay">#EBEBEB</color>
     <color name="colorBackgroundNight">#151414</color>
