@@ -1,16 +1,15 @@
 package com.denizk0461.studip.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
 //@Entity(tableName = "offers")
 data class CanteenOffer(
 //    @PrimaryKey val id: Int,
     val id: Int,
     val date: String,
-    val dateId: Int, // gives every item on the same day the same ID for easier filtering
-//    val canteen: Int,
+    val dateId: Int,
     val category: String,
+    val categoryId: Int,
+    val canteen: String,
+    val canteenId: Int,
     val title: String,
     val price: String, // price for students
     val isFair: Boolean, // artgerechte Tierhaltung

@@ -1,6 +1,5 @@
 package com.denizk0461.studip.model
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
@@ -11,15 +10,15 @@ import androidx.room.PrimaryKey
         ForeignKey(
             OfferCategory::class,
             ["id"],
-            ["category_id"],
+            ["categoryId"],
             ForeignKey.CASCADE,
         ),
     ]
 )
 data class OfferItem(
     @PrimaryKey val id: Int,
-    @ColumnInfo(name = "category_id") val categoryId: Int,
-    val title: Int,
+    val categoryId: Int,
+    val title: String,
     val price: String,
     val isFair: Boolean,
     val isFish: Boolean,

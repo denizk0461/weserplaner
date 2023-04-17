@@ -1,7 +1,7 @@
 package com.denizk0461.studip.data
 
-import android.util.Log
-import com.denizk0461.studip.model.CanteenOffer
+import com.denizk0461.studip.db.EventRepository
+import com.denizk0461.studip.model.*
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
@@ -9,10 +9,16 @@ import org.jsoup.select.Elements
 // Parser class for the Studierendenwerk cafeteria plans
 class StwParser {
 
-    private var id = 0
+    private var dateId = 0
+    private var canteenId = 0
+    private var categoryId = 0
+    private var itemId = 0
 
     fun parse(onFinish: () -> Unit) {
-        id = 0
+        dateId = 0
+        canteenId = 0
+        categoryId = 0
+        itemId = 0
         val links = mutableListOf<String>()
         if (true) { links.add(urlUniMensa) }
 //        if (true) { links.add(urlCafeCentral) }
@@ -27,27 +33,39 @@ class StwParser {
 
         Dependencies.repo.nukeOffers()
 
+        // STEP: fetch every canteen
         links.forEach { link ->
-            Dependencies.repo.insertOffers(parseFromPage(link))
+            parseFromPage(link, Dependencies.repo)
         }
     }
 
-    private fun parseFromPage(url: String): List<CanteenOffer> {
+    private fun parseFromPage(url: String, repo: EventRepository): List<CanteenOffer> {
         val items = mutableListOf<CanteenOffer>()
         var date: String
-        var day = 0
+
+        dateId = 0
 
         val doc = Jsoup.connect(url).get()
+
+        repo.insert(OfferCanteen(canteenId, "TEMP")) // TODO canteen name
+
+        // STEP: get each day
         doc.getElementsByClass("food-plan").forEach { dayPlan ->
 
             val rawDate = doc.getElementsByClass("tabs")[0]
-                .getElementsByClass("tab-date")[day].text().split(" ")
+                .getElementsByClass("tab-date")[dateId].text().split(" ")
 
             date = "${rawDate[0]}${rawDate[1].monthToNumber()}."
-            day += 1
 
+            repo.insert(OfferDate(dateId, date))
+
+            // STEP: get each category in a day
             dayPlan.getElementsByClass("food-category").forEach { category ->
                 val categoryTitle = category.getElementsByClass("category-name")[0].text()
+
+                repo.insert(OfferCategory(categoryId, dateId, canteenId, categoryTitle))
+
+                // STEP: get each item in a category
                 category
                     .getElementsByTag("tbody")[0]
                     .getElementsByTag("tr").forEach { element ->
@@ -56,29 +74,50 @@ class StwParser {
                         val prefs =
                             element.getElementsByClass("field field-name-field-food-types")[0]
 
-                        val newItem = CanteenOffer(
-                            id = id,
-                            date = date,
-                            dateId = day,
-                            category = categoryTitle,
-                            title = tableRows[1].getFilteredText(),
-                            price = tableRows.getTextOrEmpty(2),
-                            isFair = prefs.isDietaryPreferenceMet(PREFERENCE_FAIR),
-                            isFish = prefs.isDietaryPreferenceMet(PREFERENCE_FISH),
-                            isPoultry = prefs.isDietaryPreferenceMet(PREFERENCE_POULTRY),
-                            isLamb = prefs.isDietaryPreferenceMet(PREFERENCE_LAMB),
-                            isVital = prefs.isDietaryPreferenceMet(PREFERENCE_VITAL),
-                            isBeef = prefs.isDietaryPreferenceMet(PREFERENCE_BEEF),
-                            isPork = prefs.isDietaryPreferenceMet(PREFERENCE_PORK),
-                            isVegan = prefs.isDietaryPreferenceMet(PREFERENCE_VEGAN),
-                            isVegetarian = prefs.isDietaryPreferenceMet(PREFERENCE_VEGETARIAN),
-                            isGame = prefs.isDietaryPreferenceMet(PREFERENCE_GAME),
+                        repo.insert(
+                            OfferItem(
+                                itemId,
+                                categoryId,
+                                title = tableRows[1].getFilteredText(),
+                                price = tableRows.getTextOrEmpty(2),
+                                isFair = prefs.isDietaryPreferenceMet(PREFERENCE_FAIR),
+                                isFish = prefs.isDietaryPreferenceMet(PREFERENCE_FISH),
+                                isPoultry = prefs.isDietaryPreferenceMet(PREFERENCE_POULTRY),
+                                isLamb = prefs.isDietaryPreferenceMet(PREFERENCE_LAMB),
+                                isVital = prefs.isDietaryPreferenceMet(PREFERENCE_VITAL),
+                                isBeef = prefs.isDietaryPreferenceMet(PREFERENCE_BEEF),
+                                isPork = prefs.isDietaryPreferenceMet(PREFERENCE_PORK),
+                                isVegan = prefs.isDietaryPreferenceMet(PREFERENCE_VEGAN),
+                                isVegetarian = prefs.isDietaryPreferenceMet(PREFERENCE_VEGETARIAN),
+                                isGame = prefs.isDietaryPreferenceMet(PREFERENCE_GAME),
+                            )
                         )
-                        items.add(newItem)
-                        id += 1
+                        itemId += 1
+
+//                        val newItem = CanteenOffer(
+//                            id = id,
+//                            date = date,
+//                            dateId = day,
+//                            category = categoryTitle,
+//                            title = tableRows[1].getFilteredText(),
+////                            price = tableRows.getTextOrEmpty(2),
+//                            isFair = prefs.isDietaryPreferenceMet(PREFERENCE_FAIR),
+//                            isFish = prefs.isDietaryPreferenceMet(PREFERENCE_FISH),
+//                            isPoultry = prefs.isDietaryPreferenceMet(PREFERENCE_POULTRY),
+//                            isLamb = prefs.isDietaryPreferenceMet(PREFERENCE_LAMB),
+//                            isVital = prefs.isDietaryPreferenceMet(PREFERENCE_VITAL),
+//                            isBeef = prefs.isDietaryPreferenceMet(PREFERENCE_BEEF),
+//                            isPork = prefs.isDietaryPreferenceMet(PREFERENCE_PORK),
+//                            isVegan = prefs.isDietaryPreferenceMet(PREFERENCE_VEGAN),
+//                            isVegetarian = prefs.isDietaryPreferenceMet(PREFERENCE_VEGETARIAN),
+//                            isGame = prefs.isDietaryPreferenceMet(PREFERENCE_GAME),
+//                        )
                     }
+                categoryId += 1
             }
+            dateId += 1
         }
+        canteenId += 1
 
         return items
     }

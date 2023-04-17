@@ -11,7 +11,7 @@ class CanteenViewModel(app: Application) : TemplateViewModel(app) {
 
     val allOffers: LiveData<List<CanteenOffer>> = repo.allOffers
 
-    fun insertOffers(offers: List<CanteenOffer>) { doAsync { repo.insertOffers(offers) }}
+//    fun insertOffers(offers: List<CanteenOffer>) { doAsync { repo.insertOffers(offers) }}
     fun nukeOffers() { doAsync { repo.nukeOffers() }}
 
     fun fetchOffers(onFinish: () -> Unit) { doAsync { parser.parse(onFinish) }}
