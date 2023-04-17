@@ -28,7 +28,7 @@ class CanteenOfferPageAdapter(private var offers: List<CanteenOffer>, private va
 
             layoutManager = LinearLayoutManager(holder.binding.root.context, LinearLayoutManager.VERTICAL, false)
 
-            val filtered = offers.filter { it.dateId == position + 1 }
+            val filtered = offers.filter { it.dateId == position }
             adapter = CanteenOfferItemAdapter(filtered) // TODO check if empty
             scheduleLayoutAnimation()
         }

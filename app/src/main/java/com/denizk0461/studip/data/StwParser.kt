@@ -1,5 +1,6 @@
 package com.denizk0461.studip.data
 
+import android.util.Log
 import com.denizk0461.studip.db.EventRepository
 import com.denizk0461.studip.model.*
 import org.jsoup.Jsoup
@@ -46,8 +47,10 @@ class StwParser {
         dateId = 0
 
         val doc = Jsoup.connect(url).get()
+        val t = doc.getElementsByClass("pane-title")[1].text()
 
-        repo.insert(OfferCanteen(canteenId, "TEMP")) // TODO canteen name
+        repo.insert(OfferCanteen(canteenId, t)) // TODO canteen name
+        Log.d("eek!3", t)
 
         // STEP: get each day
         doc.getElementsByClass("food-plan").forEach { dayPlan ->
@@ -126,7 +129,10 @@ class StwParser {
         getElementsByAttributeValue("src", preference).isNotEmpty()
 
     private fun Element.getFilteredText(): String {
-        var text = html().replace("&amp;", "&")
+        var text = html()
+            .replace("&amp;", "&")
+            .replace("&gt;", ">")
+            .replace("&lt;", "<")
 
         while (text.contains("<sup>")) {
             text = text.substring(0 until text.indexOf("<sup>")) + text.substring(text.indexOf("</sup>")+6 until text.length)
