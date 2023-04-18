@@ -22,6 +22,18 @@
     <string name="cafeteria_bhv">Cafeteria Bremerhaven</string>
     <string name="mensa_hfk">Interimsmensa HfK</string>
 
+    <!-- dietary preferences -->
+    <string name="pref_fair">Fair</string> <!-- is this really the best name? what about 'animal welfare'? -->
+    <string name="pref_fish">Fish</string>
+    <string name="pref_poultry">Poultry</string>
+    <string name="pref_lamb">Lamb</string>
+    <string name="pref_vital">mensaVital</string>
+    <string name="pref_beef">Beef</string>
+    <string name="pref_pork">Pork</string>
+    <string name="pref_vegan">Vegan</string>
+    <string name="pref_vegetarian">Vegetarian</string>
+    <string name="pref_game">Game</string>
+
     <string name="nav_schedule">Schedule</string>
     <string name="nav_food">Canteens</string>
     <string name="nav_settings">Settings</string>

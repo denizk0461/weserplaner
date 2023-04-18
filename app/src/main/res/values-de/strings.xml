@@ -22,6 +22,18 @@
     <string name="cafeteria_bhv">Cafeteria Bremerhaven</string>
     <string name="mensa_hfk">Interimsmensa HfK</string>
 
+    <!-- dietary preferences -->
+    <string name="pref_fair">Artgerecht</string>
+    <string name="pref_fish">Fisch</string>
+    <string name="pref_poultry">Huhn</string>
+    <string name="pref_lamb">Lamm</string>
+    <string name="pref_vital">mensaVital</string>
+    <string name="pref_beef">Rind</string>
+    <string name="pref_pork">Schwein</string>
+    <string name="pref_vegan">Vegan</string>
+    <string name="pref_vegetarian">Vegetarisch</string>
+    <string name="pref_game">Wild</string>
+
     <string name="nav_schedule">Stundenplan</string>
     <string name="nav_food">Mensen</string>
     <string name="nav_settings">Einstellungen</string>

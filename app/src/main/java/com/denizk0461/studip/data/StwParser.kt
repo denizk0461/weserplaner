@@ -15,7 +15,7 @@ class StwParser {
     private var categoryId = 0
     private var itemId = 0
 
-    fun parse(onFinish: () -> Unit) {
+    fun parse(onRefreshUpdate: (status: Int) -> Unit, onFinish: () -> Unit) {
         dateId = 0
         canteenId = 0
         categoryId = 0
@@ -36,6 +36,7 @@ class StwParser {
 
         // STEP: fetch every canteen
         links.forEach { link ->
+            // TODO implement onRefresh(Int)
             parseFromPage(link, Dependencies.repo)
         }
     }
@@ -47,10 +48,8 @@ class StwParser {
         dateId = 0
 
         val doc = Jsoup.connect(url).get()
-        val t = doc.getElementsByClass("pane-title")[1].text()
 
-        repo.insert(OfferCanteen(canteenId, t)) // TODO canteen name
-        Log.d("eek!3", t)
+        repo.insert(OfferCanteen(canteenId, doc.getElementsByClass("pane-title")[1].text()))
 
         // STEP: get each day
         doc.getElementsByClass("food-plan").forEach { dayPlan ->
