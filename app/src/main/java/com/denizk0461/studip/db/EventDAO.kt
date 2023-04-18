@@ -46,14 +46,21 @@ interface EventDAO {
                 "JOIN offer_category ON offer_item.categoryId = offer_category.id " +
                 "JOIN offer_canteen ON offer_category.canteenId = offer_canteen.id " +
                 "JOIN offer_date ON offer_category.dateId = offer_date.id " +
-                "WHERE isFair = :isFair AND isFish = :isFish AND isPoultry = :isPoultry " +
-                "AND isLamb = :isLamb AND isVital = :isVital AND isBeef = :isBeef " +
-                "AND isPork = :isPork AND isVegan = :isVegan AND isVegetarian = :isVegetarian " +
-                "AND isGame = :isGame "
+                "WHERE dietary_preferences = :prefs "
+//                "WHERE isFair = :isFair " +
+//                "OR isFish = :isFish " +
+//                "OR isPoultry = :isPoultry " +
+//                "OR isLamb = :isLamb " +
+//                "OR isVital = :isVital " +
+//                "OR isBeef = :isBeef " +
+//                "OR isPork = :isPork " +
+//                "OR isVegan = :isVegan " +
+//                "OR isVegetarian = :isVegetarian " +
+//                "OR isGame = :isGame "
     )
-    fun getOffersByPreference(
-        isFair: Boolean, isFish: Boolean, isPoultry: Boolean, isLamb: Boolean, isVital: Boolean,
-        isBeef: Boolean, isPork: Boolean, isVegan: Boolean, isVegetarian: Boolean, isGame: Boolean
+    fun getOffersByPreference(prefs: String
+//        isFair: Boolean, isFish: Boolean, isPoultry: Boolean, isLamb: Boolean, isVital: Boolean,
+//        isBeef: Boolean, isPork: Boolean, isVegan: Boolean, isVegetarian: Boolean, isGame: Boolean
     ): LiveData<List<CanteenOffer>>
 
     @get:Query("SELECT id FROM offer_date")

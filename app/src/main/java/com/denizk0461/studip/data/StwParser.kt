@@ -76,22 +76,28 @@ class StwParser {
                         val prefs =
                             element.getElementsByClass("field field-name-field-food-types")[0]
 
+                        val prefString = DietaryPrefObject(
+                            isFair = prefs.isDietaryPreferenceMet(PREFERENCE_FAIR),
+                            isFish = prefs.isDietaryPreferenceMet(PREFERENCE_FISH),
+                            isPoultry = prefs.isDietaryPreferenceMet(PREFERENCE_POULTRY),
+                            isLamb = prefs.isDietaryPreferenceMet(PREFERENCE_LAMB),
+                            isVital = prefs.isDietaryPreferenceMet(PREFERENCE_VITAL),
+                            isBeef = prefs.isDietaryPreferenceMet(PREFERENCE_BEEF),
+                            isPork = prefs.isDietaryPreferenceMet(PREFERENCE_PORK),
+                            isVegan = prefs.isDietaryPreferenceMet(PREFERENCE_VEGAN),
+                            isVegetarian = prefs.isDietaryPreferenceMet(PREFERENCE_VEGETARIAN),
+                            isGame = prefs.isDietaryPreferenceMet(PREFERENCE_GAME),
+                        ).deconstruct()
+
+//                        Log.d("eek!4", "prefString = $prefString")
+
                         repo.insert(
                             OfferItem(
                                 itemId,
                                 categoryId,
                                 title = tableRows[1].getFilteredText(),
                                 price = tableRows.getTextOrEmpty(2),
-                                isFair = prefs.isDietaryPreferenceMet(PREFERENCE_FAIR),
-                                isFish = prefs.isDietaryPreferenceMet(PREFERENCE_FISH),
-                                isPoultry = prefs.isDietaryPreferenceMet(PREFERENCE_POULTRY),
-                                isLamb = prefs.isDietaryPreferenceMet(PREFERENCE_LAMB),
-                                isVital = prefs.isDietaryPreferenceMet(PREFERENCE_VITAL),
-                                isBeef = prefs.isDietaryPreferenceMet(PREFERENCE_BEEF),
-                                isPork = prefs.isDietaryPreferenceMet(PREFERENCE_PORK),
-                                isVegan = prefs.isDietaryPreferenceMet(PREFERENCE_VEGAN),
-                                isVegetarian = prefs.isDietaryPreferenceMet(PREFERENCE_VEGETARIAN),
-                                isGame = prefs.isDietaryPreferenceMet(PREFERENCE_GAME),
+                                prefString,
                             )
                         )
                         itemId += 1

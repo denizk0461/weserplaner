@@ -61,7 +61,9 @@
                 android:id="@+id/chip_pref_fish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/pref_fish"/>
+                android:text="@string/pref_fish"
+                app:chipIcon="@drawable/cross"
+                app:checkedIcon="@drawable/flatware"/>
 
             <com.google.android.material.chip.Chip
                 style="@style/Widget.Material3.Chip.Filter"

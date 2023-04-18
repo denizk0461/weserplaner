@@ -14,7 +14,7 @@ import com.denizk0461.studip.model.*
         OfferCategory::class,
         OfferItem::class
     ],
-    version = 8
+    version = 10,
 )
 abstract class EventDatabase : RoomDatabase() {
 
