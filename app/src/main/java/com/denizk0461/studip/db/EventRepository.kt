@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.preference.PreferenceManager
 import com.denizk0461.studip.model.*
 
-class EventRepository(private val app: Application) {
+class EventRepository(app: Application) {
 
     private val dao: EventDAO = EventDatabase.getInstance(app.applicationContext).dao()
     private val prefs = PreferenceManager.getDefaultSharedPreferences(app)
@@ -21,31 +21,8 @@ class EventRepository(private val app: Application) {
 
     val allOffers: LiveData<List<CanteenOffer>> = dao.allOffers
 
-    // is this better than List.filter?
-    fun getOffersByPreference(prefs: String = getDietaryPrefs()): LiveData<List<CanteenOffer>> {
-        return if (prefs != "ffffffffff") {//isPreferenceSet()) {
-            dao.getOffersByPreference(
-                prefs
-//                isFair = prefs.isFair,
-//                isFish = prefs.isFish,
-//                isPoultry = prefs.isPoultry,
-//                isLamb = prefs.isLamb,
-//                isVital = prefs.isVital,
-//                isBeef = prefs.isBeef,
-//                isPork = prefs.isPork,
-//                isVegan = prefs.isVegan,
-//                isVegetarian = prefs.isVegetarian,
-//                isGame = prefs.isGame,
-            )
-        } else {
-            dao.allOffers
-        }
-//        return dao.allOffers
-    }
-
-
     fun getDietaryPrefs(): String {
-        return prefs.getString(dietaryPrefString, "ffffffffff") ?: "ffffffffff"
+        return prefs.getString(dietaryPrefString, "..........") ?: ".........."
 //        return DietaryPrefObject(
 //            isFair = prefs.getBoolean(DietaryPreferences.FAIR.value, false),
 //            isFish = prefs.getBoolean(DietaryPreferences.FISH.value, false),
@@ -98,7 +75,7 @@ class EventRepository(private val app: Application) {
         prefs.edit().putString(dietaryPrefString, newString).apply()
     }
 
-    private fun Boolean.toChar() = if (this) 't' else 'f'
+    private fun Boolean.toChar() = if (this) 't' else '.'
 
     fun getPreference(pref: DietaryPreferences): Boolean {
         val prefString = getDietaryPrefs().toList()

@@ -5,17 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.denizk0461.studip.adapter.CanteenOfferPageAdapter
 import com.denizk0461.studip.databinding.FragmentCanteenBinding
 import com.denizk0461.studip.model.CanteenOffer
 import com.denizk0461.studip.model.DietaryPreferences
 import com.denizk0461.studip.viewmodel.CanteenViewModel
-import com.google.android.material.chip.Chip
 import com.google.android.material.tabs.TabLayoutMediator
 
 class CanteenFragment : Fragment() {
@@ -71,39 +68,16 @@ class CanteenFragment : Fragment() {
             }
         }
 
-//        binding.chipPrefFair
-//        binding.chipPrefFair.setOnCheckedChangeListener { _, newValue ->
-//            setPreference(DietaryPreferences.FAIR, newValue)
-//        }
-
-        viewPagerAdapter = CanteenOfferPageAdapter(listOf(), 0, viewModel.getDietaryPrefs())
+        viewPagerAdapter = CanteenOfferPageAdapter(listOf(), 0, getPrefRegex())
         binding.viewPager.adapter = viewPagerAdapter
 
         createTabLayoutMediator()
 
-        liveData = viewModel.getOffersByPreference()
+        liveData = viewModel.allOffers
         liveData.observe(viewLifecycleOwner) { offers ->
 
             dates = offers.map { it.date }.distinct()
             createTabLayoutMediator()
-
-//            val newOffers = mutableListOf<CanteenOffer>()
-
-//            val prefs = viewModel.getDietaryPrefs()
-//            if (prefs.isFair) { newOffers.addAll(offers.filter { it.isFair }) }
-//            if (prefs.isFish) { newOffers.addAll(offers.filter { it.isFish }) }
-//            if (prefs.isPoultry) { newOffers.addAll(offers.filter { it.isPoultry }) }
-//            if (prefs.isLamb) { newOffers.addAll(offers.filter { it.isLamb }) }
-//            if (prefs.isVital) { newOffers.addAll(offers.filter { it.isVital }) }
-//            if (prefs.isBeef) { newOffers.addAll(offers.filter { it.isBeef }) }
-//            if (prefs.isPork) { newOffers.addAll(offers.filter { it.isPork }) }
-//            if (prefs.isVegetarian) { newOffers.addAll(offers.filter { it.isVegetarian }) }
-//            if (prefs.isVegan) { newOffers.addAll(offers.filter { it.isVegan }) }
-//            if (prefs.isGame) { newOffers.addAll(offers.filter { it.isGame }) }
-//            newOffers.sortBy { it ->
-//                Log.d("eek!4", "title: ${it.title} - id: ${it.itemId}")
-//                it.itemId
-//            }
 
             viewPagerAdapter.setNewItems(offers, dates.size)
 
@@ -135,17 +109,12 @@ class CanteenFragment : Fragment() {
 
     private fun setPreference(pref: DietaryPreferences, newValue: Boolean) {
         viewModel.setPreference(pref, newValue)
-        viewPagerAdapter.refreshView(viewModel.getDietaryPrefs())
-//        Log.d("eek!4", "this")
-//        liveData.forceRefresh()
-//        viewModel.forceRefresh()
-        // notifyDataSetChanged?
+        viewPagerAdapter.refreshView(getPrefRegex())
     }
 
     private fun getPreference(pref: DietaryPreferences): Boolean =
         viewModel.getPreference(pref)
 
-    private fun MutableLiveData<List<CanteenOffer>>.forceRefresh() {
-        this.value = this.value
-    }
+    private fun getPrefRegex(): Regex =
+        Regex(viewModel.getDietaryPrefs().deconstruct().replace('t', '.'))
 }

@@ -15,7 +15,7 @@ data class DietaryPrefObject(
     companion object {
         /* assume that the values must be parsed as follows:
          * "xxxxxxxxxx"
-         * t = true, f = false
+         * t = true, . = false
          */
         fun construct(values: String) = DietaryPrefObject(
             isFair = values[0] == 't',
