@@ -116,5 +116,6 @@ class CanteenFragment : Fragment() {
         viewModel.getPreference(pref)
 
     private fun getPrefRegex(): Regex =
-        Regex(viewModel.getDietaryPrefs().deconstruct().replace('t', '.'))
+//        Regex(viewModel.getDietaryPrefs().deconstruct().replace('t', '.'))
+        Regex(viewModel.getDietaryPrefs().deconstruct().replace('f', '.'))
 }

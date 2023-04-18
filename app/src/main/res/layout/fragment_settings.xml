@@ -77,10 +77,6 @@
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp">
 
-<!--                    android:clickable="true"-->
-<!--                    android:focusable="true"-->
-<!--                    android:background="@drawable/layout_ripple"-->
-
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -107,6 +103,48 @@
                     <com.google.android.material.materialswitch.MaterialSwitch
                         style="@style/SwitchTheme"
                         android:id="@+id/switch_quarter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- Highlight course -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_highlight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/lato_bolditalic"
+                            android:text="@string/settings_highlight_title"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:text="@string/settings_highlight_subtitle"/>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        style="@style/SwitchTheme"
+                        android:id="@+id/switch_highlight"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toTopOf="parent"

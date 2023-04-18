@@ -1,6 +1,6 @@
 package com.denizk0461.studip.data
 
-import com.denizk0461.studip.model.StudIPEvent
+import com.denizk0461.studip.R
 
 object Misc {
 
@@ -50,6 +50,20 @@ object Misc {
         "19:45" to 6,
         "22:00" to 7,
         "21:45" to 7,
+    )
+
+    val indexToDrawable: Map<Int, Int> = mapOf(
+        0 to R.drawable.handshake,
+        1 to R.drawable.fish,
+        2 to R.drawable.chicken,
+        3 to R.drawable.sheep,
+        4 to R.drawable.yoga,
+        5 to R.drawable.cow,
+        6 to R.drawable.pig,
+        7 to R.drawable.leaf,
+        8 to R.drawable.carrot,
+        9 to R.drawable.deer,
+        10 to R.drawable.circle,
     )
 
     fun parseTimeslot(time: String): Pair<Int, Int> {

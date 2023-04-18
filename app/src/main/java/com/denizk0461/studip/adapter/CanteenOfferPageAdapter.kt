@@ -38,7 +38,7 @@ class CanteenOfferPageAdapter(private var offers: List<CanteenOffer>, private va
                 filteredForDate
             } else {
                 filteredForDate.filter {
-                    Log.d("eek!5", it.dietaryPreferences)
+                    Log.d("eek!5", "${it.title}: - ${prefsRegex} vs ${it.dietaryPreferences}")
                     prefsRegex.matches(it.dietaryPreferences)
                 }
             }
