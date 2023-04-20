@@ -4,6 +4,7 @@
 <!--        <item name="fontFamily">@font/lato_regular</item>-->
 
         <item name="colorPrimary">@color/primaryDay</item>
+        <item name="colorPrimaryTranslucent">@color/primaryDayTranslucent</item>
         <item name="rippleColor">@color/primaryDay</item>
 
         <item name="colorOnPrimary">@color/colorBackgroundDay</item>
@@ -31,7 +32,7 @@
     </style>
 
     <style name="NavigationViewItemIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
-        <item name="android:color">@color/primaryDay</item>
+        <item name="android:color">@color/primaryDayTranslucent</item>
     </style>
 
     <style name="SelectableItemTheme">

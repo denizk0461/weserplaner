@@ -3,6 +3,7 @@
     <attr name="colorNavHighlight" format="color" />
     <attr name="colorPrimaryOnContrast" format="color" />
     <attr name="colorPrimary" format="color" />
+    <attr name="colorPrimaryTranslucent" format="color" />
     <attr name="colorOnPrimary" format="color" />
     <attr name="colorText" format="color" />
     <attr name="colorTextHint" format="color" />

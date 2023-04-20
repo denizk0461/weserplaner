@@ -6,7 +6,9 @@
 
     <!-- colours i defined -->
     <color name="primaryDay">#B2665A</color>
+    <color name="primaryDayTranslucent">#80B2665A</color>
     <color name="primaryNight">#995348</color>
+    <color name="primaryNightTranslucent">#80995348</color>
 
     <color name="highlightDay">#871D1E</color>
     <color name="highlightNight">#CB9890</color>

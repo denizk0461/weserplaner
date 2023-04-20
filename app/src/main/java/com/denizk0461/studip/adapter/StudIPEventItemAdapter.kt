@@ -1,5 +1,6 @@
 package com.denizk0461.studip.adapter
 
+import android.content.res.ColorStateList
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -39,20 +40,29 @@ class StudIPEventItemAdapter(
         holder.binding.textRoom.text = currentItem.room
         holder.binding.textTimeslot.text = currentItem.timeslot()
 
-        val colorPrimary = TypedValue()
-        val colorTextHint = TypedValue()
+        val colorPrimaryTranslucent = TypedValue()
+        val colorCardBackground = TypedValue()
+        val colorTextHintLighter = TypedValue()
         val theme = holder.binding.root.context.theme
-        theme.resolveAttribute(R.attr.colorPrimary, colorPrimary, true)
-        theme.resolveAttribute(R.attr.colorTextHintLighter, colorTextHint, true)
+
+        theme.resolveAttribute(R.attr.colorPrimaryTranslucent, colorPrimaryTranslucent, true)
+        theme.resolveAttribute(R.attr.colorCardBackground, colorCardBackground, true)
+        theme.resolveAttribute(R.attr.colorTextHintLighter, colorTextHintLighter, true)
 
         if (!isAnyCourseHighlighted && currentItem.isCurrentCourse(currentCalendar)) { // highlight
             isAnyCourseHighlighted = true
-            holder.binding.cardBackground.strokeColor = colorPrimary.data
-            holder.binding.cardBackground.strokeWidth = 6 // TODO replace this with proper float -> dp conversion
+            holder.binding.cardBackground.apply {
+                backgroundTintList = ColorStateList.valueOf(colorPrimaryTranslucent.data)//R.attr.colorPrimaryTranslucent)
+                strokeColor = context.getColor(android.R.color.transparent)
+            }//colorPrimary.data
+//            holder.binding.cardBackground.strokeWidth = 6 // TODO replace this with proper float -> dp conversion
 //                R.color.list_card_selected)
         } else { // un-highlight
-            holder.binding.cardBackground.strokeColor = colorTextHint.data
-            holder.binding.cardBackground.strokeWidth = 3 // this should (?) be 1dp
+            holder.binding.cardBackground.apply {
+                backgroundTintList = ColorStateList.valueOf(colorCardBackground.data)//context.getColor(R.attr.colorCardBackground))
+                strokeColor = colorTextHintLighter.data
+            }
+//            holder.binding.cardBackground.strokeWidth = 3 // this should (?) be 1dp
         }
 
         holder.binding.cardBackground.setOnClickListener {

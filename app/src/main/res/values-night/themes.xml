@@ -3,6 +3,7 @@
     <style name="Base.Theme.StudIPTimetable" parent="Theme.Material3.DayNight.NoActionBar">
 
         <item name="colorPrimary">@color/primaryNight</item>
+        <item name="colorPrimaryTranslucent">@color/primaryNightTranslucent</item>
         <item name="rippleColor">@color/primaryNight</item>
 
         <item name="colorOnPrimary">@color/colorTextNight</item>
@@ -21,9 +22,9 @@
         <item name="colorNavHighlight">@color/highlightNight</item>
     </style>
 
-    <style name="NavigationViewItemIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
-        <item name="android:color">@color/primaryNight</item>
-    </style>
+<!--    <style name="NavigationViewItemIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">-->
+<!--        <item name="android:color">@color/primaryNight</item>-->
+<!--    </style>-->
 
     <style name="SelectableItemTheme">
         <item name="colorControlHighlight">@color/primaryNight</item>
