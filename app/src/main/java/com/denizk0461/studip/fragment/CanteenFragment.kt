@@ -128,9 +128,31 @@ class CanteenFragment : Fragment() {
     private fun getPreference(pref: DietaryPreferences): Boolean =
         viewModel.getPreference(pref)
 
-    private fun getPrefRegex(): Regex =
-//        Regex(viewModel.getDietaryPrefs().deconstruct().replace('t', '.'))
-        Regex(viewModel.getDietaryPrefs().deconstruct().replace('f', '.'))
+//    private data class RegexF(val index: Int)
+
+    private fun getPrefRegex(): Regex {
+        val prefs = viewModel.getDietaryPrefs().deconstruct().replace('f', '.')
+
+        val template = ".........."
+
+        return if (prefs == "..........") {
+            Regex(template)
+        } else {
+            var regexString = ""
+
+            val indices = mutableListOf<Int>()
+            prefs.forEachIndexed { index, c ->
+                if (c == 't') indices.add(index)
+            }
+            var isFirst = true
+            indices.forEach { index ->
+                if (!isFirst) regexString += '|'
+                regexString += template.substring(0 until index) + 't' + template.substring(index+1)
+                isFirst = false
+            }
+            Regex(regexString)
+        }
+    }
 
     private fun List<CanteenOffer>.groupElements(): List<CanteenOfferGroup> {
 
@@ -174,4 +196,6 @@ class CanteenFragment : Fragment() {
         }
         return b
     }
+
+//    private fun Regex.matchesAny
 }
