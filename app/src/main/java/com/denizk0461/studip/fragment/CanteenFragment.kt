@@ -127,8 +127,6 @@ class CanteenFragment : Fragment() {
 
         val prefsRegex = getPrefRegex()
 
-
-
         val filteredForPreferences = if (prefsRegex.toString() == "ffffffffff") {
             // show all elements and skip filtering
             this
@@ -139,13 +137,13 @@ class CanteenFragment : Fragment() {
             }
         }
 
-        val a = filteredForPreferences.map {
-            CanteenOfferGroupElement(
-                it.title,
-                it.price,
-                it.dietaryPreferences,
-            )
-        }
+//        val a = filteredForPreferences.map {
+//            CanteenOfferGroupElement(
+//                it.title,
+//                it.price,
+//                it.dietaryPreferences,
+//            )
+//        }
         val b = filteredForPreferences.map { offer ->
             CanteenOfferGroup(
                 offer.date,

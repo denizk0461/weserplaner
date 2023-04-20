@@ -156,10 +156,10 @@
                 <!-- App version -->
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/button_app_version"
-                    android:background="@drawable/layout_ripple"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:background="@drawable/layout_ripple"
                     android:clickable="true"
                     android:focusable="true"
                     android:paddingHorizontal="16dp"

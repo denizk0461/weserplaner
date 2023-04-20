@@ -38,7 +38,8 @@ class CanteenOfferItemAdapter(private val offers: List<CanteenOfferGroup>) : Rec
                 LayoutInflater.from(holder.binding.root.context),
             )
 
-            line.content.text = offer.title
+            line.textContent.text = offer.title
+            line.textPrice.text = offer.price
             val indices = arrayListOf<Int>()
             offer.dietaryPreferences.filterIndexed { index, char ->
                 if (char == 't') {
