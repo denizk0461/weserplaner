@@ -45,24 +45,23 @@ class StudIPEventItemAdapter(
         val colorTextHintLighter = TypedValue()
         val theme = holder.binding.root.context.theme
 
-        theme.resolveAttribute(R.attr.colorPrimaryTranslucent, colorPrimaryTranslucent, true)
-        theme.resolveAttribute(R.attr.colorCardBackground, colorCardBackground, true)
-        theme.resolveAttribute(R.attr.colorTextHintLighter, colorTextHintLighter, true)
+        theme.apply {
+            resolveAttribute(R.attr.colorPrimaryTranslucent, colorPrimaryTranslucent, true)
+            resolveAttribute(R.attr.colorCardBackground, colorCardBackground, true)
+            resolveAttribute(R.attr.colorTextHintLighter, colorTextHintLighter, true)
+        }
 
         if (!isAnyCourseHighlighted && currentItem.isCurrentCourse(currentCalendar)) { // highlight
             isAnyCourseHighlighted = true
             holder.binding.cardBackground.apply {
-                backgroundTintList = ColorStateList.valueOf(colorPrimaryTranslucent.data)//R.attr.colorPrimaryTranslucent)
+                backgroundTintList = ColorStateList.valueOf(colorPrimaryTranslucent.data)
                 strokeColor = context.getColor(android.R.color.transparent)
-            }//colorPrimary.data
-//            holder.binding.cardBackground.strokeWidth = 6 // TODO replace this with proper float -> dp conversion
-//                R.color.list_card_selected)
+            }
         } else { // un-highlight
             holder.binding.cardBackground.apply {
-                backgroundTintList = ColorStateList.valueOf(colorCardBackground.data)//context.getColor(R.attr.colorCardBackground))
+                backgroundTintList = ColorStateList.valueOf(colorCardBackground.data)
                 strokeColor = colorTextHintLighter.data
             }
-//            holder.binding.cardBackground.strokeWidth = 3 // this should (?) be 1dp
         }
 
         holder.binding.cardBackground.setOnClickListener {

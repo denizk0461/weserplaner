@@ -10,10 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import com.denizk0461.studip.adapter.CanteenOfferPageAdapter
 import com.denizk0461.studip.databinding.FragmentCanteenBinding
-import com.denizk0461.studip.model.CanteenOffer
-import com.denizk0461.studip.model.CanteenOfferGroup
-import com.denizk0461.studip.model.CanteenOfferGroupElement
-import com.denizk0461.studip.model.DietaryPreferences
+import com.denizk0461.studip.model.*
 import com.denizk0461.studip.viewmodel.CanteenViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -24,8 +21,6 @@ class CanteenFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
-    private var dates = listOf<String>()
 
     private lateinit var liveData: LiveData<List<CanteenOffer>>
 
@@ -77,7 +72,7 @@ class CanteenFragment : Fragment() {
         viewPagerAdapter = CanteenOfferPageAdapter(listOf(), 0, getPrefRegex())
         binding.viewPager.adapter = viewPagerAdapter
 
-        createTabLayoutMediator()
+        createTabLayoutMediator(listOf())
 
         liveData = viewModel.allOffers
         liveData.observe(viewLifecycleOwner) { offers ->
@@ -85,12 +80,13 @@ class CanteenFragment : Fragment() {
 
             val groupedElements = offers.groupElements().distinct()
 
-            dates = groupedElements.map { it.date }.distinct()
-            createTabLayoutMediator()
+//            dates = groupedElements.map { it.date }.distinct()
+            val newDates = viewModel.getDates()
+            createTabLayoutMediator(newDates)
 
-            this.dateSize = dates.size
+            dateSize = newDates.size
 
-            viewPagerAdapter.setNewItems(groupedElements, dates.size)
+            viewPagerAdapter.setNewItems(groupedElements, dateSize)
 
             // TODO this must be changed. if an exception is raised, then this will not fire
             binding.swipeRefreshLayout.isRefreshing = false
@@ -105,10 +101,10 @@ class CanteenFragment : Fragment() {
         }
     }
 
-    private fun createTabLayoutMediator() {
+    private fun createTabLayoutMediator(dates: List<OfferDate>) {
         if (dates.isNotEmpty()) {
             TabLayoutMediator(binding.dayTabLayout, binding.viewPager) { tab, position ->
-                tab.text = dates[position]
+                tab.text = dates[position].date
             }.attach()
         }
     }
@@ -127,7 +123,7 @@ class CanteenFragment : Fragment() {
         viewModel.getPreference(pref)
 
     private fun getPrefRegex(): Regex {
-        val prefs = viewModel.getDietaryPrefs().deconstruct().replace('f', '.')
+        val prefs = viewModel.getDietaryPrefs().deconstruct()//.replace('f', '.')
 
         val template = ".........."
 

@@ -21,6 +21,8 @@ class EventRepository(app: Application) {
 
     val allOffers: LiveData<List<CanteenOffer>> = dao.allOffers
 
+    fun getDates(): List<OfferDate> = dao.getDates()
+
     fun getDietaryPrefs(): String {
         return prefs.getString(dietaryPrefString, "..........") ?: ".........."
 //        return DietaryPrefObject(

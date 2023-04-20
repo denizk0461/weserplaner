@@ -1,6 +1,5 @@
 package com.denizk0461.studip.data
 
-import android.util.Log
 import com.denizk0461.studip.db.EventRepository
 import com.denizk0461.studip.model.*
 import org.jsoup.Jsoup
@@ -89,8 +88,6 @@ class StwParser {
                             isGame = prefs.isDietaryPreferenceMet(PREFERENCE_GAME),
                         ).deconstruct()
 
-//                        Log.d("eek!4", "prefString = $prefString")
-
                         repo.insert(
                             OfferItem(
                                 itemId,
@@ -101,25 +98,6 @@ class StwParser {
                             )
                         )
                         itemId += 1
-
-//                        val newItem = CanteenOffer(
-//                            id = id,
-//                            date = date,
-//                            dateId = day,
-//                            category = categoryTitle,
-//                            title = tableRows[1].getFilteredText(),
-////                            price = tableRows.getTextOrEmpty(2),
-//                            isFair = prefs.isDietaryPreferenceMet(PREFERENCE_FAIR),
-//                            isFish = prefs.isDietaryPreferenceMet(PREFERENCE_FISH),
-//                            isPoultry = prefs.isDietaryPreferenceMet(PREFERENCE_POULTRY),
-//                            isLamb = prefs.isDietaryPreferenceMet(PREFERENCE_LAMB),
-//                            isVital = prefs.isDietaryPreferenceMet(PREFERENCE_VITAL),
-//                            isBeef = prefs.isDietaryPreferenceMet(PREFERENCE_BEEF),
-//                            isPork = prefs.isDietaryPreferenceMet(PREFERENCE_PORK),
-//                            isVegan = prefs.isDietaryPreferenceMet(PREFERENCE_VEGAN),
-//                            isVegetarian = prefs.isDietaryPreferenceMet(PREFERENCE_VEGETARIAN),
-//                            isGame = prefs.isDietaryPreferenceMet(PREFERENCE_GAME),
-//                        )
                     }
                 categoryId += 1
             }

@@ -6,6 +6,7 @@ import com.denizk0461.studip.data.StwParser
 import com.denizk0461.studip.model.CanteenOffer
 import com.denizk0461.studip.model.DietaryPrefObject
 import com.denizk0461.studip.model.DietaryPreferences
+import com.denizk0461.studip.model.OfferDate
 
 class CanteenViewModel(app: Application) : TemplateViewModel(app) {
 
@@ -14,6 +15,8 @@ class CanteenViewModel(app: Application) : TemplateViewModel(app) {
     val allOffers: LiveData<List<CanteenOffer>> = repo.allOffers
 
     fun getDietaryPrefs(): DietaryPrefObject = repo.getDietaryPrefsAsObj()
+
+    fun getDates(): List<OfferDate> = returnBlocking { repo.getDates() }
 
     fun fetchOffers(onRefreshUpdate: (status: Int) -> Unit, onFinish: () -> Unit) { doAsync { parser.parse(onRefreshUpdate, onFinish) }}
 

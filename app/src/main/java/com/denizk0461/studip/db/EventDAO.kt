@@ -66,6 +66,9 @@ interface EventDAO {
     @get:Query("SELECT id FROM offer_date")
     val updateObserver: LiveData<List<Int>>
 
+    @Query("SELECT * FROM offer_date")
+    fun getDates(): List<OfferDate>
+
     @Query("DELETE FROM offer_date")
     fun nukeOfferDates()
 

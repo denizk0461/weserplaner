@@ -48,7 +48,9 @@
     <string name="settings_quarter_title">Use academic quarter</string>
     <string name="settings_quarter_subtitle">Where applicable</string>
     <string name="settings_highlight_title">Highlight next course</string>
-    <string name="settings_highlight_subtitle">Only works if courses don\'t overlap!</string>
+    <string name="settings_highlight_subtitle">Only works properly if courses don\'t overlap!</string>
+    <string name="settings_data_title">What happens with my data?</string>
+    <string name="settings_data_subtitle">Will you steal my login?</string>
     <string name="settings_app_version">App Version</string>
 
     <string name="with_love">with ♡️ from Bremen-Osterholz\nmade by denizk0461 \\__*</string>

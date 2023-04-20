@@ -49,6 +49,8 @@
     <string name="settings_quarter_subtitle">Wo es passt</string>
     <string name="settings_highlight_title">Markiere meinen nächsten Kurs</string>
     <string name="settings_highlight_subtitle">Funktioniert nur wenn Kurse sich nicht überschneiden!</string>
+    <string name="settings_data_title">Was passiert mit meinen Daten?</string>
+    <string name="settings_data_subtitle">Stiehlst du meinen Login?</string>
     <string name="settings_app_version">App-Verison</string>
 
     <string name="with_love">mit ♡️ aus Bremen-Osterholz\von denizk0461 \\__*</string>
