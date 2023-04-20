@@ -32,6 +32,10 @@ class CanteenFragment : Fragment() {
     private lateinit var viewPagerAdapter: CanteenOfferPageAdapter
     private val viewModel: CanteenViewModel by viewModels()
 
+
+    private var elements: List<CanteenOffer> = listOf()
+    private var dateSize = 0
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentCanteenBinding.inflate(inflater, container, false)
         return binding.root
@@ -77,11 +81,15 @@ class CanteenFragment : Fragment() {
 
         liveData = viewModel.allOffers
         liveData.observe(viewLifecycleOwner) { offers ->
+            elements = offers
 
             val groupedElements = offers.groupElements().distinct()
 
             dates = groupedElements.map { it.date }.distinct()
             createTabLayoutMediator()
+
+//            this.groupedElements = groupedElements
+            this.dateSize = dates.size
 
             viewPagerAdapter.setNewItems(groupedElements, dates.size)
 
@@ -113,7 +121,8 @@ class CanteenFragment : Fragment() {
 
     private fun setPreference(pref: DietaryPreferences, newValue: Boolean) {
         viewModel.setPreference(pref, newValue)
-        viewPagerAdapter.refreshView(getPrefRegex())
+//        viewPagerAdapter.refreshView(getPrefRegex())
+        viewPagerAdapter.setNewItems(elements.groupElements().distinct(), dateSize)
     }
 
     private fun getPreference(pref: DietaryPreferences): Boolean =
@@ -136,6 +145,8 @@ class CanteenFragment : Fragment() {
                 prefsRegex.matches(it.dietaryPreferences)
             }
         }
+
+//        Log.d("eek!6", "preference: $prefsRegex, list: $filteredForPreferences")
 
 //        val a = filteredForPreferences.map {
 //            CanteenOfferGroupElement(
