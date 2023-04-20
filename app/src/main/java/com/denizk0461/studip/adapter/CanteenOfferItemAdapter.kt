@@ -10,8 +10,9 @@ import com.denizk0461.studip.databinding.ItemCanteenBinding
 import com.denizk0461.studip.databinding.ItemCanteenLineBinding
 import com.denizk0461.studip.databinding.ItemIconBinding
 import com.denizk0461.studip.model.CanteenOffer
+import com.denizk0461.studip.model.CanteenOfferGroup
 
-class CanteenOfferItemAdapter(private val offers: List<CanteenOffer>) : RecyclerView.Adapter<CanteenOfferItemAdapter.OfferViewHolder>() {
+class CanteenOfferItemAdapter(private val offers: List<CanteenOfferGroup>) : RecyclerView.Adapter<CanteenOfferItemAdapter.OfferViewHolder>() {
 
     class OfferViewHolder(val binding: ItemCanteenBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -30,29 +31,31 @@ class CanteenOfferItemAdapter(private val offers: List<CanteenOffer>) : Recycler
     override fun onBindViewHolder(holder: OfferViewHolder, position: Int) {
         val currentItem = offers[position]
 
-        val line = ItemCanteenLineBinding.inflate(
-            LayoutInflater.from(holder.binding.root.context),
-//            holder.binding.root,
-//            true,
-        )
         holder.binding.textCategory.text = currentItem.category
-        line.content.text = currentItem.title
-        val indices = arrayListOf<Int>()
-        currentItem.dietaryPreferences.filterIndexed { index, char ->
-            if (char == 't') {
-                indices.add(index)
-                true
-            } else false
-        }
-        if (indices.isEmpty()) indices.add(10)
-        indices.forEach { index ->
-            val img = ItemIconBinding.inflate(LayoutInflater.from(holder.binding.root.context))
-//            holder.binding.root.resources.getDrawable(Misc.indexToDrawable[index]!!, holder.binding.root.context.theme)
-            img.imageView.setImageDrawable(holder.binding.root.context.getDrawable(Misc.indexToDrawable[index]!!))
-            line.imageViewContainer.addView(img.root)
-        }
 
-        holder.binding.lineContainer.addView(line.root)
+        currentItem.offers.forEach { offer ->
+            val line = ItemCanteenLineBinding.inflate(
+                LayoutInflater.from(holder.binding.root.context),
+            )
+
+            line.content.text = offer.title
+            val indices = arrayListOf<Int>()
+            offer.dietaryPreferences.filterIndexed { index, char ->
+                if (char == 't') {
+                    indices.add(index)
+                    true
+                } else false
+            }
+            if (indices.isEmpty()) indices.add(10)
+            indices.forEach { index ->
+                val img = ItemIconBinding.inflate(LayoutInflater.from(holder.binding.root.context))
+//            holder.binding.root.resources.getDrawable(Misc.indexToDrawable[index]!!, holder.binding.root.context.theme)
+                img.imageView.setImageDrawable(holder.binding.root.context.getDrawable(Misc.indexToDrawable[index]!!))
+                line.imageViewContainer.addView(img.root)
+            }
+
+            holder.binding.lineContainer.addView(line.root)
+        }
 
 //        holder.binding.textCategory.text = currentItem.category
 //        holder.binding.tempContent.text = "${currentItem.title} • ${currentItem.price}"

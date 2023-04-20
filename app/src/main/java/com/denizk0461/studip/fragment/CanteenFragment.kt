@@ -11,6 +11,8 @@ import androidx.lifecycle.LiveData
 import com.denizk0461.studip.adapter.CanteenOfferPageAdapter
 import com.denizk0461.studip.databinding.FragmentCanteenBinding
 import com.denizk0461.studip.model.CanteenOffer
+import com.denizk0461.studip.model.CanteenOfferGroup
+import com.denizk0461.studip.model.CanteenOfferGroupElement
 import com.denizk0461.studip.model.DietaryPreferences
 import com.denizk0461.studip.viewmodel.CanteenViewModel
 import com.google.android.material.tabs.TabLayoutMediator
@@ -76,10 +78,12 @@ class CanteenFragment : Fragment() {
         liveData = viewModel.allOffers
         liveData.observe(viewLifecycleOwner) { offers ->
 
-            dates = offers.map { it.date }.distinct()
+            val groupedElements = offers.groupElements().distinct()
+
+            dates = groupedElements.map { it.date }.distinct()
             createTabLayoutMediator()
 
-            viewPagerAdapter.setNewItems(offers, dates.size)
+            viewPagerAdapter.setNewItems(groupedElements, dates.size)
 
             // TODO this must be changed. if an exception is raised, then this will not fire
             binding.swipeRefreshLayout.isRefreshing = false
@@ -118,4 +122,47 @@ class CanteenFragment : Fragment() {
     private fun getPrefRegex(): Regex =
 //        Regex(viewModel.getDietaryPrefs().deconstruct().replace('t', '.'))
         Regex(viewModel.getDietaryPrefs().deconstruct().replace('f', '.'))
+
+    private fun List<CanteenOffer>.groupElements(): List<CanteenOfferGroup> {
+
+        val prefsRegex = getPrefRegex()
+
+
+
+        val filteredForPreferences = if (prefsRegex.toString() == "ffffffffff") {
+            // show all elements and skip filtering
+            this
+        } else {
+            this.filter {
+//                    Log.d("eek!5", "${it.title}: - ${prefsRegex} vs ${it.dietaryPreferences}")
+                prefsRegex.matches(it.dietaryPreferences)
+            }
+        }
+
+        val a = filteredForPreferences.map {
+            CanteenOfferGroupElement(
+                it.title,
+                it.price,
+                it.dietaryPreferences,
+            )
+        }
+        val b = filteredForPreferences.map { offer ->
+            CanteenOfferGroup(
+                offer.date,
+                offer.dateId,
+                offer.category,
+                offer.canteen,
+                filteredForPreferences.filter {
+                    it.category == offer.category && it.date == offer.date && it.canteen == offer.canteen
+                }.map {
+                    CanteenOfferGroupElement(
+                        it.title,
+                        it.price,
+                        it.dietaryPreferences,
+                    )
+                }
+            )
+        }
+        return b
+    }
 }
