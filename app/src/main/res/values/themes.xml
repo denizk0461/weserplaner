@@ -41,4 +41,12 @@
     <style name="DividerTheme" parent="Widget.Material3.MaterialDivider">
         <item name="dividerColor">@color/colorTextHintLighterDay</item>
     </style>
+
+    <style name="ChipStyle" parent="Widget.Material3.Chip.Filter">
+        <item name="chipStrokeColor">@color/item_chip_outline</item>
+        <item name="android:textColor">?attr/colorText</item>
+        <item name="rippleColor">?attr/colorPrimary</item>
+        <item name="chipBackgroundColor">@color/item_chip_background</item>
+        <item name="chipIconTint">?attr/colorText</item>
+    </style>
 </resources>

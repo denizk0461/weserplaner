@@ -88,7 +88,6 @@ class CanteenFragment : Fragment() {
             dates = groupedElements.map { it.date }.distinct()
             createTabLayoutMediator()
 
-//            this.groupedElements = groupedElements
             this.dateSize = dates.size
 
             viewPagerAdapter.setNewItems(groupedElements, dates.size)
@@ -121,14 +120,11 @@ class CanteenFragment : Fragment() {
 
     private fun setPreference(pref: DietaryPreferences, newValue: Boolean) {
         viewModel.setPreference(pref, newValue)
-//        viewPagerAdapter.refreshView(getPrefRegex())
         viewPagerAdapter.setNewItems(elements.groupElements().distinct(), dateSize)
     }
 
     private fun getPreference(pref: DietaryPreferences): Boolean =
         viewModel.getPreference(pref)
-
-//    private data class RegexF(val index: Int)
 
     private fun getPrefRegex(): Regex {
         val prefs = viewModel.getDietaryPrefs().deconstruct().replace('f', '.')
@@ -163,20 +159,10 @@ class CanteenFragment : Fragment() {
             this
         } else {
             this.filter {
-//                    Log.d("eek!5", "${it.title}: - ${prefsRegex} vs ${it.dietaryPreferences}")
                 prefsRegex.matches(it.dietaryPreferences)
             }
         }
 
-//        Log.d("eek!6", "preference: $prefsRegex, list: $filteredForPreferences")
-
-//        val a = filteredForPreferences.map {
-//            CanteenOfferGroupElement(
-//                it.title,
-//                it.price,
-//                it.dietaryPreferences,
-//            )
-//        }
         val b = filteredForPreferences.map { offer ->
             CanteenOfferGroup(
                 offer.date,
@@ -196,6 +182,4 @@ class CanteenFragment : Fragment() {
         }
         return b
     }
-
-//    private fun Regex.matchesAny
 }
