@@ -3,22 +3,39 @@ package com.denizk0461.studip.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * Entity for storing entries of the user's Stud.IP schedule. Registered in the app database.
+ *
+ * @param id            primary key that uniquely identifies the entry
+ * @param title         title of the event
+ * @param lecturer      lecturer(s) organising the event
+ * @param room          room the event takes place in
+ * @param day           day the event takes place on; 0 = Monday, 4 = Friday
+ * @param timeslotStart time the event starts at
+ * @param timeslotEnd   time the event ends at
+ * @param colour        user-defined colour the event will be shown in - UNIMPLEMENTED
+ */
 @Entity(tableName = "events")
 data class StudIPEvent(
     @PrimaryKey val id: Int,
-    val title: String, // the name of the event
-    val lecturer: String, // the lecturer(s)
-    val room: String, // the room the event takes place in
-    val day: Int, // 0 = Monday, 1 = Tuesday, 2 = Wednesday, 3 = Thursday, 4 = Friday
-    val timeslotStart: String, // the time the course starts
-    val timeslotEnd: String, // the time the course ends
-    val colour: String = "000000", // user-defined colour, TODO implement this
+    val title: String,
+    val lecturer: String,
+    val room: String,
+    val day: Int,
+    val timeslotStart: String,
+    val timeslotEnd: String,
+    val colour: String = "000000",
 ) {
 
-//    @Ignore private val timeSlotStartTimes: List<String> = listOf("06:15", "08:15", "10:15", "12:15", "14:15", "16:15", "18:15", "20:15")
-//    @Ignore private val timeSlotEndTimes: List<String> = listOf("07:45", "09:45", "11:45", "13:45", "15:45", "17:45", "19:45", "21:45")
-
+    /**
+     * Parse timeslotStart and timeslotEnd into an easily readable string in the following format:
+     * 12:15 – 13:45
+     *
+     * @return formatted time string
+     */
     fun timeslot(): String = "$timeslotStart – $timeslotEnd"
+
+    // Auto-generated methods
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -39,6 +56,7 @@ data class StudIPEvent(
         result = 31 * result + day
         result = 31 * result + timeslotStart.hashCode()
         result = 31 * result + timeslotEnd.hashCode()
+        result = 31 * result + colour.hashCode()
         return result
     }
 }

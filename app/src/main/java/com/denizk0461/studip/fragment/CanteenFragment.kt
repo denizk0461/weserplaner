@@ -20,9 +20,8 @@ class CanteenFragment : Fragment() {
 
     // This property is only valid between onCreateView and
     // onDestroyView.
+    // BUG: if the fragment is changed before the refresh is finished, the app crashes with a NPE
     private val binding get() = _binding!!
-
-    private lateinit var liveData: LiveData<List<CanteenOffer>>
 
     private lateinit var viewPagerAdapter: CanteenOfferPageAdapter
     private val viewModel: CanteenViewModel by viewModels()

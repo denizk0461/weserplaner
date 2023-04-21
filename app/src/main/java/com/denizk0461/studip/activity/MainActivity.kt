@@ -3,9 +3,7 @@ package com.denizk0461.studip.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Lifecycle
 import com.denizk0461.studip.R
@@ -16,124 +14,100 @@ import com.denizk0461.studip.fragment.EventFragment
 import com.denizk0461.studip.fragment.CanteenFragment
 import com.denizk0461.studip.fragment.SettingsFragment
 
+/**
+ * Main activity that handles all common fragments. This is opened on app launch.
+ */
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
+    // View binding
     private lateinit var binding: ActivityMainBinding
-    private var currentFragment = FragmentType.SCHEDULE
-    private val fragments = listOf(EventFragment(), CanteenFragment(), SettingsFragment())
+    /*
+     * ID of the bottom navigation view button that launched the currently active fragment; set on
+     * activity launch to the fragment that will be first shown
+     */
+    private var currentFragment: Int = R.id.plan
+    // All fragments are instantiated at app launch
+    private val fragments: List<Fragment> =
+        listOf(EventFragment(), CanteenFragment(), SettingsFragment())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
 
+        /*
+         * Instantiate repository object that is accessed by the fragments' view models to retrieve
+         * data.
+         */
         Dependencies.repo = EventRepository(application)
 
+        // Inflate view binding and bind to this activity
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        /*
+         * Set up navigation view bar to launch fragments.
+         * TODO: why do fragments launch slowly when quickly clicking between them?
+         */
         binding.contentMain.navView.setOnItemSelectedListener { item ->
-            loadFragment(bottomIdToType(item.itemId))
+            loadFragment(item.itemId)
         }
 
+        // Launch the fragment defined in currentFragment
         loadFragment(currentFragment)
-
-//        setSupportActionBar(binding.toolbar)
-
-//        val navController = findNavController(R.id.nav_host_fragment_content_main)
-//        appBarConfiguration = AppBarConfiguration(navController.graph)
-//        setupActionBarWithNavController(navController, appBarConfiguration)
-
-//        binding.fab.setOnClickListener { view ->
-//            findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.action_FirstFragment_to_SecondFragment)
-////            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-////                .setAnchorView(R.id.fab)
-////                .setAction("Action", null).show()
-//        }
     }
 
-    private fun loadFragment(type: FragmentType): Boolean {
-//        val fragment = supportFragmentManager.findFragmentByTag(type.type) ?: getFragmentByType(type)
-        val fragment = getFragment(type)
+    /**
+     * Loads a given fragment.
+     *
+     * @param id    the ID of the bottom navigation view button that was clicked
+     * @return      true on success, false if another fragment is currently instantiating
+     */
+    private fun loadFragment(id: Int): Boolean {
+        // Get fragment to be loaded
+        val fragment = getFragment(id)
 
+        // Check if another fragment exists and is not fully initialised
         if (fragment.lifecycle.currentState != Lifecycle.State.INITIALIZED) {
+            // Return false to avoid interrupting the fragment's lifecycle
             return false
         }
 
-//        if (supportFragmentManager.fragments.size > 1) {
-//
-//            val currentFragment = supportFragmentManager.findFragmentByTag(currentFragment.type)
-//            if (currentFragment != null) {
-//                supportFragmentManager.beginTransaction().remove(currentFragment).commit()
-//                supportFragmentManager.popBackStack()
-//            }
-//        }
-
-//        supportFragmentManager.popBackStack()
+        // Prepare and commit a transaction between the current and the next fragment
         supportFragmentManager.beginTransaction()
-            .replace(R.id.nav_host_fragment_content_main, fragment, type.type)
+            .replace(R.id.nav_host_fragment_content_main, fragment, id.toString())
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .commit()
 
-        binding.contentMain.appTitleBar.text = getTitleString(type)
+        // Set text of the app bar accordingly
+        binding.contentMain.appTitleBar.text = getTitleString(id)
+        // Note down the new current fragment
+        currentFragment = id
 
-        currentFragment = type
-
+        // Transaction successful
         return true
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        menuInflater.inflate(R.menu.menu_main, menu)
-//        return true
-//    }
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        return when (item.itemId) {
-//            R.id.action_settings -> true
-//            else -> super.onOptionsItemSelected(item)
-//        }
-//    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+    /**
+     * Retrieve fragment by the ID of the bottom navigation view's button.
+     *
+     * @param id    the ID of the bottom navigation button
+     * @return      the corresponding fragment
+     */
+    private fun getFragment(id: Int) = when (id) {
+        R.id.food -> fragments[1] // CanteenFragment.kt
+        R.id.settings -> fragments[2] // SettingsFragment.kt
+        else -> fragments[0] // on unknown value or R.id.plan, launch EventFragment.kt
     }
 
-//    private fun getFragmentByType(type: FragmentType): Fragment {
-////        Log.d("AAA!", "help")
-//        return when (type) {
-//            FragmentType.SCHEDULE -> EventFragment()
-//            FragmentType.FOOD -> FoodFragment()
-//            FragmentType.SETTINGS -> SettingsFragment()
-//        }
-//    }
-
-    private fun bottomIdToType(id: Int): FragmentType = when (id) {
-        R.id.food -> FragmentType.FOOD
-        R.id.settings -> FragmentType.SETTINGS
-        else -> FragmentType.SCHEDULE
-    }
-
-    private fun getFragment(type: FragmentType) = when (type) {
-        FragmentType.SCHEDULE -> fragments[0]
-        FragmentType.FOOD -> fragments[1]
-        FragmentType.SETTINGS -> fragments[2]
-    }
-
-    private fun getTitleString(type: FragmentType) = when (type) {
-        FragmentType.SCHEDULE -> getString(R.string.title_schedule)
-        FragmentType.FOOD -> getString(R.string.title_food)
-        FragmentType.SETTINGS -> getString(R.string.title_settings)
-    }
-
-    enum class FragmentType(val type: String) {
-        SCHEDULE("schedule"),
-        FOOD("food"),
-        SETTINGS("settings"),
+    /**
+     * Retrieve app bar text by the ID of the bottom navigation view's button.
+     *
+     * @param id    the ID of the bottom navigation button
+     * @return      the corresponding fragment's title
+     */
+    private fun getTitleString(id: Int) = when (id) {
+        R.id.food -> getString(R.string.title_food)
+        R.id.settings -> getString(R.string.title_settings)
+        else -> getString(R.string.title_schedule) // on unknown value or R.id.plan, get text for EventFragment.kt
     }
 }
