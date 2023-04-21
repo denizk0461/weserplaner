@@ -96,7 +96,7 @@ class CanteenFragment : Fragment() {
                 // TODO refresh updates
             }, onFinish = {
 //                binding.swipeRefreshLayout.isRefreshing = false
-                createTabLayoutMediator()
+//                createTabLayoutMediator()
             })
         }
     }
