@@ -72,21 +72,20 @@ class CanteenFragment : Fragment() {
         viewPagerAdapter = CanteenOfferPageAdapter(listOf(), 0, getPrefRegex())
         binding.viewPager.adapter = viewPagerAdapter
 
-        createTabLayoutMediator(listOf())
+        createTabLayoutMediator()
 
-        liveData = viewModel.allOffers
-        liveData.observe(viewLifecycleOwner) { offers ->
+        viewModel.allOffers.observe(viewLifecycleOwner) { offers ->
             elements = offers
 
             val groupedElements = offers.groupElements().distinct()
 
-//            dates = groupedElements.map { it.date }.distinct()
-            val newDates = viewModel.getDates()
-            createTabLayoutMediator(newDates)
+            val newDates = groupedElements.map { it.date }.distinct()//.map { item -> OfferDate(item.) }
+//            val newDates = viewModel.getDates()
 
             dateSize = newDates.size
 
             viewPagerAdapter.setNewItems(groupedElements, dateSize)
+//            createTabLayoutMediator(newDates)
 
             // TODO this must be changed. if an exception is raised, then this will not fire
             binding.swipeRefreshLayout.isRefreshing = false
@@ -97,13 +96,17 @@ class CanteenFragment : Fragment() {
                 // TODO refresh updates
             }, onFinish = {
 //                binding.swipeRefreshLayout.isRefreshing = false
+                createTabLayoutMediator()
             })
         }
     }
 
-    private fun createTabLayoutMediator(dates: List<OfferDate>) {
+    private fun createTabLayoutMediator(){//List<OfferDate>) {
+        val dates = viewModel.getDates()
         if (dates.isNotEmpty()) {
+            Log.d("eek!7", "dates: ${dates}, viewpager pages: ${binding.viewPager.adapter?.itemCount}")
             TabLayoutMediator(binding.dayTabLayout, binding.viewPager) { tab, position ->
+                Log.d("eek!9", position.toString())
                 tab.text = dates[position].date
             }.attach()
         }

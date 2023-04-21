@@ -1,5 +1,6 @@
 package com.denizk0461.studip.data
 
+import android.util.Log
 import com.denizk0461.studip.db.EventRepository
 import com.denizk0461.studip.model.*
 import org.jsoup.Jsoup
@@ -38,6 +39,7 @@ class StwParser {
             // TODO implement onRefresh(Int)
             parseFromPage(link, Dependencies.repo)
         }
+        onFinish()
     }
 
     private fun parseFromPage(url: String, repo: EventRepository): List<CanteenOffer> {
@@ -58,7 +60,9 @@ class StwParser {
 
             date = "${rawDate[0]}${rawDate[1].monthToNumber()}."
 
-            repo.insert(OfferDate(dateId, date))
+            val d = OfferDate(dateId, date)
+            Log.d("eek!8", d.toString())
+            repo.insert(d)
 
             // STEP: get each category in a day
             dayPlan.getElementsByClass("food-category").forEach { category ->
