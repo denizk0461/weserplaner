@@ -19,6 +19,7 @@ import androidx.room.ColumnInfo
  * @param price                 students' price for the individual canteen offer
  * @param dietaryPreferences    dietary preferences used to filter for the user's needs - see
  *                              DietaryPrefObject.kt
+ * @param allergens             allergens and additives that are present in the item
  */
 data class CanteenOffer(
     val itemId: Int,
@@ -31,4 +32,5 @@ data class CanteenOffer(
     val title: String,
     val price: String,
     @ColumnInfo(name = "dietary_preferences") val dietaryPreferences: String,
+    val allergens: String,
 )

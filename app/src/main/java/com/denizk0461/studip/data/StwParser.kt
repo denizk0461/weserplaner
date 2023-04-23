@@ -156,14 +156,17 @@ class StwParser {
                             isGame = prefs.isDietaryPreferenceMet(imageLinkPrefGame),
                         ).deconstruct()
 
+                        val filteredText = tableRows[1].getFilteredText()
+
                         // Save the item to persistent storage
                         repo.insert(
                             OfferItem(
                                 itemId,
                                 categoryId,
-                                title = tableRows[1].getFilteredText(),
+                                title = filteredText.first,
                                 price = tableRows.getTextOrEmpty(2),
-                                prefString,
+                                dietaryPreferences = prefString,
+                                allergens = filteredText.second,
                             )
                         )
 
@@ -193,28 +196,67 @@ class StwParser {
     /**
      * Processes certain character references into human-readable characters. Since the fetched HTML
      * contains unresolved symbols such as &amp;, they need to be replaced with their counterpart
-     * (in this case, &).
+     * (in this case, &). This method also parses allergens and additives, since they are listed on
+     * the website of the Studierendenwerk, but they are invisible, rendering them pointless to the
+     * website user.
      *
-     * @return  the filtered string
+     * @return  the filtered string and a string describing allergens and additives
      */
-    private fun Element.getFilteredText(): String {
+    private fun Element.getFilteredText(): Pair<String, String> {
         // Retrieve the element's inner HTML and replace faulty characters
         var text = html()
             .replace("&amp;", "&")
             .replace("&gt;", ">")
             .replace("&lt;", "<")
 
+        // All allergens will be collected here
+        var allergens: String = ""
+
+        /*
+         * Used to determine whether any allergens have already been found in the item. Should this
+         * be the case, a delimiter is added.
+         */
+        var hasAllergens: Boolean = false
+
+        /*
+         * Allergens are stored in super tags. Example:
+         * <sup>4, a1, a4, c, g</sup>
+         * This is the start index of the opening tag (inclusive).
+         */
+        var indexSupOpen = 0
+
+        // This is the end index of the closing tag (exclusive)
+        var indexSupClose = 0
+
         /*
          * The Studierendenwerk's website lists allergens, but they are invisible, rendering them
          * pointless to the website user. As of now, this information is discarded in the app.
          * TODO implement allergen functionality
          */
-//        while (text.contains("<sup>")) {
-//            text = text.substring(0 until text.indexOf("<sup>")) + text.substring(text.indexOf("</sup>")+6 until text.length)
-//        }
+        while (text.contains("<sup>")) {
+            // Add a delimiter if allergens have already been added
+            if (hasAllergens) allergens += ","
+
+            // Set indices for the <sup> tags
+            indexSupOpen = text.indexOf("<sup>")
+            indexSupClose = text.indexOf("</sup>")
+
+            // Add allergens
+            allergens += text.substring(indexSupOpen + 5 until indexSupClose)
+
+            // Remove allergens from the title of the offer
+            text = text.substring(0 until indexSupOpen) +
+                    text.substring((indexSupClose + 6) until text.length)
+
+            /*
+             * Make sure that the delimiter will be added if more than one instance of allergens is
+             * found.
+             */
+            hasAllergens = true
+        }
 
         // Return the stripped and updated HTML string
-        return text
+        return Pair(text, allergens)
     }
 
     /**

@@ -34,6 +34,52 @@
     <string name="pref_vegetarian">Vegetarian</string>
     <string name="pref_game">Game</string>
 
+    <!-- additives -->
+    <string name="allergen_dye">dye</string>
+    <string name="allergen_preservatives">preservatives</string>
+    <string name="allergen_antioxidants">antioxidants</string>
+    <string name="allergen_phosphates">phosphates</string>
+    <string name="allergen_sweeteners">sweeteners</string>
+    <string name="allergen_phenylalanine">a source of phenylalanine</string>
+    <string name="allergen_blackened">blackened</string>
+    <string name="allergen_sulphured">sulphured</string>
+    <string name="allergen_waxed">waxed</string>
+    <string name="allergen_alcohol">alcohol</string>
+    <string name="allergen_flavour_enhancers">flavour enhancers</string>
+    <string name="allergen_caffeine">caffeine</string>
+    <string name="allergen_rennet">animal rennet</string>
+
+    <!-- allergens -->
+    <string name="allergen_wheat">wheat</string>
+    <string name="allergen_rye">rye</string>
+    <string name="allergen_barley">barley</string>
+    <string name="allergen_oat">oats</string>
+    <string name="allergen_spelt">spelt</string>
+    <string name="allergen_kamut">kamut</string>
+    <string name="allergen_crustaceans">crustaceans</string>
+    <string name="allergen_eggs">eggs</string>
+    <string name="allergen_fish">fish</string>
+    <string name="allergen_peanuts">peanuts</string>
+    <string name="allergen_soy">soy</string>
+    <string name="allergen_dairy">dairy &amp; lactose</string>
+    <string name="allergen_almonds">almonds</string>
+    <string name="allergen_hazelnuts">hazelnuts</string>
+    <string name="allergen_walnuts">walnuts</string>
+    <string name="allergen_cashew_nuts">cashew nuts</string>
+    <string name="allergen_pecans">pecans</string>
+    <string name="allergen_brazil_nuts">brazil nuts</string>
+    <string name="allergen_pistachios">pistachios</string>
+    <string name="allergen_macadamia">macadamia nuts</string>
+    <string name="allergen_celery">celery</string>
+    <string name="allergen_mustard">mustard</string>
+    <string name="allergen_sulphides">sulphur oxide &amp; sulphide concentrated above 10mg/kg or 10mg/l</string>
+    <string name="allergen_lupins">lupins</string>
+    <string name="allergen_sesame">sesame</string>
+    <string name="allergen_molluscs">molluscs</string>
+
+    <string name="allergens_none">Contains no allergens or additives.</string>
+    <string name="allergens_contains">Contains: %s.</string>
+
     <string name="nav_schedule">Schedule</string>
     <string name="nav_food">Canteens</string>
     <string name="nav_settings">Settings</string>

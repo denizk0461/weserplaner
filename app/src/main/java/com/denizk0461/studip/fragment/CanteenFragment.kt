@@ -1,7 +1,6 @@
 package com.denizk0461.studip.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -130,6 +129,7 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
             viewModel.fetchOffers(onRefreshUpdate = { status ->
                 // TODO refresh updates
             }, onFinish = {
+                createTabLayoutMediator()
 //                binding.swipeRefreshLayout.isRefreshing = false
 //                createTabLayoutMediator()
             })
@@ -138,16 +138,17 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
 
     /**
      * Create and attach the object mediating the tabs for the view pager.
+     * TODO this is crash-prone
      */
     private fun createTabLayoutMediator() {
         // Fetch all dates from the database
         val dates = viewModel.getDates()
+
         if (dates.isNotEmpty()) {
-            Log.d("eek!7", "dates: ${dates}, viewpager pages: ${binding.viewPager.adapter?.itemCount}")
             TabLayoutMediator(binding.dayTabLayout, binding.viewPager) { tab, position ->
-                Log.d("eek!9", position.toString())
                 tab.text = dates[position].date
             }.attach()
+
         }
     }
 
@@ -264,6 +265,7 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
                         it.title,
                         it.price,
                         it.dietaryPreferences,
+                        it.allergens
                     )
                 }
             )

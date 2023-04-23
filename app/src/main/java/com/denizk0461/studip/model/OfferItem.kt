@@ -14,6 +14,7 @@ import androidx.room.PrimaryKey
  * @param price                 students' price for the individual canteen offer
  * @param dietaryPreferences    dietary preferences used to filter for the user's needs - see
  *                              DietaryPrefObject.kt
+ * @param allergens             allergens and additives that are present in the item
  */
 @Entity(
     tableName = "offer_item",
@@ -32,4 +33,5 @@ data class OfferItem(
     val title: String,
     val price: String,
     @ColumnInfo(name = "dietary_preferences") val dietaryPreferences: String,
+    val allergens: String,
 )

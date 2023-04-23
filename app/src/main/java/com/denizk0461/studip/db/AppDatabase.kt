@@ -17,7 +17,7 @@ import com.denizk0461.studip.model.*
         OfferCategory::class,
         OfferItem::class
     ],
-    version = 10,
+    version = 11,
 )
 abstract class AppDatabase : RoomDatabase() {
 

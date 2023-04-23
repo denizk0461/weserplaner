@@ -34,6 +34,52 @@
     <string name="pref_vegetarian">Vegetarisch</string>
     <string name="pref_game">Wild</string>
 
+    <!-- Zusatzstoffe -->
+    <string name="allergen_dye">Farbstoffe</string>
+    <string name="allergen_preservatives">Konservierungsstoffe</string>
+    <string name="allergen_antioxidants">Antioxidationsmittel</string>
+    <string name="allergen_phosphates">Phosphate</string>
+    <string name="allergen_sweeteners">Süßungsmittel</string>
+    <string name="allergen_phenylalanine">Phenylalaninquelle</string>
+    <string name="allergen_blackened">geschwärzt</string>
+    <string name="allergen_sulphured">geschwefelt</string>
+    <string name="allergen_waxed">gewachst</string>
+    <string name="allergen_alcohol">Alkohol</string>
+    <string name="allergen_flavour_enhancers">Geschmacksverstärker</string>
+    <string name="allergen_caffeine">Koffein</string>
+    <string name="allergen_rennet">tierisches Lab</string>
+
+    <!-- Allergene -->
+    <string name="allergen_wheat">Weizen</string>
+    <string name="allergen_rye">Roggen</string>
+    <string name="allergen_barley">Gerste</string>
+    <string name="allergen_oat">Hafer</string>
+    <string name="allergen_spelt">Dinkel</string>
+    <string name="allergen_kamut">Kamut</string>
+    <string name="allergen_crustaceans">Krebstiere</string>
+    <string name="allergen_eggs">Eier</string>
+    <string name="allergen_fish">Fisch</string>
+    <string name="allergen_peanuts">Erdnüsse</string>
+    <string name="allergen_soy">Soja</string>
+    <string name="allergen_dairy">Milch &amp; Laktose</string>
+    <string name="allergen_almonds">Mandeln</string>
+    <string name="allergen_hazelnuts">Haselnüsse</string>
+    <string name="allergen_walnuts">Walnüsse</string>
+    <string name="allergen_cashew_nuts">Cashew-Kerne</string>
+    <string name="allergen_pecans">Pecannüsse</string>
+    <string name="allergen_brazil_nuts">Paranüsse</string>
+    <string name="allergen_pistachios">Pistazien</string>
+    <string name="allergen_macadamia">Macadamianüsse</string>
+    <string name="allergen_celery">Sellerie</string>
+    <string name="allergen_mustard">Senf</string>
+    <string name="allergen_sulphides">Schwefeldioxide &amp; Sulfide von mehr als 10mg/kg or 10mg/l</string>
+    <string name="allergen_lupins">Lupinen</string>
+    <string name="allergen_sesame">Sesam</string>
+    <string name="allergen_molluscs">Weichtiere</string>
+
+    <string name="allergens_none">Enthält weder Allergene noch Zusatzstoffe.</string>
+    <string name="allergens_contains">Enthält: %s.</string>
+
     <string name="nav_schedule">Stundenplan</string>
     <string name="nav_food">Mensen</string>
     <string name="nav_settings">Einstellungen</string>
