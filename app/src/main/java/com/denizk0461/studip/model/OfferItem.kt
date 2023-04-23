@@ -5,6 +5,16 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
+/**
+ * Entity for storing individual items of a university canteen. Registered in the app database.
+ *
+ * @param itemId                primary key that uniquely identifies the item
+ * @param categoryId            foreign key binding the item to an instance of OfferCategory.kt
+ * @param title                 text content of the individual canteen offer
+ * @param price                 students' price for the individual canteen offer
+ * @param dietaryPreferences    dietary preferences used to filter for the user's needs - see
+ *                              DietaryPrefObject.kt
+ */
 @Entity(
     tableName = "offer_item",
     foreignKeys = [
@@ -22,14 +32,4 @@ data class OfferItem(
     val title: String,
     val price: String,
     @ColumnInfo(name = "dietary_preferences") val dietaryPreferences: String,
-//    val isFair: Boolean,
-//    val isFish: Boolean,
-//    val isPoultry: Boolean,
-//    val isLamb: Boolean,
-//    val isVital: Boolean,
-//    val isBeef: Boolean,
-//    val isPork: Boolean,
-//    val isVegan: Boolean,
-//    val isVegetarian: Boolean,
-//    val isGame: Boolean,
 )

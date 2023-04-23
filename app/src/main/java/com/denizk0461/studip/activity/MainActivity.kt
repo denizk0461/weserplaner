@@ -9,7 +9,7 @@ import androidx.lifecycle.Lifecycle
 import com.denizk0461.studip.R
 import com.denizk0461.studip.data.Dependencies
 import com.denizk0461.studip.databinding.ActivityMainBinding
-import com.denizk0461.studip.db.EventRepository
+import com.denizk0461.studip.db.AppRepository
 import com.denizk0461.studip.fragment.EventFragment
 import com.denizk0461.studip.fragment.CanteenFragment
 import com.denizk0461.studip.fragment.SettingsFragment
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
          * Instantiate repository object that is accessed by the fragments' view models to retrieve
          * data.
          */
-        Dependencies.repo = EventRepository(application)
+        Dependencies.repo = AppRepository(application)
 
         // Inflate view binding and bind to this activity
         binding = ActivityMainBinding.inflate(layoutInflater)

@@ -7,8 +7,26 @@ import androidx.recyclerview.widget.RecyclerView
 import com.denizk0461.studip.databinding.ItemScrollablePageBinding
 import com.denizk0461.studip.model.CanteenOfferGroup
 
-class CanteenOfferPageAdapter(private var offers: List<CanteenOfferGroup>, private var daysCovered: Int, private var prefsRegex: Regex) : RecyclerView.Adapter<CanteenOfferPageAdapter.CanteenOfferPageViewHolder>() {
+/**
+ * Custom RecyclerView adapter for managing multiple pages of canteen offers in a RecyclerView or
+ * ViewPager.
+ *
+ * @param offers        all offers for a given canteen, grouped by category (not filtered by day at
+ *                      this point)
+ * @param daysCovered   tells for how many days offers are available for.
+ *                      Example: if the next two weeks are available, Monday through Friday and
+ *                      excluding weekends, this value should be 10.
+ */
+class CanteenOfferPageAdapter(
+    private var offers: List<CanteenOfferGroup>,
+    private var daysCovered: Int,
+) : RecyclerView.Adapter<CanteenOfferPageAdapter.CanteenOfferPageViewHolder>() {
 
+    /**
+     * View holder class for parent class
+     *
+     * @param binding   view binding object
+     */
     class CanteenOfferPageViewHolder(val binding: ItemScrollablePageBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CanteenOfferPageViewHolder =
@@ -20,22 +38,39 @@ class CanteenOfferPageAdapter(private var offers: List<CanteenOfferGroup>, priva
             )
     )
 
+    // Returns the count of days covered
     override fun getItemCount(): Int = daysCovered
 
     override fun onBindViewHolder(holder: CanteenOfferPageViewHolder, position: Int) {
 
         holder.binding.pageRecyclerView.apply {
-
+            // Set page to horizontally scroll
             layoutManager = LinearLayoutManager(holder.binding.root.context, LinearLayoutManager.VERTICAL, false)
 
+            /*
+             * Create new adapter for every page. Attribute position denotes day that will be set up
+             * by the newly created adapter (0 = Monday, 4 = Friday)
+             */
             adapter = CanteenOfferItemAdapter(offers.filter { it.dateId == position }) // TODO check if empty
+
+            // Animate creation of new page
             scheduleLayoutAnimation()
         }
     }
 
+    /**
+     * Update the entire list of items
+     *
+     * @param items the new set of items
+     */
     fun setNewItems(items: List<CanteenOfferGroup>, daysCovered: Int) {
+        // Update the count of days covered
         this.daysCovered = daysCovered
+
+        // Update items
         offers = items
+
+        // Force an update of the view. TODO replace with individual updates, as this is inefficient
         notifyDataSetChanged()
     }
 }

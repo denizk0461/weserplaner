@@ -1,5 +1,20 @@
 package com.denizk0461.studip.model
 
+/**
+ * Object that holds dietary preferences. Can be used to hold both the user-set values as well as
+ * the values of an individual canteen item.
+ *
+ * @param isFair        item contains meat from fairly-treated animals (lol sure)
+ * @param isFish        item contains fish
+ * @param isPoultry     item contains chicken
+ * @param isLamb        item contains lamb
+ * @param isVital       i don't actually know
+ * @param isBeef        item contains beef
+ * @param isPork        item contains pork
+ * @param isVegan       item is plant-based; contains no animal-derived ingredients
+ * @param isVegetarian  item is vegetarian; contains no animal parts
+ * @param isGame        item contains game meat (e.g. deer)
+ */
 data class DietaryPrefObject(
     val isFair: Boolean,
     val isFish: Boolean,
@@ -13,11 +28,18 @@ data class DietaryPrefObject(
     val isGame: Boolean,
 ) {
     companion object {
-        private const val C_TRUE = 't'
-        private const val C_FALSE = '.'
-        /* assume that the values must be parsed as follows:
-         * "xxxxxxxxxx"
-         * t = true, . = false
+        // Char used to construct a regex to denote that a preference is met
+        const val C_TRUE = 't'
+        // Char used to construct a regex to denote that a preference is not met
+        const val C_FALSE = '.'
+
+        /**
+         * Constructs a DietaryPrefObject from a regex string. String must be 10 characters long.
+         * A char equal to C_TRUE is treated as a true boolean value. Any other char is treated as a
+         * false boolean value.
+         *
+         * @param values the regex string
+         * @return an instance of DietaryPrefObject
          */
         fun construct(values: String) = DietaryPrefObject(
             isFair = values[0] == C_TRUE,
@@ -33,6 +55,15 @@ data class DietaryPrefObject(
         )
     }
 
+    /**
+     * Constructs a regular expression string from a DietaryPrefObject. This can be used to filter for specific
+     * preferences. Example:
+     * .......t..
+     * This expression filters for items that are vegan ('t' in position 8) and ignores all other
+     * preference options ('.' in all other positions).
+     *
+     * @return a 10-character long regular expression
+     */
     fun deconstruct() = String(
         charArrayOf(
             if (this.isFair) C_TRUE else C_FALSE,
