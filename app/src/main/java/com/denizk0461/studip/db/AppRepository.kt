@@ -85,18 +85,6 @@ class AppRepository(app: Application) {
         val oldString = getDietaryPrefs().toMutableList()
 
         oldString[pref.ordinal] = newValue.toChar()
-//        when (pref) {
-//            DietaryPreferences.FAIR -> oldString[0] = newValue.toChar()
-//            DietaryPreferences.FISH -> oldString[1] = newValue.toChar()
-//            DietaryPreferences.POULTRY -> oldString[2] = newValue.toChar()
-//            DietaryPreferences.LAMB -> oldString[3] = newValue.toChar()
-//            DietaryPreferences.VITAL -> oldString[4] = newValue.toChar()
-//            DietaryPreferences.BEEF -> oldString[5] = newValue.toChar()
-//            DietaryPreferences.PORK -> oldString[6] = newValue.toChar()
-//            DietaryPreferences.VEGAN -> oldString[7] = newValue.toChar()
-//            DietaryPreferences.VEGETARIAN -> oldString[8] = newValue.toChar()
-//            DietaryPreferences.GAME -> oldString[9] = newValue.toChar()
-//        }
         val newString = oldString.joinToString("")
         prefs.edit().putString(dietaryPrefString, newString).apply()
     }
@@ -117,19 +105,6 @@ class AppRepository(app: Application) {
      */
     fun getPreference(pref: DietaryPreferences): Boolean =
         getDietaryPrefs()[pref.ordinal] == DietaryPrefObject.C_TRUE
-//        val prefString = getDietaryPrefs().toList()
-//        return when (pref) {
-//            DietaryPreferences.FAIR -> prefString[0] == 't'
-//            DietaryPreferences.FISH -> prefString[1] == 't'
-//            DietaryPreferences.POULTRY -> prefString[2] == 't'
-//            DietaryPreferences.LAMB -> prefString[3] == 't'
-//            DietaryPreferences.VITAL -> prefString[4] == 't'
-//            DietaryPreferences.BEEF -> prefString[5] == 't'
-//            DietaryPreferences.PORK -> prefString[6] == 't'
-//            DietaryPreferences.VEGAN -> prefString[7] == 't'
-//            DietaryPreferences.VEGETARIAN -> prefString[8] == 't'
-//            DietaryPreferences.GAME -> prefString[9] == 't'
-//        }
 
     /**
      * Deletes all canteen offers from the database.
@@ -168,4 +143,22 @@ class AppRepository(app: Application) {
      * @param item object to be saved to the database
      */
     fun insert(item: OfferItem) { dao.insert(item) }
+
+    // --- settings preferences --- //
+
+    /**
+     * Retrieves the user's preference on displaying allergens.
+     *
+     * @return  whether the user set this preference
+     */
+    fun getPreferenceAllergen(): Boolean = prefs.getBoolean("setting_allergen", false)
+
+    /**
+     * Updates the user's preference on displaying allergens.
+     *
+     * @param value new value to set the preference to
+     */
+    fun setPreferenceAllergen(value: Boolean) {
+        prefs.edit().putBoolean("setting_allergen", value).apply()
+    }
 }

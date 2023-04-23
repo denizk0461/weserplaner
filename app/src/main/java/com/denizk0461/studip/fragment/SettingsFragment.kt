@@ -7,9 +7,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.denizk0461.studip.BuildConfig
 import com.denizk0461.studip.activity.FetcherActivity
 import com.denizk0461.studip.databinding.FragmentSettingsBinding
+import com.denizk0461.studip.viewmodel.SettingsViewModel
 
 /**
  * User-facing fragment view that is used to change app settings.
@@ -24,6 +26,9 @@ class SettingsFragment : AppFragment() {
      * onDestroyView.
      */
     private val binding get() = _binding!!
+
+    // View model reference for providing access to the database
+    private val viewModel: SettingsViewModel by viewModels()
 
     // Click counter on the app version button
     private var appVersionClick = 0
@@ -43,6 +48,13 @@ class SettingsFragment : AppFragment() {
         // Launch the Stud.IP schedule fetcher activity
         binding.buttonRefreshSchedule.setOnClickListener {
             launchWebView()
+        }
+
+        binding.switchAllergens.apply {
+            isChecked = viewModel.preferenceAllergen
+            setOnCheckedChangeListener { _, b ->
+                viewModel.preferenceAllergen = b
+            }
         }
 
         // Set click listener for the app version button

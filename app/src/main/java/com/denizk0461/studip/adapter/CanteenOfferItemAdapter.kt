@@ -15,10 +15,12 @@ import com.denizk0461.studip.model.CanteenOfferGroupElement
  *
  * @param offers            list of all offers filtered by canteen and day, grouped by category
  * @param onClickListener   used for listening to clicks and long presses
+ * @param displayAllergens  whether the user wants allergens to be marked
  */
 class CanteenOfferItemAdapter(
     private val offers: List<CanteenOfferGroup>,
-    private val onClickListener: OnClickListener
+    private val onClickListener: OnClickListener,
+    private val displayAllergens: Boolean,
 ) : RecyclerView.Adapter<CanteenOfferItemAdapter.OfferViewHolder>() {
 
     /**
@@ -75,7 +77,7 @@ class CanteenOfferItemAdapter(
             )
 
             // Set text values
-            line.textContent.text = offer.title
+            line.textContent.text = offer.title.addAllergenNotice(displayAllergens, offer.allergens)
             line.textPrice.text = offer.price
 
             /*
@@ -119,6 +121,26 @@ class CanteenOfferItemAdapter(
             // Bind the new line to the line container
             holder.binding.lineContainer.addView(line.root)
         }
+    }
+
+    /**
+     * Adds a star to mark allergens present in an offer. Allergens will be displayed as a star '*'
+     * next to the title.
+     *
+     * @param displayAllergens  whether the user wants allergens to be displayed
+     * @param allergens         allergens present in the offer
+     * @return                  the formatted string
+     */
+    private fun String.addAllergenNotice(displayAllergens: Boolean, allergens: String): String {
+
+        /*
+         * Don't add anything to the string if the user does not want a star added, or if the item
+         * does not contain any allergens or additives.
+         */
+        if (!displayAllergens || allergens.isBlank()) return this
+
+        // Add a star to the string
+        return "$this*"
     }
 
     /**

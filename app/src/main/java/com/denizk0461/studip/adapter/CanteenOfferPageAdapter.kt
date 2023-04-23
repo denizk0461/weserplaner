@@ -11,17 +11,19 @@ import com.denizk0461.studip.model.CanteenOfferGroup
  * Custom RecyclerView adapter for managing multiple pages of canteen offers in a RecyclerView or
  * ViewPager.
  *
- * @param offers        all offers for a given canteen, grouped by category (not filtered by day at
- *                      this point)
- * @param daysCovered   tells for how many days offers are available for.
- *                      Example: if the next two weeks are available, Monday through Friday and
- *                      excluding weekends, this value should be 10.
+ * @param offers            all offers for a given canteen, grouped by category (not filtered by day at
+ *                          this point)
+ * @param daysCovered       tells for how many days offers are available for.
+ *                          Example: if the next two weeks are available, Monday through Friday and
+ *                          excluding weekends, this value should be 10.
  * @param onClickListener   for managing click and long press events
+ * @param displayAllergens  whether the user wants allergens to be marked
  */
 class CanteenOfferPageAdapter(
     private var offers: List<CanteenOfferGroup>,
     private var daysCovered: Int,
     private val onClickListener: CanteenOfferItemAdapter.OnClickListener,
+    private val displayAllergens: Boolean,
 ) : RecyclerView.Adapter<CanteenOfferPageAdapter.CanteenOfferPageViewHolder>() {
 
     /**
@@ -47,7 +49,9 @@ class CanteenOfferPageAdapter(
 
         holder.binding.pageRecyclerView.apply {
             // Set page to horizontally scroll
-            layoutManager = LinearLayoutManager(holder.binding.root.context, LinearLayoutManager.VERTICAL, false)
+            layoutManager = LinearLayoutManager(
+                holder.binding.root.context, LinearLayoutManager.VERTICAL, false
+            )
 
             /*
              * Create new adapter for every page. Attribute position denotes day that will be set up
@@ -56,7 +60,8 @@ class CanteenOfferPageAdapter(
              */
             adapter = CanteenOfferItemAdapter(
                 offers.filter { it.dateId == position },
-                onClickListener
+                onClickListener,
+                displayAllergens,
             )
 
             // Animate creation of new page

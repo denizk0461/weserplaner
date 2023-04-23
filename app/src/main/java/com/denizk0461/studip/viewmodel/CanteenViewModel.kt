@@ -61,4 +61,10 @@ class CanteenViewModel(app: Application) : AppViewModel(app) {
      * @return      whether the preference needs to be met
      */
     fun getPreference(pref: DietaryPreferences): Boolean = repo.getPreference(pref)
+
+    /**
+     * This value determines whether the user wants to have allergens marked.
+     */
+    val preferenceAllergen: Boolean
+        get() = repo.getPreferenceAllergen()
 }

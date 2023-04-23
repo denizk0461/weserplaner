@@ -91,7 +91,9 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
         }
 
         // Set up the view pager's adapter
-        viewPagerAdapter = CanteenOfferPageAdapter(listOf(), 0, this)
+        viewPagerAdapter = CanteenOfferPageAdapter(
+            listOf(), 0, this, viewModel.preferenceAllergen
+        )
 
         // Assign the adapter to the view pager
         binding.viewPager.adapter = viewPagerAdapter
@@ -129,7 +131,7 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
             viewModel.fetchOffers(onRefreshUpdate = { status ->
                 // TODO refresh updates
             }, onFinish = {
-                createTabLayoutMediator()
+//                createTabLayoutMediator()
 //                binding.swipeRefreshLayout.isRefreshing = false
 //                createTabLayoutMediator()
             })
