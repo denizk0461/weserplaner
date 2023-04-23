@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    android:background="?attr/colorBackground">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/toolbar"
@@ -13,8 +12,7 @@
         android:fitsSystemWindows="true"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="?attr/colorBackground">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
             android:id="@+id/app_title_bar"
@@ -45,21 +43,8 @@
         android:layout_height="wrap_content"
         app:menu="@menu/nav_view_items"
         app:labelVisibilityMode="selected"
-        app:itemActiveIndicatorStyle="@style/NavigationViewItemIndicator"
-        app:itemTextColor="@color/list_nav_bar_text"
-        app:itemIconTint="@color/list_nav_bar_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="?attr/colorBackground"/>
-
-    <com.google.android.material.divider.MaterialDivider
-        style="@style/DividerTheme"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/nav_view"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,7 +9,7 @@ import com.denizk0461.studip.model.StudIPEvent
  *
  * @param app   reference to the app
  */
-class EventViewModel(app: Application) : TemplateViewModel(app) {
+class EventViewModel(app: Application) : AppViewModel(app) {
 
     /**
      * Retrieves all Stud.IP events.

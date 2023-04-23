@@ -1,11 +1,8 @@
 package com.denizk0461.studip.adapter
 
-import android.content.res.ColorStateList
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.denizk0461.studip.R
 import com.denizk0461.studip.model.StudIPEvent
 import com.denizk0461.studip.databinding.ItemEventBinding
 import java.util.*
@@ -72,42 +69,43 @@ class StudIPEventItemAdapter(
         // Use parsed timeslot string as defined in StudIPEvent#timeslot()
         holder.binding.textTimeslot.text = currentItem.timeslot()
 
+        // TODO highlighting functionality is currently not supported!
         // Set up colours used for highlighting and un-highlighting an item.
-        val colorPrimaryTranslucent = TypedValue()
-        val colorCardBackground = TypedValue()
-        val colorTextHintLighter = TypedValue()
+//        val colorPrimaryTranslucent = TypedValue()
+//        val colorCardBackground = TypedValue()
+//        val colorTextHintLighter = TypedValue()
 
         // Resolve themed attributes to get the right values for day and night modes
-            holder.binding.root.context.theme.apply {
-            resolveAttribute(R.attr.colorPrimaryTranslucent, colorPrimaryTranslucent, true)
-            resolveAttribute(R.attr.colorCardBackground, colorCardBackground, true)
-            resolveAttribute(R.attr.colorTextHintLighter, colorTextHintLighter, true)
-        }
+//        holder.binding.root.context.theme.apply {
+//            resolveAttribute(com.google.android.material.R.attr.colorSecondaryContainer, colorPrimaryTranslucent, true)
+//            resolveAttribute(R.attr.colorCardBackground, colorCardBackground, true)
+//            resolveAttribute(R.attr.colorTextHintLighter, colorTextHintLighter, true)
+//        }
 
         /* Highlight the next upcoming course of the day if the day of the adapter matches the
          * current day, and if no other course has been highlighted, to avoid double highlighting.
          */
-        if (!isAnyCourseHighlighted && currentItem.isCurrentCourse(currentCalendar)) {
-            // Ensure that no other course will be highlighted
-            isAnyCourseHighlighted = true
-
-            holder.binding.cardBackground.apply {
-                // Set the card's background colour to a desaturated shade of the primary colour
-                backgroundTintList = ColorStateList.valueOf(colorPrimaryTranslucent.data)
-
-                // Hide card stroke
-                strokeColor = context.getColor(android.R.color.transparent)
-            }
-        // Otherwise, apply colours to ensure that the item will not be highlighted
-        } else {
-            holder.binding.cardBackground.apply {
-                // Set the card's background colour to its default value
-                backgroundTintList = ColorStateList.valueOf(colorCardBackground.data)
-
-                // Set the card's stroke to its default colour
-                strokeColor = colorTextHintLighter.data
-            }
-        }
+//        if (!isAnyCourseHighlighted && currentItem.isCurrentCourse(currentCalendar)) {
+//            // Ensure that no other course will be highlighted
+//            isAnyCourseHighlighted = true
+//
+//            holder.binding.cardBackground.apply {
+//                // Set the card's background colour to a desaturated shade of the primary colour
+//                backgroundTintList = ColorStateList.valueOf(colorPrimaryTranslucent.data)
+//
+//                // Hide card stroke
+//                strokeColor = context.getColor(android.R.color.transparent)
+//            }
+//        // Otherwise, apply colours to ensure that the item will not be highlighted
+//        } else {
+//            holder.binding.cardBackground.apply {
+//                // Set the card's background colour to its default value
+//                backgroundTintList = ColorStateList.valueOf(colorCardBackground.data)
+//
+//                // Set the card's stroke to its default colour
+//                strokeColor = colorTextHintLighter.data
+//            }
+//        }
 
         // Set up single click listener
         holder.binding.cardBackground.setOnClickListener {

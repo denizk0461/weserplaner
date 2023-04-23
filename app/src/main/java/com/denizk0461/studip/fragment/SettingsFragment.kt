@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.denizk0461.studip.BuildConfig
 import com.denizk0461.studip.activity.FetcherActivity
 import com.denizk0461.studip.databinding.FragmentSettingsBinding
@@ -15,7 +14,7 @@ import com.denizk0461.studip.databinding.FragmentSettingsBinding
 /**
  * User-facing fragment view that is used to change app settings.
  */
-class SettingsFragment : Fragment() {
+class SettingsFragment : AppFragment() {
 
     // Nullable view binding reference
     private var _binding: FragmentSettingsBinding? = null

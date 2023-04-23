@@ -8,15 +8,36 @@ import com.denizk0461.studip.databinding.ItemCanteenBinding
 import com.denizk0461.studip.databinding.ItemCanteenLineBinding
 import com.denizk0461.studip.databinding.ItemIconBinding
 import com.denizk0461.studip.model.CanteenOfferGroup
+import com.denizk0461.studip.model.CanteenOfferGroupElement
 
 /**
  * Custom RecyclerView adapter that lays out the offers of a given canteen on a given day.
  *
  * @param offers            list of all offers filtered by canteen and day, grouped by category
+ * @param onClickListener   used for listening to clicks and long presses
  */
 class CanteenOfferItemAdapter(
-    private val offers: List<CanteenOfferGroup>
+    private val offers: List<CanteenOfferGroup>,
+    private val onClickListener: OnClickListener
 ) : RecyclerView.Adapter<CanteenOfferItemAdapter.OfferViewHolder>() {
+
+    /**
+     * Provides a converting function between the index of a dietary preference and its according
+     * icon.
+     */
+    private val indexToDrawable: Map<Int, Int> = mapOf(
+        0 to R.drawable.handshake,
+        1 to R.drawable.fish,
+        2 to R.drawable.chicken,
+        3 to R.drawable.sheep,
+        4 to R.drawable.yoga,
+        5 to R.drawable.cow,
+        6 to R.drawable.pig,
+        7 to R.drawable.leaf,
+        8 to R.drawable.carrot,
+        9 to R.drawable.deer,
+        10 to R.drawable.circle,
+    )
 
     /**
      * View holder class for parent class
@@ -86,26 +107,39 @@ class CanteenOfferItemAdapter(
                 line.imageViewContainer.addView(img.root)
             }
 
+            // Set up single click listener
+            line.root.setOnClickListener {
+                onClickListener.onClick(offer)
+            }
+
+            // Set up long press listener
+            line.root.setOnLongClickListener {
+                onClickListener.onLongClick(offer)
+            }
             // Bind the new line to the line container
             holder.binding.lineContainer.addView(line.root)
         }
     }
 
     /**
-     * Provides a converting function between the index of a dietary preference and its according
-     * icon.
+     * Interface used to evaluate clicks and long presses on a given item.
      */
-    private val indexToDrawable: Map<Int, Int> = mapOf(
-        0 to R.drawable.handshake,
-        1 to R.drawable.fish,
-        2 to R.drawable.chicken,
-        3 to R.drawable.sheep,
-        4 to R.drawable.yoga,
-        5 to R.drawable.cow,
-        6 to R.drawable.pig,
-        7 to R.drawable.leaf,
-        8 to R.drawable.carrot,
-        9 to R.drawable.deer,
-        10 to R.drawable.circle,
-    )
+    interface OnClickListener {
+
+        /**
+         * Executed when an item has been clicked.
+         *
+         * @param offer item that has been clicked
+         */
+        fun onClick(offer: CanteenOfferGroupElement)
+
+
+        /**
+         * Executed when an item has been long-pressed.
+         *
+         * @param offer item that has been long-pressed
+         * @return      whether the long press was successful
+         */
+        fun onLongClick(offer: CanteenOfferGroupElement): Boolean
+    }
 }

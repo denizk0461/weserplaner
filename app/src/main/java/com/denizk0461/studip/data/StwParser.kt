@@ -209,9 +209,9 @@ class StwParser {
          * pointless to the website user. As of now, this information is discarded in the app.
          * TODO implement allergen functionality
          */
-        while (text.contains("<sup>")) {
-            text = text.substring(0 until text.indexOf("<sup>")) + text.substring(text.indexOf("</sup>")+6 until text.length)
-        }
+//        while (text.contains("<sup>")) {
+//            text = text.substring(0 until text.indexOf("<sup>")) + text.substring(text.indexOf("</sup>")+6 until text.length)
+//        }
 
         // Return the stripped and updated HTML string
         return text

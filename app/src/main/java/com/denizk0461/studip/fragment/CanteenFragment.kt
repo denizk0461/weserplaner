@@ -5,11 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.denizk0461.studip.adapter.CanteenOfferItemAdapter
 import com.denizk0461.studip.adapter.CanteenOfferPageAdapter
 import com.denizk0461.studip.databinding.FragmentCanteenBinding
 import com.denizk0461.studip.model.*
+import com.denizk0461.studip.sheet.AllergenSheet
 import com.denizk0461.studip.viewmodel.CanteenViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -17,7 +18,7 @@ import com.google.android.material.tabs.TabLayoutMediator
  * User-facing fragment view that displays the canteen offers from the website of the
  * Studierendenwerk Bremen.
  */
-class CanteenFragment : Fragment() {
+class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
 
     // Nullable view binding reference
     private var _binding: FragmentCanteenBinding? = null
@@ -91,7 +92,7 @@ class CanteenFragment : Fragment() {
         }
 
         // Set up the view pager's adapter
-        viewPagerAdapter = CanteenOfferPageAdapter(listOf(), 0)
+        viewPagerAdapter = CanteenOfferPageAdapter(listOf(), 0, this)
 
         // Assign the adapter to the view pager
         binding.viewPager.adapter = viewPagerAdapter
@@ -267,5 +268,24 @@ class CanteenFragment : Fragment() {
                 }
             )
         }
+    }
+
+    /**
+     * Executed when an item has been clicked.
+     *
+     * @param offer item that has been clicked
+     */
+    override fun onClick(offer: CanteenOfferGroupElement) {
+        openBottomSheet(AllergenSheet(offer))
+    }
+
+    /**
+     * Executed when an item has been long-pressed.
+     *
+     * @param offer item that has been long-pressed
+     * @return      whether the long press was successful
+     */
+    override fun onLongClick(offer: CanteenOfferGroupElement): Boolean {
+        return false
     }
 }

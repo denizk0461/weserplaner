@@ -1,53 +1,39 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
-    <style name="Base.Theme.StudIPTimetable" parent="Theme.Material3.DayNight.NoActionBar">
-<!--        <item name="fontFamily">@font/lato_regular</item>-->
+    <style name="Base.Theme.StudIPTimetable" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/md_theme_light_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_light_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_light_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/md_theme_light_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_light_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/md_theme_light_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_light_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/md_theme_light_tertiary</item>
+        <item name="colorOnTertiary">@color/md_theme_light_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/md_theme_light_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/md_theme_light_onTertiaryContainer</item>
+        <item name="colorError">@color/md_theme_light_error</item>
+        <item name="colorErrorContainer">@color/md_theme_light_errorContainer</item>
+        <item name="colorOnError">@color/md_theme_light_onError</item>
+        <item name="colorOnErrorContainer">@color/md_theme_light_onErrorContainer</item>
+        <item name="android:colorBackground">@color/md_theme_light_background</item>
+        <item name="colorOnBackground">@color/md_theme_light_onBackground</item>
+        <item name="colorSurface">@color/md_theme_light_surface</item>
+        <item name="colorOnSurface">@color/md_theme_light_onSurface</item>
+        <item name="colorSurfaceVariant">@color/md_theme_light_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_light_onSurfaceVariant</item>
+        <item name="colorOutline">@color/md_theme_light_outline</item>
+        <item name="colorOnSurfaceInverse">@color/md_theme_light_inverseOnSurface</item>
+        <item name="colorSurfaceInverse">@color/md_theme_light_inverseSurface</item>
+        <item name="colorPrimaryInverse">@color/md_theme_light_inversePrimary</item>
 
-        <item name="colorPrimary">@color/primaryDay</item>
-        <item name="colorPrimaryTranslucent">@color/primaryDayTranslucent</item>
-        <item name="rippleColor">@color/primaryDay</item>
-
-        <item name="colorOnPrimary">@color/colorBackgroundDay</item>
-
-        <item name="colorText">@color/colorTextDay</item>
-        <item name="colorTextHint">@color/colorTextHintDay</item>
-        <item name="colorTextHintLighter">@color/colorTextHintLighterDay</item>
-
-        <item name="colorBackground">@color/colorBackgroundDay</item>
-        <item name="colorCardBackground">@color/colorCardBackgroundDay</item>
-        <item name="colorSwitchTrack">@color/colorSwitchTrackDay</item>
-
-        <item name="android:textColor">?attr/colorText</item>
-
-        <item name="android:windowBackground">@color/colorBackgroundDay</item>
-        <item name="colorNavHighlight">@color/highlightDay</item>
+        <item name="android:textColor">@color/md_theme_light_onSurfaceVariant</item>
     </style>
 
     <style name="Theme.StudIPTimetable" parent="Base.Theme.StudIPTimetable" />
 
-    <style name="SwitchTheme" parent="Widget.Material3.CompoundButton.MaterialSwitch">
-        <item name="thumbTint">@color/list_switch_thumb</item>
-        <item name="trackTint">@color/list_switch_track</item>
-        <item name="trackDecorationTint">@color/list_switch_decoration</item>
-    </style>
-
-    <style name="NavigationViewItemIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
-        <item name="android:color">@color/primaryDayTranslucent</item>
-    </style>
-
-    <style name="SelectableItemTheme">
-        <item name="colorControlHighlight">@color/primaryDay</item>
-    </style>
-
     <style name="DividerTheme" parent="Widget.Material3.MaterialDivider">
-        <item name="dividerColor">@color/colorTextHintLighterDay</item>
-    </style>
-
-    <style name="ChipStyle" parent="Widget.Material3.Chip.Filter">
-        <item name="chipStrokeColor">@color/item_chip_outline</item>
-        <item name="android:textColor">?attr/colorText</item>
-        <item name="rippleColor">?attr/colorPrimary</item>
-        <item name="chipBackgroundColor">@color/item_chip_background</item>
-        <item name="chipIconTint">?attr/colorText</item>
+        <item name="dividerColor">@color/md_theme_light_outlineVariant</item>
     </style>
 </resources>

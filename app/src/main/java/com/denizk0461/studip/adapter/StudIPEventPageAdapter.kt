@@ -16,7 +16,7 @@ import com.denizk0461.studip.databinding.ItemScrollablePageBinding
  */
 class StudIPEventPageAdapter(
     private var events: List<StudIPEvent>,
-    private val onClickListener: StudIPEventItemAdapter.OnClickListener
+    private val onClickListener: StudIPEventItemAdapter.OnClickListener,
 ) : RecyclerView.Adapter<StudIPEventPageAdapter.EventPageViewHolder>() {
 
     /**

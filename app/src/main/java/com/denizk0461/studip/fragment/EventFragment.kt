@@ -1,7 +1,6 @@
 package com.denizk0461.studip.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,7 @@ import java.util.*
 /**
  * User-facing fragment view that displays the user's Stud.IP schedule.
  */
-class EventFragment : Fragment() {
+class EventFragment : AppFragment() {
 
     // Nullable view binding reference
     private var _binding: FragmentEventBinding? = null

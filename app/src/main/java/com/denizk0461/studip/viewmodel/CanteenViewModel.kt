@@ -13,7 +13,7 @@ import com.denizk0461.studip.model.OfferDate
  *
  * @param app   reference to the app
  */
-class CanteenViewModel(app: Application) : TemplateViewModel(app) {
+class CanteenViewModel(app: Application) : AppViewModel(app) {
 
     // Instantiate a parser, should the user want to refresh the canteen offers
     private val parser = StwParser()

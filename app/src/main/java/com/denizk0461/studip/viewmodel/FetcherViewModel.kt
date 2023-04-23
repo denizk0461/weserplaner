@@ -8,7 +8,7 @@ import com.denizk0461.studip.model.StudIPEvent
  *
  * @param app   reference to the app
  */
-class FetcherViewModel(app: Application) : TemplateViewModel(app) {
+class FetcherViewModel(app: Application) : AppViewModel(app) {
 
     /**
      * Save a list of Stud.IP events to persistent storage asynchronously.

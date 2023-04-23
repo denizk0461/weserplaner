@@ -9,6 +9,6 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:scaleType="centerInside"
-        app:tint="?attr/colorText"/>
+        app:tint="?attr/colorOnSurfaceVariant" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
