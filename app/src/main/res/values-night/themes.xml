@@ -29,6 +29,10 @@
         <item name="colorPrimaryInverse">@color/md_theme_dark_inversePrimary</item>
 
         <item name="android:textColor">@color/md_theme_dark_onSurfaceVariant</item>
+        <item name="android:scrollbarThumbVertical">@color/md_theme_dark_onSurfaceVariant</item>
+
+        <!-- is this correct? -->
+        <item name="scheduleColorDefault">@color/md_theme_light_background</item>
     </style>
 
     <style name="DividerTheme" parent="Widget.Material3.MaterialDivider">

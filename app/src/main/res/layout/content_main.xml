@@ -43,6 +43,7 @@
         android:layout_height="wrap_content"
         app:menu="@menu/nav_view_items"
         app:labelVisibilityMode="selected"
+        app:itemTextColor="?attr/colorOnSurfaceVariant"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

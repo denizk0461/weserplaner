@@ -1,14 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="colorNavHighlight" format="color" />
-    <attr name="colorPrimaryOnContrast" format="color" />
-    <attr name="colorPrimary" format="color" />
-    <attr name="colorPrimaryTranslucent" format="color" />
-    <attr name="colorOnPrimary" format="color" />
-    <attr name="colorText" format="color" />
-    <attr name="colorTextHint" format="color" />
-    <attr name="colorTextHintLighter" format="color" />
-    <attr name="colorBackground" format="color" />
-    <attr name="colorCardBackground" format="color" />
-    <attr name="colorSwitchTrack" format="color" />
+    <attr name="scheduleColorDefault" type="color"/>
 </resources>

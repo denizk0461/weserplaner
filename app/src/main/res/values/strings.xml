@@ -87,16 +87,20 @@
     <string name="toast_fetch_finished">Your schedule has been refreshed!</string>
 
     <string name="settings_general">General</string>
+    <string name="settings_schedule">Stud.IP Schedule</string>
+    <string name="settings_canteen">Canteen Offers</string>
     <string name="settings_misc">Miscellaneous</string>
 
     <string name="refresh_schedule_title">Refresh your Stud.IP schedule</string>
     <string name="refresh_schedule_subtitle">This will clear any customisations!</string>
-    <string name="settings_quarter_title">Use academic quarter</string>
-    <string name="settings_quarter_subtitle">Where applicable</string>
     <string name="settings_highlight_title">Highlight next course</string>
     <string name="settings_highlight_subtitle">Only works properly if courses don\'t overlap!</string>
+    <string name="settings_quarter_title">Use academic quarter</string>
+    <string name="settings_quarter_subtitle">Where applicable</string>
+    <string name="settings_allergens_title">Mark allergens with a star*</string>
+    <string name="settings_allergens_subtitle">Also applies to additives</string>
     <string name="settings_data_title">What happens with my data?</string>
-    <string name="settings_data_subtitle">Will you steal my login?</string>
+    <string name="settings_data_subtitle">Will you steal my Stud.IP login?</string>
     <string name="settings_app_version">App Version</string>
 
     <string name="with_love">with ♡️ from Bremen-Osterholz\nmade by denizk0461 \\__*</string>

@@ -24,7 +24,7 @@ data class StudIPEvent(
     val day: Int,
     val timeslotStart: String,
     val timeslotEnd: String,
-    val colour: String = "000000",
+    val colour: Int = 0,
 ) {
 
     /**

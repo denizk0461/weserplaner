@@ -8,7 +8,7 @@
     <string name="friday">FREITAG</string>
 
     <string name="title_schedule">Dein Stundenplan</string>
-    <string name="title_food">Mensen-Angebote</string>
+    <string name="title_food">Mensenangebote</string>
     <string name="title_settings">App-Einstellungen</string>
 
     <string name="mensa_uni">Uni-Mensa</string>
@@ -81,22 +81,26 @@
     <string name="allergens_contains">Enthält: %s.</string>
 
     <string name="nav_schedule">Stundenplan</string>
-    <string name="nav_food">Mensen</string>
+    <string name="nav_food">Mensa</string>
     <string name="nav_settings">Einstellungen</string>
 
     <string name="toast_fetch_finished">Dein Stundenplan wurde aktualisiert!</string>
 
     <string name="settings_general">Allgemein</string>
+    <string name="settings_schedule">Stud.IP-Stundenplan</string>
+    <string name="settings_canteen">Mensenangebote</string>
     <string name="settings_misc">Sonstiges</string>
 
     <string name="refresh_schedule_title">Aktualisiere deinen Stud.IP-Stundenplan</string>
     <string name="refresh_schedule_subtitle">Dies wird alle Anpassungen löschen!</string>
-    <string name="settings_quarter_title">Nutze akademisches Viertel</string>
-    <string name="settings_quarter_subtitle">Wo es passt</string>
     <string name="settings_highlight_title">Markiere meinen nächsten Kurs</string>
     <string name="settings_highlight_subtitle">Funktioniert nur wenn Kurse sich nicht überschneiden!</string>
+    <string name="settings_quarter_title">Nutze akademisches Viertel</string>
+    <string name="settings_quarter_subtitle">Wo es passt</string>
+    <string name="settings_allergens_title">Markiere Allergene mit einem Stern*</string>
+    <string name="settings_allergens_subtitle">Wird auch für Zusatzstoffe genutzt</string>
     <string name="settings_data_title">Was passiert mit meinen Daten?</string>
-    <string name="settings_data_subtitle">Stiehlst du meinen Login?</string>
+    <string name="settings_data_subtitle">Stiehlst du meinen Stud.IP-Login?</string>
     <string name="settings_app_version">App-Verison</string>
 
     <string name="with_love">mit ♡️ aus Bremen-Osterholz\von denizk0461 \\__*</string>
