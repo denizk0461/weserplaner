@@ -15,6 +15,9 @@ import com.denizk0461.studip.model.DietaryPreferences
 /**
  * This class is used to display further information on a canteen offer to the user. Unlike the name
  * implies, it displays more than just allergens.
+ *
+ * @param offer     item to display further information on
+ * @param category  category the offer belongs to
  */
 class AllergenSheet(
     private val offer: CanteenOfferGroupElement,

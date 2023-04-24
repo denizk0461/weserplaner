@@ -95,14 +95,24 @@
 
     <string name="refresh_schedule_title">Refresh your Stud.IP schedule</string>
     <string name="refresh_schedule_subtitle">This will clear any customisations!</string>
+
     <string name="settings_highlight_title">Highlight next course</string>
     <string name="settings_highlight_subtitle">Only works properly if courses don\'t overlap!</string>
+
     <string name="settings_quarter_title">Use academic quarter</string>
     <string name="settings_quarter_subtitle">Where applicable</string>
+
     <string name="settings_allergens_title">Mark allergens with a star*</string>
     <string name="settings_allergens_subtitle">Also applies to additives</string>
+
+    <string name="settings_crashlytics_title">Opt-in to sharing crash data</string>
+    <string name="settings_crashlytics_subtitle">Data will be anonymised</string> <!-- TODO is this true? -->
+
     <string name="settings_data_title">What happens with my data?</string>
     <string name="settings_data_subtitle">Will you steal my Stud.IP login?</string>
+    <string name="settings_data_sheet_header">TL;DR: no, but Google may let me know if the app crashes on your device.</string>
+    <string name="settings_data_sheet_content">This app works standalone, which is to say, it doesn\'t ever connect to a server I own. Instead, it is a web scraper, which means that it opens a website and then downloads and analyses all the data from that website by itself. In this case, those websites are the canteen websites of the Studierendenwerk Bremen (stw-bremen.de) and the Stud.IP page (elearning.uni-bremen.de).\n\nThis works fairly easily for the canteen offers, since the plans are public and anyone can access them. However, to access your personal Stud.IP schedule, the app needs access to that website, with your account logged in. This is done by letting you log into the website by yourself (which happens when you click the button to refresh the schedule and the app opens the login page) and then clicking a button to download the content, the HTML source code, of the website. The HTML source code contains information about which elements are shown on the website and how they look, but it can never contain your personal details such as passwords, or any other sensitive data you may store on your device.\n\nThe HTML source is then processed locally on your device, which means that your device will handle converting the HTML source to the cards you will be shown in the app by itself, without needing to send any data anywhere.\n\nHowever, some data may still be sent outside of your device. This app uses \"Crashlytics\" by Google, which is a tool that sends crash reports to Google servers if something breaks. These are used to fix problems that occur in the app.\n\nThis, in compliance with the European General Data Protection Regulation, is of course opt-in, which means that you need to accept this before any data is sent outside of your device. You have been prompted for this when you first started the app, and you can always change your mind in the app settings by clicking the corresponding switch. Should you choose to not share crash data with Google (and me), no data will be sent outside of your device.\n\nShould you want to reassure yourself that no data is sent to any servers (outside of the crash reports from Google), feel free to explore the project, since it is open-source and documented on my GitHub profile:\nhttps://github.com/denizk0461/studip-timetable/</string>
+
     <string name="settings_app_version">App Version</string>
 
     <string name="with_love">with ♡️ from Bremen-Osterholz\nmade by denizk0461 \\__*</string>

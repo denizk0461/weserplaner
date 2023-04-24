@@ -9,8 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.denizk0461.studip.BuildConfig
+import com.denizk0461.studip.R
 import com.denizk0461.studip.activity.FetcherActivity
 import com.denizk0461.studip.databinding.FragmentSettingsBinding
+import com.denizk0461.studip.sheet.TextSheet
 import com.denizk0461.studip.viewmodel.SettingsViewModel
 
 /**
@@ -55,6 +57,13 @@ class SettingsFragment : AppFragment() {
             setOnCheckedChangeListener { _, b ->
                 viewModel.preferenceAllergen = b
             }
+        }
+
+        binding.buttonDataHandling.setOnClickListener {
+            openBottomSheet(TextSheet(
+                R.string.settings_data_sheet_header,
+                R.string.settings_data_sheet_content
+            ))
         }
 
         // Set click listener for the app version button
