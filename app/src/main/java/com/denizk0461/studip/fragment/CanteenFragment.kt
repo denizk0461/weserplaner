@@ -279,8 +279,8 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
      *
      * @param offer item that has been clicked
      */
-    override fun onClick(offer: CanteenOfferGroupElement) {
-        openBottomSheet(AllergenSheet(offer))
+    override fun onClick(offer: CanteenOfferGroupElement, category: String) {
+        openBottomSheet(AllergenSheet(offer, category))
     }
 
     /**

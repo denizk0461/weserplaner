@@ -22,6 +22,8 @@
     <string name="cafeteria_bhv">Cafeteria Bremerhaven</string>
     <string name="mensa_hfk">Interimsmensa HfK</string>
 
+    <string name="sheet_category" translatable="false">[ %s ]</string>
+
     <!-- dietary preferences -->
     <string name="pref_fair">Fair</string> <!-- is this really the best name? what about 'animal welfare'? -->
     <string name="pref_fish">Fish</string>
@@ -105,5 +107,5 @@
 
     <string name="with_love">with ♡️ from Bremen-Osterholz\nmade by denizk0461 \\__*</string>
 
-    <string name="de4thSpirit">In our hearts, she lives forevermore</string>
+    <string name="de4thSpirit" translatable="false">In our hearts, she lives forevermore</string>
 </resources>

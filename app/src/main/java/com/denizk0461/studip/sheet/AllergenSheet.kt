@@ -1,14 +1,25 @@
 package com.denizk0461.studip.sheet
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import com.denizk0461.studip.R
 import com.denizk0461.studip.data.viewBinding
+import com.denizk0461.studip.databinding.ItemSheetPreferenceBinding
 import com.denizk0461.studip.databinding.SheetAllergenBinding
 import com.denizk0461.studip.model.Allergens
 import com.denizk0461.studip.model.CanteenOfferGroupElement
+import com.denizk0461.studip.model.DietaryPreferences
 
-class AllergenSheet(private val offer: CanteenOfferGroupElement) : AppSheet(R.layout.sheet_allergen) {
+/**
+ * This class is used to display further information on a canteen offer to the user. Unlike the name
+ * implies, it displays more than just allergens.
+ */
+class AllergenSheet(
+    private val offer: CanteenOfferGroupElement,
+    private val category: String,
+) : AppSheet(R.layout.sheet_allergen) {
 
     private val binding: SheetAllergenBinding by viewBinding(SheetAllergenBinding::bind)
 
@@ -16,8 +27,46 @@ class AllergenSheet(private val offer: CanteenOfferGroupElement) : AppSheet(R.la
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-            title.text = offer.title
+
+            // Category header
+            textCategory.text = getString(R.string.sheet_category, category)
+
+            // Offer text
+            textTitle.text = offer.title
+
+            // Iterate through all dietary preferences
+            offer.dietaryPreferences.toList().forEachIndexed { index, c ->
+                // If a preference is met, inflate a view to display it
+                if (c == 't') {
+                    // Inflate the view
+                    val prefLine = ItemSheetPreferenceBinding.inflate(LayoutInflater.from(context))
+
+                    // Add the localised text for the preference
+                    prefLine.preferenceText.text = getString(DietaryPreferences.indexToString[index]!!)
+
+                    // Set the appropriate icon
+                    prefLine.preferenceImage.setImageDrawable(
+                        getDrawable(
+                            context,
+                            DietaryPreferences.indexToDrawable[index]!!,
+                        )
+                    )
+
+                    // Add the view to the sheet's view container
+                    containerPreferences.addView(prefLine.root)
+                }
+            }
+
+            // Allergen and additive notice
             textContent.text = offer.allergens.compileAllergenString()
+
+            // Show a price, if one is available
+            if (offer.price.isBlank()) {
+                textPrice.visibility = View.GONE
+            } else {
+                textPrice.visibility = View.VISIBLE
+                textPrice.text = offer.price
+            }
         }
     }
 

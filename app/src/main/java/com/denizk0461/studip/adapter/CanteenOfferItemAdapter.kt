@@ -2,13 +2,14 @@ package com.denizk0461.studip.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
-import com.denizk0461.studip.R
 import com.denizk0461.studip.databinding.ItemCanteenBinding
 import com.denizk0461.studip.databinding.ItemCanteenLineBinding
 import com.denizk0461.studip.databinding.ItemIconBinding
 import com.denizk0461.studip.model.CanteenOfferGroup
 import com.denizk0461.studip.model.CanteenOfferGroupElement
+import com.denizk0461.studip.model.DietaryPreferences
 
 /**
  * Custom RecyclerView adapter that lays out the offers of a given canteen on a given day.
@@ -22,24 +23,6 @@ class CanteenOfferItemAdapter(
     private val onClickListener: OnClickListener,
     private val displayAllergens: Boolean,
 ) : RecyclerView.Adapter<CanteenOfferItemAdapter.OfferViewHolder>() {
-
-    /**
-     * Provides a converting function between the index of a dietary preference and its according
-     * icon.
-     */
-    private val indexToDrawable: Map<Int, Int> = mapOf(
-        0 to R.drawable.handshake,
-        1 to R.drawable.fish,
-        2 to R.drawable.chicken,
-        3 to R.drawable.sheep,
-        4 to R.drawable.yoga,
-        5 to R.drawable.cow,
-        6 to R.drawable.pig,
-        7 to R.drawable.leaf,
-        8 to R.drawable.carrot,
-        9 to R.drawable.deer,
-        10 to R.drawable.circle,
-    )
 
     /**
      * View holder class for parent class
@@ -102,7 +85,10 @@ class CanteenOfferItemAdapter(
 
                 // Set the appropriate icon
                 img.imageView.setImageDrawable(
-                    holder.binding.root.context.getDrawable(indexToDrawable[index]!!)
+                    AppCompatResources.getDrawable(
+                        holder.binding.root.context,
+                        DietaryPreferences.indexToDrawable[index]!!,
+                    )
                 )
 
                 // Bind the new icon to the line view
@@ -111,7 +97,7 @@ class CanteenOfferItemAdapter(
 
             // Set up single click listener
             line.root.setOnClickListener {
-                onClickListener.onClick(offer)
+                onClickListener.onClick(offer, currentItem.category)
             }
 
             // Set up long press listener
@@ -153,7 +139,7 @@ class CanteenOfferItemAdapter(
          *
          * @param offer item that has been clicked
          */
-        fun onClick(offer: CanteenOfferGroupElement)
+        fun onClick(offer: CanteenOfferGroupElement, category: String)
 
 
         /**
