@@ -3,10 +3,7 @@ package com.denizk0461.studip.viewmodel
 import android.app.Application
 import androidx.lifecycle.LiveData
 import com.denizk0461.studip.data.StwParser
-import com.denizk0461.studip.model.CanteenOffer
-import com.denizk0461.studip.model.DietaryPrefObject
-import com.denizk0461.studip.model.DietaryPreferences
-import com.denizk0461.studip.model.OfferDate
+import com.denizk0461.studip.model.*
 
 /**
  * View model for [com.denizk0461.studip.fragment.CanteenFragment]
@@ -66,5 +63,5 @@ class CanteenViewModel(app: Application) : AppViewModel(app) {
      * This value determines whether the user wants to have allergens marked.
      */
     val preferenceAllergen: Boolean
-        get() = repo.getPreferenceAllergen()
+        get() = repo.getPreference(SettingsPreferences.ALLERGEN)
 }

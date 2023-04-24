@@ -24,6 +24,7 @@ class AllergenSheet(
     private val category: String,
 ) : AppSheet(R.layout.sheet_allergen) {
 
+    // View binding
     private val binding: SheetAllergenBinding by viewBinding(SheetAllergenBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

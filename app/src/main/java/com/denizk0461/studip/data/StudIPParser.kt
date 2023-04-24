@@ -76,6 +76,9 @@ class StudIPParser {
                 // Retrieve the time slot and split it into start and end time stamps
                 val timeSlot = entryInfo[0].split(" - ")
 
+                // Time the event starts at
+                val eventStart = timeSlot[0]
+
                 // Construct the newly scraped Stud.IP event
                 val event = StudIPEvent(
                     id = id,
@@ -83,8 +86,9 @@ class StudIPParser {
                     lecturer = parsedLecturers,
                     room = entryInfo[1],
                     day = index,
-                    timeslotStart = timeSlot[0],
+                    timeslotStart = eventStart,
                     timeslotEnd = timeSlot[1],
+                    timeslotId = eventStart.parseToMinutes(),
                 )
 
                 // Add the new element to the temporary list

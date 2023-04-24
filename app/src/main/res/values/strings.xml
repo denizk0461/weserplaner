@@ -1,11 +1,20 @@
 <resources>
     <string name="app_name">Stud.IP Timetable</string>
 
-    <string name="monday">MONDAY</string>
-    <string name="tuesday">TUESDAY</string>
-    <string name="wednesday">WEDNESDAY</string>
-    <string name="thursday">THURSDAY</string>
-    <string name="friday">FRIDAY</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
+    
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="sheet_schedule_update_header">Edit Event</string>
+    <string name="sheet_schedule_update_title_hint">Event title</string>
+    <string name="sheet_schedule_update_lecturers_hint">Lecturer(s)</string>
+    <string name="sheet_schedule_update_room_hint">Room</string>
 
     <string name="title_schedule">Your Schedule</string>
     <string name="title_food">Canteen Offers</string>
@@ -97,12 +106,12 @@
     <string name="refresh_schedule_subtitle">This will clear any customisations!</string>
 
     <string name="settings_highlight_title">Highlight next course</string>
-    <string name="settings_highlight_subtitle">Only works properly if courses don\'t overlap!</string>
+    <string name="settings_highlight_subtitle">Only works properly if courses don\'t overlap!\nNOTE: Currently broken!</string>
 
     <string name="settings_quarter_title">Use academic quarter</string>
     <string name="settings_quarter_subtitle">Where applicable</string>
 
-    <string name="settings_allergens_title">Mark allergens with a star*</string>
+    <string name="settings_allergens_title">Mark offers with allergens with a star*</string>
     <string name="settings_allergens_subtitle">Also applies to additives</string>
 
     <string name="settings_crashlytics_title">Opt-in to sharing crash data</string>

@@ -13,6 +13,7 @@ import androidx.room.PrimaryKey
  * @param day           day the event takes place on; 0 = Monday, 4 = Friday
  * @param timeslotStart time the event starts at
  * @param timeslotEnd   time the event ends at
+ * @param timeslotId    minute the event starts at - used for ordering
  * @param colour        user-defined colour the event will be shown in - UNIMPLEMENTED
  */
 @Entity(tableName = "events")
@@ -24,6 +25,7 @@ data class StudIPEvent(
     val day: Int,
     val timeslotStart: String,
     val timeslotEnd: String,
+    val timeslotId: Int,
     val colour: Int = 0,
 ) {
 

@@ -10,6 +10,8 @@ import com.denizk0461.studip.adapter.StudIPEventItemAdapter
 import com.denizk0461.studip.adapter.StudIPEventPageAdapter
 import com.denizk0461.studip.databinding.FragmentEventBinding
 import com.denizk0461.studip.model.StudIPEvent
+import com.denizk0461.studip.sheet.ScheduleUpdateSheet
+import com.denizk0461.studip.sheet.TextSheet
 import com.denizk0461.studip.viewmodel.EventViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import java.util.*
@@ -73,8 +75,13 @@ class EventFragment : AppFragment() {
                 // TODO implement functionality or delete
             }
             override fun onLongClick(event: StudIPEvent): Boolean {
-                // TODO implement functionality or delete
-                return false
+                // Open a bottom sheet to edit the event
+                openBottomSheet(ScheduleUpdateSheet(event, onUpdate = { eventToUpdate ->
+                    viewModel.update(eventToUpdate)
+                }, onDelete = { eventToDelete ->
+                    viewModel.delete(eventToDelete)
+                }))
+                return true
             }
         })
 

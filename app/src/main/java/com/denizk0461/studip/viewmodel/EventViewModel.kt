@@ -17,4 +17,18 @@ class EventViewModel(app: Application) : AppViewModel(app) {
      * @return all Stud.IP events exposed through a LiveData object
      */
     val allEvents: LiveData<List<StudIPEvent>> = repo.allEvents
+
+    /**
+     * Updates a schedule element.
+     *
+     * @param event the event to update
+     */
+    fun update(event: StudIPEvent) { doAsync { repo.update(event) } }
+
+    /**
+     * Deletes a schedule element.
+     *
+     * @param event the event to delete
+     */
+    fun delete(event: StudIPEvent) { doAsync { repo.delete(event) } }
 }

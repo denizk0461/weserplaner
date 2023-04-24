@@ -52,6 +52,24 @@ class AppRepository(app: Application) {
     val allOffers: LiveData<List<CanteenOffer>> = dao.allOffers
 
     /**
+     * Updates a schedule element.
+     *
+     * @param event the event to update
+     */
+    fun update(event: StudIPEvent) {
+        dao.update(event)
+    }
+
+    /**
+     * Deletes a schedule element.
+     *
+     * @param event the event to delete
+     */
+    fun delete(event: StudIPEvent) {
+        dao.delete(event)
+    }
+
+    /**
      * Retrieves all canteen offer date objects.
      *
      * @return a list of instances of canteen offer dates
@@ -147,18 +165,20 @@ class AppRepository(app: Application) {
     // --- settings preferences --- //
 
     /**
-     * Retrieves the user's preference on displaying allergens.
+     * Retrieves ta user-set boolean preference.
      *
-     * @return  whether the user set this preference
+     * @param pref  preference to retrieve
+     * @return      whether the user set this preference
      */
-    fun getPreferenceAllergen(): Boolean = prefs.getBoolean("setting_allergen", false)
+    fun getPreference(pref: SettingsPreferences): Boolean = prefs.getBoolean(pref.key, false)
 
     /**
-     * Updates the user's preference on displaying allergens.
+     * Updates a user-set boolean preference.
      *
-     * @param value new value to set the preference to
+     * @param pref      preference to set
+     * @param newValue  new value to set the preference to
      */
-    fun setPreferenceAllergen(value: Boolean) {
-        prefs.edit().putBoolean("setting_allergen", value).apply()
+    fun setPreference(pref: SettingsPreferences, newValue: Boolean) {
+        prefs.edit().putBoolean(pref.key, newValue).apply()
     }
 }

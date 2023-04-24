@@ -1,9 +1,7 @@
 package com.denizk0461.studip.db
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.denizk0461.studip.model.*
 
 /**
@@ -16,12 +14,28 @@ interface AppDAO {
     /* --- Stud.IP schedule events --- */
 
     /**
-     * Retrieves all Stud.IP events.
+     * Retrieves all Stud.IP events, ordered by their timeslots, then their IDs.
      *
      * @return all Stud.IP events exposed through a LiveData object
      */
-    @get:Query("SELECT * FROM events ORDER BY id")
+    @get:Query("SELECT * FROM events ORDER BY timeslotId, id")
     val allEvents: LiveData<List<StudIPEvent>>
+
+    /**
+     * Updates a given Stud.IP element.
+     *
+     * @param event object to be updated
+     */
+    @Update
+    fun update(event: StudIPEvent)
+
+    /**
+     * Updates a given Stud.IP element.
+     *
+     * @param event object to be updated
+     */
+    @Delete
+    fun delete(event: StudIPEvent)
 
     /**
      * Inserts a Stud.IP event into the database.

@@ -18,11 +18,13 @@ class TextSheet(
     @StringRes private val content: Int
 ) : AppSheet(R.layout.sheet_text) {
 
+    // View binding
     private val binding: SheetTextBinding by viewBinding(SheetTextBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Set text values
         binding.apply {
             textHeader.text = getString(header)
             textContent.text = getString(content)

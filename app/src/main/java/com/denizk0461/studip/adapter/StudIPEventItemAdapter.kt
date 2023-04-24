@@ -3,6 +3,7 @@ package com.denizk0461.studip.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.denizk0461.studip.data.parseToMinutes
 import com.denizk0461.studip.model.StudIPEvent
 import com.denizk0461.studip.databinding.ItemEventBinding
 import java.util.*
@@ -148,17 +149,6 @@ class StudIPEventItemAdapter(
         5 -> Calendar.SATURDAY
         6 -> Calendar.SUNDAY
         else -> Calendar.MONDAY
-    }
-
-    /**
-     * Converts a time stamp string to its numeric value in minutes.
-     * Example: 13:20. (20 minutes) + (13 hours * 60 minutes) = 800 minutes.
-     *
-     * @return  minute value of the string
-     */
-    private fun String.parseToMinutes(): Int {
-        val parts = split(":")
-        return (parts[0].toInt() * 60) + parts[1].toInt()
     }
 
     /**

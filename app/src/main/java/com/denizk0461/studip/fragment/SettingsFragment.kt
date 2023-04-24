@@ -52,13 +52,31 @@ class SettingsFragment : AppFragment() {
             launchWebView()
         }
 
-        binding.switchAllergens.apply {
-            isChecked = viewModel.preferenceAllergen
-            setOnCheckedChangeListener { _, b ->
-                viewModel.preferenceAllergen = b
+        // Set up switch for highlighting the next course in the schedule
+        binding.switchHighlight.apply {
+            isChecked = viewModel.preferenceCourseHighlighting
+            setOnCheckedChangeListener { _, newValue ->
+                viewModel.preferenceCourseHighlighting = newValue
             }
         }
 
+        // Set up switch for displaying allergens
+        binding.switchAllergens.apply {
+            isChecked = viewModel.preferenceAllergen
+            setOnCheckedChangeListener { _, newValue ->
+                viewModel.preferenceAllergen = newValue
+            }
+        }
+
+        // Set up switch for crash report opt-in
+        binding.switchCrashlytics.apply {
+            isChecked = viewModel.preferenceDataHandling
+            setOnCheckedChangeListener { _, newValue ->
+                viewModel.preferenceDataHandling = newValue
+            }
+        }
+
+        // Set click listener for the data handling dialogue
         binding.buttonDataHandling.setOnClickListener {
             openBottomSheet(TextSheet(
                 R.string.settings_data_sheet_header,

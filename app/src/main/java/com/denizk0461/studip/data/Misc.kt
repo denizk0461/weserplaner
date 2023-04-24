@@ -3,6 +3,18 @@ package com.denizk0461.studip.data
 /**
  * Miscellaneous functions and variables that don't belong into any specific class.
  */
+
+/**
+ * Converts a time stamp string to its numeric value in minutes.
+ * Example: 13:20. (20 minutes) + (13 hours * 60 minutes) = 800 minutes.
+ *
+ * @return  minute value of the string
+ */
+fun String.parseToMinutes(): Int {
+    val parts = split(":")
+    return (parts[0].toInt() * 60) + parts[1].toInt()
+}
+
 object Misc {
 
 //    private val timeslotAcademicQuarter = mapOf(
