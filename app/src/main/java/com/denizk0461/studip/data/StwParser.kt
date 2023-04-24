@@ -209,24 +209,18 @@ class StwParser {
             .replace("&gt;", ">")
             .replace("&lt;", "<")
 
-        // All allergens will be collected here
-        var allergens: String = ""
-
-        /*
-         * Used to determine whether any allergens have already been found in the item. Should this
-         * be the case, a delimiter is added.
-         */
-        var hasAllergens: Boolean = false
-
         /*
          * Allergens are stored in super tags. Example:
          * <sup>4, a1, a4, c, g</sup>
          * This is the start index of the opening tag (inclusive).
          */
-        var indexSupOpen = 0
+        var indexSupOpen: Int
 
         // This is the end index of the closing tag (exclusive)
-        var indexSupClose = 0
+        var indexSupClose: Int
+
+        // This list collects the individual items without the <sup> tags and commas
+        val allergens = mutableListOf<String>()
 
         /*
          * The Studierendenwerk's website lists allergens, but they are invisible, rendering them
@@ -234,29 +228,33 @@ class StwParser {
          * TODO implement allergen functionality
          */
         while (text.contains("<sup>")) {
-            // Add a delimiter if allergens have already been added
-            if (hasAllergens) allergens += ","
 
             // Set indices for the <sup> tags
             indexSupOpen = text.indexOf("<sup>")
             indexSupClose = text.indexOf("</sup>")
 
             // Add allergens
-            allergens += text.substring(indexSupOpen + 5 until indexSupClose)
+            allergens.addAll(
+                text.substring(indexSupOpen + 5 until indexSupClose)
+                    // Remove redundant whitespace
+                    .replace(" ", "")
+                    /*
+                     * Split individual strings with multiple allergens so that duplicates can be
+                     * filtered out later.
+                     */
+                    .split(",")
+            )
 
             // Remove allergens from the title of the offer
             text = text.substring(0 until indexSupOpen) +
                     text.substring((indexSupClose + 6) until text.length)
-
-            /*
-             * Make sure that the delimiter will be added if more than one instance of allergens is
-             * found.
-             */
-            hasAllergens = true
         }
 
-        // Return the stripped and updated HTML string
-        return Pair(text, allergens)
+        /*
+         * Return the stripped and updated HTML string and join the allergen list to a cohesive
+         * string without duplication.
+         */
+        return Pair(text, allergens.distinct().joinToString(","))
     }
 
     /**

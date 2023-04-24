@@ -50,12 +50,12 @@
     <string name="allergen_rennet">tierisches Lab</string>
 
     <!-- Allergene -->
-    <string name="allergen_wheat">Weizen</string>
-    <string name="allergen_rye">Roggen</string>
-    <string name="allergen_barley">Gerste</string>
-    <string name="allergen_oat">Hafer</string>
-    <string name="allergen_spelt">Dinkel</string>
-    <string name="allergen_kamut">Kamut</string>
+    <string name="allergen_wheat">Gluten (Weizen)</string>
+    <string name="allergen_rye">Gluten (Roggen)</string>
+    <string name="allergen_barley">Gluten (Gerste)</string>
+    <string name="allergen_oat">Gluten (Hafer)</string>
+    <string name="allergen_spelt">Gluten (Dinkel)</string>
+    <string name="allergen_kamut">Gluten (Kamut)</string>
     <string name="allergen_crustaceans">Krebstiere</string>
     <string name="allergen_eggs">Eier</string>
     <string name="allergen_fish">Fisch</string>

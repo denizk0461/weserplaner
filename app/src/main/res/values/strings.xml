@@ -50,12 +50,12 @@
     <string name="allergen_rennet">animal rennet</string>
 
     <!-- allergens -->
-    <string name="allergen_wheat">wheat</string>
-    <string name="allergen_rye">rye</string>
-    <string name="allergen_barley">barley</string>
-    <string name="allergen_oat">oats</string>
-    <string name="allergen_spelt">spelt</string>
-    <string name="allergen_kamut">kamut</string>
+    <string name="allergen_wheat">gluten (wheat)</string>
+    <string name="allergen_rye">gluten (rye)</string>
+    <string name="allergen_barley">gluten (barley)</string>
+    <string name="allergen_oat">gluten (oats)</string>
+    <string name="allergen_spelt">gluten (spelt)</string>
+    <string name="allergen_kamut">gluten (kamut)</string>
     <string name="allergen_crustaceans">crustaceans</string>
     <string name="allergen_eggs">eggs</string>
     <string name="allergen_fish">fish</string>
