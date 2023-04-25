@@ -27,14 +27,15 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:hint="@string/sheet_schedule_update_title_hint"
-        app:boxStrokeColor="@color/brightfuckingpink"
-        android:textColorHint="@color/brightfuckingpink">
+        app:boxStrokeColor="@color/selector_text_input"
+        app:hintTextColor="@color/selector_text_input">
 
         <com.google.android.material.textfield.TextInputEditText
+            style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+            android:textColor="?attr/colorOnSurfaceVariant"
             android:id="@+id/edit_text_title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/brightfuckingpink"/>
+            android:layout_height="wrap_content"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -54,9 +55,13 @@
             android:layout_marginEnd="4dp"
             android:maxLines="1"
             android:scrollHorizontally="true"
-            android:hint="@string/sheet_schedule_update_lecturers_hint">
+            android:hint="@string/sheet_schedule_update_lecturers_hint"
+            app:boxStrokeColor="@color/selector_text_input"
+            app:hintTextColor="@color/selector_text_input">
 
             <com.google.android.material.textfield.TextInputEditText
+                style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+                android:textColor="?attr/colorOnSurfaceVariant"
                 android:id="@+id/edit_text_lecturers"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -73,15 +78,49 @@
             android:layout_marginBottom="8dp"
             android:maxLines="1"
             android:scrollHorizontally="true"
-            android:hint="@string/sheet_schedule_update_room_hint">
+            android:hint="@string/sheet_schedule_update_room_hint"
+            app:boxStrokeColor="@color/selector_text_input"
+            app:hintTextColor="@color/selector_text_input">
 
             <com.google.android.material.textfield.TextInputEditText
+                style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+                android:textColor="?attr/colorOnSurfaceVariant"
                 android:id="@+id/edit_text_room"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"/>
 
         </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp">
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:id="@+id/button_time_start"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:strokeColor="?attr/colorOutlineVariant"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sheet_schedule_update_timeslot_middle"
+            android:layout_marginHorizontal="8dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:id="@+id/button_time_end"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:strokeColor="?attr/colorOutlineVariant"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

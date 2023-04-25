@@ -15,6 +15,7 @@
     <string name="sheet_schedule_update_title_hint">Event title</string>
     <string name="sheet_schedule_update_lecturers_hint">Lecturer(s)</string>
     <string name="sheet_schedule_update_room_hint">Room</string>
+    <string name="sheet_schedule_update_timeslot_middle" translatable="false">–</string>
 
     <string name="title_schedule">Your Schedule</string>
     <string name="title_food">Canteen Offers</string>

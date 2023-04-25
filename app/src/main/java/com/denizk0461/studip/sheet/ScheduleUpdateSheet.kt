@@ -2,6 +2,8 @@ package com.denizk0461.studip.sheet
 
 import android.os.Bundle
 import android.view.View
+import android.widget.TimePicker
+import androidx.fragment.app.FragmentActivity
 import com.denizk0461.studip.R
 import com.denizk0461.studip.data.parseToMinutes
 import com.denizk0461.studip.data.viewBinding
@@ -26,10 +28,17 @@ class ScheduleUpdateSheet(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.apply {
-            editTextTitle.setText(event.title)
-            editTextLecturers.setText(event.lecturer)
-            editTextRoom.setText(event.room)
+        binding.editTextTitle.setText(event.title)
+        binding.editTextLecturers.setText(event.lecturer)
+        binding.editTextRoom.setText(event.room)
+
+        binding.buttonTimeStart.text = timeslotStart
+        binding.buttonTimeStart.setOnClickListener {
+            TimePickerFragment(binding.buttonTimeStart.text.toString(), this, true).show((context as FragmentActivity).supportFragmentManager, "timePicker")
+        }
+        binding.buttonTimeEnd.text = timeslotEnd
+        binding.buttonTimeEnd.setOnClickListener {
+            TimePickerFragment(binding.buttonTimeEnd.text.toString(), this, false).show((context as FragmentActivity).supportFragmentManager, "timePicker")
         }
 
         binding.buttonDelete.setOnClickListener {
@@ -59,10 +68,21 @@ class ScheduleUpdateSheet(
      *
      */
     override fun onTimeSet(hours: Int, minutes: Int, isEventStart: Boolean) {
-        if (isEventStart) {
-            timeslotStart = "$hours:$minutes"
+
+        val newTimestamp = "$hours:$minutes"
+
+        if ((isEventStart && newTimestamp.parseToMinutes() > timeslotEnd.parseToMinutes()) ||
+            (!isEventStart && newTimestamp.parseToMinutes() < timeslotStart.parseToMinutes())) {
+            // tell user that the timestamp must be set earlier/later
         } else {
-            timeslotEnd = "$hours:$minutes"
+
+            if (isEventStart) {
+                timeslotStart = newTimestamp
+                binding.buttonTimeStart.text = newTimestamp
+            } else {
+                timeslotEnd = newTimestamp
+                binding.buttonTimeEnd.text = newTimestamp
+            }
         }
     }
 }
