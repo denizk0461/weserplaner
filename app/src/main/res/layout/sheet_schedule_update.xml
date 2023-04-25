@@ -13,13 +13,34 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:fontFamily="@font/lato_blackitalic"
-        android:layout_marginBottom="8dp"
-        android:text="@string/sheet_schedule_update_header"/>
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:fontFamily="@font/lato_blackitalic"
+            android:text="@string/sheet_schedule_update_header"
+            android:layout_gravity="start|center_vertical"/>
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.Material3.Button.TextButton"
+            android:id="@+id/button_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="0dp"
+            app:icon="@drawable/cross"
+            app:iconPadding="0dp"
+            android:layout_gravity="end|center_vertical"
+            app:iconTint="?attr/colorOnSurfaceVariant"/>
+<!--        app:icon="@drawable/cross"-->
+<!--        app:strokeColor="?attr/colorOutlineVariant"-->
+<!--        android:text="@string/cancel"-->
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

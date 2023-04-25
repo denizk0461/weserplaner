@@ -2,9 +2,12 @@ package com.denizk0461.studip.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.viewModels
+import com.denizk0461.studip.R
 import com.denizk0461.studip.adapter.CanteenOfferItemAdapter
 import com.denizk0461.studip.adapter.CanteenOfferPageAdapter
 import com.denizk0461.studip.databinding.FragmentCanteenBinding
@@ -52,6 +55,31 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // TODO KDoc and finish
+        binding.buttonCanteenPicker.setOnClickListener {
+            PopupMenu(binding.root.context, binding.buttonCanteenPicker).apply {
+                setOnMenuItemClickListener { item ->
+                    viewModel.preferenceCanteen = when (item?.itemId) {
+                        R.id.mensa_uni -> 0
+                        R.id.cafe_central -> 1
+                        R.id.mensa_nw1 -> 2
+                        R.id.cafeteria_gw2 -> 3
+                        R.id.mensa_neustadt -> 4
+                        R.id.mensa_werder -> 5
+                        R.id.mensa_airport -> 6
+                        R.id.mensa_bhv -> 7
+                        R.id.cafeteria_bhv -> 8
+                        R.id.mensa_hfk -> 9
+                        else -> 0
+                    }
+                    true
+                }
+                inflate(R.menu.menu_canteens)
+                show()
+            }
+        }
+
 
         // Assign a preference value to every button to filter for dietary preferences
         val chipMap = mapOf(
@@ -128,7 +156,7 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
         // Set up functions for when the user swipes to refresh the view
         binding.swipeRefreshLayout.setOnRefreshListener {
             // Retrieve new offers from the website(s)
-            viewModel.fetchOffers(onRefreshUpdate = { status ->
+            viewModel.fetchOffers(viewModel.preferenceCanteen, onRefreshUpdate = { status ->
                 // TODO refresh updates
             }, onFinish = {
 //                createTabLayoutMediator()
@@ -140,7 +168,8 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
 
     /**
      * Create and attach the object mediating the tabs for the view pager.
-     * TODO this is crash-prone
+     * TODO this is crash-prone and doesn't refresh when the dates get renewed (when the last update
+     *  was from the day prior)
      */
     private fun createTabLayoutMediator() {
         // Fetch all dates from the database

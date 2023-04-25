@@ -1,8 +1,11 @@
 package com.denizk0461.studip.adapter
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.R
+import com.denizk0461.studip.data.getThemedColor
 import com.denizk0461.studip.data.parseToMinutes
 import com.denizk0461.studip.model.StudIPEvent
 import com.denizk0461.studip.databinding.ItemEventBinding
@@ -83,30 +86,32 @@ class StudIPEventItemAdapter(
 //            resolveAttribute(R.attr.colorTextHintLighter, colorTextHintLighter, true)
 //        }
 
+        val theme = holder.binding.root.context.theme
+
         /* Highlight the next upcoming course of the day if the day of the adapter matches the
          * current day, and if no other course has been highlighted, to avoid double highlighting.
          */
-//        if (!isAnyCourseHighlighted && currentItem.isCurrentCourse(currentCalendar)) {
-//            // Ensure that no other course will be highlighted
-//            isAnyCourseHighlighted = true
-//
-//            holder.binding.cardBackground.apply {
-//                // Set the card's background colour to a desaturated shade of the primary colour
-//                backgroundTintList = ColorStateList.valueOf(colorPrimaryTranslucent.data)
-//
-//                // Hide card stroke
-//                strokeColor = context.getColor(android.R.color.transparent)
-//            }
-//        // Otherwise, apply colours to ensure that the item will not be highlighted
-//        } else {
-//            holder.binding.cardBackground.apply {
-//                // Set the card's background colour to its default value
-//                backgroundTintList = ColorStateList.valueOf(colorCardBackground.data)
-//
-//                // Set the card's stroke to its default colour
-//                strokeColor = colorTextHintLighter.data
-//            }
-//        }
+        if (!isAnyCourseHighlighted && currentItem.isCurrentCourse(currentCalendar)) {
+            // Ensure that no other course will be highlighted
+            isAnyCourseHighlighted = true
+
+            holder.binding.cardBackground.apply {
+                // Set the card's background colour to a desaturated shade of the primary colour
+                backgroundTintList = ColorStateList.valueOf(theme.getThemedColor(R.attr.colorSecondaryContainer))
+
+                // Hide card stroke
+                strokeColor = context.getColor(android.R.color.transparent)
+            }
+        // Otherwise, apply colours to ensure that the item will not be highlighted
+        } else {
+            holder.binding.cardBackground.apply {
+                // Set the card's background colour to its default value
+                backgroundTintList = ColorStateList.valueOf(theme.getThemedColor(R.attr.colorSurface))
+
+                // Set the card's stroke to its default colour
+                strokeColor = theme.getThemedColor(R.attr.colorOutlineVariant)
+            }
+        }
 
         // Set up single click listener
         holder.binding.cardBackground.setOnClickListener {

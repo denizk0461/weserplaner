@@ -121,7 +121,7 @@ class AppRepository(app: Application) {
      * @param pref  the dietary preference that should be retrieved
      * @return      whether the preference needs to be met1
      */
-    fun getPreference(pref: DietaryPreferences): Boolean =
+    fun getBooleanPreference(pref: DietaryPreferences): Boolean =
         getDietaryPrefs()[pref.ordinal] == DietaryPrefObject.C_TRUE
 
     /**
@@ -170,7 +170,15 @@ class AppRepository(app: Application) {
      * @param pref  preference to retrieve
      * @return      whether the user set this preference
      */
-    fun getPreference(pref: SettingsPreferences): Boolean = prefs.getBoolean(pref.key, false)
+    fun getBooleanPreference(pref: SettingsPreferences): Boolean = prefs.getBoolean(pref.key, false)
+
+    /**
+     * Retrieves ta user-set integer preference.
+     *
+     * @param pref  preference to retrieve
+     * @return      whether the user set this preference
+     */
+    fun getIntPreference(pref: SettingsPreferences): Int = prefs.getInt(pref.key, 0)
 
     /**
      * Updates a user-set boolean preference.
@@ -180,5 +188,15 @@ class AppRepository(app: Application) {
      */
     fun setPreference(pref: SettingsPreferences, newValue: Boolean) {
         prefs.edit().putBoolean(pref.key, newValue).apply()
+    }
+
+    /**
+     * Updates a user-set integer preference.
+     *
+     * @param pref      preference to set
+     * @param newValue  new value to set the preference to
+     */
+    fun setPreference(pref: SettingsPreferences, newValue: Int) {
+        prefs.edit().putInt(pref.key, newValue).apply()
     }
 }

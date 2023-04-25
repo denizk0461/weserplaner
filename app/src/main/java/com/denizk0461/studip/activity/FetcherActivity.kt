@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.denizk0461.studip.R
 import com.denizk0461.studip.data.StudIPParser
+import com.denizk0461.studip.data.getThemedColor
 import com.denizk0461.studip.databinding.ActivityFetcherBinding
 import com.denizk0461.studip.viewmodel.FetcherViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -86,16 +87,6 @@ class FetcherActivity : Activity() {
                     }
                 } catch (e: IOException) {
 
-                    // Set up error colours
-                    val colorErrorContainer = TypedValue()
-                    val colorOnErrorContainer = TypedValue()
-
-                    // Resolve themed attributes to get the right values for day and night modes
-                    theme.apply {
-                        resolveAttribute(R.attr.colorErrorContainer, colorErrorContainer, true)
-                        resolveAttribute(R.attr.colorOnErrorContainer, colorOnErrorContainer, true)
-                    }
-
                     // Let the user know that an error occurred
                     Snackbar
                         .make(
@@ -104,8 +95,8 @@ class FetcherActivity : Activity() {
                             Snackbar.LENGTH_SHORT
                         )
                         // Set colours to signify an error
-                        .setBackgroundTint(colorErrorContainer.data)
-                        .setTextColor(colorOnErrorContainer.data)
+                        .setBackgroundTint(theme.getThemedColor(R.attr.colorErrorContainer))
+                        .setTextColor(theme.getThemedColor(R.attr.colorOnErrorContainer))
                         .show()
                 }
             }

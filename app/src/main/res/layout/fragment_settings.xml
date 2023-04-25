@@ -11,6 +11,24 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true">
+
+        <TextView
+            android:id="@+id/app_title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="@string/title_settings"
+            android:textSize="32sp"
+            android:fontFamily="@font/lato_bolditalic"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"/>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
         <!-- Stud.IP schedule settings -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -221,6 +239,49 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"/>
+
+                <!-- show canteen plan on app launch -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_launch_canteen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/switch_launch_canteen"
+                        android:layout_marginEnd="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/lato_bolditalic"
+                            android:text="@string/settings_launch_canteen_title"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:text="@string/settings_launch_canteen_subtitle"/>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/switch_launch_canteen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <!-- crashlytics opt-in -->
                 <androidx.constraintlayout.widget.ConstraintLayout

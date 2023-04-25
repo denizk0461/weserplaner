@@ -6,4 +6,6 @@
     <attr name="colorOnSurfaceVariant" type="color"/>
     <attr name="colorErrorContainer" type="color"/>
     <attr name="colorOnErrorContainer" type="color"/>
+    <attr name="colorSecondaryContainer" type="color"/>
+    <attr name="colorOnSecondaryContainer" type="color"/>
 </resources>

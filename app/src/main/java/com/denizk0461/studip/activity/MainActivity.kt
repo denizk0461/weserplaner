@@ -75,11 +75,12 @@ class MainActivity : AppCompatActivity() {
         // Prepare and commit a transaction between the current and the next fragment
         supportFragmentManager.beginTransaction()
             .replace(R.id.nav_host_fragment_content_main, fragment, id.toString())
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+//            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .commit()
 
         // Set text of the app bar accordingly
-        binding.contentMain.appTitleBar.text = getTitleString(id)
+//        binding.contentMain.appTitleBar.text = getTitleString(id)
         // Note down the new current fragment
         currentFragment = id
 

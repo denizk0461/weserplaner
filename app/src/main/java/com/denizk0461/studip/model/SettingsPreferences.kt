@@ -11,7 +11,9 @@ enum class SettingsPreferences(val key: String) {
     ALLERGEN("setting_allergen"),
     // Whether the user wants the next course in his schedule to be highlighted
     COURSE_HIGHLIGHTING("setting_highlight"),
+    LAUNCH_CANTEEN_ON_START("settings_launch_canteen"),
     // Whether the user opts into sending crash report
     DATA_HANDLING("setting_data_handling"),
+    CANTEEN("setting_canteen"),
     ;
 }

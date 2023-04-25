@@ -57,6 +57,17 @@ class ScheduleUpdateSheet(
             ).show((context as FragmentActivity).supportFragmentManager, "timePicker")
         }
 
+        /*
+         * TODO implement option to change the colour for the course - single-selection coloured
+         *  filter buttons with checkmarks when they're selected maybe?
+         */
+
+        // Prepare cancel button
+        binding.buttonCancel.setOnClickListener {
+            // Do nothing and dismiss the sheet
+            dismiss()
+        }
+
         // Prepare delete button
         binding.buttonDelete.setOnClickListener {
             onDelete(event)
@@ -67,6 +78,7 @@ class ScheduleUpdateSheet(
         // Prepare update/save button
         binding.buttonSave.setOnClickListener {
             onUpdate(
+                // construct new StudIPEvent from the data the user may have edited
                 StudIPEvent(
                     id = event.id,
                     title = binding.editTextTitle.text.toString(),
@@ -98,7 +110,7 @@ class ScheduleUpdateSheet(
         // If start > end, show an error
         if ((isEventStart && newTimestamp.parseToMinutes() > timeslotEnd.parseToMinutes()) ||
             (!isEventStart && newTimestamp.parseToMinutes() < timeslotStart.parseToMinutes())) {
-            // tell user that the timestamp must be set earlier/later
+            // TODO tell user that the timestamp must be set earlier/later
         } else {
             // If the new timestamp is valid, save it
             if (isEventStart) {

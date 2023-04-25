@@ -13,6 +13,7 @@
 
     <string name="save">Speichern</string>
     <string name="delete">Löschen</string>
+    <string name="cancel">Abbrechen</string>
     <string name="sheet_schedule_update_header">Veranstaltung bearbeiten</string>
     <string name="sheet_schedule_update_title_hint">Veranstaltungstitel</string>
     <string name="sheet_schedule_update_lecturers_hint">Dozierende(r)</string>
@@ -113,6 +114,9 @@
 
     <string name="settings_allergens_title">Markiere Angebote mit Allergenen mit einem Stern*</string>
     <string name="settings_allergens_subtitle">Wird auch für Zusatzstoffe genutzt</string>
+
+    <string name="settings_launch_canteen_title">Starte die App mit dem Mensaplan</string>
+    <string name="settings_launch_canteen_subtitle">Sonst wird Dein Stundenplan beim Start gezeigt</string>
 
     <string name="settings_crashlytics_title">Stimme Sammlung von Absturzreporten zu</string>
     <string name="settings_crashlytics_subtitle">Daten werden anonymisiert übertragen</string> <!-- TODO is this true? -->

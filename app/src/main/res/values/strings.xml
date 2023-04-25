@@ -13,6 +13,7 @@
     
     <string name="save">Save</string>
     <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
     <string name="sheet_schedule_update_header">Edit Event</string>
     <string name="sheet_schedule_update_title_hint">Event title</string>
     <string name="sheet_schedule_update_lecturers_hint">Lecturer(s)</string>
@@ -116,6 +117,9 @@
 
     <string name="settings_allergens_title">Mark offers with allergens with a star*</string>
     <string name="settings_allergens_subtitle">Also applies to additives</string>
+
+    <string name="settings_launch_canteen_title">Show canteen plan on app launch</string>
+    <string name="settings_launch_canteen_subtitle">Otherwise your schedule will be shown at launch</string>
 
     <string name="settings_crashlytics_title">Opt-in to sharing crash data</string>
     <string name="settings_crashlytics_subtitle">Data will be anonymised</string> <!-- TODO is this true? -->

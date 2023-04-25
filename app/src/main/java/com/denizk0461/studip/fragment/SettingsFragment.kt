@@ -68,6 +68,14 @@ class SettingsFragment : AppFragment() {
             }
         }
 
+        // Set up switch for launching the app with a specific view
+        binding.switchLaunchCanteen.apply {
+            isChecked = viewModel.preferenceLaunchCanteen
+            setOnCheckedChangeListener { _, newValue ->
+                viewModel.preferenceLaunchCanteen = newValue
+            }
+        }
+
         // Set up switch for crash report opt-in
         binding.switchCrashlytics.apply {
             isChecked = viewModel.preferenceDataHandling

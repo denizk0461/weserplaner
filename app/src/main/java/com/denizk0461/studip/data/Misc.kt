@@ -1,5 +1,10 @@
 package com.denizk0461.studip.data
 
+import android.content.res.Resources
+import android.util.TypedValue
+import androidx.annotation.AttrRes
+import com.denizk0461.studip.R
+
 /**
  * Miscellaneous functions and variables that don't belong into any specific class.
  */
@@ -14,6 +19,16 @@ fun String.parseToMinutes(): Int {
     val parts = split(":")
     return (parts[0].toInt() * 60) + parts[1].toInt()
 }
+
+/**
+ * Retrieves a specified colour customised to the currently applied theme.
+ *
+ * @param id    attribute ID of the colour reference
+ * @return      resolved colour
+ */
+fun Resources.Theme.getThemedColor(@AttrRes id: Int): Int = TypedValue().also { value ->
+    resolveAttribute(id, value, true)
+}.data
 
 object Misc {
 

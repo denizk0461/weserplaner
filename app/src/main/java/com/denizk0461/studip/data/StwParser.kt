@@ -1,5 +1,6 @@
 package com.denizk0461.studip.data
 
+import com.denizk0461.studip.R
 import com.denizk0461.studip.db.AppRepository
 import com.denizk0461.studip.model.*
 import org.jsoup.Jsoup
@@ -31,7 +32,7 @@ class StwParser {
      *                          available
      * @param onFinish          action call for when the fetch has finished
      */
-    fun parse(onRefreshUpdate: (status: Int) -> Unit, onFinish: () -> Unit) {
+    fun parse(canteen: Int, onRefreshUpdate: (status: Int) -> Unit, onFinish: () -> Unit) {
         /*
          * Reset primary key values. This needs to be done in case this method is called multiple
          * times within the app's lifespan
@@ -41,21 +42,20 @@ class StwParser {
         categoryId = 0
         itemId = 0
 
-        /*
-         * Create and populate a list of all the canteen plans that will be fetched.
-         * TODO implement functionality that will allow for fetching multiple plans, if necessary
-         */
-        val links = mutableListOf<String>()
-        if (true) { links.add(urlUniMensa) }
-//        if (true) { links.add(urlCafeCentral) }
-//        if (true) { links.add(urlNW1) }
-//        if (true) { links.add(urlGW2) }
-//        if (true) { links.add(urlHSBNeustadt) }
-//        if (true) { links.add(urlHSBAirport) }
-//        if (true) { links.add(urlHSBWerder) }
-//        if (true) { links.add(urlHfK) }
-//        if (true) { links.add(urlMensaBHV) }
-//        if (true) { links.add(urlCafeBHV) }
+        // Check which plan needs to be fetched
+        val link = when (canteen) {
+            0 -> urlUniMensa
+            1 -> urlCafeCentral
+            2 -> urlNW1
+            3 -> urlGW2
+            4 -> urlHSBNeustadt
+            5 -> urlHSBWerder
+            6 -> urlHSBAirport
+            7 -> urlMensaBHV
+            8 -> urlCafeBHV
+            9 -> urlHfK
+            else -> urlUniMensa
+        }
 
         // Delete all previous entries and start afresh
         Dependencies.repo.nukeOffers()
@@ -68,11 +68,11 @@ class StwParser {
          *  implemented here instead. Another option would be to set the conflict policy to IGNORE
          *  and move the dateId reset from parseFromPage() to parse().
          */
-        links.forEach { link ->
+//        links.forEach { link ->
             parseFromPage(link, Dependencies.repo)
 
             // TODO implement onRefresh(Int)
-        }
+//        }
 
         // Action call once all fetching activities have finished
         onFinish()
