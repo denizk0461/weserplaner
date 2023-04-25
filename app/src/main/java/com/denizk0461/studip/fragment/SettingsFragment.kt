@@ -87,8 +87,8 @@ class SettingsFragment : AppFragment() {
         // Set click listener for the data handling dialogue
         binding.buttonDataHandling.setOnClickListener {
             openBottomSheet(TextSheet(
-                R.string.settings_data_sheet_header,
-                R.string.settings_data_sheet_content
+                getString(R.string.settings_data_sheet_header),
+                    getString(R.string.settings_data_sheet_content),
             ))
         }
 

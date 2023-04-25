@@ -24,6 +24,8 @@
     <string name="title_food">Canteen Offers</string>
     <string name="title_settings">App Settings</string>
 
+    <string name="canteen_opening_hours">%s – Opening Hours</string>
+
     <string name="mensa_uni">Uni-Mensa</string>
     <string name="cafe_central">Café Central</string>
     <string name="mensa_nw1">Mensa NW1</string>

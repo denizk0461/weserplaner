@@ -13,6 +13,7 @@ import com.denizk0461.studip.adapter.CanteenOfferPageAdapter
 import com.denizk0461.studip.databinding.FragmentCanteenBinding
 import com.denizk0461.studip.model.*
 import com.denizk0461.studip.sheet.AllergenSheet
+import com.denizk0461.studip.sheet.TextSheet
 import com.denizk0461.studip.viewmodel.CanteenViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -47,6 +48,8 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
     // Used if no preference has been set or none can be found
     private val emptyPreferenceRegex: String = ".........."
 
+    private var openingHours = ""
+
     // Instantiate the view binding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentCanteenBinding.inflate(inflater, container, false)
@@ -73,11 +76,26 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
                         R.id.mensa_hfk -> 9
                         else -> 0
                     }
+                    // Set currently selected canteen to the button
+                    binding.buttonCanteenPicker.text = getCurrentlySelectedCanteenName()
+                    refresh()
                     true
                 }
                 inflate(R.menu.menu_canteens)
                 show()
             }
+        }
+
+        binding.buttonInfo.setOnClickListener {
+            openBottomSheet(
+                TextSheet(
+                    getString(
+                        R.string.canteen_opening_hours,
+                        getCurrentlySelectedCanteenName()
+                    ),
+                    openingHours
+                )
+            )
         }
 
 
@@ -146,6 +164,9 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
             // Update the item list in the view pager's adapter
             viewPagerAdapter.setNewItems(groupedElements, dateSize)
 
+            // Set the text for the opening hours dialogue
+            openingHours = viewModel.getCanteenOpeningHours()
+
             /*
              * Tell the swipe refresh layout to stop refreshing.
              * TODO if an exception is raised, this will not be fired. This must be changed
@@ -155,14 +176,7 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
 
         // Set up functions for when the user swipes to refresh the view
         binding.swipeRefreshLayout.setOnRefreshListener {
-            // Retrieve new offers from the website(s)
-            viewModel.fetchOffers(viewModel.preferenceCanteen, onRefreshUpdate = { status ->
-                // TODO refresh updates
-            }, onFinish = {
-//                createTabLayoutMediator()
-//                binding.swipeRefreshLayout.isRefreshing = false
-//                createTabLayoutMediator()
-            })
+            refresh()
         }
     }
 
@@ -179,7 +193,6 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
             TabLayoutMediator(binding.dayTabLayout, binding.viewPager) { tab, position ->
                 tab.text = dates[position].date
             }.attach()
-
         }
     }
 
@@ -301,6 +314,41 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
                 }
             )
         }
+    }
+
+    /**
+     * Retrieves the localised string for the canteen selected by the user.
+     *
+     * @return  the localised canteen name
+     */
+    private fun getCurrentlySelectedCanteenName(): String = getString(
+        when (viewModel.preferenceCanteen) {
+            0 -> R.string.mensa_uni
+            1 -> R.string.cafe_central
+            2 -> R.string.mensa_nw1
+            3 -> R.string.cafeteria_gw2
+            4 -> R.string.mensa_neustadt
+            5 -> R.string.mensa_werder
+            6 -> R.string.mensa_airport
+            7 -> R.string.mensa_bhv
+            8 -> R.string.cafeteria_bhv
+            9 -> R.string.mensa_hfk
+            else -> R.string.mensa_uni
+        }
+    )
+
+    /**
+     * Downloads the canteen offers and refreshes them in the app.
+     */
+    private fun refresh() {
+        // Retrieve new offers from the website(s)
+        viewModel.fetchOffers(viewModel.preferenceCanteen, onRefreshUpdate = { status ->
+            // TODO refresh updates
+        }, onFinish = {
+//                createTabLayoutMediator()
+//                binding.swipeRefreshLayout.isRefreshing = false
+//                createTabLayoutMediator()
+        })
     }
 
     /**

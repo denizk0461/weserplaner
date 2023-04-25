@@ -6,8 +6,9 @@ import androidx.room.PrimaryKey
 /**
  * Entity for binding several canteen items to a specific date. Registered in the app database.
  *
- * @param id        primary key that uniquely identifies the item
- * @param canteen   name of the canteen
+ * @param id            primary key that uniquely identifies the item
+ * @param canteen       name of the canteen
+ * @param openingHours  opening hours of the canteen
  */
 @Entity(
     tableName = "offer_canteen",
@@ -15,4 +16,5 @@ import androidx.room.PrimaryKey
 data class OfferCanteen(
     @PrimaryKey val id: Int,
     val canteen: String,
+    val openingHours: String,
 )

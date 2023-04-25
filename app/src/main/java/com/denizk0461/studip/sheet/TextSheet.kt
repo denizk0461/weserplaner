@@ -14,8 +14,8 @@ import com.denizk0461.studip.databinding.SheetTextBinding
  * @param content   content text for the window
  */
 class TextSheet(
-    @StringRes private val header: Int,
-    @StringRes private val content: Int
+    private val header: String,
+    private val content: String,
 ) : AppSheet(R.layout.sheet_text) {
 
     // View binding
@@ -26,8 +26,8 @@ class TextSheet(
 
         // Set text values
         binding.apply {
-            textHeader.text = getString(header)
-            textContent.text = getString(content)
+            textHeader.text = header
+            textContent.text = content
         }
     }
 }

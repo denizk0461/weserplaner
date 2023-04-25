@@ -148,4 +148,12 @@ interface AppDAO {
      * @param item object to be saved to the database
      */
     @Insert fun insert(item: OfferItem)
+
+    /**
+     * Retrieves the opening hours of the canteen as a string.
+     *
+     * @return  opening hours
+     */
+    @Query("SELECT openingHours FROM offer_canteen LIMIT 1")
+    fun getCanteenOpeningHours(): String
 }

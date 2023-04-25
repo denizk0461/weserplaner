@@ -94,8 +94,23 @@ class StwParser {
         // Parse the HTML using Jsoup to traverse the document
         val doc = Jsoup.connect(url).get()
 
+        /*
+         * Retrieve the opening hours for the canteen.
+         * TODO this formatting sucks
+         */
+        var openingHours = ""
+        doc.getElementsByClass("details-wrapper")[0].getElementsByTag("p").forEach { p ->
+            openingHours += "${p.text()}\n"
+        }
+
         // Save the canteen to persistent storage
-        repo.insert(OfferCanteen(canteenId, doc.getElementsByClass("pane-title")[1].text()))
+        repo.insert(
+            OfferCanteen(
+                canteenId,
+                doc.getElementsByClass("pane-title")[1].text(),
+                openingHours,
+            )
+        )
 
         // Iterate through each day for which offers are available
         doc.getElementsByClass("food-plan").forEach { dayPlan ->
