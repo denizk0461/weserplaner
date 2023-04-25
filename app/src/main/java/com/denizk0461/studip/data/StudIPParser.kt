@@ -2,6 +2,7 @@ package com.denizk0461.studip.data
 
 import com.denizk0461.studip.model.StudIPEvent
 import org.jsoup.Jsoup
+import java.io.IOException
 
 /**
  * Parser class used for fetching and collecting scheduled events from a Stud.IP timetable.
@@ -11,9 +12,11 @@ class StudIPParser {
     /**
      * Parse a given HTML string. HTML must be of a Stud.IP timetable.
      *
-     * @param html      website content of the Stud.IP timetable
-     * @param insert    action call to save the contents to persistent storage
+     * @param html          website content of the Stud.IP timetable
+     * @param insert        action call to save the contents to persistent storage
+     * @throws IOException  when an error in fetching or the database transaction occurs
      */
+    @kotlin.jvm.Throws(IOException::class)
     fun parse(html: String, insert: (events: List<StudIPEvent>) -> Unit) {
         // Primary key value to uniquely identify entries in the database
         var id = 0

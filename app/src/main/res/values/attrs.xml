@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- I am unsure whether these attrs are necessary to define -->
     <attr name="scheduleColorDefault" type="color"/>
     <attr name="colorOutlineVariant" type="color"/>
     <attr name="colorOnSurfaceVariant" type="color"/>
+    <attr name="colorErrorContainer" type="color"/>
+    <attr name="colorOnErrorContainer" type="color"/>
 </resources>

@@ -3,6 +3,7 @@ package com.denizk0461.studip.activity
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Bundle
+import android.util.TypedValue
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -12,6 +13,8 @@ import com.denizk0461.studip.R
 import com.denizk0461.studip.data.StudIPParser
 import com.denizk0461.studip.databinding.ActivityFetcherBinding
 import com.denizk0461.studip.viewmodel.FetcherViewModel
+import com.google.android.material.snackbar.Snackbar
+import java.io.IOException
 import java.net.URLDecoder
 
 /**
@@ -67,18 +70,43 @@ class FetcherActivity : Activity() {
             binding.webview.evaluateJavascript(
                 "(function(){return encodeURI(document.getElementsByTagName('html')[0].innerHTML)})();"
             ) { p0 ->
-                // Delete all previously fetched elements
-                viewModel.nukeEvents()
-                // Decode HTML and parse it into a list of StudIPEvent.kt
-                StudIPParser().parse(URLDecoder.decode(p0, "UTF-8")) { events ->
-                    // Insert the list into the database
-                    viewModel.insertEvents(events)
-                    // Notify the user that the fetch was successful. TODO: notify on error
-                    Toast.makeText(
-                        this, R.string.toast_fetch_finished, Toast.LENGTH_SHORT
-                    ).show()
-                    // Close the activity
-                    finish()
+                try {
+                    // Decode HTML and parse it into a list of StudIPEvent.kt
+                    StudIPParser().parse(URLDecoder.decode(p0, "UTF-8")) { events ->
+                        // Delete all previously fetched elements
+                        viewModel.nukeEvents()
+                        // Insert the list into the database
+                        viewModel.insertEvents(events)
+                        // Notify the user that the fetch was successful
+                        Toast.makeText(
+                            this, R.string.toast_fetch_finished, Toast.LENGTH_SHORT
+                        ).show()
+                        // Close the activity
+                        finish()
+                    }
+                } catch (e: IOException) {
+
+                    // Set up error colours
+                    val colorErrorContainer = TypedValue()
+                    val colorOnErrorContainer = TypedValue()
+
+                    // Resolve themed attributes to get the right values for day and night modes
+                    theme.apply {
+                        resolveAttribute(R.attr.colorErrorContainer, colorErrorContainer, true)
+                        resolveAttribute(R.attr.colorOnErrorContainer, colorOnErrorContainer, true)
+                    }
+
+                    // Let the user know that an error occurred
+                    Snackbar
+                        .make(
+                            binding.rootView,
+                            getString(R.string.fetch_error_snack),
+                            Snackbar.LENGTH_SHORT
+                        )
+                        // Set colours to signify an error
+                        .setBackgroundTint(colorErrorContainer.data)
+                        .setTextColor(colorOnErrorContainer.data)
+                        .show()
                 }
             }
         }
