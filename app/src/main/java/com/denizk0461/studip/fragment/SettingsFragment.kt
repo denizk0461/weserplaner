@@ -14,6 +14,8 @@ import com.denizk0461.studip.activity.FetcherActivity
 import com.denizk0461.studip.databinding.FragmentSettingsBinding
 import com.denizk0461.studip.sheet.TextSheet
 import com.denizk0461.studip.viewmodel.SettingsViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * User-facing fragment view that is used to change app settings.
@@ -105,10 +107,16 @@ class SettingsFragment : AppFragment() {
 
         /*
          * Display the app's version as set in the build.gradle. Also display if the app is a
-         * development version.
+         * development version, and if so, display build timestamp.
          */
         @SuppressLint("SetTextI18n")
-        binding.appVersionText.text = "${BuildConfig.VERSION_NAME}-${if (BuildConfig.DEBUG) "dev" else "release"}"
+        binding.appVersionText.text =
+            "${BuildConfig.VERSION_NAME}-${
+                if (BuildConfig.DEBUG) 
+                    "dev-[${SimpleDateFormat("yyyy-MM-dd, HH:mm:ss.SSS").format(Date(BuildConfig.TIMESTAMP))}]" 
+                else 
+                    "release"
+            }"
     }
 
     // Invalidate the view binding
