@@ -12,6 +12,7 @@ import com.denizk0461.studip.BuildConfig
 import com.denizk0461.studip.R
 import com.denizk0461.studip.activity.FetcherActivity
 import com.denizk0461.studip.databinding.FragmentSettingsBinding
+import com.denizk0461.studip.sheet.DevCodeSheet
 import com.denizk0461.studip.sheet.TextSheet
 import com.denizk0461.studip.viewmodel.SettingsViewModel
 import java.text.SimpleDateFormat
@@ -102,6 +103,12 @@ class SettingsFragment : AppFragment() {
                     getString(R.string.sheet_licences_content),
                 )
             )
+        }
+
+        // Set long click listener for licences button to open dev code sheet
+        binding.buttonLicences.setOnLongClickListener {
+            openBottomSheet(DevCodeSheet())
+            true
         }
 
         // Set click listener for the app version button

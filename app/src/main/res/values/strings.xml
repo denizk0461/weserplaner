@@ -136,6 +136,9 @@
 
     <string name="settings_licences_title">View licences</string>
     <string name="settings_licences_subtitle">Resources that made this app possible</string>
+
+    <string name="sheet_cheat_header" translatable="false">Cheat Codes</string>
+
     <string name="settings_app_version">App Version</string>
 
     <string name="with_love">with ♡️ from Bremen-Osterholz\nmade by denizk0461 \\__*</string>
