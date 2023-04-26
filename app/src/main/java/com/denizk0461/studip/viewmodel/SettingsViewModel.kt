@@ -10,6 +10,44 @@ import com.denizk0461.studip.model.SettingsPreferences
  */
 class SettingsViewModel(app: Application) : AppViewModel(app) {
 
+
+
+    /**
+     * Deletes everything from the database.
+     */
+    fun nukeEverything() {
+        nukeEvents()
+        nukeOfferItems()
+        nukeOfferCategories()
+        nukeOfferCanteens()
+        nukeOfferDates()
+    }
+
+    /**
+     * Deletes all Stud.IP events from the database.
+     */
+    fun nukeEvents() { doAsync { repo.nukeEvents() } }
+
+    /**
+     * Deletes all canteen items from the database.
+     */
+    fun nukeOfferItems() { doAsync { repo.nukeOfferItems() } }
+
+    /**
+     * Deletes all canteen categories from the database.
+     */
+    fun nukeOfferCategories() { doAsync { repo.nukeOfferCategories() } }
+
+    /**
+     * Deletes all canteens from the database.
+     */
+    fun nukeOfferCanteens() { doAsync { repo.nukeOfferCanteens() } }
+
+    /**
+     * Deletes all canteen dates from the database.
+     */
+    fun nukeOfferDates() { doAsync { repo.nukeOfferDates() } }
+
     /**
      * This value determines whether the user wants to have the next course in their schedule
      * highlighted.

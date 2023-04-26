@@ -1,6 +1,7 @@
 package com.denizk0461.studip.sheet
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.FragmentActivity
 import com.denizk0461.studip.R
@@ -104,8 +105,8 @@ class ScheduleUpdateSheet(
      * @param isEventStart  whether this timestamp is for the start of the course
      */
     override fun onTimeSet(hours: Int, minutes: Int, isEventStart: Boolean) {
-        // Parse the separate ints into a timestamp string
-        val newTimestamp = "$hours:$minutes"
+        // Parse the separate ints into a timestamp string. Add a leading zero if necessary.
+        val newTimestamp = "$hours:${String.format("%02d", minutes)}"
 
         // If start > end, show an error
         if ((isEventStart && newTimestamp.parseToMinutes() > timeslotEnd.parseToMinutes()) ||

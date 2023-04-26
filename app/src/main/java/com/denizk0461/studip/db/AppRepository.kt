@@ -135,11 +135,31 @@ class AppRepository(app: Application) {
      * Deletes all canteen offers from the database.
      */
     fun nukeOffers() {
-        dao.nukeOfferItems()
-        dao.nukeOfferCategories()
-        dao.nukeOfferCanteens()
-        dao.nukeOfferDates()
+        nukeOfferItems()
+        nukeOfferCategories()
+        nukeOfferCanteens()
+        nukeOfferDates()
     }
+
+    /**
+     * Deletes all canteen items from the database.
+     */
+    fun nukeOfferItems() { dao.nukeOfferItems() }
+
+    /**
+     * Deletes all canteen categories from the database.
+     */
+    fun nukeOfferCategories() { dao.nukeOfferCategories() }
+
+    /**
+     * Deletes all canteens from the database.
+     */
+    fun nukeOfferCanteens() { dao.nukeOfferCanteens() }
+
+    /**
+     * Deletes all canteen dates from the database.
+     */
+    fun nukeOfferDates() { dao.nukeOfferDates() }
 
     /**
      * Inserts a date into the database.

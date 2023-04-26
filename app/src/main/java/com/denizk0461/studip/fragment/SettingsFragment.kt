@@ -107,7 +107,14 @@ class SettingsFragment : AppFragment() {
 
         // Set long click listener for licences button to open dev code sheet
         binding.buttonLicences.setOnLongClickListener {
-            openBottomSheet(DevCodeSheet())
+            openBottomSheet(DevCodeSheet(
+                viewModel::nukeEvents,
+                viewModel::nukeOfferItems,
+                viewModel::nukeOfferCategories,
+                viewModel::nukeOfferCanteens,
+                viewModel::nukeOfferDates,
+                viewModel::nukeEverything,
+            ))
             true
         }
 
