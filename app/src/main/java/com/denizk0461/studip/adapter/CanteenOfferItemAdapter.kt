@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
+import com.denizk0461.studip.R
 import com.denizk0461.studip.databinding.ItemCanteenBinding
 import com.denizk0461.studip.databinding.ItemCanteenLineBinding
 import com.denizk0461.studip.databinding.ItemIconBinding
@@ -44,68 +45,102 @@ class CanteenOfferItemAdapter(
     // Returns the amount of offers for a given canteen and day
     override fun getItemCount(): Int = offers.size
 
-    // TODO inflate a view saying "no events" if none are available for a given day
     override fun onBindViewHolder(holder: OfferViewHolder, position: Int) {
         // Retrieve item for current position
         val currentItem = offers[position]
 
-        // Set category text / header of the item
-        holder.binding.textCategory.text = currentItem.category
+        // If an item has been added to mark that there are no offers available, tell the user
+        if (currentItem.category == "NO\$ITEMS") {
 
-        // Create a new view (line) for each item displayed within one category
-        currentItem.offers.forEach { offer ->
-            // Inflate the new line without binding it to the line container
+            // Set the text to "No offers" (localised)
+            holder.binding.textCategory.text =
+                holder.binding.root.context.getString(R.string.canteen_no_offer_header)
+
+            // Inflate a single line without binding it to the line container
             val line = ItemCanteenLineBinding.inflate(
                 LayoutInflater.from(holder.binding.root.context),
             )
 
-            // Set text values
-            line.textContent.text = offer.title.addAllergenNotice(displayAllergens, offer.allergens)
-            line.textPrice.text = offer.price
+            // Set content to tell the user that no offers are available (localised)
+            line.textContent.text =
+                holder.binding.root.context.getString(R.string.canteen_no_offer_desc)
 
-            /*
-             * Check which dietary preferences are met by this item. This is used to set visual
-             * icons on each line. Example: a leaf on vegan items.
-             */
-            val indices = arrayListOf<Int>()
-            offer.dietaryPreferences.filterIndexed { index, char ->
-                if (char == 't') {
-                    indices.add(index)
-                    true
-                } else false
-            }
+            // Inflate a new icon holder
+            val img = ItemIconBinding.inflate(LayoutInflater.from(holder.binding.root.context))
 
-            // If no dietary preferences are met, set the view to display a neutral icon
-            if (indices.isEmpty()) indices.add(10)
-
-            // Iterate through all icons that need to be displayed
-            indices.forEach { index ->
-                // Inflate a new icon holder
-                val img = ItemIconBinding.inflate(LayoutInflater.from(holder.binding.root.context))
-
-                // Set the appropriate icon
-                img.imageView.setImageDrawable(
-                    AppCompatResources.getDrawable(
-                        holder.binding.root.context,
-                        DietaryPreferences.indexToDrawable[index]!!,
-                    )
+            // Set a cross icon
+            img.imageView.setImageDrawable(
+                AppCompatResources.getDrawable(
+                    holder.binding.root.context,
+                    DietaryPreferences.indexToDrawable[11]!!,
                 )
+            )
 
-                // Bind the new icon to the line view
-                line.imageViewContainer.addView(img.root)
-            }
+            // Bind the new icon to the line view
+            line.imageViewContainer.addView(img.root)
 
-            // Set up single click listener
-            line.root.setOnClickListener {
-                onClickListener.onClick(offer, currentItem.category)
-            }
-
-            // Set up long press listener
-            line.root.setOnLongClickListener {
-                onClickListener.onLongClick(offer)
-            }
             // Bind the new line to the line container
             holder.binding.lineContainer.addView(line.root)
+
+        } else { // Proceed normally if items are available
+            // Set category text / header of the item
+            holder.binding.textCategory.text = currentItem.category
+
+            // Create a new view (line) for each item displayed within one category
+            currentItem.offers.forEach { offer ->
+                // Inflate the new line without binding it to the line container
+                val line = ItemCanteenLineBinding.inflate(
+                    LayoutInflater.from(holder.binding.root.context),
+                )
+
+                // Set text values
+                line.textContent.text = offer.title.addAllergenNotice(displayAllergens, offer.allergens)
+                line.textPrice.text = offer.price
+
+                /*
+                 * Check which dietary preferences are met by this item. This is used to set visual
+                 * icons on each line. Example: a leaf on vegan items.
+                 */
+                val indices = arrayListOf<Int>()
+                offer.dietaryPreferences.filterIndexed { index, char ->
+                    if (char == 't') {
+                        indices.add(index)
+                        true
+                    } else false
+                }
+
+                // If no dietary preferences are met, set the view to display a neutral icon
+                if (indices.isEmpty()) indices.add(10)
+
+                // Iterate through all icons that need to be displayed
+                indices.forEach { index ->
+                    // Inflate a new icon holder
+                    val img = ItemIconBinding.inflate(LayoutInflater.from(holder.binding.root.context))
+
+                    // Set the appropriate icon
+                    img.imageView.setImageDrawable(
+                        AppCompatResources.getDrawable(
+                            holder.binding.root.context,
+                            DietaryPreferences.indexToDrawable[index]!!,
+                        )
+                    )
+
+                    // Bind the new icon to the line view
+                    line.imageViewContainer.addView(img.root)
+                }
+
+                // Set up single click listener
+                line.root.setOnClickListener {
+                    onClickListener.onClick(offer, currentItem.category)
+                }
+
+                // Set up long press listener
+                line.root.setOnLongClickListener {
+                    onClickListener.onLongClick(offer)
+                }
+                // Bind the new line to the line container
+                holder.binding.lineContainer.addView(line.root)
+            }
         }
     }
 

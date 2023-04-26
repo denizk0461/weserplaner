@@ -21,6 +21,9 @@
     <string name="sheet_schedule_update_room_hint">Room</string>
     <string name="sheet_schedule_update_timeslot_middle" translatable="false">–</string>
 
+    <string name="canteen_no_offer_header">No offers</string>
+    <string name="canteen_no_offer_desc">There are no offers available for this day</string>
+
     <string name="sheet_licences_header">Licences</string>
     <string name="sheet_licences_content" translatable="false">Android developer resources provided by Google.\nhttps://developer.android.com/\n\nCrash reporting provided by Google.\nhttps://firebase.google.com/products/crashlytics/\n\nDesign guidelines, icons, and colour palette provided by Google.\nhttps://m3.material.io/\n\nAdditional icons provided by Flaticon.\nhttps://www.flaticon.com/\n\nWeb scraping functionality provided by Jonathan Hedley.\nhttps://jhy.io/ | https://jsoup.org/</string>
 

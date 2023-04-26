@@ -1,5 +1,6 @@
 package com.denizk0461.studip.data
 
+import android.util.Log
 import com.denizk0461.studip.db.AppRepository
 import com.denizk0461.studip.model.*
 import org.jsoup.Jsoup
@@ -23,6 +24,9 @@ class StwParser {
 
     // Unique primary key value for the item elements
     private var itemId = 0
+
+    // Determine whether there are offers for a given date
+    private var dateHasItems = false
 
     /**
      * Parses through a list of canteen plans and saves them to persistent storage.
@@ -137,10 +141,17 @@ class StwParser {
              */
             repo.insert(OfferDate(dateId, date))
 
+            dateHasItems = false
+
             // Iterate through all categories offered on a given day
             dayPlan.getElementsByClass("food-category").forEach { category ->
+
+                dateHasItems = true
+
                 // Retrieve the category text
                 val categoryTitle = category.getElementsByClass("category-name")[0].text()
+
+                Log.d("AAA?", "$date on $categoryTitle")
 
                 // Save the category to persistent storage
                 repo.insert(OfferCategory(categoryId, dateId, canteenId, categoryTitle))
@@ -184,16 +195,38 @@ class StwParser {
                             )
                         )
 
-                        // Increment the item ID to avoid overriding
+                        // Increment the item ID to avoid conflict
                         itemId += 1
                     }
-                // Increment the category ID to avoid overriding
+                // Increment the category ID to avoid conflict
                 categoryId += 1
             }
-            // Increment the date ID to avoid overriding
+
+            /*
+             * If no items were found for the day, insert items that will tell the user that nothing
+             * is available. Text will then be handled in the adapter class.
+             */
+            if (!dateHasItems) {
+                repo.insert(OfferCategory(categoryId, dateId, canteenId, "NO\$ITEMS"))
+                repo.insert(
+                    OfferItem(
+                        itemId,
+                        categoryId,
+                        title = "NO\$ITEMS",
+                        price = "",
+                        dietaryPreferences = "..........",
+                        allergens = "",
+                    )
+                )
+                // Increment the IDs to avoid conflict
+                categoryId += 1
+                itemId += 1
+            }
+
+            // Increment the date ID to avoid conflict
             dateId += 1
         }
-        // Increment the canteen ID to avoid overriding
+        // Increment the canteen ID to avoid conflict
         canteenId += 1
     }
 

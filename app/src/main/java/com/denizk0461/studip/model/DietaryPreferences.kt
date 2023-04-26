@@ -41,6 +41,7 @@ enum class DietaryPreferences(val value: String) {
             8 to R.drawable.carrot,
             9 to R.drawable.deer,
             10 to R.drawable.circle,
+            11 to R.drawable.cross,
         )
 
         /**
