@@ -94,6 +94,16 @@ class SettingsFragment : AppFragment() {
             ))
         }
 
+        // Set click listener for showing licences dialogue
+        binding.buttonLicences.setOnClickListener {
+            openBottomSheet(
+                TextSheet(
+                    getString(R.string.sheet_licences_header),
+                    getString(R.string.sheet_licences_content),
+                )
+            )
+        }
+
         // Set click listener for the app version button
         binding.buttonAppVersion.setOnClickListener {
             when (appVersionClick) {

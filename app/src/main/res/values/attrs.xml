@@ -8,4 +8,6 @@
     <attr name="colorOnErrorContainer" type="color"/>
     <attr name="colorSecondaryContainer" type="color"/>
     <attr name="colorOnSecondaryContainer" type="color"/>
+    <attr name="colorText" type="color"/>
+<!--    <attr name="colorOutline" type="color"/>-->
 </resources>

@@ -2,7 +2,6 @@ package com.denizk0461.studip.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
@@ -59,7 +58,7 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // TODO KDoc and finish
+        // Open the menu for the canteen picker button
         binding.buttonCanteenPicker.setOnClickListener {
             PopupMenu(binding.root.context, binding.buttonCanteenPicker).apply {
                 setOnMenuItemClickListener { item ->
@@ -76,8 +75,13 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
                         R.id.mensa_hfk -> 9
                         else -> 0
                     }
-                    // Set currently selected canteen to the button
+                    // Set newly selected canteen to the button
                     binding.buttonCanteenPicker.text = getCurrentlySelectedCanteenName()
+
+                    // Display to the user that the canteen plan will be refreshed
+                    binding.swipeRefreshLayout.isRefreshing = true
+
+                    // Refresh the canteen menu for the newly selected canteen
                     refresh()
                     true
                 }
@@ -85,6 +89,9 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
                 show()
             }
         }
+
+        // Set currently selected canteen to the button
+        binding.buttonCanteenPicker.text = getCurrentlySelectedCanteenName()
 
         binding.buttonInfo.setOnClickListener {
             openBottomSheet(

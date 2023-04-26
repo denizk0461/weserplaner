@@ -353,6 +353,34 @@
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
+                <!-- Licences -->
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/button_licences"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:background="?android:attr/selectableItemBackground">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/lato_bolditalic"
+                        android:text="@string/settings_licences_title"/>
+
+                    <TextView
+                        android:id="@+id/licences_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="@string/settings_licences_subtitle"/>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
                 <!-- App version -->
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/button_app_version"

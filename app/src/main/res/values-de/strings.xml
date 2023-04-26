@@ -19,6 +19,8 @@
     <string name="sheet_schedule_update_lecturers_hint">Dozierende(r)</string>
     <string name="sheet_schedule_update_room_hint">Raum</string>
 
+    <string name="sheet_licences_header">Lizenzen</string>
+
     <string name="title_schedule">Dein Stundenplan</string>
     <string name="title_food">Mensenangebote</string>
     <string name="title_settings">App-Einstellungen</string>
@@ -127,6 +129,9 @@
     <string name="settings_data_subtitle">Stiehlst du meinen Stud.IP-Login?</string>
     <string name="settings_data_sheet_header">TL;DR: nein, aber Google könnte mir Bescheid geben, falls die App mal abstürzt.</string>
     <string name="settings_data_sheet_content">Die App funktioniert standalone, was bedeutet, dass sie sich niemals mit einem Server verbindet, der mir gehört. Sie ist ein Web-Scraper, also ein Programm, welches eine Internetseite öffnet und dann all die Informationen dieser Webseite herunterlädt und analysiert. In diesem Fall sind es die Webseiten der Mensen und Cafeterien des Studierendenwerks Bremen (stw-bremen.de) sowie die Stud.IP-Seite (elearning.uni-bremen.de).\n\nDies funktioniert relativ einfach für die Essenspläne, da diese Pläne öffentlich zugänglich sind. Um jedoch Deinen persönlichen Stud.IP-Stundenplan herunterzuladen, braucht die App Zugriff auf diese Webseite während Dein Account eingeloggt ist. Dies erfolgt, indem die App Dich mit deinem Account einloggen lässt - dies geschieht, wenn Du den Knopf zum Aktualisieren des Plans drückst und die App Dir die Login-Seite zeigt - und Du dann den Knopf klickst, um den Inhalt, den HTML-Quellcode, herunterzuladen. Der HTML-Quellcode beinhält Informationen darüber, was auf einer Webseite angezeigt wird und wie es aussehen soll, aber er kann niemals persönliche Details beinhalten, wie zum Beispiel Passwörter oder andere Daten, die auf Deinem Gerät vorhanden sind.\n\nDer Quellcode wird dann lokal, also auf Deinem Gerät, zu den Karten verarbeitet, die Du dann in der App sehen kannst, ohne, dass jegliche Daten irgendwohin geschickt werden müssten.\n\nEinige Daten könnten jedoch dennoch nach außen geschickt werden. Diese App nutzt \"Crashlytics\" von Google. Dies ist ein Tool, welches Absturzreporte an Google-Server schickt, wenn in der App etwas schief läuft. Diese werden genutzt, um Probleme in der App zu lösen.\n\nDies ist jedoch gemäß europäischer Datenschutz-Grundverordnung Opt-In, was bedeutet, dass Du zustimmen musst, bevor Daten nach außen geschickt werden. Du wurdest danach gefragt, als Du die App zum ersten Mal gestartet hast, und du kannst jederzeit deine Meinung ändern, indem Du den Schalter hierfür in den Einstellungen umstellst. Solltest Du dich entscheiden, keine Daten verschicken zu lassen, wird auch nichts mit Google (und mir) geteilt.\n\nSolltest du dich versichern wollen, dass wirklich keine Daten an irgendwelche Server verschickt wird (abgesehen von den Absturzreports an Google), kannst Du jederzeit das Projekt erkunden, da es Open-Source und auf meinen GitHub-Profil öffentlich zugänglich ist:\nhttps://github.com/denizk0461/studip-timetable/\n\nSchreib mir ansonsten gerne eine E-Mail:\ndenizk0461+kyzil@gmail.com</string>
+
+    <string name="settings_licences_title">Siehe Lizenzen</string>
+    <string name="settings_licences_subtitle">Ressourcen, die diese App möglich gemacht haben</string>
 
     <string name="settings_app_version">App-Version</string>
 

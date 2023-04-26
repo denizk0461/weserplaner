@@ -26,6 +26,7 @@
                 android:fontFamily="@font/lato_bolditalic"/>
 
             <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/divider"
                 style="@style/DividerTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

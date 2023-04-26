@@ -73,22 +73,11 @@ class StudIPEventItemAdapter(
         // Use parsed timeslot string as defined in StudIPEvent#timeslot()
         holder.binding.textTimeslot.text = currentItem.timeslot()
 
-        // TODO highlighting functionality is currently not supported!
-        // Set up colours used for highlighting and un-highlighting an item.
-//        val colorPrimaryTranslucent = TypedValue()
-//        val colorCardBackground = TypedValue()
-//        val colorTextHintLighter = TypedValue()
-
-        // Resolve themed attributes to get the right values for day and night modes
-//        holder.binding.root.context.theme.apply {
-//            resolveAttribute(com.google.android.material.R.attr.colorSecondaryContainer, colorPrimaryTranslucent, true)
-//            resolveAttribute(R.attr.colorCardBackground, colorCardBackground, true)
-//            resolveAttribute(R.attr.colorTextHintLighter, colorTextHintLighter, true)
-//        }
-
+        // Get current theme
         val theme = holder.binding.root.context.theme
 
-        /* Highlight the next upcoming course of the day if the day of the adapter matches the
+        /*
+         * Highlight the next upcoming course of the day if the day of the adapter matches the
          * current day, and if no other course has been highlighted, to avoid double highlighting.
          */
         if (!isAnyCourseHighlighted && currentItem.isCurrentCourse(currentCalendar)) {
@@ -102,6 +91,8 @@ class StudIPEventItemAdapter(
                 // Hide card stroke
                 strokeColor = context.getColor(android.R.color.transparent)
             }
+            // Set the divider colour to the text colour
+            holder.binding.divider.dividerColor = theme.getThemedColor(com.denizk0461.studip.R.attr.colorText)
         // Otherwise, apply colours to ensure that the item will not be highlighted
         } else {
             holder.binding.cardBackground.apply {
@@ -109,8 +100,10 @@ class StudIPEventItemAdapter(
                 backgroundTintList = ColorStateList.valueOf(theme.getThemedColor(R.attr.colorSurface))
 
                 // Set the card's stroke to its default colour
-                strokeColor = theme.getThemedColor(R.attr.colorOutlineVariant)
+                strokeColor = theme.getThemedColor(R.attr.colorOutline)
             }
+            // Set the divider colour to its default value
+            holder.binding.divider.dividerColor = theme.getThemedColor(R.attr.colorOutlineVariant)
         }
 
         // Set up single click listener
