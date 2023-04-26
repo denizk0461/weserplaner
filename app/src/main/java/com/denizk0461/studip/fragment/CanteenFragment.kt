@@ -173,12 +173,6 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
 
             // Set the text for the opening hours dialogue
             openingHours = viewModel.getCanteenOpeningHours()
-
-            /*
-             * Tell the swipe refresh layout to stop refreshing.
-             * TODO if an exception is raised, this will not be fired. This must be changed
-             */
-            binding.swipeRefreshLayout.isRefreshing = false
         }
 
         // Set up functions for when the user swipes to refresh the view
@@ -352,6 +346,13 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
         viewModel.fetchOffers(viewModel.preferenceCanteen, onRefreshUpdate = { status ->
             // TODO refresh updates
         }, onFinish = {
+            /*
+             * Tell the swipe refresh layout to stop refreshing.
+             * TODO if an exception is raised, this will not be fired. This must be changed
+             */
+            binding.swipeRefreshLayout.isRefreshing = false
+
+
 //                createTabLayoutMediator()
 //                binding.swipeRefreshLayout.isRefreshing = false
 //                createTabLayoutMediator()

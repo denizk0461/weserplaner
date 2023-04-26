@@ -1,6 +1,5 @@
 package com.denizk0461.studip.data
 
-import com.denizk0461.studip.R
 import com.denizk0461.studip.db.AppRepository
 import com.denizk0461.studip.model.*
 import org.jsoup.Jsoup
