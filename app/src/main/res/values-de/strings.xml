@@ -19,6 +19,8 @@
     <string name="sheet_schedule_update_title_hint">Veranstaltungstitel</string>
     <string name="sheet_schedule_update_lecturers_hint">Dozierende(r)</string>
     <string name="sheet_schedule_update_room_hint">Raum</string>
+    <string name="sheet_schedule_update_hint_quarter">Auf akademisches Viertel umstellen</string>
+    <string name="sheet_schedule_update_hint_quarter_error">Sorry, ein Fehler ist aufgetreten!</string>
 
     <string name="canteen_no_offer_header">Kein Angebot</string>
     <string name="canteen_no_offer_desc">Für diesen Tag sind keine Angebote vorhanden</string>

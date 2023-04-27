@@ -20,6 +20,8 @@
     <string name="sheet_schedule_update_lecturers_hint">Lecturer(s)</string>
     <string name="sheet_schedule_update_room_hint">Room</string>
     <string name="sheet_schedule_update_timeslot_middle" translatable="false">–</string>
+    <string name="sheet_schedule_update_hint_quarter">Change to academic quarter</string>
+    <string name="sheet_schedule_update_hint_quarter_error">Sorry, an error occurred!</string>
 
     <string name="canteen_no_offer_header">No offers</string>
     <string name="canteen_no_offer_desc">There are no offers available for this day</string>

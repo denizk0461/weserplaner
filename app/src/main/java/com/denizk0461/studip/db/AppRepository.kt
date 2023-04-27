@@ -197,7 +197,8 @@ class AppRepository(app: Application) {
      * @param pref  preference to retrieve
      * @return      whether the user set this preference
      */
-    fun getBooleanPreference(pref: SettingsPreferences): Boolean = prefs.getBoolean(pref.key, false)
+    fun getBooleanPreference(pref: SettingsPreferences, defaultValue: Boolean = false): Boolean =
+        prefs.getBoolean(pref.key, defaultValue)
 
     /**
      * Retrieves ta user-set integer preference.

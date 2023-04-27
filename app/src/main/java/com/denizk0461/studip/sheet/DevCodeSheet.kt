@@ -7,6 +7,7 @@ import android.util.Base64
 import android.view.View
 import android.widget.Toast
 import com.denizk0461.studip.R
+import com.denizk0461.studip.data.showToast
 import com.denizk0461.studip.data.viewBinding
 import com.denizk0461.studip.databinding.SheetDevCodeBinding
 import java.nio.charset.StandardCharsets
@@ -60,41 +61,32 @@ class DevCodeSheet(
                 "QkJVT0s/".d() -> launchLink("aHR0cHM6Ly95b3V0dS5iZS90Rm1PMm1TY0tHNA==".d())
                 "NEVENT" -> { // nuke events
                     nukeEvents()
-                    showToast("Nuked all events")
+                    showToast(context, "Nuked all events")
                 }
                 "NCANTE" -> { // nuke canteens
                     nukeOfferCanteens()
-                    showToast("Nuked all canteens")
+                    showToast(context, "Nuked all canteens")
                 }
                 "NDATES" -> { // nuke dates
                     nukeOfferDates()
-                    showToast("Nuked all dates")
+                    showToast(context, "Nuked all dates")
                 }
                 "NCATEG" -> { // nuke categories
                     nukeOfferCategories()
-                    showToast("Nuked all categories")
+                    showToast(context, "Nuked all categories")
                 }
                 "NITEMS" -> { // nuke items
                     nukeOfferItems()
-                    showToast("Nuked all items")
+                    showToast(context, "Nuked all items")
                 }
                 "NEVERY" -> { // nuke everything
                     nukeEverything()
-                    showToast("Nuked everything")
+                    showToast(context, "Nuked everything")
                 }
-                else -> showToast("code is invalid")
+                else -> showToast(context, "code is invalid")
             }
             dismiss()
         }
-    }
-
-    /**
-     * Present the user with a toast.
-     *
-     * @param text  text to display
-     */
-    private fun showToast(text: String) {
-        Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
     }
 
     /**
@@ -104,7 +96,7 @@ class DevCodeSheet(
      */
     private fun launchLink(link: String) {
         // Let the user know they accomplished something with their life
-        showToast("✨")
+        showToast(context, "✨")
 
         // Give the user a slight dopamine boost
         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(link)))

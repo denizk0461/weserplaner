@@ -70,7 +70,7 @@ class CanteenViewModel(app: Application) : AppViewModel(app) {
      * This value determines whether the user wants to have allergens marked.
      */
     val preferenceAllergen: Boolean
-        get() = repo.getBooleanPreference(SettingsPreferences.ALLERGEN)
+        get() = repo.getBooleanPreference(SettingsPreferences.ALLERGEN, defaultValue = true)
 
     var preferenceCanteen: Int
         get() = repo.getIntPreference(SettingsPreferences.CANTEEN)

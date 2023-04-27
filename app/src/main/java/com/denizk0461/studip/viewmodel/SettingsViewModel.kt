@@ -60,7 +60,7 @@ class SettingsViewModel(app: Application) : AppViewModel(app) {
      * This value determines whether the user wants to have allergens marked.
      */
     var preferenceAllergen: Boolean
-        get() = repo.getBooleanPreference(SettingsPreferences.ALLERGEN)
+        get() = repo.getBooleanPreference(SettingsPreferences.ALLERGEN, defaultValue = true)
         set(newValue) { repo.setPreference(SettingsPreferences.ALLERGEN, newValue) }
 
     /**

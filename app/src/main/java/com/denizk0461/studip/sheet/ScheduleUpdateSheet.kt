@@ -1,11 +1,17 @@
 package com.denizk0461.studip.sheet
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.FragmentActivity
+import androidx.transition.TransitionManager
 import com.denizk0461.studip.R
 import com.denizk0461.studip.data.parseToMinutes
+import com.denizk0461.studip.data.showToast
+import com.denizk0461.studip.data.timeslotsAcademicQuarter
+import com.denizk0461.studip.data.timeslotsAcademicQuarterEnd
+import com.denizk0461.studip.data.timeslotsAcademicQuarterStart
 import com.denizk0461.studip.data.viewBinding
 import com.denizk0461.studip.databinding.SheetScheduleUpdateBinding
 import com.denizk0461.studip.dialog.TimePickerFragment
@@ -39,6 +45,34 @@ class ScheduleUpdateSheet(
         binding.editTextTitle.setText(event.title)
         binding.editTextLecturers.setText(event.lecturer)
         binding.editTextRoom.setText(event.room)
+
+        // Show academic quarter suggestion if it is applicable
+        binding.buttonAcademicQuarter.visibility = if (
+            timeslotsAcademicQuarter.contains(timeslotStart) &&
+            timeslotsAcademicQuarter.contains(timeslotEnd)
+        ) {
+            binding.buttonAcademicQuarter.setOnClickListener {
+                try {
+                    val newStart = timeslotsAcademicQuarterStart[timeslotStart]
+                        ?: throw NullPointerException()
+                    val newEnd = timeslotsAcademicQuarterEnd[timeslotEnd]
+                        ?: throw NullPointerException()
+
+                    timeslotStart = newStart
+                    binding.buttonTimeStart.text = newStart
+                    timeslotEnd = newEnd
+                    binding.buttonTimeEnd.text = newEnd
+
+                    TransitionManager.beginDelayedTransition(binding.sheet)
+                    binding.buttonAcademicQuarter.visibility = View.GONE
+                } catch (e: NullPointerException) {
+                    showToast(context, getString(R.string.sheet_schedule_update_hint_quarter_error))
+                }
+            }
+            View.VISIBLE
+        } else {
+            View.GONE
+        }
 
         // Prepare timestamp buttons
         binding.buttonTimeStart.text = timeslotStart
