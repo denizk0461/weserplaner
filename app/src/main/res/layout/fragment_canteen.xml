@@ -36,7 +36,6 @@
         style="@style/Widget.Material3.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="hello"
         android:textSize="18sp"
         android:fontFamily="@font/lato_bolditalic"
         app:layout_constraintTop_toTopOf="parent"

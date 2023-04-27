@@ -3,35 +3,170 @@ package com.denizk0461.studip.model
 import com.denizk0461.studip.R
 
 /**
- * Enumeration that can be used in conjunction with DietaryPrefObject.kt to more concisely look up,
- * specify, and iterate through dietary preferences. Order of these elements matches the order used
- * on the website of the Studierendenwerk Bremen.
+ * Enumeration for more concisely looking up, specifying, and iterating through dietary preferences.
+ * Order of these elements matches the order used on the website of the Studierendenwerk Bremen.
  *
  * @param value string value that can be used where the enum value itself cannot be used (e.g.
  *              SharedPreferences)
  */
 enum class DietaryPreferences(val value: String) {
-    FAIR("isFair"),
+    /**
+     * Offer contains meat for which animal welfare standards were upheld.
+     */
+    WELFARE("isFair"),
+
+    /**
+     * Offer contains fish products.
+     */
     FISH("isFish"),
+
+    /**
+     * Offer contains poultry (chicken) products.
+     */
     POULTRY("isPoultry"),
+
+    /**
+     * Offer contains lamb products.
+     */
     LAMB("isLamb"),
+
+    /**
+     * Offer contains products that are good for ur health i guess?
+     */
     VITAL("isVital"),
+
+    /**
+     * Offer contains beef (cow) products.
+     */
     BEEF("isBeef"),
+
+    /**
+     * Offer contains pork (pig) products.
+     */
     PORK("isPork"),
+
+    /**
+     * Offer contains no animal products and is fully plant-based (vegan).
+     */
     VEGAN("isVegan"),
+
+    /**
+     * Offer contains no animal parts and is vegetarian.
+     */
     VEGETARIAN("isVegetarian"),
+
+    /**
+     * Offer contains game (wild animals such as deer, gosh, is that not barbaric? Sorry for being
+     * dramatic, but I didn't even know that was served at our canteens until I started making this
+     * app).
+     */
     GAME("isGame"),
+
+    /**
+     * Offer doesn't fulfil any of the dietary preferences listed above.
+     */
     NONE("hasNone"),
+
+    /**
+     * Offer has encountered an error.
+     */
     ERROR("onError")
     ;
+
+    /**
+     * Object that holds dietary preferences. Can be used to hold both the user-set values as well as
+     * the values of an individual canteen item.
+     *
+     * @param isFair        item contains meat from fairly-treated animals (lol sure)
+     * @param isFish        item contains fish
+     * @param isPoultry     item contains chicken
+     * @param isLamb        item contains lamb
+     * @param isVital       i don't actually know
+     * @param isBeef        item contains beef
+     * @param isPork        item contains pork
+     * @param isVegan       item is plant-based; contains no animal-derived ingredients
+     * @param isVegetarian  item is vegetarian; contains no animal parts
+     * @param isGame        item contains game meat (e.g. deer)
+     */
+    data class Object(
+        val isFair: Boolean,
+        val isFish: Boolean,
+        val isPoultry: Boolean,
+        val isLamb: Boolean,
+        val isVital: Boolean,
+        val isBeef: Boolean,
+        val isPork: Boolean,
+        val isVegan: Boolean,
+        val isVegetarian: Boolean,
+        val isGame: Boolean,
+    ) {
+        /**
+         * Constructs a regular expression string from a DietaryPrefObject. This can be used to filter for specific
+         * preferences. Example:
+         * .......t..
+         * This expression filters for items that are vegan ('t' in position 8) and ignores all other
+         * preference options ('.' in all other positions).
+         *
+         * @return a 10-character long regular expression
+         */
+        fun deconstruct(): String = String(
+            charArrayOf(
+                if (this.isFair) DietaryPreferences.C_TRUE else DietaryPreferences.C_FALSE,
+                if (this.isFish) DietaryPreferences.C_TRUE else DietaryPreferences.C_FALSE,
+                if (this.isPoultry) DietaryPreferences.C_TRUE else DietaryPreferences.C_FALSE,
+                if (this.isLamb) DietaryPreferences.C_TRUE else DietaryPreferences.C_FALSE,
+                if (this.isVital) DietaryPreferences.C_TRUE else DietaryPreferences.C_FALSE,
+                if (this.isBeef) DietaryPreferences.C_TRUE else DietaryPreferences.C_FALSE,
+                if (this.isPork) DietaryPreferences.C_TRUE else DietaryPreferences.C_FALSE,
+                if (this.isVegan) DietaryPreferences.C_TRUE else DietaryPreferences.C_FALSE,
+                if (this.isVegetarian) DietaryPreferences.C_TRUE else DietaryPreferences.C_FALSE,
+                if (this.isGame) DietaryPreferences.C_TRUE else DietaryPreferences.C_FALSE,
+            )
+        )
+    }
 
     companion object {
 
         /**
-         * Provides a converting function between
+         * Char used to construct a regex to denote that a preference is met
+         */
+        const val C_TRUE: Char = 't'
+
+        /**
+         * Char used to construct a regex to denote that a preference is not met
+         */
+        const val C_FALSE: Char = '.'
+
+        /**
+         * Constructs a DietaryPrefObject from a regex string. String must be 10 characters long.
+         * A char equal to C_TRUE is treated as a true boolean value. Any other char is treated as a
+         * false boolean value.
+         *
+         * @param values the regex string
+         * @return an instance of DietaryPrefObject
+         */
+        fun construct(values: String): Object = Object(
+            isFair = values[0] == DietaryPreferences.C_TRUE,
+            isFish = values[1] == DietaryPreferences.C_TRUE,
+            isPoultry = values[2] == DietaryPreferences.C_TRUE,
+            isLamb = values[3] == DietaryPreferences.C_TRUE,
+            isVital = values[4] == DietaryPreferences.C_TRUE,
+            isBeef = values[5] == DietaryPreferences.C_TRUE,
+            isPork = values[6] == DietaryPreferences.C_TRUE,
+            isVegan = values[7] == DietaryPreferences.C_TRUE,
+            isVegetarian = values[8] == DietaryPreferences.C_TRUE,
+            isGame = values[9] == DietaryPreferences.C_TRUE,
+        )
+
+        /**
+         * Provides a converting function between the ordinals of the enumeration and corresponding
+         * string and drawable values.
+         *
+         * @param index ordinal of the enum item
+         * @return      string resource ID and drawable resource ID as a pair
          */
         fun getData(index: Int): Pair<Int, Int> = when (index) {
-            FAIR.ordinal -> Pair(R.string.pref_fair, R.drawable.handshake)
+            WELFARE.ordinal -> Pair(R.string.pref_fair, R.drawable.handshake)
             FISH.ordinal -> Pair(R.string.pref_fish, R.drawable.fish)
             POULTRY.ordinal -> Pair(R.string.pref_poultry, R.drawable.chicken)
             LAMB.ordinal -> Pair(R.string.pref_lamb, R.drawable.sheep)

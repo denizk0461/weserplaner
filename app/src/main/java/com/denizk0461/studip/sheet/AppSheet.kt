@@ -19,7 +19,9 @@ open class AppSheet(@LayoutRes private val layoutId: Int) : BottomSheetDialogFra
     // Internal context object
     private lateinit var _context: Context
 
-    // Get non-null context. Only valid after onAttach()
+    /**
+     * Get non-null context. Only valid after onAttach().
+     */
     override fun getContext(): Context = _context
 
     override fun onAttach(context: Context) {
@@ -27,7 +29,6 @@ open class AppSheet(@LayoutRes private val layoutId: Int) : BottomSheetDialogFra
         _context = context
     }
 
-    // Inflate the given layout
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         LayoutInflater.from(context).inflate(layoutId, container, false)
 }

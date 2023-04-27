@@ -3,7 +3,6 @@ package com.denizk0461.studip.activity
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Bundle
-import android.util.TypedValue
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -29,7 +28,7 @@ class FetcherActivity : Activity() {
     // View model
     private lateinit var viewModel: FetcherViewModel
 
-    /*
+    /**
      * Enabling JavaScript is necessary to get the HTML source in this context. As the HTML can only
      * be accessed once the user has logged in, a simple HTML request would not suffice here.
      */

@@ -18,7 +18,9 @@ import kotlinx.coroutines.runBlocking
  */
 open class AppViewModel(app: Application) : AndroidViewModel(app) {
 
-    // Reference to the app's repository for database transactions
+    /**
+     * Reference to the app's repository for database transactions.
+     */
     protected val repo: AppRepository = Dependencies.repo
 
     /**

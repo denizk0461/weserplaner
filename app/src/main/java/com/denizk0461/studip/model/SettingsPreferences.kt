@@ -7,13 +7,29 @@ package com.denizk0461.studip.model
  * @param key   key for the SharedPreferences transaction
  */
 enum class SettingsPreferences(val key: String) {
-    // Whether the user wants to have allergens displayed in the canteen overview
+
+    /**
+     * Whether the user wants to have allergens displayed in the canteen overview.
+     */
     ALLERGEN("setting_allergen"),
-    // Whether the user wants the next course in his schedule to be highlighted
+
+    /**
+     * Whether the user wants the next course in his schedule to be highlighted.
+     */
     COURSE_HIGHLIGHTING("setting_highlight"),
+    /**
+     * Whether the user wants the app to launch with the canteen fragment.
+     */
     LAUNCH_CANTEEN_ON_START("settings_launch_canteen"),
-    // Whether the user opts into sending crash report
+
+    /**
+     * Whether the user opts into sending crash report.
+     */
     DATA_HANDLING("setting_data_handling"),
+
+    /**
+     * The canteen the user has picked.
+     */
     CANTEEN("setting_canteen"),
     ;
 }

@@ -18,7 +18,7 @@ import androidx.room.ColumnInfo
  * @param title                 text content of the individual canteen offer
  * @param price                 students' price for the individual canteen offer
  * @param dietaryPreferences    dietary preferences used to filter for the user's needs - see
- *                              DietaryPrefObject.kt
+ *                              [DietaryPreferences]
  * @param allergens             allergens and additives that are present in the item
  */
 data class CanteenOffer(

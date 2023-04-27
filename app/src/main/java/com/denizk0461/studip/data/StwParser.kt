@@ -180,7 +180,7 @@ class StwParser {
                             .getElementsByClass("field field-name-field-food-types")[0]
 
                         // Parse the preferences into a string for the database
-                        val prefString = DietaryPrefObject(
+                        val prefString = DietaryPreferences.Object(
                             isFair = prefs.isDietaryPreferenceMet(imageLinkPrefFair),
                             isFish = prefs.isDietaryPreferenceMet(imageLinkPrefFish),
                             isPoultry = prefs.isDietaryPreferenceMet(imageLinkPrefPoultry),

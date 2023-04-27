@@ -137,7 +137,7 @@ class SettingsFragment : AppFragment() {
         binding.appVersionText.text =
             "${BuildConfig.VERSION_NAME}-${
                 if (BuildConfig.DEBUG) 
-                    "dev-[${SimpleDateFormat("yyyy-MM-dd, HH:mm:ss.SSS").format(Date(BuildConfig.TIMESTAMP))}]" 
+                    "dev-[${SimpleDateFormat("yyyy-MM-dd, HH:mm:ss.SSS", Locale.GERMANY).format(Date(BuildConfig.TIMESTAMP))}]" 
                 else 
                     "release"
             }"

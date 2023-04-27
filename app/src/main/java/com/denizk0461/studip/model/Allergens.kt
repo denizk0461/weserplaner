@@ -2,7 +2,11 @@ package com.denizk0461.studip.model
 
 import com.denizk0461.studip.R
 
+/**
+ * This class provides static functions for dealing with allergens present in a canteen offer.
+ */
 object Allergens {
+
     /**
      * Converts an allergen into the string ID for its localised full-text version. Elements are
      * derived from the website of the Studierendenwerk Bremen:

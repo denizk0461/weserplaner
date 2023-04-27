@@ -6,14 +6,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import androidx.transition.TransitionManager
 import com.denizk0461.studip.R
+import com.denizk0461.studip.data.getTimestampAcademicQuarterEnd
+import com.denizk0461.studip.data.getTimestampAcademicQuarterStart
 import com.denizk0461.studip.data.parseToMinutes
 import com.denizk0461.studip.data.showToast
 import com.denizk0461.studip.data.timeslotsAcademicQuarter
-import com.denizk0461.studip.data.timeslotsAcademicQuarterEnd
-import com.denizk0461.studip.data.timeslotsAcademicQuarterStart
 import com.denizk0461.studip.data.viewBinding
 import com.denizk0461.studip.databinding.SheetScheduleUpdateBinding
 import com.denizk0461.studip.dialog.TimePickerFragment
+import com.denizk0461.studip.exception.AcademicQuarterNotApplicableException
 import com.denizk0461.studip.model.StudIPEvent
 
 /**
@@ -60,10 +61,8 @@ class ScheduleUpdateSheet(
             binding.buttonAcademicQuarter.setOnClickListener {
                 try {
                     // Retrieve new timestamps with the academic quarter applied, or throw a tantrum
-                    val newStart = timeslotsAcademicQuarterStart[timeslotStart]
-                        ?: throw NullPointerException()
-                    val newEnd = timeslotsAcademicQuarterEnd[timeslotEnd]
-                        ?: throw NullPointerException()
+                    val newStart = getTimestampAcademicQuarterStart(timeslotStart)
+                    val newEnd = getTimestampAcademicQuarterEnd(timeslotEnd)
 
                     // Set the buttons to the new timesatmps
                     timeslotStart = newStart
@@ -79,7 +78,7 @@ class ScheduleUpdateSheet(
                     binding.buttonAcademicQuarter.visibility = View.GONE
 
                 // Catch if a timeslot couldn't be found in the list, and tell the user
-                } catch (e: NullPointerException) {
+                } catch (e: AcademicQuarterNotApplicableException) {
                     showToast(context, getString(R.string.sheet_schedule_update_hint_quarter_error))
                 }
             }

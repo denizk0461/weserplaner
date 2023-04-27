@@ -27,7 +27,7 @@ class CanteenViewModel(app: Application) : AppViewModel(app) {
      *
      * @return dietary preferences
      */
-    fun getDietaryPrefs(): DietaryPrefObject = repo.getDietaryPrefsAsObj()
+    fun getDietaryPrefs(): DietaryPreferences.Object = repo.getDietaryPrefsAsObject()
 
     /**
      * Retrieves all canteen offer date objects.
@@ -43,7 +43,13 @@ class CanteenViewModel(app: Application) : AppViewModel(app) {
      */
     fun getCanteenOpeningHours(): String = returnBlocking { repo.getCanteenOpeningHours() }
 
-    // Fetch the canteen offers asynchronously. Updates will be provided through a LiveData object.
+    /**
+     * Fetch the canteen offers asynchronously. Updates will be provided through a LiveData object.
+     *
+     * @param canteen           canteen from which to fetch offers from
+     * @param onRefreshUpdate   action to execute when a status update is available
+     * @param onFinish          action to execute when the operation has finished
+     */
     fun fetchOffers(canteen: Int, onRefreshUpdate: (status: Int) -> Unit, onFinish: () -> Unit) {
         doAsync { parser.parse(canteen, onRefreshUpdate, onFinish) }
     }
@@ -72,6 +78,9 @@ class CanteenViewModel(app: Application) : AppViewModel(app) {
     val preferenceAllergen: Boolean
         get() = repo.getBooleanPreference(SettingsPreferences.ALLERGEN, defaultValue = true)
 
+    /**
+     * This value determines which canteen the user has selected.
+     */
     var preferenceCanteen: Int
         get() = repo.getIntPreference(SettingsPreferences.CANTEEN)
         set(newValue) { repo.setPreference(SettingsPreferences.CANTEEN, newValue) }

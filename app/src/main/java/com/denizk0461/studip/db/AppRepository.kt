@@ -23,7 +23,7 @@ class AppRepository(app: Application) {
     private val dietaryPrefString = "prefs_obj"
 
     // Blank dietary preference regular expression
-    private val blankDietaryPrefs: String = DietaryPrefObject.C_FALSE.toString().repeat(10)
+    private val blankDietaryPrefs: String = DietaryPreferences.C_FALSE.toString().repeat(10)
 
     /**
      * Retrieves all Stud.IP events.
@@ -49,7 +49,7 @@ class AppRepository(app: Application) {
      *
      * @return  opening hours
      */
-    fun getCanteenOpeningHours() = dao.getCanteenOpeningHours()
+    fun getCanteenOpeningHours(): String = dao.getCanteenOpeningHours()
 
     /**
      * Retrieves all canteen offers.
@@ -89,16 +89,17 @@ class AppRepository(app: Application) {
      *
      * @return dietary preferences as a regular expression string
      */
-    private fun getDietaryPrefs(): String {
+    private fun getDietaryPrefsAsString(): String {
         return prefs.getString(dietaryPrefString, blankDietaryPrefs) ?: blankDietaryPrefs
     }
 
     /**
-     * Retrieve the user's dietary preferences as a DietaryPrefObject.
+     * Retrieve the user's dietary preferences as a [DietaryPreferences.Object].
      *
-     * @return dietary preferences as an instance of DietaryPrefObject.kt
+     * @return dietary preferences as an instance of [DietaryPreferences.Object]
      */
-    fun getDietaryPrefsAsObj(): DietaryPrefObject = DietaryPrefObject.construct(getDietaryPrefs())
+    fun getDietaryPrefsAsObject(): DietaryPreferences.Object =
+        DietaryPreferences.construct(getDietaryPrefsAsString())
 
     /**
      * Updates a given dietary preference to a new value.
@@ -107,7 +108,7 @@ class AppRepository(app: Application) {
      * @param newValue  value to set the preference to
      */
     fun setPreference(pref: DietaryPreferences, newValue: Boolean) {
-        val oldString = getDietaryPrefs().toMutableList()
+        val oldString = getDietaryPrefsAsString().toMutableList()
 
         oldString[pref.ordinal] = newValue.toChar()
         val newString = oldString.joinToString("")
@@ -120,7 +121,11 @@ class AppRepository(app: Application) {
      *
      * @return char denoting whether a preference needs to be met
      */
-    private fun Boolean.toChar() = if (this) DietaryPrefObject.C_TRUE else DietaryPrefObject.C_FALSE
+    private fun Boolean.toChar() = if (this) {
+        DietaryPreferences.C_TRUE
+    } else {
+        DietaryPreferences.C_FALSE
+    }
 
     /**
      * Retrieves a single user-specified dietary preference.
@@ -129,7 +134,7 @@ class AppRepository(app: Application) {
      * @return      whether the preference needs to be met1
      */
     fun getBooleanPreference(pref: DietaryPreferences): Boolean =
-        getDietaryPrefs()[pref.ordinal] == DietaryPrefObject.C_TRUE
+        getDietaryPrefsAsString()[pref.ordinal] == DietaryPreferences.C_TRUE
 
     /**
      * Deletes all canteen offers from the database.

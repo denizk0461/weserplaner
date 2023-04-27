@@ -2,7 +2,6 @@ package com.denizk0461.studip.sheet
 
 import android.os.Bundle
 import android.view.View
-import androidx.annotation.StringRes
 import com.denizk0461.studip.R
 import com.denizk0461.studip.data.viewBinding
 import com.denizk0461.studip.databinding.SheetTextBinding

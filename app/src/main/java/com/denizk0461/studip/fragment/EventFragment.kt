@@ -11,7 +11,6 @@ import com.denizk0461.studip.adapter.StudIPEventPageAdapter
 import com.denizk0461.studip.databinding.FragmentEventBinding
 import com.denizk0461.studip.model.StudIPEvent
 import com.denizk0461.studip.sheet.ScheduleUpdateSheet
-import com.denizk0461.studip.sheet.TextSheet
 import com.denizk0461.studip.viewmodel.EventViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import java.util.*

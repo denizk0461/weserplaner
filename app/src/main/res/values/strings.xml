@@ -126,9 +126,6 @@
     <string name="settings_highlight_title">Highlight next course</string>
     <string name="settings_highlight_subtitle">Only works properly if courses don\'t overlap!</string>
 
-    <string name="settings_quarter_title">Use academic quarter</string>
-    <string name="settings_quarter_subtitle">Where applicable</string>
-
     <string name="settings_allergens_title">Mark offers with allergens with a star*</string>
     <string name="settings_allergens_subtitle">Also applies to additives</string>
 

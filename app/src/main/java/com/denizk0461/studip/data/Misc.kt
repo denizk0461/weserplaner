@@ -5,7 +5,8 @@ import android.content.res.Resources
 import android.util.TypedValue
 import android.widget.Toast
 import androidx.annotation.AttrRes
-import com.denizk0461.studip.R
+import com.denizk0461.studip.exception.AcademicQuarterNotApplicableException
+import kotlin.jvm.Throws
 
 /**
  * Miscellaneous functions and variables that don't belong into any specific class.
@@ -45,7 +46,9 @@ fun showToast(context: Context, text: String) {
  * Provides a conversion method between a timestamp ending in a full hour, and one with an academic
  * quarter applied.
  */
-val timeslotsAcademicQuarter = listOf(
+val timeslotsAcademicQuarter: List<String> = listOf(
+    "0:00",
+    "2:00",
     "4:00",
     "6:00",
     "8:00",
@@ -56,28 +59,57 @@ val timeslotsAcademicQuarter = listOf(
     "18:00",
     "20:00",
     "22:00",
+    "24:00",
 )
 
-val timeslotsAcademicQuarterStart = mapOf(
-    "4:00" to "4:15",
-    "6:00" to "6:15",
-    "8:00" to "8:15",
-    "10:00" to "10:15",
-    "12:00" to "12:15",
-    "14:00" to "14:15",
-    "16:00" to "16:15",
-    "18:00" to "18:15",
-    "20:00" to "20:15",
-)
+/**
+ * Provides a means of converting from a timestamp ending in a full hour to a timestamp that takes
+ * the academic quarter into account. Should only be used on events where it can be assumed that the
+ * academic quarter was implied in the timestamp. Use this for the beginning of an event.
+ *
+ * @param input timestamp to apply the academic quarter to
+ * @return      timestamp with the academic quarter applied to it
+ */
+@Throws(AcademicQuarterNotApplicableException::class)
+fun getTimestampAcademicQuarterStart(input: String): String = when (input) {
+    "0:00" -> "0:15"
+    "2:00" -> "2:15"
+    "4:00" -> "4:15"
+    "6:00" -> "6:15"
+    "8:00" -> "8:15"
+    "10:00" -> "10:15"
+    "12:00" -> "12:15"
+    "14:00" -> "14:15"
+    "16:00" -> "16:15"
+    "18:00" -> "18:15"
+    "20:00" -> "20:15"
+    "22:00" -> "22:15"
+    "24:00" -> "0:15"
+    else -> throw AcademicQuarterNotApplicableException()
+}
 
-val timeslotsAcademicQuarterEnd = mapOf(
-    "6:00" to "5:45",
-    "8:00" to "7:45",
-    "10:00" to "9:45",
-    "12:00" to "11:45",
-    "14:00" to "13:45",
-    "16:00" to "15:45",
-    "18:00" to "17:45",
-    "20:00" to "19:45",
-    "22:00" to "21:45",
-)
+/**
+ * Provides a means of converting from a timestamp ending in a full hour to a timestamp that takes
+ * the academic quarter into account. Should only be used on events where it can be assumed that the
+ * academic quarter was implied in the timestamp. Use this for the end of an event.
+ *
+ * @param input timestamp to apply the academic quarter to
+ * @return      timestamp with the academic quarter applied to it
+ */
+@Throws(AcademicQuarterNotApplicableException::class)
+fun getTimestampAcademicQuarterEnd(input: String): String = when (input) {
+    "0:00" -> "23:45"
+    "2:00" -> "1:45"
+    "4:00" -> "3:45"
+    "6:00" -> "5:45"
+    "8:00" -> "7:45"
+    "10:00" -> "9:45"
+    "12:00" -> "11:45"
+    "14:00" -> "13:45"
+    "16:00" -> "15:45"
+    "18:00" -> "17:45"
+    "20:00" -> "19:45"
+    "22:00" -> "21:45"
+    "24:00" -> "23:45"
+    else -> throw AcademicQuarterNotApplicableException()
+}

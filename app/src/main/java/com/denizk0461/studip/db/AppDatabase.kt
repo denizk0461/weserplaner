@@ -21,7 +21,9 @@ import com.denizk0461.studip.model.*
 )
 abstract class AppDatabase : RoomDatabase() {
 
-    // The database access object
+    /**
+     * The database access object. Database transactions go through this.
+     */
     abstract fun dao(): AppDAO
 
     companion object {

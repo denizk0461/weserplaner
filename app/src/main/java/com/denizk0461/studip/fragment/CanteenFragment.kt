@@ -108,7 +108,7 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
 
         // Assign a preference value to every button to filter for dietary preferences
         val chipMap = mapOf(
-            binding.chipPrefFair to DietaryPreferences.FAIR,
+            binding.chipPrefFair to DietaryPreferences.WELFARE,
             binding.chipPrefFish to DietaryPreferences.FISH,
             binding.chipPrefPoultry to DietaryPreferences.POULTRY,
             binding.chipPrefLamb to DietaryPreferences.LAMB,
@@ -255,7 +255,7 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
 
             // Find all preferences that need to be met
             prefs.forEachIndexed { index, c ->
-                if (c == DietaryPrefObject.C_TRUE) indices.add(index)
+                if (c == DietaryPreferences.C_TRUE) indices.add(index)
             }
 
             // Needs to be set to correctly assemble the regular expression
@@ -268,7 +268,7 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
 
                 // Add the expression looking for the single preference to the entire string
                 regexString += emptyPreferenceRegex.substring(0 until index) +
-                        DietaryPrefObject.C_TRUE +
+                        DietaryPreferences.C_TRUE +
                         emptyPreferenceRegex.substring(index+1)
 
                 // Ensure that OR statements will be placed between the individual expressions
@@ -290,7 +290,7 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
         // Get dietary preference regex
         val prefsRegex = getPrefRegex()
 
-        val filteredForPreferences = if (prefsRegex.toString() == emptyPreferenceRegex) {
+        val filteredForPrefs = if (prefsRegex.toString() == emptyPreferenceRegex) {
             // Show all elements and skip filtering if no preference is set
             this
         } else {
@@ -300,15 +300,15 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
             }
         }
 
-        return filteredForPreferences.map { offer ->
+        return filteredForPrefs.map { (_, date, dateId, category, _, canteen, _, _, _, _, _) ->
             // Create new group elements to group the already filtered elements by their categories
             CanteenOfferGroup(
-                offer.date,
-                offer.dateId,
-                offer.category,
-                offer.canteen,
-                filteredForPreferences.filter {
-                    it.category == offer.category && it.date == offer.date && it.canteen == offer.canteen
+                date,
+                dateId,
+                category,
+                canteen,
+                filteredForPrefs.filter {
+                    it.category == category && it.date == date && it.canteen == canteen
                 }.map {
                     // Map the individual items to their respective groups
                     CanteenOfferGroupElement(
