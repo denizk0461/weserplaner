@@ -37,7 +37,7 @@ class AppRepository(app: Application) {
      *
      * @param events objects to be saved to the database
      */
-    fun insertEvents(events: List<StudIPEvent>) { dao.insert(events) }
+    fun insertEvents(events: List<StudIPEvent>) { dao.insertEvents(events) }
 
     /**
      * Deletes all Stud.IP events from the database.
@@ -174,11 +174,25 @@ class AppRepository(app: Application) {
     fun insert(date: OfferDate) { dao.insert(date) }
 
     /**
+     * Inserts a list of dates into the database.
+     *
+     * @param dates objects to be saved to the database
+     */
+    fun insertDates(dates: List<OfferDate>) { dao.insertDates(dates) }
+
+    /**
      * Inserts a canteen into the database.
      *
-     * @param canteen object to be saved to the database
+     * @param canteen   object to be saved to the database
      */
     fun insert(canteen: OfferCanteen) { dao.insert(canteen) }
+
+    /**
+     * Inserts a list of canteens into the database.
+     *
+     * @param canteens  objects to be saved to the database
+     */
+    fun insertCanteens(canteens: List<OfferCanteen>) { dao.insertCanteens(canteens) }
 
     /**
      * Inserts a canteen offer category into the database.
@@ -188,11 +202,25 @@ class AppRepository(app: Application) {
     fun insert(category: OfferCategory) { dao.insert(category) }
 
     /**
+     * Inserts a list of categories into the database.
+     *
+     * @param categories    objects to be saved to the database
+     */
+    fun insertCategories(categories: List<OfferCategory>) { dao.insertCategories(categories) }
+
+    /**
      * Inserts a canteen offer item into the database.
      *
      * @param item object to be saved to the database
      */
     fun insert(item: OfferItem) { dao.insert(item) }
+
+    /**
+     * Inserts a list of items into the database.
+     *
+     * @param items objects to be saved to the database
+     */
+    fun insertItems(items: List<OfferItem>) { dao.insertItems(items) }
 
     // --- settings preferences --- //
 

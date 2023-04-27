@@ -49,6 +49,15 @@ class CanteenOfferItemAdapter(
         // Retrieve item for current position
         val currentItem = offers[position]
 
+        /*
+         * Children of the line container MUST be removed before any are added, as otherwise, during
+         * recycling, lines will be duplicated when they are scrolled off the visible screen area
+         * and then scrolled onto the screen again. In other terms, if removeAllViews() wasn't
+         * called and the user was to scroll down a list and then back up again, the items at the
+         * top of the list would be added again, creating duplicates.
+         */
+        holder.binding.lineContainer.removeAllViews()
+
         // If an item has been added to mark that there are no offers available, tell the user
         if (currentItem.category == "NO\$ITEMS") {
 

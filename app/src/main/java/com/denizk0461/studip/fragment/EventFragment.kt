@@ -1,9 +1,12 @@
 package com.denizk0461.studip.fragment
 
 import android.os.Bundle
+import android.os.Parcelable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import com.denizk0461.studip.R
 import com.denizk0461.studip.adapter.StudIPEventItemAdapter
@@ -39,13 +42,12 @@ class EventFragment : AppFragment() {
     private var dayOfWeek: Int = 0
 
     // Titles for the view pager's tabs
-    private val dayStrings = listOf(
-        R.string.monday,
-        R.string.tuesday,
-        R.string.wednesday,
-        R.string.thursday,
-        R.string.friday,
-    )
+    private lateinit var weekdays: Array<String>
+
+//    private var viewPagerScrollPosition: Parcelable? = null
+    private var viewPagerPosition = -1
+
+    private var hasFragmentStarted = false
 
     // Instantiate the view binding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -56,40 +58,45 @@ class EventFragment : AppFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /*
-         * Determine the current day.
-         * TODO expand to weekend
-         */
+        weekdays = resources.getStringArray(R.array.weekdays)
+
+        // Determine the current day
         dayOfWeek = when (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
             Calendar.TUESDAY -> 1
             Calendar.WEDNESDAY -> 2
             Calendar.THURSDAY -> 3
             Calendar.FRIDAY -> 4
-            else -> 0
+            Calendar.SATURDAY -> 5
+            Calendar.SUNDAY -> 6
+            else -> 0 // assume Monday
         }
 
         // Set up the view pager's adapter
-        viewPagerAdapter = StudIPEventPageAdapter(listOf(), object : StudIPEventItemAdapter.OnClickListener {
-            override fun onClick(event: StudIPEvent) {
-                // TODO implement functionality or delete
-            }
-            override fun onLongClick(event: StudIPEvent): Boolean {
-                // Open a bottom sheet to edit the event
-                openBottomSheet(ScheduleUpdateSheet(event, onUpdate = { eventToUpdate ->
-                    viewModel.update(eventToUpdate)
-                }, onDelete = { eventToDelete ->
-                    viewModel.delete(eventToDelete)
-                }))
-                return true
-            }
-        })
+        viewPagerAdapter =
+            StudIPEventPageAdapter(activity as FragmentActivity, listOf(), object : StudIPEventItemAdapter.OnClickListener {
+                override fun onClick(event: StudIPEvent) {
+                    // TODO implement functionality or delete
+                }
+                override fun onLongClick(event: StudIPEvent): Boolean {
+                    // Save the current page of the ViewPager
+                    viewPagerPosition = binding.viewPager.currentItem
+
+                    // Open a bottom sheet to edit the event
+                    openBottomSheet(ScheduleUpdateSheet(event, onUpdate = { eventToUpdate ->
+                        viewModel.update(eventToUpdate)
+                    }, onDelete = { eventToDelete ->
+                        viewModel.delete(eventToDelete)
+                    }))
+                    return true
+                }
+            })
 
         // Assign the adapter to the view pager
         binding.viewPager.adapter = viewPagerAdapter
 
         // Create and attach the object mediating the tabs for the view pager
         TabLayoutMediator(binding.dayTabLayout, binding.viewPager) { tab, position ->
-            tab.text = getString(dayStrings[position])
+            tab.text = weekdays[position]
         }.attach()
 
         // Set up LiveData observer to refresh the view on update
@@ -97,16 +104,53 @@ class EventFragment : AppFragment() {
             // Update the item list in the view pager's adapter
             viewPagerAdapter.setNewItems(events)
 
-            // Scroll to the current day
-            switchToCurrentDayView()
+            if (!hasFragmentStarted) {
+                // Scroll to the current day, if no page has been stored to be scrolled to
+                switchToCurrentDayView()
+                hasFragmentStarted = true
+//            } else {
+//                /*
+//                 * If a page was previously saved, scroll to that one instead. This is meant to
+//                 * prevent jumping from
+//                 */
+//                binding.viewPager.currentItem = viewPagerPosition
+            }
         }
+    }
+
+    override fun onPause() {
+//        viewPagerPosition = binding.viewPager.currentItem
+//        Log.d("AAA?", "onpause: $viewPagerPosition")
+        super.onPause()
     }
 
     override fun onResume() {
         super.onResume()
+        binding.viewPager.currentItem = viewPagerPosition
+        Log.d("AAA?", "onresume: pos: $viewPagerPosition; vpp: ${binding.viewPager.currentItem}")
 
         // Scroll to the current day
-        switchToCurrentDayView()
+//        switchToCurrentDayView()
+    }
+
+    /**
+     * Called when the layout changes (e.g. device rotation) but NOT when the fragment is selected
+     * from the bottom navigation view.
+     */
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        Log.d("AAA?", "${binding.viewPager.currentItem}")
+        outState.putInt(
+            "viewPagerCurrentPage",
+            binding.viewPager.currentItem
+        )
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        val restoredPage = savedInstanceState?.getInt("viewPagerCurrentPage") ?: 0
+        viewPagerPosition = restoredPage
+
     }
 
     // Invalidate the view binding

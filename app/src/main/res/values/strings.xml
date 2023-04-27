@@ -9,6 +9,16 @@
     <string name="saturday">Saturday</string>
     <string name="sunday">Sunday</string>
 
+    <string-array name="weekdays">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
+
     <string name="fetch_error_snack">Something went wrong!</string>
     
     <string name="save">Save</string>

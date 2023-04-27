@@ -1,6 +1,5 @@
 package com.denizk0461.studip.data
 
-import com.denizk0461.studip.db.AppRepository
 import com.denizk0461.studip.model.*
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
@@ -63,8 +62,15 @@ class StwParser {
         Dependencies.repo.nukeOffers()
 
         // Fetch offers from the chosen canteen
-        parseFromPage(link, Dependencies.repo)
+        val (dates, canteens, categories, items) = parseFromPage(link)
 
+        // Save everything all at once into the database
+        with (Dependencies.repo) {
+            insertDates(dates)
+            insertCanteens(canteens)
+            insertCategories(categories)
+            insertItems(items)
+        }
             // TODO implement onRefresh(Int)
 
         // Action call once all fetching activities have finished
@@ -75,9 +81,14 @@ class StwParser {
      * Fetch and parse the plan of a specific canteen.
      *
      * @param url   link to the canteen to be scraped. Must be a subpage of stw-bremen.de
-     * @param repo  reference to the app repository used to save the items to persistent storage
      */
-    private fun parseFromPage(url: String, repo: AppRepository) {
+    private fun parseFromPage(url: String): StwResults {
+
+        val dates = mutableListOf<OfferDate>()
+        val canteens = mutableListOf<OfferCanteen>()
+        val categories = mutableListOf<OfferCategory>()
+        val items = mutableListOf<OfferItem>()
+
         // Used to store a parsed date string without creating a new variable on every loop
         var date: String
 
@@ -120,8 +131,8 @@ class StwParser {
         // Trim off excess line breaks
         openingHours = openingHours.trim()
 
-        // Save the canteen to persistent storage
-        repo.insert(
+        // Save the canteen to its list
+        canteens.add(
             OfferCanteen(
                 canteenId,
                 doc.getElementsByClass("pane-title")[1].text(),
@@ -148,12 +159,8 @@ class StwParser {
              */
             date = "${rawDate[0]}${rawDate[1].monthToNumber()}."
 
-            /*
-             * Save the date to persistent storage.
-             * TODO this will duplicate date entries for every canteen that is fetched. This is
-             *  inefficient.
-             */
-            repo.insert(OfferDate(dateId, date))
+            // Save the date to its list
+            dates.add(OfferDate(dateId, date))
 
             dateHasItems = false
 
@@ -165,8 +172,8 @@ class StwParser {
                 // Retrieve the category text
                 val categoryTitle = category.getElementsByClass("category-name")[0].text()
 
-                // Save the category to persistent storage
-                repo.insert(OfferCategory(categoryId, dateId, canteenId, categoryTitle))
+                // Save the category to its list
+                categories.add(OfferCategory(categoryId, dateId, canteenId, categoryTitle))
 
                 // Iterate through all items in a category
                 category
@@ -195,8 +202,8 @@ class StwParser {
 
                         val filteredText = tableRows[1].getFilteredText()
 
-                        // Save the item to persistent storage
-                        repo.insert(
+                        // Save the item to its list
+                        items.add(
                             OfferItem(
                                 itemId,
                                 categoryId,
@@ -219,8 +226,8 @@ class StwParser {
              * is available. Text will then be handled in the adapter class.
              */
             if (!dateHasItems) {
-                repo.insert(OfferCategory(categoryId, dateId, canteenId, "NO\$ITEMS"))
-                repo.insert(
+                categories.add(OfferCategory(categoryId, dateId, canteenId, "NO\$ITEMS"))
+                items.add(
                     OfferItem(
                         itemId,
                         categoryId,
@@ -240,6 +247,8 @@ class StwParser {
         }
         // Increment the canteen ID to avoid conflict
         canteenId += 1
+
+        return StwResults(dates, canteens, categories, items)
     }
 
     /**
@@ -365,6 +374,13 @@ class StwParser {
 //            .replace("</strong>", "")
 //            .replace("<p>", "")
 //            .replace("</p>", "")
+
+    private data class StwResults(
+        val dates: List<OfferDate>,
+        val canteens: List<OfferCanteen>,
+        val categories: List<OfferCategory>,
+        val items: List<OfferItem>,
+    )
 
     // Image links to all dietary preferences used for checking whether a preference is met
     private val imageLinkPrefFair = "https://www.stw-bremen.de/sites/default/files/images/pictograms/at_small.png"

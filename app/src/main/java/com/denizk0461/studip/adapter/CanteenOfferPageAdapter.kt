@@ -1,16 +1,15 @@
 package com.denizk0461.studip.adapter
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.denizk0461.studip.databinding.ItemScrollablePageBinding
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.denizk0461.studip.fragment.CanteenPageFragment
 import com.denizk0461.studip.model.CanteenOfferGroup
 
 /**
- * Custom RecyclerView adapter for managing multiple pages of canteen offers in a RecyclerView or
- * ViewPager.
+ * Custom ViewPager adapter for managing multiple pages of canteen offers.
  *
+ * @param fragmentActivity  parent fragment activity
  * @param offers            all offers for a given canteen, grouped by category (not filtered by day at
  *                          this point)
  * @param daysCovered       tells for how many days offers are available for.
@@ -20,54 +19,23 @@ import com.denizk0461.studip.model.CanteenOfferGroup
  * @param displayAllergens  whether the user wants allergens to be marked
  */
 class CanteenOfferPageAdapter(
+    fragmentActivity: FragmentActivity,
     private var offers: List<CanteenOfferGroup>,
     private var daysCovered: Int,
     private val onClickListener: CanteenOfferItemAdapter.OnClickListener,
     private val displayAllergens: Boolean,
-) : RecyclerView.Adapter<CanteenOfferPageAdapter.CanteenOfferPageViewHolder>() {
-
-    /**
-     * View holder class for parent class
-     *
-     * @param binding   view binding object
-     */
-    class CanteenOfferPageViewHolder(val binding: ItemScrollablePageBinding) : RecyclerView.ViewHolder(binding.root)
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CanteenOfferPageViewHolder =
-        CanteenOfferPageViewHolder(
-            ItemScrollablePageBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-    )
+) : FragmentStateAdapter(fragmentActivity) {
 
     // Returns the count of days covered
     override fun getItemCount(): Int = daysCovered
 
-    override fun onBindViewHolder(holder: CanteenOfferPageViewHolder, position: Int) {
-
-        holder.binding.pageRecyclerView.apply {
-            // Set page to horizontally scroll
-            layoutManager = LinearLayoutManager(
-                holder.binding.root.context, LinearLayoutManager.VERTICAL, false
-            )
-
-            /*
-             * Create new adapter for every page. Attribute position denotes day that will be set up
-             * by the newly created adapter (0 = Monday, 4 = Friday)
-             * TODO check if the filtered list is empty, and tell the user if it is
-             */
-            adapter = CanteenOfferItemAdapter(
-                offers.filter { it.dateId == position },
-                onClickListener,
-                displayAllergens,
-            )
-
-            // Animate creation of new page
-            scheduleLayoutAnimation()
-        }
-    }
+    override fun createFragment(position: Int): Fragment =
+        CanteenPageFragment(
+            offers,
+            onClickListener,
+            displayAllergens,
+            position,
+        )
 
     /**
      * Update the entire list of items

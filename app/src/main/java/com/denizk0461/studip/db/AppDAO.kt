@@ -49,7 +49,7 @@ interface AppDAO {
      *
      * @param events objects to be saved to the database
      */
-    @Insert fun insert(events: List<StudIPEvent>)
+    @Insert fun insertEvents(events: List<StudIPEvent>)
 
     /**
      * Deletes all Stud.IP events from the database.
@@ -124,16 +124,30 @@ interface AppDAO {
     /**
      * Inserts a date into the database.
      *
-     * @param date object to be saved to the database
+     * @param date  object to be saved to the database
      */
     @Insert fun insert(date: OfferDate)
 
     /**
+     * Inserts a list of dates into the database.
+     *
+     * @param dates objects to be saved to the database
+     */
+    @Insert fun insertDates(dates: List<OfferDate>)
+
+    /**
      * Inserts a canteen into the database.
      *
-     * @param canteen object to be saved to the database
+     * @param canteen   object to be saved to the database
      */
     @Insert fun insert(canteen: OfferCanteen)
+
+    /**
+     * Inserts a list of canteens into the database.
+     *
+     * @param canteens  objects to be saved to the database
+     */
+    @Insert fun insertCanteens(canteens: List<OfferCanteen>)
 
     /**
      * Inserts a canteen offer category into the database.
@@ -143,11 +157,25 @@ interface AppDAO {
     @Insert fun insert(category: OfferCategory)
 
     /**
+     * Inserts a list of categories into the database.
+     *
+     * @param categories    objects to be saved to the database
+     */
+    @Insert fun insertCategories(categories: List<OfferCategory>)
+
+    /**
      * Inserts a canteen offer item into the database.
      *
      * @param item object to be saved to the database
      */
     @Insert fun insert(item: OfferItem)
+
+    /**
+     * Inserts a list of items into the database.
+     *
+     * @param items objects to be saved to the database
+     */
+    @Insert fun insertItems(items: List<OfferItem>)
 
     /**
      * Retrieves the opening hours of the canteen as a string.

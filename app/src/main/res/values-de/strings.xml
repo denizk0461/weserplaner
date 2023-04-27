@@ -9,6 +9,16 @@
     <string name="saturday">Samstag</string>
     <string name="sunday">Sonntag</string>
 
+    <string-array name="weekdays">
+        <item>Montag</item>
+        <item>Dienstag</item>
+        <item>Mittwoch</item>
+        <item>Donnerstag</item>
+        <item>Freitag</item>
+        <item>Samstag</item>
+        <item>Sonntag</item>
+    </string-array>
+
     <string name="fetch_error_snack">Ein Fehler ist aufgetreten!</string>
 
     <string name="save">Speichern</string>
@@ -120,9 +130,6 @@
 
     <string name="settings_highlight_title">Markiere meinen nächsten Kurs</string>
     <string name="settings_highlight_subtitle">Funktioniert nur wenn Kurse sich nicht überschneiden!</string>
-
-    <string name="settings_quarter_title">Nutze akademisches Viertel</string>
-    <string name="settings_quarter_subtitle">Wo es passt</string>
 
     <string name="settings_allergens_title">Markiere Angebote mit Allergenen mit einem Stern*</string>
     <string name="settings_allergens_subtitle">Wird auch für Zusatzstoffe genutzt</string>

@@ -1,61 +1,31 @@
 package com.denizk0461.studip.adapter
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.denizk0461.studip.model.StudIPEvent
-import com.denizk0461.studip.databinding.ItemScrollablePageBinding
+import com.denizk0461.studip.fragment.EventPageFragment
 
 /**
- * Custom RecyclerView adapter for managing multiple pages of Stud.IP events in a RecyclerView or
- * ViewPager.
+ * Custom ViewPager adapter for managing multiple pages of Stud.IP events.
  *
+ * @param fragmentActivity  parent fragment activity
  * @param events            all events (not filtered by day at this point)
  * @param onClickListener   for managing click and long press events
  */
 class StudIPEventPageAdapter(
+    fragmentActivity: FragmentActivity,
     private var events: List<StudIPEvent>,
     private val onClickListener: StudIPEventItemAdapter.OnClickListener,
-) : RecyclerView.Adapter<StudIPEventPageAdapter.EventPageViewHolder>() {
-
-    /**
-     * View holder class for parent class
-     *
-     * @param binding   view binding object
-     */
-    class EventPageViewHolder(val binding: ItemScrollablePageBinding) : RecyclerView.ViewHolder(binding.root)
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventPageViewHolder = EventPageViewHolder(
-        ItemScrollablePageBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        )
-    )
+) : FragmentStateAdapter(fragmentActivity) {
 
     /*
-     * Assume that there will always be 5 pages, for 5 days - Monday through Friday.
-     * TODO is it right to assume that the user only has events on weekdays?
+     * Assume that there will always be 7 pages, for 7 days - Monday through Sunday.
      */
-    override fun getItemCount(): Int = 5
+    override fun getItemCount(): Int = 7
 
-    // Set up page
-    override fun onBindViewHolder(holder: EventPageViewHolder, position: Int) {
-        holder.binding.pageRecyclerView.apply {
-            // Set page to horizontally scroll
-            layoutManager = LinearLayoutManager(holder.binding.root.context, LinearLayoutManager.VERTICAL, false)
-
-            /*
-             * Create new adapter for every page. Attribute position denotes day that will be set up
-             * by the newly created adapter (0 = Monday, 4 = Friday)
-             */
-            adapter = StudIPEventItemAdapter(events, currentDay = position, onClickListener) // TODO check if empty
-
-            // Animate creation of new page
-            scheduleLayoutAnimation()
-        }
-    }
+    override fun createFragment(position: Int): Fragment =
+        EventPageFragment(events, position, onClickListener)
 
     /**
      * Update the entire list of items

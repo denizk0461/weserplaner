@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import com.denizk0461.studip.R
 import com.denizk0461.studip.adapter.CanteenOfferItemAdapter
@@ -145,7 +146,11 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
 
         // Set up the view pager's adapter
         viewPagerAdapter = CanteenOfferPageAdapter(
-            listOf(), 0, this, viewModel.preferenceAllergen
+            activity as FragmentActivity,
+            listOf(),
+            0,
+            this,
+            viewModel.preferenceAllergen,
         )
 
         // Assign the adapter to the view pager
@@ -163,7 +168,9 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
             val groupedElements = offers.groupElements().distinct()
 
             // Find all dates stored in the database
-            val newDates = /*groupedElements.map { it.date }.distinct() TODO */viewModel.getDates()
+//            val newDates = /*groupedElements.map { it.date }.distinct() TODO */viewModel.getDates()
+
+            val newDates = groupedElements.map { it.date }.distinct()
 
             // Update the date count stored in this fragment
             dateSize = newDates.size
