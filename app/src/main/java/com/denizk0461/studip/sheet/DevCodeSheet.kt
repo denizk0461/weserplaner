@@ -5,7 +5,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Base64
 import android.view.View
-import android.widget.Toast
 import com.denizk0461.studip.R
 import com.denizk0461.studip.data.showToast
 import com.denizk0461.studip.data.viewBinding
@@ -52,13 +51,14 @@ class DevCodeSheet(
              * If you're reading this – why?
              */
             when (binding.input.text.toString().uppercase()) {
-                "U1RST0JF".d() -> launchLink("aHR0cHM6Ly95b3V0dS5iZS90S2k5Wi1mNnFYNA==".d())
-                "U1BJUklU".d() -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9XN25lMzlEU05TZw==".d())
-                "Q0xPVURT".d() -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9rbUJ6YTRhNTB2dw==".d())
-                "NjQxODJL".d() -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9EbTFyZ285UHBUcw==".d())
-                "U0FJTE9S".d() -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9QUHlDYXZ6OG5NWQ==".d())
-                "SE9ORVNU".d() -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9DSEg0OE5LUEFraw==".d())
-                "QkJVT0s/".d() -> launchLink("aHR0cHM6Ly95b3V0dS5iZS90Rm1PMm1TY0tHNA==".d())
+                "U1RST0JF".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS90S2k5Wi1mNnFYNA==".d64)
+                "U1BJUklU".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9XN25lMzlEU05TZw==".d64)
+                "Q0xPVURT".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9rbUJ6YTRhNTB2dw==".d64)
+                "NjQxODJL".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9EbTFyZ285UHBUcw==".d64)
+                "U0FJTE9S".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9QUHlDYXZ6OG5NWQ==".d64)
+                "SE9ORVNU".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9DSEg0OE5LUEFraw==".d64)
+                "QkJVT0s/".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS90Rm1PMm1TY0tHNA==".d64)
+                "SUhUU0Mq".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS85bXZ4SVdhWHZuWQ==".d64)
                 "NEVENT" -> { // nuke events
                     nukeEvents()
                     showToast(context, "Nuked all events")
@@ -107,7 +107,7 @@ class DevCodeSheet(
      *
      * @return the encoded string
      */
-    private fun String.e(): String = Base64.encodeToString(this.toByteArray(), Base64.DEFAULT)
+    private val String.e64: String get() = Base64.encodeToString(this.toByteArray(), Base64.DEFAULT)
 
 
     /**
@@ -115,7 +115,7 @@ class DevCodeSheet(
      *
      * @return the decoded string
      */
-    private fun String.d(): String = String(
+    private val String.d64: String get() = String(
         Base64.decode(this, Base64.DEFAULT),
         StandardCharsets.UTF_8
     )

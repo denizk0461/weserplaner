@@ -68,11 +68,13 @@ class CanteenOfferItemAdapter(
             // Inflate a new icon holder
             val img = ItemIconBinding.inflate(LayoutInflater.from(holder.binding.root.context))
 
+            val (_, drawableId) = DietaryPreferences.getData(DietaryPreferences.ERROR.ordinal)
+
             // Set a cross icon
             img.imageView.setImageDrawable(
                 AppCompatResources.getDrawable(
                     holder.binding.root.context,
-                    DietaryPreferences.indexToDrawable[11]!!,
+                    drawableId,
                 )
             )
 
@@ -117,11 +119,13 @@ class CanteenOfferItemAdapter(
                     // Inflate a new icon holder
                     val img = ItemIconBinding.inflate(LayoutInflater.from(holder.binding.root.context))
 
+                    val (_, drawableId) = DietaryPreferences.getData(index)
+
                     // Set the appropriate icon
                     img.imageView.setImageDrawable(
                         AppCompatResources.getDrawable(
                             holder.binding.root.context,
-                            DietaryPreferences.indexToDrawable[index]!!,
+                            drawableId,
                         )
                     )
 

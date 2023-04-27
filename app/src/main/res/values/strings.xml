@@ -22,6 +22,8 @@
     <string name="sheet_schedule_update_timeslot_middle" translatable="false">–</string>
     <string name="sheet_schedule_update_hint_quarter">Change to academic quarter</string>
     <string name="sheet_schedule_update_hint_quarter_error">Sorry, an error occurred!</string>
+    <string name="sheet_schedule_update_timestamp_error_start">The course can\'t begin after it ends!</string>
+    <string name="sheet_schedule_update_timestamp_error_end">The course can\'t end before it begins!</string>
 
     <string name="canteen_no_offer_header">No offers</string>
     <string name="canteen_no_offer_desc">There are no offers available for this day</string>
@@ -47,9 +49,10 @@
     <string name="mensa_hfk">Interimsmensa HfK</string>
 
     <string name="sheet_category" translatable="false">[ %s ]</string>
+    <string name="question_mark" translatable="false">\?</string>
 
     <!-- dietary preferences -->
-    <string name="pref_fair">Fair</string> <!-- is this really the best name? what about 'animal welfare'? -->
+    <string name="pref_fair">Animal Welfare</string> <!-- TODO is this really the best name? what about 'animal welfare'? -->
     <string name="pref_fish">Fish</string>
     <string name="pref_poultry">Poultry</string>
     <string name="pref_lamb">Lamb</string>

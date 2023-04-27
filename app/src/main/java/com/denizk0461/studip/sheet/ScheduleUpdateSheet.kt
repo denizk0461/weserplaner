@@ -161,10 +161,12 @@ class ScheduleUpdateSheet(
         // Parse the separate ints into a timestamp string. Add a leading zero if necessary.
         val newTimestamp = "$hours:${String.format("%02d", minutes)}"
 
-        // If start > end, show an error
-        if ((isEventStart && newTimestamp.parseToMinutes() > timeslotEnd.parseToMinutes()) ||
-            (!isEventStart && newTimestamp.parseToMinutes() < timeslotStart.parseToMinutes())) {
-            // TODO tell user that the timestamp must be set earlier/later
+        if (isEventStart && newTimestamp.parseToMinutes() > timeslotEnd.parseToMinutes()) {
+            // If editing start and start > end, show an error
+            showToast(context, getString(R.string.sheet_schedule_update_timestamp_error_start))
+            // If editing end and end < start, show an error
+        } else if (!isEventStart && newTimestamp.parseToMinutes() < timeslotStart.parseToMinutes()) {
+            showToast(context, getString(R.string.sheet_schedule_update_timestamp_error_end))
         } else {
             // If the new timestamp is valid, save it
             if (isEventStart) {

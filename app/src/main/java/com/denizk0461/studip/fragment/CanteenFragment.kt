@@ -152,7 +152,7 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
         binding.viewPager.adapter = viewPagerAdapter
 
         // Create and attach the tab mediator for the view pager
-        createTabLayoutMediator()
+//        createTabLayoutMediator()
 
         // Set up LiveData observer to refresh the view on update
         viewModel.allOffers.observe(viewLifecycleOwner) { offers ->
@@ -163,7 +163,7 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
             val groupedElements = offers.groupElements().distinct()
 
             // Find all dates stored in the database
-            val newDates = groupedElements.map { it.date }.distinct() // TODO viewModel.getDates()
+            val newDates = /*groupedElements.map { it.date }.distinct() TODO */viewModel.getDates()
 
             // Update the date count stored in this fragment
             dateSize = newDates.size
@@ -173,6 +173,10 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
 
             // Set the text for the opening hours dialogue
             openingHours = viewModel.getCanteenOpeningHours()
+
+            binding.swipeRefreshLayout.isRefreshing = false
+
+//            createTabLayoutMediator(newDates)
         }
 
         // Set up functions for when the user swipes to refresh the view
@@ -185,10 +189,11 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
      * Create and attach the object mediating the tabs for the view pager.
      * TODO this is crash-prone and doesn't refresh when the dates get renewed (when the last update
      *  was from the day prior)
+     *  TODO WHY DO YOU THROW AN INDEXOUTOFBOUNDSEXCEPTION????
      */
-    private fun createTabLayoutMediator() {
+    private fun createTabLayoutMediator(dates: List<OfferDate>) {
         // Fetch all dates from the database
-        val dates = viewModel.getDates()
+//        val dates = viewModel.getDates()
 
         if (dates.isNotEmpty()) {
             TabLayoutMediator(binding.dayTabLayout, binding.viewPager) { tab, position ->
@@ -340,6 +345,7 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
 
     /**
      * Downloads the canteen offers and refreshes them in the app.
+     * TODO handle SocketTimeoutException
      */
     private fun refresh() {
         // Retrieve new offers from the website(s)
@@ -350,10 +356,6 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
              * Tell the swipe refresh layout to stop refreshing.
              * TODO if an exception is raised, this will not be fired. This must be changed
              */
-            binding.swipeRefreshLayout.isRefreshing = false
-
-
-//                createTabLayoutMediator()
 //                binding.swipeRefreshLayout.isRefreshing = false
 //                createTabLayoutMediator()
         })

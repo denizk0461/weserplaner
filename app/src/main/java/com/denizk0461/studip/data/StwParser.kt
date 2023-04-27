@@ -1,6 +1,5 @@
 package com.denizk0461.studip.data
 
-import android.util.Log
 import com.denizk0461.studip.db.AppRepository
 import com.denizk0461.studip.model.*
 import org.jsoup.Jsoup
@@ -63,19 +62,10 @@ class StwParser {
         // Delete all previous entries and start afresh
         Dependencies.repo.nukeOffers()
 
-        /*
-         * Fetch offers from every canteen individually. This is done in sequence for
-         * simplicity's sake.
-         * TODO perhaps it can be assumed here that the next two weeks will always be available?
-         *  Hence, the date fetch might be superfluous and a database insert call could be
-         *  implemented here instead. Another option would be to set the conflict policy to IGNORE
-         *  and move the dateId reset from parseFromPage() to parse().
-         */
-//        links.forEach { link ->
-            parseFromPage(link, Dependencies.repo)
+        // Fetch offers from the chosen canteen
+        parseFromPage(link, Dependencies.repo)
 
             // TODO implement onRefresh(Int)
-//        }
 
         // Action call once all fetching activities have finished
         onFinish()
@@ -174,8 +164,6 @@ class StwParser {
 
                 // Retrieve the category text
                 val categoryTitle = category.getElementsByClass("category-name")[0].text()
-
-                Log.d("AAA?", "$date on $categoryTitle")
 
                 // Save the category to persistent storage
                 repo.insert(OfferCategory(categoryId, dateId, canteenId, categoryTitle))

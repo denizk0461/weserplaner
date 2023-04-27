@@ -45,14 +45,16 @@ class AllergenSheet(
                     // Inflate the view
                     val prefLine = ItemSheetPreferenceBinding.inflate(LayoutInflater.from(context))
 
+                    val (stringId, drawableId) = DietaryPreferences.getData(index)
+
                     // Add the localised text for the preference
-                    prefLine.preferenceText.text = getString(DietaryPreferences.indexToString[index]!!)
+                    prefLine.preferenceText.text = getString(stringId)
 
                     // Set the appropriate icon
                     prefLine.preferenceImage.setImageDrawable(
                         getDrawable(
                             context,
-                            DietaryPreferences.indexToDrawable[index]!!,
+                            drawableId,
                         )
                     )
 

@@ -12,6 +12,7 @@ import com.denizk0461.studip.db.AppRepository
 import com.denizk0461.studip.fragment.EventFragment
 import com.denizk0461.studip.fragment.CanteenFragment
 import com.denizk0461.studip.fragment.SettingsFragment
+import com.denizk0461.studip.model.SettingsPreferences
 
 /**
  * Main activity that handles all common fragments. This is opened on app launch.
@@ -41,9 +42,21 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Open the fragment that the user specified to open on app start
+        if (
+            Dependencies.repo.getBooleanPreference(SettingsPreferences.LAUNCH_CANTEEN_ON_START)
+        ) {
+            // Open canteen fragment
+            binding.contentMain.navView.selectedItemId = R.id.food
+            currentFragment = "canteen"
+        } else {
+            // Open event fragment
+            binding.contentMain.navView.selectedItemId = R.id.plan
+            currentFragment = "event"
+        }
+
         // Set up navigation view bar to launch fragments
         binding.contentMain.navView.setOnItemSelectedListener { item ->
-
             // Launch fragment based on the item that has been clicked
             loadFragment(when (item.itemId) {
                 R.id.food -> "canteen"
