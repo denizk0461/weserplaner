@@ -37,9 +37,6 @@
             app:iconPadding="0dp"
             android:layout_gravity="end|center_vertical"
             app:iconTint="?attr/colorOnSurfaceVariant"/>
-<!--        app:icon="@drawable/cross"-->
-<!--        app:strokeColor="?attr/colorOutlineVariant"-->
-<!--        android:text="@string/cancel"-->
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -1,9 +1,8 @@
 package com.denizk0461.studip.sheet
 
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import androidx.transition.TransitionManager
 import com.denizk0461.studip.R
@@ -46,37 +45,56 @@ class ScheduleUpdateSheet(
         binding.editTextLecturers.setText(event.lecturer)
         binding.editTextRoom.setText(event.room)
 
-        // Show academic quarter suggestion if it is applicable
+        /*
+         * Show academic quarter suggestion if it is applicable. For this to be the case, both the
+         * start timestamp and the end timestamp must match up in a pattern that would make it
+         * likely for the course to use the academic quarter. Example:
+         * 14:00 - 16:00 -> likely 14:15 - 15:45
+         *
+         * 13:00 - 15:30 -> likely no academic quarter intended
+         */
         binding.buttonAcademicQuarter.visibility = if (
             timeslotsAcademicQuarter.contains(timeslotStart) &&
             timeslotsAcademicQuarter.contains(timeslotEnd)
         ) {
             binding.buttonAcademicQuarter.setOnClickListener {
                 try {
+                    // Retrieve new timestamps with the academic quarter applied, or throw a tantrum
                     val newStart = timeslotsAcademicQuarterStart[timeslotStart]
                         ?: throw NullPointerException()
                     val newEnd = timeslotsAcademicQuarterEnd[timeslotEnd]
                         ?: throw NullPointerException()
 
+                    // Set the buttons to the new timesatmps
                     timeslotStart = newStart
                     binding.buttonTimeStart.text = newStart
                     timeslotEnd = newEnd
                     binding.buttonTimeEnd.text = newEnd
 
-                    TransitionManager.beginDelayedTransition(binding.sheet)
+                    /*
+                     * Attempt to fix the issue of the bottom sheet jumping up when hiding the
+                     * button.
+                     */
+                    TransitionManager.beginDelayedTransition(binding.sheet.parent as ViewGroup)
                     binding.buttonAcademicQuarter.visibility = View.GONE
+
+                // Catch if a timeslot couldn't be found in the list, and tell the user
                 } catch (e: NullPointerException) {
                     showToast(context, getString(R.string.sheet_schedule_update_hint_quarter_error))
                 }
             }
+
+            // If the pattern applies, show the button to the user
             View.VISIBLE
         } else {
+            // Hide the button if the action is not necessary or applicable
             View.GONE
         }
 
         // Prepare timestamp buttons
         binding.buttonTimeStart.text = timeslotStart
         binding.buttonTimeStart.setOnClickListener {
+            // Launch a time picker dialogue to pick a new start timestamp
             TimePickerFragment(
                 binding.buttonTimeStart.text.toString(),
                 this,
@@ -85,6 +103,7 @@ class ScheduleUpdateSheet(
         }
         binding.buttonTimeEnd.text = timeslotEnd
         binding.buttonTimeEnd.setOnClickListener {
+            // Launch a time picker dialogue to pick a new end timestamp
             TimePickerFragment(
                 binding.buttonTimeEnd.text.toString(),
                 this,

@@ -102,9 +102,33 @@ class StwParser {
          * TODO this formatting sucks
          */
         var openingHours = ""
-        doc.getElementsByClass("details-wrapper")[0].getElementsByTag("p").forEach { p ->
-            openingHours += "${p.text()}\n"
+
+        // Iterate through all wrappers that could contain opening hours
+        doc.getElementsByClass("details-wrapper").forEach {
+            // Element is not for providing contact details
+            if (it.getElementsByClass("contact-person-name").size == 0) {
+
+                /*
+                 * Retrieve all opening hours.
+                 * TODO this slows down the fetch SIGNIFICANTLY, but why?
+                 */
+                it.children().forEach { element ->
+                    if (element.tag().toString() == "p") {
+                        openingHours += element.textWithBreaks().trim() + "\n" // Uni-Mensa is not parsed properly
+                    } else {
+                        element.children().forEach { subElement ->
+                            openingHours += subElement.textWithBreaks() + '\n'
+                        }
+                    }
+                }
+            }
+
+            // Add an extra line break to separate elements
+            openingHours += "\n"
         }
+
+        // Trim off excess line breaks
+        openingHours = openingHours.trim()
 
         // Save the canteen to persistent storage
         repo.insert(
@@ -339,6 +363,20 @@ class StwParser {
         "Dez" -> "12"
         else -> "00" // shouldn't occur
     }
+
+    /**
+     * Retrieves a text and adds <br> tags with line breaks.
+     *
+     * @return  formatted element text
+     */
+    private fun Element.textWithBreaks(): String =
+        this.text()//html()
+//            .replace("<br>", "\n")
+//            .replace("&nbsp;", " ")
+//            .replace("<strong>", "")
+//            .replace("</strong>", "")
+//            .replace("<p>", "")
+//            .replace("</p>", "")
 
     // Image links to all dietary preferences used for checking whether a preference is met
     private val imageLinkPrefFair = "https://www.stw-bremen.de/sites/default/files/images/pictograms/at_small.png"
