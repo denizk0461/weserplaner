@@ -37,7 +37,7 @@ data class StudIPEvent(
      */
     fun timeslot(): String = "$timeslotStart – $timeslotEnd"
 
-    // Auto-generated methods
+    // Auto-generated methods. Necessary for [AppDiffUtilCallback]
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -45,11 +45,19 @@ data class StudIPEvent(
 
         other as StudIPEvent
 
+        if (id != other.id) return false
         if (title != other.title) return false
-        if (!lecturer.contentEquals(other.lecturer)) return false
+        if (lecturer != other.lecturer) return false
+        if (room != other.room) return false
+        if (day != other.day) return false
+        if (timeslotStart != other.timeslotStart) return false
+        if (timeslotEnd != other.timeslotEnd) return false
+        if (timeslotId != other.timeslotId) return false
+        if (colour != other.colour) return false
 
         return true
     }
+
     override fun hashCode(): Int {
         var result = id
         result = 31 * result + title.hashCode()
@@ -58,7 +66,8 @@ data class StudIPEvent(
         result = 31 * result + day
         result = 31 * result + timeslotStart.hashCode()
         result = 31 * result + timeslotEnd.hashCode()
-        result = 31 * result + colour.hashCode()
+        result = 31 * result + timeslotId
+        result = 31 * result + colour
         return result
     }
 }

@@ -1,7 +1,6 @@
 package com.denizk0461.studip.fragment
 
 import android.os.Bundle
-import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,11 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import com.denizk0461.studip.R
-import com.denizk0461.studip.adapter.StudIPEventItemAdapter
 import com.denizk0461.studip.adapter.StudIPEventPageAdapter
 import com.denizk0461.studip.databinding.FragmentEventBinding
-import com.denizk0461.studip.model.StudIPEvent
-import com.denizk0461.studip.sheet.ScheduleUpdateSheet
 import com.denizk0461.studip.viewmodel.EventViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import java.util.*
@@ -73,24 +69,7 @@ class EventFragment : AppFragment() {
         }
 
         // Set up the view pager's adapter
-        viewPagerAdapter =
-            StudIPEventPageAdapter(activity as FragmentActivity, listOf(), object : StudIPEventItemAdapter.OnClickListener {
-                override fun onClick(event: StudIPEvent) {
-                    // TODO implement functionality or delete
-                }
-                override fun onLongClick(event: StudIPEvent): Boolean {
-                    // Save the current page of the ViewPager
-                    viewPagerPosition = binding.viewPager.currentItem
-
-                    // Open a bottom sheet to edit the event
-                    openBottomSheet(ScheduleUpdateSheet(event, onUpdate = { eventToUpdate ->
-                        viewModel.update(eventToUpdate)
-                    }, onDelete = { eventToDelete ->
-                        viewModel.delete(eventToDelete)
-                    }))
-                    return true
-                }
-            })
+        viewPagerAdapter = StudIPEventPageAdapter(activity as FragmentActivity)
 
         // Assign the adapter to the view pager
         binding.viewPager.adapter = viewPagerAdapter
@@ -101,25 +80,25 @@ class EventFragment : AppFragment() {
         }.attach()
 
         // Set up LiveData observer to refresh the view on update
-        viewModel.allEvents.observe(viewLifecycleOwner) { events ->
-
-            Log.d("AAAbA?", events.toString())
-
-            // Update the item list in the view pager's adapter
-            viewPagerAdapter.setNewItems(events)
-
-            if (!hasFragmentStarted) {
-                // Scroll to the current day, if no page has been stored to be scrolled to
-                switchToCurrentDayView()
-                hasFragmentStarted = true
-//            } else {
-//                /*
-//                 * If a page was previously saved, scroll to that one instead. This is meant to
-//                 * prevent jumping from
-//                 */
-//                binding.viewPager.currentItem = viewPagerPosition
-            }
-        }
+//        viewModel.allEvents.observe(viewLifecycleOwner) { events ->
+//
+//            Log.d("AAAbA?", events.toString())
+//
+//            // Update the item list in the view pager's adapter
+//            viewPagerAdapter.setNewItems(events)
+//
+//            if (!hasFragmentStarted) {
+//                // Scroll to the current day, if no page has been stored to be scrolled to
+//                switchToCurrentDayView()
+//                hasFragmentStarted = true
+////            } else {
+////                /*
+////                 * If a page was previously saved, scroll to that one instead. This is meant to
+////                 * prevent jumping from
+////                 */
+////                binding.viewPager.currentItem = viewPagerPosition
+//            }
+//        }
     }
 
     override fun onPause() {

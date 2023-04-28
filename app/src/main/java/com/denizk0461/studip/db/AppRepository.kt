@@ -26,11 +26,11 @@ class AppRepository(app: Application) {
     private val blankDietaryPrefs: String = DietaryPreferences.C_FALSE.toString().repeat(10)
 
     /**
-     * Retrieves all Stud.IP events.
+     * Retrieves Stud.IP events for a specific day, ordered by their timeslots, then their IDs.
      *
-     * @return all Stud.IP events exposed through a LiveData object
+     * @return  Stud.IP events for a certain day exposed through a LiveData object
      */
-    val allEvents: LiveData<List<StudIPEvent>> = dao.allEvents
+    fun getEventsForDay(day: Int): LiveData<List<StudIPEvent>> = dao.getEventsForDay(day)
 
     /**
      * Inserts a list of Stud.IP events into the database.
@@ -167,25 +167,11 @@ class AppRepository(app: Application) {
     fun nukeOfferDates() { dao.nukeOfferDates() }
 
     /**
-     * Inserts a date into the database.
-     *
-     * @param date object to be saved to the database
-     */
-    fun insert(date: OfferDate) { dao.insert(date) }
-
-    /**
      * Inserts a list of dates into the database.
      *
      * @param dates objects to be saved to the database
      */
     fun insertDates(dates: List<OfferDate>) { dao.insertDates(dates) }
-
-    /**
-     * Inserts a canteen into the database.
-     *
-     * @param canteen   object to be saved to the database
-     */
-    fun insert(canteen: OfferCanteen) { dao.insert(canteen) }
 
     /**
      * Inserts a list of canteens into the database.
@@ -195,25 +181,11 @@ class AppRepository(app: Application) {
     fun insertCanteens(canteens: List<OfferCanteen>) { dao.insertCanteens(canteens) }
 
     /**
-     * Inserts a canteen offer category into the database.
-     *
-     * @param category object to be saved to the database
-     */
-    fun insert(category: OfferCategory) { dao.insert(category) }
-
-    /**
      * Inserts a list of categories into the database.
      *
      * @param categories    objects to be saved to the database
      */
     fun insertCategories(categories: List<OfferCategory>) { dao.insertCategories(categories) }
-
-    /**
-     * Inserts a canteen offer item into the database.
-     *
-     * @param item object to be saved to the database
-     */
-    fun insert(item: OfferItem) { dao.insert(item) }
 
     /**
      * Inserts a list of items into the database.

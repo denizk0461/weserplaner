@@ -20,7 +20,7 @@ import com.denizk0461.studip.model.CanteenOfferGroup
  * @param displayAllergens  whether the user wants allergens to be marked
  */
 class CanteenOfferPageAdapter(
-    val fragmentActivity: FragmentActivity,
+    fragmentActivity: FragmentActivity,
     private var offers: List<CanteenOfferGroup>,
     private var daysCovered: Int,
     private val onClickListener: CanteenOfferItemAdapter.OnClickListener,

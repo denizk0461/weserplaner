@@ -22,6 +22,14 @@ interface AppDAO {
     val allEvents: LiveData<List<StudIPEvent>>
 
     /**
+     * Retrieves Stud.IP events for a specific day, ordered by their timeslots, then their IDs.
+     *
+     * @return  Stud.IP events for a certain day exposed through a LiveData object
+     */
+    @Query("SELECT * FROM studipevents WHERE day = :day ORDER BY timeslotId, id")
+    fun getEventsForDay(day: Int): LiveData<List<StudIPEvent>>
+
+    /**
      * Updates a given Stud.IP element.
      *
      * @param event object to be updated
