@@ -2,6 +2,7 @@ package com.denizk0461.studip.db
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.preference.PreferenceManager
 import com.denizk0461.studip.model.*
 
@@ -24,6 +25,11 @@ class AppRepository(app: Application) {
 
     // Blank dietary preference regular expression
     private val blankDietaryPrefs: String = DietaryPreferences.C_FALSE.toString().repeat(10)
+
+    /**
+     * Used to observe just to register an update of the user-set dietary preferences.
+     */
+    val dietaryPreferencesUpdate: MutableLiveData<Int> = MutableLiveData(0)
 
     companion object {
         /**
@@ -78,6 +84,20 @@ class AppRepository(app: Application) {
      * @return all canteen offers exposed through a LiveData object
      */
     val allOffers: LiveData<List<CanteenOffer>> = dao.allOffers
+
+    /**
+     * Retrieves all canteen offers that match given day.
+     *
+     * @return all canteen offers matching the given day exposed through a LiveData object
+     */
+    fun getOffersByDay(day: Int): LiveData<List<CanteenOffer>> = dao.getOffersByDay(day)
+
+    /**
+     * Retrieves the amount of dates represented in the offers stored locally. Can be observed.
+     *
+     * @return  date count as LiveData
+     */
+    fun getDateCount(): LiveData<Int> = dao.getDateCount()
 
     /**
      * Updates a schedule element.

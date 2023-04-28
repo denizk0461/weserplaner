@@ -29,7 +29,7 @@ class StudIPEventItemAdapter(
     /**
      * List of all events.
      */
-    private var events: MutableList<StudIPEvent> = mutableListOf()
+    private val events: MutableList<StudIPEvent> = mutableListOf()
 
     /**
      * Retrieve an instance of Calendar to check whether the adapter's day matches the current day.

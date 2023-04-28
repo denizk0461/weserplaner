@@ -22,12 +22,7 @@ class CanteenViewModel(app: Application) : AppViewModel(app) {
      */
     val allOffers: LiveData<List<CanteenOffer>> = repo.allOffers
 
-    /**
-     * Retrieve the user's dietary preferences.
-     *
-     * @return dietary preferences
-     */
-    fun getDietaryPrefs(): DietaryPreferences.Object = repo.getDietaryPrefsAsObject()
+
 
     /**
      * Retrieves all canteen offer date objects.
@@ -53,6 +48,17 @@ class CanteenViewModel(app: Application) : AppViewModel(app) {
     fun fetchOffers(canteen: Int, onRefreshUpdate: (status: Int) -> Unit, onFinish: () -> Unit) {
         doAsync { parser.parse(canteen, onRefreshUpdate, onFinish) }
     }
+
+    fun registerDietaryPreferencesUpdate() {
+        repo.dietaryPreferencesUpdate.postValue(repo.dietaryPreferencesUpdate.value?.plus(1))
+    }
+
+    /**
+     * Retrieves the amount of dates represented in the offers stored locally. Can be observed.
+     *
+     * @return  date count as LiveData
+     */
+    fun getDateCount(): LiveData<Int> = repo.getDateCount()
 
     /**
      * Updates a given dietary preference to a new value.

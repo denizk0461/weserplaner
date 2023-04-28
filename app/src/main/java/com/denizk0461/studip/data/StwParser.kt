@@ -240,7 +240,7 @@ class StwParser(application: Application) {
                         categoryId,
                         title = "NO\$ITEMS",
                         price = "",
-                        dietaryPreferences = "..........",
+                        dietaryPreferences = "tttttttttt",
                         allergens = "",
                     )
                 )
@@ -324,7 +324,6 @@ class StwParser(application: Application) {
             text = text.substring(0 until indexSupOpen) +
                     text.substring((indexSupClose + 6) until text.length)
         }
-
         /*
          * Return the stripped and updated HTML string and join the allergen list to a cohesive
          * string without duplication.

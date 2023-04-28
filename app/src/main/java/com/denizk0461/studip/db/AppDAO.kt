@@ -98,6 +98,30 @@ interface AppDAO {
     fun getOffersByPreference(prefs: String): LiveData<List<CanteenOffer>>
 
     /**
+     * Retrieves all canteen offers that match given day. Objects will be joined through their
+     * primary/foreign keys from instances of OfferDate.kt, OfferCanteen.kt, OfferCategory.kt, and
+     * OfferItem.kt.
+     *
+     * @return all canteen offers matching the given day exposed through a LiveData object
+     */
+    @Query(
+        "SELECT * FROM offer_item " +
+                "JOIN offer_category ON offer_item.categoryId = offer_category.id " +
+                "JOIN offer_canteen ON offer_category.canteenId = offer_canteen.id " +
+                "JOIN offer_date ON offer_category.dateId = offer_date.id " +
+                "WHERE dateId = :day "
+    )
+    fun getOffersByDay(day: Int): LiveData<List<CanteenOffer>>
+
+    /**
+     * Retrieves the amount of dates represented in the offers stored locally. Can be observed.
+     *
+     * @return  date count as LiveData
+     */
+    @Query("SELECT COUNT(*) FROM offer_date")
+    fun getDateCount(): LiveData<Int>
+
+    /**
      * Retrieves all canteen offer date objects.
      *
      * @return a list of instances of canteen offer dates

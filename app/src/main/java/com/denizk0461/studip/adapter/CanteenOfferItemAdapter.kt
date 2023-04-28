@@ -3,8 +3,10 @@ package com.denizk0461.studip.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.denizk0461.studip.R
+import com.denizk0461.studip.data.AppDiffUtilCallback
 import com.denizk0461.studip.databinding.ItemCanteenBinding
 import com.denizk0461.studip.databinding.ItemCanteenLineBinding
 import com.denizk0461.studip.databinding.ItemIconBinding
@@ -15,15 +17,15 @@ import com.denizk0461.studip.model.DietaryPreferences
 /**
  * Custom RecyclerView adapter that lays out the offers of a given canteen on a given day.
  *
- * @param offers            list of all offers filtered by canteen and day, grouped by category
  * @param onClickListener   used for listening to clicks and long presses
  * @param displayAllergens  whether the user wants allergens to be marked
  */
 class CanteenOfferItemAdapter(
-    private val offers: List<CanteenOfferGroup>,
     private val onClickListener: OnClickListener,
     private val displayAllergens: Boolean,
 ) : RecyclerView.Adapter<CanteenOfferItemAdapter.OfferViewHolder>() {
+
+    private val offers: MutableList<CanteenOfferGroup> = mutableListOf()
 
     /**
      * View holder class for parent class
@@ -121,7 +123,7 @@ class CanteenOfferItemAdapter(
                 }
 
                 // If no dietary preferences are met, set the view to display a neutral icon
-                if (indices.isEmpty()) indices.add(10)
+                if (indices.isEmpty()) indices.add(DietaryPreferences.NONE.ordinal)
 
                 // Iterate through all icons that need to be displayed
                 indices.forEach { index ->
@@ -155,6 +157,26 @@ class CanteenOfferItemAdapter(
                 holder.binding.lineContainer.addView(line.root)
             }
         }
+    }
+
+    /**
+     * Updates the data and calculates the difference between the old dataset and the newly provided
+     * dataset.
+     *
+     * @param newData   new dataset to be displayed
+     */
+    fun setNewData(newData: List<CanteenOfferGroup>) {
+        // Calculate the difference between the old list and the new list
+        val diffResult = DiffUtil.calculateDiff(AppDiffUtilCallback(offers, newData))
+
+        // Remove all items from the list
+        offers.clear()
+
+        // Add all items from the new list
+        offers.addAll(newData)
+
+        // Tell the DiffUtil which items have changed between the two lists
+        diffResult.dispatchUpdatesTo(this)
     }
 
     /**
