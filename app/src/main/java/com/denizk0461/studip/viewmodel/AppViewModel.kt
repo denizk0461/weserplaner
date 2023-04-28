@@ -3,7 +3,6 @@ package com.denizk0461.studip.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.denizk0461.studip.data.Dependencies
 import com.denizk0461.studip.db.AppRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,7 +20,7 @@ open class AppViewModel(app: Application) : AndroidViewModel(app) {
     /**
      * Reference to the app's repository for database transactions.
      */
-    protected val repo: AppRepository = Dependencies.repo
+    protected val repo: AppRepository = AppRepository.getRepositoryInstance(app)
 
     /**
      * Execute a function asynchronously on the I/O thread. Be careful not to execute UI commands

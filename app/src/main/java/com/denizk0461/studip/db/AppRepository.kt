@@ -25,6 +25,27 @@ class AppRepository(app: Application) {
     // Blank dietary preference regular expression
     private val blankDietaryPrefs: String = DietaryPreferences.C_FALSE.toString().repeat(10)
 
+    companion object {
+        /**
+         * Reference to the app's repository. It is only instantiated once because it can only be
+         * accessed by [getRepositoryInstance].
+         */
+        private lateinit var repo: AppRepository
+
+        /**
+         * Get a static instance of the repository. If none has been instantiated, one will be created
+         * and saved into [repo].
+         *
+         * @return  static instance of the repository
+         */
+        fun getRepositoryInstance(app: Application): AppRepository {
+            if (!::repo.isInitialized) {
+                repo = AppRepository(app)
+            }
+            return repo
+        }
+    }
+
     /**
      * Retrieves Stud.IP events for a specific day, ordered by their timeslots, then their IDs.
      *

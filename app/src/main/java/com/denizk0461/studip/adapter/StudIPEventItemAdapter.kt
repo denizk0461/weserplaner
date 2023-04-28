@@ -27,7 +27,7 @@ class StudIPEventItemAdapter(
 ) : RecyclerView.Adapter<StudIPEventItemAdapter.EventViewHolder>() {
 
     /**
-     * List of all events (still not filtered by day at this point)
+     * List of all events.
      */
     private var events: MutableList<StudIPEvent> = mutableListOf()
 

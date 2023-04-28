@@ -13,7 +13,7 @@ import com.denizk0461.studip.model.*
 class CanteenViewModel(app: Application) : AppViewModel(app) {
 
     // Instantiate a parser, should the user want to refresh the canteen offers
-    private val parser = StwParser()
+    private val parser = StwParser(app)
 
     /**
      * Retrieves all Stud.IP events.

@@ -1,5 +1,7 @@
 package com.denizk0461.studip.data
 
+import android.app.Application
+import com.denizk0461.studip.db.AppRepository
 import com.denizk0461.studip.model.*
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
@@ -9,7 +11,7 @@ import org.jsoup.select.Elements
  * Parser class used for fetching and collecting canteen offers from the website of the
  * Studierendenwerk Bremen.
  */
-class StwParser {
+class StwParser(application: Application) {
 
     // Unique primary key value for the date elements
     private var dateId = 0
@@ -25,6 +27,11 @@ class StwParser {
 
     // Determine whether there are offers for a given date
     private var dateHasItems = false
+
+    /**
+     * Static instance of the app's repository.
+     */
+    private val repo: AppRepository = AppRepository.getRepositoryInstance(application)
 
     /**
      * Parses through a list of canteen plans and saves them to persistent storage.
@@ -59,13 +66,13 @@ class StwParser {
         }
 
         // Delete all previous entries and start afresh
-        Dependencies.repo.nukeOffers()
+        repo.nukeOffers()
 
         // Fetch offers from the chosen canteen
         val (dates, canteens, categories, items) = parseFromPage(link)
 
         // Save everything all at once into the database
-        with (Dependencies.repo) {
+        with (repo) {
             insertDates(dates)
             insertCanteens(canteens)
             insertCategories(categories)

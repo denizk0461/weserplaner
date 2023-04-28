@@ -1,7 +1,7 @@
 package com.denizk0461.studip.viewmodel
 
 import android.app.Application
-import com.denizk0461.studip.model.StudIPEvent
+import com.denizk0461.studip.data.StudIPParser
 
 /**
  * View model for [com.denizk0461.studip.activity.FetcherActivity]
@@ -10,15 +10,7 @@ import com.denizk0461.studip.model.StudIPEvent
  */
 class FetcherViewModel(app: Application) : AppViewModel(app) {
 
-    /**
-     * Save a list of Stud.IP events to persistent storage asynchronously.
-     *
-     * @param events    list of events to be saved
-     */
-    fun insertEvents(events: List<StudIPEvent>) { doAsync { repo.insertEvents(events) }}
+    private val parser: StudIPParser = StudIPParser(app)
 
-    /**
-     * Delete all Stud.IP events from the database asynchronously.
-     */
-    fun nukeEvents() { doAsync { repo.nukeEvents() } }
+    fun parse(html: String) { doAsync { parser.parse(html, {}) }}
 }

@@ -133,7 +133,7 @@ class ScheduleUpdateSheet(
             onUpdate(
                 // construct new StudIPEvent from the data the user may have edited
                 StudIPEvent(
-                    id = event.id,
+                    eventId = event.eventId,
                     title = binding.editTextTitle.text.toString(),
                     lecturer = binding.editTextLecturers.text.toString(),
                     room = binding.editTextRoom.text.toString(),

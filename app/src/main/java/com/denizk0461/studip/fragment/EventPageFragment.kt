@@ -66,7 +66,7 @@ class EventPageFragment(
 
         // Set up LiveData observer to refresh the view on update
         viewModel.getEventsForDay(currentDay).observe(viewLifecycleOwner) { events ->
-//            eventAdapter.setNewItems(events)
+
             eventAdapter.setNewData(events)
         }
     }

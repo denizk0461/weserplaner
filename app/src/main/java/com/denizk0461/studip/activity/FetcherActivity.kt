@@ -6,10 +6,8 @@ import android.os.Bundle
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.denizk0461.studip.R
-import com.denizk0461.studip.data.StudIPParser
 import com.denizk0461.studip.data.getThemedColor
 import com.denizk0461.studip.databinding.ActivityFetcherBinding
 import com.denizk0461.studip.viewmodel.FetcherViewModel
@@ -72,21 +70,25 @@ class FetcherActivity : Activity() {
             ) { p0 ->
                 try {
                     // Decode HTML and parse it into a list of StudIPEvent.kt
-                    StudIPParser().parse(URLDecoder.decode(p0, "UTF-8")) { events ->
-                        // Delete all previously fetched elements
-                        viewModel.nukeEvents()
-
-                        // Insert the list into the database
-                        viewModel.insertEvents(events)
-
-                        // Notify the user that the fetch was successful
-                        Toast.makeText(
-                            this, R.string.toast_fetch_finished, Toast.LENGTH_SHORT
-                        ).show()
-
-                        // Close the activity
-                        finish()
-                    }
+                    // TODO this exception handling and finish() is broken
+                    viewModel.parse(URLDecoder.decode(p0, "UTF-8"))
+//                    StudIPParser(application).parse(URLDecoder.decode(p0, "UTF-8")) { events ->
+//
+//                        // Delete all previously fetched elements
+////                        viewModel.nukeEvents()
+////                        viewModel.replaceEvents(events)
+//
+//                        // Insert the list into the database
+////                        viewModel.insertEvents(events)
+//
+//                        // Notify the user that the fetch was successful
+//                        Toast.makeText(
+//                            this, R.string.toast_fetch_finished, Toast.LENGTH_SHORT
+//                        ).show()
+//
+//                        // Close the activity
+//                        finish()
+//                    }
                 } catch (e: IOException) {
 
                     // Let the user know that an error occurred

@@ -1,12 +1,11 @@
 package com.denizk0461.studip.activity
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Lifecycle
 import com.denizk0461.studip.R
-import com.denizk0461.studip.data.Dependencies
 import com.denizk0461.studip.databinding.ActivityMainBinding
 import com.denizk0461.studip.db.AppRepository
 import com.denizk0461.studip.fragment.EventFragment
@@ -17,7 +16,7 @@ import com.denizk0461.studip.model.SettingsPreferences
 /**
  * Main activity that handles all common fragments. This is opened on app launch.
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : FragmentActivity() {
 
     // View binding
     private lateinit var binding: ActivityMainBinding
@@ -36,7 +35,7 @@ class MainActivity : AppCompatActivity() {
          * Instantiate repository object that is accessed by the fragments' view models to retrieve
          * data.
          */
-        Dependencies.repo = AppRepository(application)
+//        Dependencies.repo = AppRepository(application)
 
         // Inflate view binding and bind to this activity
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -44,7 +43,8 @@ class MainActivity : AppCompatActivity() {
 
         // Open the fragment that the user specified to open on app start
         if (
-            Dependencies.repo.getBooleanPreference(SettingsPreferences.LAUNCH_CANTEEN_ON_START)
+            AppRepository.getRepositoryInstance(application)
+                .getBooleanPreference(SettingsPreferences.LAUNCH_CANTEEN_ON_START)
         ) {
             // Open canteen fragment
             binding.contentMain.navView.selectedItemId = R.id.food

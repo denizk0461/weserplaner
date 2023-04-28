@@ -18,7 +18,7 @@ interface AppDAO {
      *
      * @return all Stud.IP events exposed through a LiveData object
      */
-    @get:Query("SELECT * FROM studipevents ORDER BY timeslotId, id")
+    @get:Query("SELECT * FROM studip_events ORDER BY timeslotId, eventId")
     val allEvents: LiveData<List<StudIPEvent>>
 
     /**
@@ -26,7 +26,7 @@ interface AppDAO {
      *
      * @return  Stud.IP events for a certain day exposed through a LiveData object
      */
-    @Query("SELECT * FROM studipevents WHERE day = :day ORDER BY timeslotId, id")
+    @Query("SELECT * FROM studip_events WHERE day = :day ORDER BY timeslotId, eventId")
     fun getEventsForDay(day: Int): LiveData<List<StudIPEvent>>
 
     /**
@@ -62,7 +62,7 @@ interface AppDAO {
     /**
      * Deletes all Stud.IP events from the database.
      */
-    @Query("DELETE FROM studipevents")
+    @Query("DELETE FROM studip_events")
     fun nukeEvents()
 
     /* --- canteen offers --- */

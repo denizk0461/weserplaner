@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 /**
  * Entity for storing entries of the user's Stud.IP schedule. Registered in the app database.
  *
- * @param id            primary key that uniquely identifies the entry
+ * @param eventId       primary key that uniquely identifies the entry
  * @param title         title of the event
  * @param lecturer      lecturer(s) organising the event
  * @param room          room the event takes place in
@@ -16,9 +16,9 @@ import androidx.room.PrimaryKey
  * @param timeslotId    minute the event starts at - used for ordering
  * @param colour        user-defined colour the event will be shown in - UNIMPLEMENTED
  */
-@Entity(tableName = "studipevents")
+@Entity(tableName = "studip_events")
 data class StudIPEvent(
-    @PrimaryKey val id: Int,
+    @PrimaryKey val eventId: Int,
     val title: String,
     val lecturer: String,
     val room: String,
@@ -45,7 +45,7 @@ data class StudIPEvent(
 
         other as StudIPEvent
 
-        if (id != other.id) return false
+        if (eventId != other.eventId) return false
         if (title != other.title) return false
         if (lecturer != other.lecturer) return false
         if (room != other.room) return false
@@ -59,7 +59,7 @@ data class StudIPEvent(
     }
 
     override fun hashCode(): Int {
-        var result = id
+        var result = eventId
         result = 31 * result + title.hashCode()
         result = 31 * result + lecturer.hashCode()
         result = 31 * result + room.hashCode()

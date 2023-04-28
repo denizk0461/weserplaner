@@ -1,5 +1,7 @@
 package com.denizk0461.studip.data
 
+import android.app.Application
+import com.denizk0461.studip.db.AppRepository
 import com.denizk0461.studip.model.StudIPEvent
 import org.jsoup.Jsoup
 import java.io.IOException
@@ -7,7 +9,9 @@ import java.io.IOException
 /**
  * Parser class used for fetching and collecting scheduled events from a Stud.IP timetable.
  */
-class StudIPParser {
+class StudIPParser(application: Application) {
+
+    private val repo: AppRepository = AppRepository.getRepositoryInstance(application)
 
     /**
      * Parse a given HTML string. HTML must be of a Stud.IP timetable.
@@ -84,7 +88,7 @@ class StudIPParser {
 
                 // Construct the newly scraped Stud.IP event
                 val event = StudIPEvent(
-                    id = id,
+                    eventId = id,
                     title = parsedTitle,
                     lecturer = parsedLecturers,
                     room = entryInfo[1],
@@ -102,7 +106,10 @@ class StudIPParser {
             }
         }
 
+        // Delete all previously saved events
+        repo.nukeEvents()
+
         // After fetching has finished, save the list of new items into persistent storage
-        insert(newEvents)
+        repo.insertEvents(newEvents)
     }
 }
