@@ -15,7 +15,7 @@ class FetcherViewModel(app: Application) : AppViewModel(app) {
      *
      * @param events    list of events to be saved
      */
-    fun insertEvents(events: List<StudIPEvent>) { doAsync { repo.insertEvents(events) } }
+    fun insertEvents(events: List<StudIPEvent>) { doAsync { repo.insertEvents(events) }}
 
     /**
      * Delete all Stud.IP events from the database asynchronously.

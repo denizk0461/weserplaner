@@ -75,12 +75,15 @@ class FetcherActivity : Activity() {
                     StudIPParser().parse(URLDecoder.decode(p0, "UTF-8")) { events ->
                         // Delete all previously fetched elements
                         viewModel.nukeEvents()
+
                         // Insert the list into the database
                         viewModel.insertEvents(events)
+
                         // Notify the user that the fetch was successful
                         Toast.makeText(
                             this, R.string.toast_fetch_finished, Toast.LENGTH_SHORT
                         ).show()
+
                         // Close the activity
                         finish()
                     }

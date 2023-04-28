@@ -15,9 +15,9 @@ import com.denizk0461.studip.model.*
         OfferDate::class,
         OfferCanteen::class,
         OfferCategory::class,
-        OfferItem::class
+        OfferItem::class,
     ],
-    version = 14,
+    version = 16,
 )
 abstract class AppDatabase : RoomDatabase() {
 

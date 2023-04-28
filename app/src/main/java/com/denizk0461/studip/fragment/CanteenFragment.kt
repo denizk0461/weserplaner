@@ -137,6 +137,7 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
                  * flicker.
                  * TODO implement a more efficient / better-looking method
                  * TODO order the chips alphabetically
+                 * TODO the refreshing ability stopped working
                  */
                 val index = binding.chipsPreference.indexOfChild(buttonView)
                 binding.chipsPreference.removeView(buttonView)
@@ -156,9 +157,6 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
         // Assign the adapter to the view pager
         binding.viewPager.adapter = viewPagerAdapter
 
-        // Create and attach the tab mediator for the view pager
-//        createTabLayoutMediator()
-
         // Set up LiveData observer to refresh the view on update
         viewModel.allOffers.observe(viewLifecycleOwner) { offers ->
             // Update the element list stored in this fragment
@@ -167,9 +165,7 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
             // Group elements by category
             val groupedElements = offers.groupElements().distinct()
 
-            // Find all dates stored in the database
-//            val newDates = /*groupedElements.map { it.date }.distinct() TODO */viewModel.getDates()
-
+            // Find all dates for which items are available
             val newDates = groupedElements.map { it.date }.distinct()
 
             // Update the date count stored in this fragment
@@ -183,7 +179,8 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
 
             binding.swipeRefreshLayout.isRefreshing = false
 
-//            createTabLayoutMediator(newDates)
+            // Create and attach the tab layout for the ViewPager
+            createTabLayoutMediator(newDates)
         }
 
         // Set up functions for when the user swipes to refresh the view
@@ -194,17 +191,17 @@ class CanteenFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
 
     /**
      * Create and attach the object mediating the tabs for the view pager.
-     * TODO this is crash-prone and doesn't refresh when the dates get renewed (when the last update
-     *  was from the day prior)
-     *  TODO WHY DO YOU THROW AN INDEXOUTOFBOUNDSEXCEPTION????
+     *
+     * TODO this is error-prone, likes to crash with an IndexOutOfBoundsException, and I have no
+     *  fucking idea why
+     *
+     * @param dates titles for the individual tabs
      */
-    private fun createTabLayoutMediator(dates: List<OfferDate>) {
-        // Fetch all dates from the database
-//        val dates = viewModel.getDates()
-
+    private fun createTabLayoutMediator(dates: List<String>) {
+        // Only attach the mediator if the list has items, otherwise an error would occur
         if (dates.isNotEmpty()) {
             TabLayoutMediator(binding.dayTabLayout, binding.viewPager) { tab, position ->
-                tab.text = dates[position].date
+                tab.text = dates[position]
             }.attach()
         }
     }

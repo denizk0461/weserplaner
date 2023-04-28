@@ -6,6 +6,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.denizk0461.studip.fragment.CanteenPageFragment
 import com.denizk0461.studip.model.CanteenOfferGroup
 
+
 /**
  * Custom ViewPager adapter for managing multiple pages of canteen offers.
  *
@@ -19,7 +20,7 @@ import com.denizk0461.studip.model.CanteenOfferGroup
  * @param displayAllergens  whether the user wants allergens to be marked
  */
 class CanteenOfferPageAdapter(
-    fragmentActivity: FragmentActivity,
+    val fragmentActivity: FragmentActivity,
     private var offers: List<CanteenOfferGroup>,
     private var daysCovered: Int,
     private val onClickListener: CanteenOfferItemAdapter.OnClickListener,

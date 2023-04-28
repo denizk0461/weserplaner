@@ -58,7 +58,8 @@ class EventFragment : AppFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        weekdays = resources.getStringArray(R.array.weekdays)
+        // Get localised weekday names
+        weekdays = context?.resources?.getStringArray(R.array.weekdays) ?: arrayOf()
 
         // Determine the current day
         dayOfWeek = when (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
@@ -101,6 +102,9 @@ class EventFragment : AppFragment() {
 
         // Set up LiveData observer to refresh the view on update
         viewModel.allEvents.observe(viewLifecycleOwner) { events ->
+
+            Log.d("AAAbA?", events.toString())
+
             // Update the item list in the view pager's adapter
             viewPagerAdapter.setNewItems(events)
 

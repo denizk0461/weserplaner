@@ -16,7 +16,7 @@ import androidx.room.PrimaryKey
  * @param timeslotId    minute the event starts at - used for ordering
  * @param colour        user-defined colour the event will be shown in - UNIMPLEMENTED
  */
-@Entity(tableName = "events")
+@Entity(tableName = "studipevents")
 data class StudIPEvent(
     @PrimaryKey val id: Int,
     val title: String,
