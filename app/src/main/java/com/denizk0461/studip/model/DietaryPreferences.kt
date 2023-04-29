@@ -167,21 +167,21 @@ enum class DietaryPreferences(val value: String) {
          * string and drawable values.
          *
          * @param index ordinal of the enum item
-         * @return      string resource ID and drawable resource ID as a pair
+         * @return      string resource ID, drawable resource ID, colour attribute ID
          */
-        fun getData(index: Int): Pair<Int, Int> = when (index) {
-            WELFARE.ordinal -> Pair(R.string.pref_fair, R.drawable.handshake)
-            FISH.ordinal -> Pair(R.string.pref_fish, R.drawable.fish)
-            POULTRY.ordinal -> Pair(R.string.pref_poultry, R.drawable.chicken)
-            LAMB.ordinal -> Pair(R.string.pref_lamb, R.drawable.sheep)
-            VITAL.ordinal -> Pair(R.string.pref_vital, R.drawable.yoga)
-            BEEF.ordinal -> Pair(R.string.pref_beef, R.drawable.cow)
-            PORK.ordinal -> Pair(R.string.pref_pork, R.drawable.pig)
-            VEGAN.ordinal -> Pair(R.string.pref_vegan, R.drawable.leaf)
-            VEGETARIAN.ordinal -> Pair(R.string.pref_vegetarian, R.drawable.carrot)
-            GAME.ordinal -> Pair(R.string.pref_game, R.drawable.deer)
-            NONE.ordinal -> Pair(R.string.question_mark, R.drawable.circle)
-            else -> Pair(R.string.question_mark, R.drawable.cross) // ERROR.ordinal
+        fun getData(index: Int): Triple<Int, Int, Int> = when (index) {
+            WELFARE.ordinal -> Triple(R.string.pref_fair, R.drawable.handshake, R.attr.colorPrimaryFair)
+            FISH.ordinal -> Triple(R.string.pref_fish, R.drawable.fish, R.attr.colorPrimaryFish)
+            POULTRY.ordinal -> Triple(R.string.pref_poultry, R.drawable.chicken, R.attr.colorPrimaryPoultry)
+            LAMB.ordinal -> Triple(R.string.pref_lamb, R.drawable.sheep, R.attr.colorPrimaryLamb)
+            VITAL.ordinal -> Triple(R.string.pref_vital, R.drawable.yoga, R.attr.colorPrimaryVital)
+            BEEF.ordinal -> Triple(R.string.pref_beef, R.drawable.cow, R.attr.colorPrimaryBeef)
+            PORK.ordinal -> Triple(R.string.pref_pork, R.drawable.pig, R.attr.colorPrimaryPork)
+            VEGAN.ordinal -> Triple(R.string.pref_vegan, R.drawable.leaf, R.attr.colorPrimaryVegan)
+            VEGETARIAN.ordinal -> Triple(R.string.pref_vegetarian, R.drawable.carrot, R.attr.colorPrimaryVegetarian)
+            GAME.ordinal -> Triple(R.string.pref_game, R.drawable.deer, R.attr.colorPrimaryGame)
+            NONE.ordinal -> Triple(R.string.question_mark, R.drawable.circle, R.attr.colorText)
+            else -> Triple(R.string.question_mark, R.drawable.cross, R.attr.colorErrorText) // ERROR.ordinal
         }
     }
 }

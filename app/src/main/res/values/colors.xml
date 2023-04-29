@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+
     <!-- auto-generated using https://m3.material.io/theme-builder#/custom -->
     <color name="seed">#c85848</color>
     <color name="md_theme_light_primary">#A33D2F</color>
-    <color name="md_theme_light_onPrimary">#FFFFFF</color>
+    <color name="md_theme_light_onPrimary">@color/white</color>
     <color name="md_theme_light_primaryContainer">#FFDAD4</color>
     <color name="md_theme_light_onPrimaryContainer">#410000</color>
     <color name="md_theme_light_secondary">#775651</color>
-    <color name="md_theme_light_onSecondary">#FFFFFF</color>
+    <color name="md_theme_light_onSecondary">@color/white</color>
     <color name="md_theme_light_secondaryContainer">#FFDAD4</color>
     <color name="md_theme_light_onSecondaryContainer">#2C1511</color>
     <color name="md_theme_light_tertiary">#705C2E</color>
-    <color name="md_theme_light_onTertiary">#FFFFFF</color>
+    <color name="md_theme_light_onTertiary">@color/white</color>
     <color name="md_theme_light_tertiaryContainer">#FBDFA6</color>
     <color name="md_theme_light_onTertiaryContainer">#251A00</color>
     <color name="md_theme_light_error">#BA1A1A</color>
     <color name="md_theme_light_errorContainer">#FFDAD6</color>
-    <color name="md_theme_light_onError">#FFFFFF</color>
+    <color name="md_theme_light_onError">@color/white</color>
     <color name="md_theme_light_onErrorContainer">#410002</color>
     <color name="md_theme_light_background">#FFFBFF</color>
     <color name="md_theme_light_onBackground">#201A19</color>
@@ -28,10 +31,10 @@
     <color name="md_theme_light_inverseOnSurface">#FBEEEC</color>
     <color name="md_theme_light_inverseSurface">#362F2E</color>
     <color name="md_theme_light_inversePrimary">#FFB4A8</color>
-    <color name="md_theme_light_shadow">#000000</color>
+    <color name="md_theme_light_shadow">@color/black</color>
     <color name="md_theme_light_surfaceTint">#A33D2F</color>
     <color name="md_theme_light_outlineVariant">#D8C2BE</color>
-    <color name="md_theme_light_scrim">#000000</color>
+    <color name="md_theme_light_scrim">@color/black</color>
     <color name="md_theme_dark_primary">#FFB4A8</color>
     <color name="md_theme_dark_onPrimary">#630E07</color>
     <color name="md_theme_dark_primaryContainer">#83251A</color>
@@ -58,44 +61,102 @@
     <color name="md_theme_dark_inverseOnSurface">#201A19</color>
     <color name="md_theme_dark_inverseSurface">#EDE0DD</color>
     <color name="md_theme_dark_inversePrimary">#A33D2F</color>
-    <color name="md_theme_dark_shadow">#000000</color>
+    <color name="md_theme_dark_shadow">@color/black</color>
     <color name="md_theme_dark_surfaceTint">#FFB4A8</color>
     <color name="md_theme_dark_outlineVariant">#534341</color>
-    <color name="md_theme_dark_scrim">#000000</color>
+    <color name="md_theme_dark_scrim">@color/black</color>
 
-    <!-- OBSOLETE: custom defined colours -->
-
-<!--    <color name="black">#FF000000</color>-->
-<!--    <color name="white">#FFFFFFFF</color>-->
+    <!-- dietary preference colours generated using https://m3.material.io/theme-builder#/custom -->
+    <!-- fair / animal welfare - custom colour -->
+    <color name="fair_light_primary">#4b54b8</color>
+    <color name="fair_light_onPrimary">@color/white</color>
+    <color name="fair_light_container">#e0e0ff</color>
+    <color name="fair_light_onContainer">#00036b</color>
+    <color name="fair_dark_primary">#bec2ff</color>
+    <color name="fair_dark_onPrimary">#181f88</color>
+    <color name="fair_dark_container">#323a9f</color>
+    <color name="fair_dark_onContainer">#e0e0ff</color>
+    <!-- fish - lifted from the Stw page -->
+    <color name="fish_light_primary">#006782</color>
+    <color name="fish_light_onPrimary">@color/white</color>
+    <color name="fish_light_container">#bbe9ff</color>
+    <color name="fish_light_onContainer">#001f29</color>
+    <color name="fish_dark_primary">#60d4fe</color>
+    <color name="fish_dark_onPrimary">#003545</color>
+    <color name="fish_dark_container">#004d63</color>
+    <color name="fish_dark_onContainer">#bbe9ff</color>
+    <!-- poultry - lifted from the Stw page -->
+    <color name="poultry_light_primary">#6b5f00</color>
+    <color name="poultry_light_onPrimary">@color/white</color>
+    <color name="poultry_light_container">#f8e467</color>
+    <color name="poultry_light_onContainer">#201c00</color>
+    <color name="poultry_dark_primary">#dbc84e</color>
+    <color name="poultry_dark_onPrimary">#383100</color>
+    <color name="poultry_dark_container">#514700</color>
+    <color name="poultry_dark_onContainer">#f8e467</color>
+    <!-- vital - custom. is this a good colour? -->
+    <color name="vital_light_primary">#1d6c30</color>
+    <color name="vital_light_onPrimary">@color/white</color>
+    <color name="vital_light_container">#a5f5a9</color>
+    <color name="vital_light_onContainer">#002107</color>
+    <color name="vital_dark_primary">#8ad88f</color>
+    <color name="vital_dark_onPrimary">#003911</color>
+    <color name="vital_dark_container">#00531d</color>
+    <color name="vital_dark_onContainer">#a5f5a9</color>
+    <!-- lamb - lifted from the Stw page -->
+    <color name="lamb_light_primary">#95416d</color>
+    <color name="lamb_light_onPrimary">@color/white</color>
+    <color name="lamb_light_container">#ffd8e7</color>
+    <color name="lamb_light_onContainer">#3d0025</color>
+    <color name="lamb_dark_primary">#ffafd3</color>
+    <color name="lamb_dark_onPrimary">#5c113d</color>
+    <color name="lamb_dark_container">#782954</color>
+    <color name="lamb_dark_onContainer">#ffd8e7</color>
+    <!-- beef - lifted from the Stw page -->
+    <color name="beef_light_primary">#a83730</color>
+    <color name="beef_light_onPrimary">@color/white</color>
+    <color name="beef_light_container">#ffdad6</color>
+    <color name="beef_light_onContainer">#410002</color>
+    <color name="beef_dark_primary">#ffb4ab</color>
+    <color name="beef_dark_onPrimary">#670408</color>
+    <color name="beef_dark_container">#871f1c</color>
+    <color name="beef_dark_onContainer">#ffdad6</color>
+    <!-- pork - lifted from the Stw page -->
+    <color name="pork_light_primary">#9c4144</color>
+    <color name="pork_light_onPrimary">@color/white</color>
+    <color name="pork_light_container">#ffdad9</color>
+    <color name="pork_light_onContainer">#410009</color>
+    <color name="pork_dark_primary">#ffb3b2</color>
+    <color name="pork_dark_onPrimary">#5f131a</color>
+    <color name="pork_dark_container">#7e2a2f</color>
+    <color name="pork_dark_onContainer">#ffdad9</color>
+    <!-- vegan - lifted from the Stw page -->
+    <color name="vegan_light_primary">#3e691a</color>
+    <color name="vegan_light_onPrimary">@color/white</color>
+    <color name="vegan_light_container">#bef292</color>
+    <color name="vegan_light_onContainer">#0c2000</color>
+    <color name="vegan_dark_primary">#a2d578</color>
+    <color name="vegan_dark_onPrimary">#193800</color>
+    <color name="vegan_dark_container">#275000</color>
+    <color name="vegan_dark_onContainer">#bef292</color>
+    <!-- vegetarian - lifted from the Stw page -->
+    <color name="vegetarian_light_primary">#954a03</color>
+    <color name="vegetarian_light_onPrimary">@color/white</color>
+    <color name="vegetarian_light_container">#ffdcc6</color>
+    <color name="vegetarian_light_onContainer">#311400</color>
+    <color name="vegetarian_dark_primary">#ffb786</color>
+    <color name="vegetarian_dark_onPrimary">#502400</color>
+    <color name="vegetarian_dark_container">#723600</color>
+    <color name="vegetarian_dark_onContainer">#ffdcc6</color>
+    <!-- game - lifted from the Stw page -->
+    <color name="game_light_primary">#9d4043</color>
+    <color name="game_light_onPrimary">@color/white</color>
+    <color name="game_light_container">#ffdad9</color>
+    <color name="game_light_onContainer">#410008</color>
+    <color name="game_dark_primary">#ffb3b2</color>
+    <color name="game_dark_onPrimary">#601219</color>
+    <color name="game_dark_container">#7f292e</color>
+    <color name="game_dark_onContainer">#ffdad9</color>
+    
     <color name="brightfuckingpink">#FF46BB</color> <!-- for debug purposes -->
-
-<!--    &lt;!&ndash; colours i defined &ndash;&gt;-->
-<!--    <color name="primaryDay">#B2665A</color>-->
-<!--    <color name="primaryDayTranslucent">#80B2665A</color>-->
-<!--    <color name="primaryNight">#995348</color>-->
-<!--    <color name="primaryNightTranslucent">#80995348</color>-->
-
-<!--    <color name="highlightDay">#871D1E</color>-->
-<!--    <color name="highlightNight">#CB9890</color>-->
-
-<!--    <color name="colorTextDay">#141414</color>-->
-<!--    <color name="colorTextNight">#CDCBCB</color>-->
-
-<!--    <color name="colorTextHintDay">#2A2828</color>-->
-<!--    <color name="colorTextHintNight">#B9B6B6</color>-->
-
-<!--    <color name="colorTextHintLighterDay">#AFACAC</color>-->
-<!--    <color name="colorTextHintLighterNight">#5E5A5A</color>-->
-
-<!--    <color name="colorBackgroundDay">#EBEBEB</color>-->
-<!--    <color name="colorBackgroundNight">#151414</color>-->
-
-<!--    <color name="colorCardBackgroundDay">#E0E0E0</color>-->
-<!--    <color name="colorCardBackgroundNight">#1F1E1E</color>-->
-
-<!--    <color name="colorSwitchTrackDay">#D6D6D6</color>-->
-<!--    <color name="colorSwitchTrackNight">#2A2828</color>-->
-
-<!--    <color name="colorPrimaryOnContrastLight">#E6898B</color>-->
-<!--    <color name="colorPrimaryOnContrastDark">#B77166</color>-->
 </resources>

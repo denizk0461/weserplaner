@@ -20,6 +20,7 @@
     </string-array>
 
     <string name="fetch_error_snack">Ein Fehler ist aufgetreten!</string>
+    <string name="fetch_error_webpage_snack">Du musst deinen Stundenplan öffnen!</string>
     <string name="canteen_fetch_error">Mensaplan konnte nicht heruntergeladen werden!</string>
 
     <string name="save">Speichern</string>
@@ -137,6 +138,9 @@
 
     <string name="settings_launch_canteen_title">Starte die App mit dem Mensaplan</string>
     <string name="settings_launch_canteen_subtitle">Sonst wird Dein Stundenplan beim Start gezeigt</string>
+
+    <string name="settings_pref_colour_title">Färbe Diätpreferenzen</string>
+    <string name="settings_pref_colour_subtitle">Dies färbt die kleinen Symbole ähnlich wie auf der Webseite</string>
 
     <string name="settings_crashlytics_title">Stimme Sammlung von Absturzreporten zu</string>
     <string name="settings_crashlytics_subtitle">Daten werden anonymisiert übertragen</string> <!-- TODO is this true? -->

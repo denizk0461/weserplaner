@@ -2,6 +2,8 @@ package com.denizk0461.studip.viewmodel
 
 import android.app.Application
 import com.denizk0461.studip.data.StudIPParser
+import java.io.IOException
+import kotlin.jvm.Throws
 
 /**
  * View model for [com.denizk0461.studip.activity.FetcherActivity]
@@ -10,7 +12,20 @@ import com.denizk0461.studip.data.StudIPParser
  */
 class FetcherViewModel(app: Application) : AppViewModel(app) {
 
+    /**
+     * Instance of the parser used to fetch and parse the user's Stud.IP schedule.
+     */
     private val parser: StudIPParser = StudIPParser(app)
 
-    fun parse(html: String) { doAsync { parser.parse(html, {}) }}
+    /**
+     * Fetches and parses the user's Stud.IP schedule.
+     *
+     * @param html  source code of the schedule website
+     */
+    @Throws(IOException::class)
+    fun parse(html: String) {
+        doAsync {
+            parser.parse(html)
+        }
+    }
 }

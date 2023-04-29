@@ -72,7 +72,7 @@ class CanteenFragment : AppFragment() {
                     binding.buttonCanteenPicker.text = getCurrentlySelectedCanteenName()
 
                     // Display to the user that the canteen plan will be refreshed
-//                    binding.swipeRefreshLayout.isRefreshing = true
+                    binding.swipeRefreshLayout.isRefreshing = true
 
                     // Refresh the canteen menu for the newly selected canteen
                     refresh()

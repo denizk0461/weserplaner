@@ -79,6 +79,14 @@ class SettingsFragment : AppFragment() {
             }
         }
 
+        // Set up switch for colouring dietary preferences
+        binding.switchPrefColour.apply {
+            isChecked = viewModel.preferenceColour
+            setOnCheckedChangeListener { _, newValue ->
+                viewModel.preferenceColour = newValue
+            }
+        }
+
         // Set up switch for crash report opt-in
         binding.switchCrashlytics.apply {
             isChecked = viewModel.preferenceDataHandling

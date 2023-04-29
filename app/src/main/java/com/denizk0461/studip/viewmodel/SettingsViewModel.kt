@@ -71,6 +71,13 @@ class SettingsViewModel(app: Application) : AppViewModel(app) {
         set(newValue) { repo.setPreference(SettingsPreferences.LAUNCH_CANTEEN_ON_START, newValue) }
 
     /**
+     * This value determines which canteen the user has selected.
+     */
+    var preferenceColour: Boolean
+        get() = repo.getBooleanPreference(SettingsPreferences.COLOUR_PREFS)
+        set(newValue) { repo.setPreference(SettingsPreferences.COLOUR_PREFS, newValue) }
+
+    /**
      * This value determines whether the user opts into submitting crash reports.
      */
     var preferenceDataHandling: Boolean

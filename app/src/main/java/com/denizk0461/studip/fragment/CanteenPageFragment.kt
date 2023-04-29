@@ -54,6 +54,7 @@ class CanteenPageFragment(
         recyclerViewAdapter = CanteenOfferItemAdapter(
             this,
             viewModel.preferenceAllergen,
+            viewModel.preferenceColour,
         )
 
         binding.recyclerView.apply {
@@ -61,13 +62,6 @@ class CanteenPageFragment(
             layoutManager = LinearLayoutManager(
                 context, LinearLayoutManager.VERTICAL, false
             )
-
-            /*
-             * Create new adapter for every page. Attribute position denotes day that will be set up
-             * by the newly created adapter (0 = Monday, 4 = Friday)
-             * TODO check if the filtered list is empty, and tell the user if it is
-             */
-//            val o = offers.filter { it.dateId == currentDay }
 
             adapter = recyclerViewAdapter
 
@@ -78,7 +72,6 @@ class CanteenPageFragment(
                 offerList.clear()
                 offerList.addAll(offers)
                 recyclerViewAdapter.setNewData(offers.filterElements().groupElements().distinct())
-//                filterList()
             }
         }
 
@@ -192,7 +185,7 @@ class CanteenPageFragment(
      * @param offer item that has been clicked
      */
     override fun onClick(offer: CanteenOfferGroupElement, category: String) {
-        openBottomSheet(AllergenSheet(offer, category))
+        openBottomSheet(AllergenSheet(offer, category, viewModel.preferenceColour))
     }
 
     /**

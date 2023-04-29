@@ -33,8 +33,52 @@
         <item name="android:scrollbarThumbVertical">@color/md_theme_light_onSurfaceVariant</item>
         <item name="colorOutlineVariant">@color/md_theme_light_outlineVariant</item>
 
+        <item name="colorErrorText">@color/md_theme_light_error</item>
+
         <!-- is this correct? -->
         <item name="scheduleColorDefault">@color/md_theme_dark_background</item>
+
+        <!-- dietary preference colours -->
+        <item name="colorPrimaryFair">@color/fair_light_primary</item>
+        <item name="colorOnPrimaryFair">@color/fair_light_onPrimary</item>
+        <item name="colorContainerFair">@color/fair_light_container</item>
+        <item name="colorOnContainerFair">@color/fair_light_onContainer</item>
+        <item name="colorPrimaryFish">@color/fish_light_primary</item>
+        <item name="colorOnPrimaryFish">@color/fish_light_onPrimary</item>
+        <item name="colorContainerFish">@color/fish_light_container</item>
+        <item name="colorOnContainerFish">@color/fish_light_onContainer</item>
+        <item name="colorPrimaryPoultry">@color/poultry_light_primary</item>
+        <item name="colorOnPrimaryPoultry">@color/poultry_light_onPrimary</item>
+        <item name="colorContainerPoultry">@color/poultry_light_container</item>
+        <item name="colorOnContainerPoultry">@color/poultry_light_onContainer</item>
+        <item name="colorPrimaryVital">@color/vital_light_primary</item>
+        <item name="colorOnPrimaryVital">@color/vital_light_onPrimary</item>
+        <item name="colorContainerVital">@color/vital_light_container</item>
+        <item name="colorOnContainerVital">@color/vital_light_onContainer</item>
+        <item name="colorPrimaryLamb">@color/lamb_light_primary</item>
+        <item name="colorOnPrimaryLamb">@color/lamb_light_onPrimary</item>
+        <item name="colorContainerLamb">@color/lamb_light_container</item>
+        <item name="colorOnContainerLamb">@color/lamb_light_onContainer</item>
+        <item name="colorPrimaryBeef">@color/beef_light_primary</item>
+        <item name="colorOnPrimaryBeef">@color/beef_light_onPrimary</item>
+        <item name="colorContainerBeef">@color/beef_light_container</item>
+        <item name="colorOnContainerBeef">@color/beef_light_onContainer</item>
+        <item name="colorPrimaryPork">@color/pork_light_primary</item>
+        <item name="colorOnPrimaryPork">@color/pork_light_onPrimary</item>
+        <item name="colorContainerPork">@color/pork_light_container</item>
+        <item name="colorOnContainerPork">@color/pork_light_onContainer</item>
+        <item name="colorPrimaryVegan">@color/vegan_light_primary</item>
+        <item name="colorOnPrimaryVegan">@color/vegan_light_onPrimary</item>
+        <item name="colorContainerVegan">@color/vegan_light_container</item>
+        <item name="colorOnContainerVegan">@color/vegan_light_onContainer</item>
+        <item name="colorPrimaryVegetarian">@color/vegetarian_light_primary</item>
+        <item name="colorOnPrimaryVegetarian">@color/vegetarian_light_onPrimary</item>
+        <item name="colorContainerVegetarian">@color/vegetarian_light_container</item>
+        <item name="colorOnContainerVegetarian">@color/vegetarian_light_onContainer</item>
+        <item name="colorPrimaryGame">@color/game_light_primary</item>
+        <item name="colorOnPrimaryGame">@color/game_light_onPrimary</item>
+        <item name="colorContainerGame">@color/game_light_container</item>
+        <item name="colorOnContainerGame">@color/game_light_onContainer</item>
     </style>
 
     <style name="Theme.StudIPTimetable" parent="Base.Theme.StudIPTimetable" />

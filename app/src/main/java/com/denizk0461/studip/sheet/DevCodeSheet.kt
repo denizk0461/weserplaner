@@ -62,6 +62,7 @@ class DevCodeSheet(
                 "SU5TQU5F".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS90NE9kYTlUZFYwbw==".d64)
                 "X0RSV05f".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9SUVpUUy1CWjhtcw==".d64)
                 "TUFSR0Uh".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS8tbHFxRHZXRjQ1dw==".d64)
+                "UE9XRUxM".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9XUGMtVkVxQlBISQ==".d64)
                 "NEVENT" -> { // nuke events
                     nukeEvents()
                     showToast(context, "Nuked all events")
@@ -86,7 +87,8 @@ class DevCodeSheet(
                     nukeEverything()
                     showToast(context, "Nuked everything")
                 }
-                else -> showToast(context, "code is invalid")
+                "HACK()" -> showToast(context, "Hack attempt unsuccessful")
+                else -> showToast(context, "Code is invalid")
             }
             dismiss()
         }

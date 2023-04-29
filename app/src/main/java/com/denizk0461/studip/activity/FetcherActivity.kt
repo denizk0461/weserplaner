@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.denizk0461.studip.R
 import com.denizk0461.studip.data.showErrorSnackBar
@@ -60,38 +61,37 @@ class FetcherActivity : Activity() {
         binding.webview.loadUrl("https://elearning.uni-bremen.de/index.php?again=yes")
 
         binding.fab.setOnClickListener { view ->
-            /*
-             * Retrieve encoded HTML via JavaScript function. Encoding is done as otherwise not all
-             * symbols will be accurately fetched.
-             */
-            binding.webview.evaluateJavascript(
-                "(function(){return encodeURI(document.getElementsByTagName('html')[0].innerHTML)})();"
-            ) { p0 ->
-                try {
-                    // Decode HTML and parse it into a list of StudIPEvent.kt
-                    // TODO this exception handling and finish() is broken
-                    viewModel.parse(URLDecoder.decode(p0, "UTF-8"))
-//                    StudIPParser(application).parse(URLDecoder.decode(p0, "UTF-8")) { events ->
-//
-//                        // Delete all previously fetched elements
-////                        viewModel.nukeEvents()
-////                        viewModel.replaceEvents(events)
-//
-//                        // Insert the list into the database
-////                        viewModel.insertEvents(events)
-//
-//                        // Notify the user that the fetch was successful
-//                        Toast.makeText(
-//                            this, R.string.toast_fetch_finished, Toast.LENGTH_SHORT
-//                        ).show()
-//
-//                        // Close the activity
-//                        finish()
-//                    }
-                } catch (e: IOException) {
-                    // Let the user know that an error occurred
-                    theme.showErrorSnackBar(binding.rootView, getString(R.string.fetch_error_snack))
+
+            if (binding.webview.url?.contains(
+                    "https://elearning.uni-bremen.de/dispatch.php/calendar/schedule"
+                ) == true) {
+                /*
+                 * Retrieve encoded HTML via JavaScript function. Encoding is done as otherwise not all
+                 * symbols will be accurately fetched.
+                 */
+                binding.webview.evaluateJavascript(
+                    "(function(){return encodeURI(document.getElementsByTagName('html')[0].innerHTML)})();"
+                ) { p0 ->
+                    try {
+                        // Decode HTML and parse it into a list of StudIPEvent.kt
+                        // TODO add a tutorial for the user to know what to do
+                        viewModel.parse(URLDecoder.decode(p0, "UTF-8"))
+
+                        // Notify the user that the fetch was successful
+                        Toast.makeText(
+                            this, R.string.toast_fetch_finished, Toast.LENGTH_SHORT
+                        ).show()
+
+                        // Close the activity
+                        finish()
+
+                    } catch (e: IOException) {
+                        // Let the user know that an error occurred
+                        theme.showErrorSnackBar(binding.rootView, getString(R.string.fetch_error_snack))
+                    }
                 }
+            } else {
+                theme.showErrorSnackBar(binding.rootView, getString(R.string.fetch_error_webpage_snack))
             }
         }
     }

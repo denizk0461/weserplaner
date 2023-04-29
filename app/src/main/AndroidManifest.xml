@@ -17,6 +17,7 @@
 
         <activity
             android:name=".activity.MainActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="true"
             android:theme="@style/Theme.StudIPTimetable">
             <intent-filter>

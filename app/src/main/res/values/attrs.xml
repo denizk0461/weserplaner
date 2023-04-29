@@ -1,13 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- I am unsure whether these attrs are necessary to define -->
-    <attr name="scheduleColorDefault" type="color"/>
-    <attr name="colorOutlineVariant" type="color"/>
-    <attr name="colorOnSurfaceVariant" type="color"/>
-    <attr name="colorErrorContainer" type="color"/>
-    <attr name="colorOnErrorContainer" type="color"/>
-    <attr name="colorSecondaryContainer" type="color"/>
-    <attr name="colorOnSecondaryContainer" type="color"/>
-    <attr name="colorText" type="color"/>
-<!--    <attr name="colorOutline" type="color"/>-->
+    <attr name="scheduleColorDefault" type="color" />
+    <attr name="colorOutlineVariant" type="color" />
+    <attr name="colorOnSurfaceVariant" type="color" />
+    <attr name="colorErrorContainer" type="color" />
+    <attr name="colorOnErrorContainer" type="color" />
+    <attr name="colorSecondaryContainer" type="color" />
+    <attr name="colorOnSecondaryContainer" type="color" />
+    <attr name="colorText" type="color" />
+    <attr name="colorErrorText" type="color" />
+    <!--    <attr name="colorOutline" type="color"/>-->
+
+    <!-- dietary preference colours -->
+    <!-- fair / animal welfare -->
+    <attr name="colorPrimaryFair" type="color" />
+    <attr name="colorOnPrimaryFair" type="color" />
+    <attr name="colorContainerFair" type="color" />
+    <attr name="colorOnContainerFair" type="color" />
+    <!-- fish -->
+    <attr name="colorPrimaryFish" type="color" />
+    <attr name="colorOnPrimaryFish" type="color" />
+    <attr name="colorContainerFish" type="color" />
+    <attr name="colorOnContainerFish" type="color" />
+    <!-- poultry -->
+    <attr name="colorPrimaryPoultry" type="color" />
+    <attr name="colorOnPrimaryPoultry" type="color" />
+    <attr name="colorContainerPoultry" type="color" />
+    <attr name="colorOnContainerPoultry" type="color" />
+    <!-- vital -->
+    <attr name="colorPrimaryVital" type="color" />
+    <attr name="colorOnPrimaryVital" type="color" />
+    <attr name="colorContainerVital" type="color" />
+    <attr name="colorOnContainerVital" type="color" />
+    <!-- lamb -->
+    <attr name="colorPrimaryLamb" type="color" />
+    <attr name="colorOnPrimaryLamb" type="color" />
+    <attr name="colorContainerLamb" type="color" />
+    <attr name="colorOnContainerLamb" type="color" />
+    <!-- beef -->
+    <attr name="colorPrimaryBeef" type="color" />
+    <attr name="colorOnPrimaryBeef" type="color" />
+    <attr name="colorContainerBeef" type="color" />
+    <attr name="colorOnContainerBeef" type="color" />
+    <!-- pork -->
+    <attr name="colorPrimaryPork" type="color" />
+    <attr name="colorOnPrimaryPork" type="color" />
+    <attr name="colorContainerPork" type="color" />
+    <attr name="colorOnContainerPork" type="color" />
+    <!-- vegan -->
+    <attr name="colorPrimaryVegan" type="color" />
+    <attr name="colorOnPrimaryVegan" type="color" />
+    <attr name="colorContainerVegan" type="color" />
+    <attr name="colorOnContainerVegan" type="color" />
+    <!-- vegetarian -->
+    <attr name="colorPrimaryVegetarian" type="color" />
+    <attr name="colorOnPrimaryVegetarian" type="color" />
+    <attr name="colorContainerVegetarian" type="color" />
+    <attr name="colorOnContainerVegetarian" type="color" />
+    <!-- game -->
+    <attr name="colorPrimaryGame" type="color" />
+    <attr name="colorOnPrimaryGame" type="color" />
+    <attr name="colorContainerGame" type="color" />
+    <attr name="colorOnContainerGame" type="color" />
 </resources>

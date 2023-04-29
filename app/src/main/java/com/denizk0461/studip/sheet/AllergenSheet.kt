@@ -1,10 +1,12 @@
 package com.denizk0461.studip.sheet
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import com.denizk0461.studip.R
+import com.denizk0461.studip.data.getThemedColor
 import com.denizk0461.studip.data.viewBinding
 import com.denizk0461.studip.databinding.ItemSheetPreferenceBinding
 import com.denizk0461.studip.databinding.SheetAllergenBinding
@@ -18,10 +20,12 @@ import com.denizk0461.studip.model.DietaryPreferences
  *
  * @param offer     item to display further information on
  * @param category  category the offer belongs to
+ * @param displayColours    whether the user wants dietary preferences to be marked with colours
  */
 class AllergenSheet(
     private val offer: CanteenOfferGroupElement,
     private val category: String,
+    private val displayColours: Boolean,
 ) : AppSheet(R.layout.sheet_allergen) {
 
     // View binding
@@ -45,7 +49,7 @@ class AllergenSheet(
                     // Inflate the view
                     val prefLine = ItemSheetPreferenceBinding.inflate(LayoutInflater.from(context))
 
-                    val (stringId, drawableId) = DietaryPreferences.getData(index)
+                    val (stringId, drawableId, colourId) = DietaryPreferences.getData(index)
 
                     // Add the localised text for the preference
                     prefLine.preferenceText.text = getString(stringId)
@@ -55,6 +59,17 @@ class AllergenSheet(
                         getDrawable(
                             context,
                             drawableId,
+                        )
+                    )
+
+                    // Set tint of the icon; themed to the preference, if the user has the option enabled
+                    prefLine.preferenceImage.imageTintList = ColorStateList.valueOf(
+                        context.theme.getThemedColor(
+                            if (displayColours) {
+                                colourId
+                            } else {
+                                R.attr.colorText
+                            }
                         )
                     )
 

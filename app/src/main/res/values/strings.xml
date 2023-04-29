@@ -20,6 +20,7 @@
     </string-array>
 
     <string name="fetch_error_snack">Something went wrong!</string>
+    <string name="fetch_error_webpage_snack">You must navigate to your schedule!</string>
     <string name="canteen_fetch_error">Couldn\'t retrieve the canteen plan!</string>
 
     <string name="save">Save</string>
@@ -139,6 +140,9 @@
 
     <string name="settings_allergens_title">Mark offers with allergens with a star*</string>
     <string name="settings_allergens_subtitle">Also applies to additives</string>
+
+    <string name="settings_pref_colour_title">Colour dietary preferences</string>
+    <string name="settings_pref_colour_subtitle">This colours the icons similar to the website</string> <!-- TODO this text sucks, DE too -->
 
     <string name="settings_launch_canteen_title">Show canteen plan on app launch</string>
     <string name="settings_launch_canteen_subtitle">Otherwise your schedule will be shown at launch</string>

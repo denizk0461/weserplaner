@@ -28,6 +28,8 @@
         <item name="colorSurfaceInverse">@color/md_theme_dark_inverseSurface</item>
         <item name="colorPrimaryInverse">@color/md_theme_dark_inversePrimary</item>
 
+        <item name="colorErrorText">@color/md_theme_dark_error</item>
+
         <item name="android:textColor">@color/md_theme_dark_onSurfaceVariant</item>
         <item name="colorText">@color/md_theme_dark_onSurfaceVariant</item>
         <item name="android:scrollbarThumbVertical">@color/md_theme_dark_onSurfaceVariant</item>
@@ -35,6 +37,48 @@
 
         <!-- is this correct? -->
         <item name="scheduleColorDefault">@color/md_theme_light_background</item>
+
+        <!-- dietary preference colours -->
+        <item name="colorPrimaryFair">@color/fair_dark_primary</item>
+        <item name="colorOnPrimaryFair">@color/fair_dark_onPrimary</item>
+        <item name="colorContainerFair">@color/fair_dark_container</item>
+        <item name="colorOnContainerFair">@color/fair_dark_onContainer</item>
+        <item name="colorPrimaryFish">@color/fish_dark_primary</item>
+        <item name="colorOnPrimaryFish">@color/fish_dark_onPrimary</item>
+        <item name="colorContainerFish">@color/fish_dark_container</item>
+        <item name="colorOnContainerFish">@color/fish_dark_onContainer</item>
+        <item name="colorPrimaryPoultry">@color/poultry_dark_primary</item>
+        <item name="colorOnPrimaryPoultry">@color/poultry_dark_onPrimary</item>
+        <item name="colorContainerPoultry">@color/poultry_dark_container</item>
+        <item name="colorOnContainerPoultry">@color/poultry_dark_onContainer</item>
+        <item name="colorPrimaryVital">@color/vital_dark_primary</item>
+        <item name="colorOnPrimaryVital">@color/vital_dark_onPrimary</item>
+        <item name="colorContainerVital">@color/vital_dark_container</item>
+        <item name="colorOnContainerVital">@color/vital_dark_onContainer</item>
+        <item name="colorPrimaryLamb">@color/lamb_dark_primary</item>
+        <item name="colorOnPrimaryLamb">@color/lamb_dark_onPrimary</item>
+        <item name="colorContainerLamb">@color/lamb_dark_container</item>
+        <item name="colorOnContainerLamb">@color/lamb_dark_onContainer</item>
+        <item name="colorPrimaryBeef">@color/beef_dark_primary</item>
+        <item name="colorOnPrimaryBeef">@color/beef_dark_onPrimary</item>
+        <item name="colorContainerBeef">@color/beef_dark_container</item>
+        <item name="colorOnContainerBeef">@color/beef_dark_onContainer</item>
+        <item name="colorPrimaryPork">@color/pork_dark_primary</item>
+        <item name="colorOnPrimaryPork">@color/pork_dark_onPrimary</item>
+        <item name="colorContainerPork">@color/pork_dark_container</item>
+        <item name="colorOnContainerPork">@color/pork_dark_onContainer</item>
+        <item name="colorPrimaryVegan">@color/vegan_dark_primary</item>
+        <item name="colorOnPrimaryVegan">@color/vegan_dark_onPrimary</item>
+        <item name="colorContainerVegan">@color/vegan_dark_container</item>
+        <item name="colorOnContainerVegan">@color/vegan_dark_onContainer</item>
+        <item name="colorPrimaryVegetarian">@color/vegetarian_dark_primary</item>
+        <item name="colorOnPrimaryVegetarian">@color/vegetarian_dark_onPrimary</item>
+        <item name="colorContainerVegetarian">@color/vegetarian_dark_container</item>
+        <item name="colorOnContainerVegetarian">@color/vegetarian_dark_onContainer</item>
+        <item name="colorPrimaryGame">@color/game_dark_primary</item>
+        <item name="colorOnPrimaryGame">@color/game_dark_onPrimary</item>
+        <item name="colorContainerGame">@color/game_dark_container</item>
+        <item name="colorOnContainerGame">@color/game_dark_onContainer</item>
     </style>
 
     <style name="DividerTheme" parent="Widget.Material3.MaterialDivider">

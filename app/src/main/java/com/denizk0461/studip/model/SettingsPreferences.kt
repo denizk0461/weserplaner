@@ -17,10 +17,16 @@ enum class SettingsPreferences(val key: String) {
      * Whether the user wants the next course in his schedule to be highlighted.
      */
     COURSE_HIGHLIGHTING("setting_highlight"),
+
     /**
      * Whether the user wants the app to launch with the canteen fragment.
      */
     LAUNCH_CANTEEN_ON_START("settings_launch_canteen"),
+
+    /**
+     * Whether the user wants dietary preferences to be coloured.
+     */
+    COLOUR_PREFS("settings_prefs_colour"),
 
     /**
      * Whether the user opts into sending crash report.

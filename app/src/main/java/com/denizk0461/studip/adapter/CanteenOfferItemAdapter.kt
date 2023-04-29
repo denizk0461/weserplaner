@@ -1,5 +1,6 @@
 package com.denizk0461.studip.adapter
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.denizk0461.studip.R
 import com.denizk0461.studip.data.AppDiffUtilCallback
+import com.denizk0461.studip.data.getThemedColor
 import com.denizk0461.studip.databinding.ItemCanteenBinding
 import com.denizk0461.studip.databinding.ItemCanteenLineBinding
 import com.denizk0461.studip.databinding.ItemIconBinding
@@ -19,10 +21,12 @@ import com.denizk0461.studip.model.DietaryPreferences
  *
  * @param onClickListener   used for listening to clicks and long presses
  * @param displayAllergens  whether the user wants allergens to be marked
+ * @param displayColours    whether the user wants dietary preferences to be marked with colours
  */
 class CanteenOfferItemAdapter(
     private val onClickListener: OnClickListener,
     private val displayAllergens: Boolean,
+    private val displayColours: Boolean,
 ) : RecyclerView.Adapter<CanteenOfferItemAdapter.OfferViewHolder>() {
 
     private val offers: MutableList<CanteenOfferGroup> = mutableListOf()
@@ -79,13 +83,25 @@ class CanteenOfferItemAdapter(
             // Inflate a new icon holder
             val img = ItemIconBinding.inflate(LayoutInflater.from(holder.binding.root.context))
 
-            val (_, drawableId) = DietaryPreferences.getData(DietaryPreferences.ERROR.ordinal)
+            // Retrieve data for the dietary preference
+            val (_, drawableId, colourId) = DietaryPreferences.getData(DietaryPreferences.ERROR.ordinal)
 
             // Set a cross icon
             img.imageView.setImageDrawable(
                 AppCompatResources.getDrawable(
                     holder.binding.root.context,
                     drawableId,
+                )
+            )
+
+            // Set tint of the icon; themed to the preference, if the user has the option enabled
+            img.imageView.imageTintList = ColorStateList.valueOf(
+                holder.binding.root.context.theme.getThemedColor(
+                    if (displayColours) {
+                        colourId
+                    } else {
+                        R.attr.colorText
+                    }
                 )
             )
 
@@ -130,13 +146,25 @@ class CanteenOfferItemAdapter(
                     // Inflate a new icon holder
                     val img = ItemIconBinding.inflate(LayoutInflater.from(holder.binding.root.context))
 
-                    val (_, drawableId) = DietaryPreferences.getData(index)
+                    // Retrieve data for the dietary preference
+                    val (_, drawableId, colourId) = DietaryPreferences.getData(index)
 
                     // Set the appropriate icon
                     img.imageView.setImageDrawable(
                         AppCompatResources.getDrawable(
                             holder.binding.root.context,
                             drawableId,
+                        )
+                    )
+
+                    // Set tint of the icon
+                    img.imageView.imageTintList = ColorStateList.valueOf(
+                        holder.binding.root.context.theme.getThemedColor(
+                            if (displayColours) {
+                                colourId
+                            } else {
+                                R.attr.colorText
+                            }
                         )
                     )
 
