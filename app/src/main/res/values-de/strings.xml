@@ -20,6 +20,7 @@
     </string-array>
 
     <string name="fetch_error_snack">Ein Fehler ist aufgetreten!</string>
+    <string name="canteen_fetch_error">Mensaplan konnte nicht heruntergeladen werden!</string>
 
     <string name="save">Speichern</string>
     <string name="delete">Löschen</string>

@@ -3,9 +3,12 @@ package com.denizk0461.studip.data
 import android.app.Application
 import com.denizk0461.studip.db.AppRepository
 import com.denizk0461.studip.model.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
+import kotlin.jvm.Throws
 
 /**
  * Parser class used for fetching and collecting canteen offers from the website of the
@@ -36,11 +39,14 @@ class StwParser(application: Application) {
     /**
      * Parses through a list of canteen plans and saves them to persistent storage.
      *
-     * @param onRefreshUpdate   action call for when an update on the status of the fetch is
-     *                          available
-     * @param onFinish          action call for when the fetch has finished
+     * @param onFinish  action call for when the fetch has finished
+     * @param onError   action call for when an error has occurred
      */
-    fun parse(canteen: Int, onRefreshUpdate: (status: Int) -> Unit, onFinish: () -> Unit) {
+    suspend fun parse(
+        canteen: Int,
+        onFinish: () -> Unit,
+        onError: () -> Unit
+    ) {
         /*
          * Reset primary key values. This needs to be done in case this method is called multiple
          * times within the app's lifespan
@@ -65,30 +71,47 @@ class StwParser(application: Application) {
             else -> urlUniMensa
         }
 
-        // Delete all previous entries and start afresh
-        repo.nukeOffers()
+        /*
+         * Handle the fetch operation in an encompassing try-catch to prevent the app from crashing.
+         * User will be notified if an error occurs.
+         */
+        try {
 
-        // Fetch offers from the chosen canteen
-        val (dates, canteens, categories, items) = parseFromPage(link)
+            // Fetch offers from the chosen canteen
+            val (dates, canteens, categories, items) = parseFromPage(link)
 
-        // Save everything all at once into the database
-        with (repo) {
-            insertDates(dates)
-            insertCanteens(canteens)
-            insertCategories(categories)
-            insertItems(items)
+            // Delete all previous entries and start afresh
+            repo.nukeOffers()
+
+            // Save everything all at once into the database
+            with(repo) {
+                insertDates(dates)
+                insertCanteens(canteens)
+                insertCategories(categories)
+                insertItems(items)
+            }
+
+            // Call action to let the user know the fetch has finished
+            onFinish()
+
+        } catch (e: RuntimeException) {
+            /*
+             * Call action to let the user know an error occurred. Do this on the main thread to
+             * access UI.
+             */
+            withContext(Dispatchers.Main) {
+                onError()
+            }
         }
-            // TODO implement onRefresh(Int)
-
-        // Action call once all fetching activities have finished
-        onFinish()
     }
 
     /**
      * Fetch and parse the plan of a specific canteen.
      *
-     * @param url   link to the canteen to be scraped. Must be a subpage of stw-bremen.de
+     * @param url               link to the canteen to be scraped. Must be a subpage of stw-bremen.de
+     * @throws RuntimeException if something goes wrong during the fetch
      */
+    @Throws(RuntimeException::class)
     private fun parseFromPage(url: String): StwResults {
 
         val dates = mutableListOf<OfferDate>()
@@ -189,25 +212,34 @@ class StwParser(application: Application) {
                         // Retrieve the parent element holding the item's title and price
                         val tableRows = element.getElementsByTag("td")
 
-                        // Retrieve the dietary preferences the item meets
-                        val prefs = element
-                            .getElementsByClass("field field-name-field-food-types")[0]
+                        /*
+                         * Retrieve the dietary preferences the item meets and parse them into a
+                         * string that can be inserted into the database.
+                         */
+                        val prefs = try {
+                            with(element
+                                .getElementsByClass("field field-name-field-food-types")[0]
+                            ) {
+                                DietaryPreferences.Object(
+                                    isFair = isDietaryPreferenceMet(imageLinkPrefFair),
+                                    isFish = isDietaryPreferenceMet(imageLinkPrefFish),
+                                    isPoultry = isDietaryPreferenceMet(imageLinkPrefPoultry),
+                                    isLamb = isDietaryPreferenceMet(imageLinkPrefLamb),
+                                    isVital = isDietaryPreferenceMet(imageLinkPrefVital),
+                                    isBeef = isDietaryPreferenceMet(imageLinkPrefBeef),
+                                    isPork = isDietaryPreferenceMet(imageLinkPrefPork),
+                                    isVegan = isDietaryPreferenceMet(imageLinkPrefVegan),
+                                    isVegetarian = isDietaryPreferenceMet(imageLinkPrefVegetarian),
+                                    isGame = isDietaryPreferenceMet(imageLinkPrefGame),
+                                )
+                            }
+                        } catch (e: IndexOutOfBoundsException) {
+                            DietaryPreferences.NONE_MET
+                        }
 
-                        // Parse the preferences into a string for the database
-                        val prefString = DietaryPreferences.Object(
-                            isFair = prefs.isDietaryPreferenceMet(imageLinkPrefFair),
-                            isFish = prefs.isDietaryPreferenceMet(imageLinkPrefFish),
-                            isPoultry = prefs.isDietaryPreferenceMet(imageLinkPrefPoultry),
-                            isLamb = prefs.isDietaryPreferenceMet(imageLinkPrefLamb),
-                            isVital = prefs.isDietaryPreferenceMet(imageLinkPrefVital),
-                            isBeef = prefs.isDietaryPreferenceMet(imageLinkPrefBeef),
-                            isPork = prefs.isDietaryPreferenceMet(imageLinkPrefPork),
-                            isVegan = prefs.isDietaryPreferenceMet(imageLinkPrefVegan),
-                            isVegetarian = prefs.isDietaryPreferenceMet(imageLinkPrefVegetarian),
-                            isGame = prefs.isDietaryPreferenceMet(imageLinkPrefGame),
-                        ).deconstruct()
-
-                        val filteredText = tableRows[1].getFilteredText()
+                        val filteredText = getOrElse(orElse = Pair("", "")) {
+                            tableRows[1].getFilteredText()
+                        }
 
                         // Save the item to its list
                         items.add(
@@ -216,7 +248,7 @@ class StwParser(application: Application) {
                                 categoryId,
                                 title = filteredText.first,
                                 price = tableRows.getTextOrEmpty(2),
-                                dietaryPreferences = prefString,
+                                dietaryPreferences = prefs.deconstruct(),
                                 allergens = filteredText.second,
                             )
                         )
@@ -300,7 +332,6 @@ class StwParser(application: Application) {
         /*
          * The Studierendenwerk's website lists allergens, but they are invisible, rendering them
          * pointless to the website user. As of now, this information is discarded in the app.
-         * TODO implement allergen functionality
          */
         while (text.contains("<sup>")) {
 
@@ -367,6 +398,12 @@ class StwParser(application: Application) {
         else -> "00" // shouldn't occur
     }
 
+    private fun <T> getOrElse(orElse: T, action: () -> T): T = try {
+        action()
+    } catch (e: Exception) {
+        orElse
+    }
+
     /**
      * Retrieves a text and adds <br> tags with line breaks.
      *
@@ -407,7 +444,7 @@ class StwParser(application: Application) {
     private val urlGW2 = "https://www.stw-bremen.de/de/cafeteria/gw2"
 //    private val urlGraz = "" // No link since there are only snacks on offer that are not listed online
     private val urlHSBNeustadt = "https://www.stw-bremen.de/de/mensa/neustadtswall"
-    private val urlHSBWerder = "https://www.stw-bremen.de/de/mensa/werderstra%C3%9Fe"
+    private val urlHSBWerder = "https://www.stw-bremen.de/de/mensa/werderstraße"
     private val urlHSBAirport = "https://www.stw-bremen.de/de/mensa/airport"
     private val urlHfK = "https://www.stw-bremen.de/de/mensa/interimsmensa-hfk"
     private val urlMensaBHV = "https://www.stw-bremen.de/de/mensa/bremerhaven"

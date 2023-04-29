@@ -2,8 +2,11 @@ package com.denizk0461.studip.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.viewModelScope
 import com.denizk0461.studip.data.StwParser
 import com.denizk0461.studip.model.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * View model for [com.denizk0461.studip.fragment.CanteenFragment]
@@ -16,20 +19,11 @@ class CanteenViewModel(app: Application) : AppViewModel(app) {
     private val parser = StwParser(app)
 
     /**
-     * Retrieves all Stud.IP events.
-     *
-     * @return all Stud.IP events exposed through a LiveData object
-     */
-    val allOffers: LiveData<List<CanteenOffer>> = repo.allOffers
-
-
-
-    /**
      * Retrieves all canteen offer date objects.
      *
      * @return a list of instances of canteen offer dates
      */
-    fun getDates(): List<OfferDate> = returnBlocking { repo.getDates() }
+    fun getDates(): LiveData<List<OfferDate>> = repo.getDates()
 
     /**
      * Retrieves the opening hours of the canteen as a string.
@@ -41,24 +35,23 @@ class CanteenViewModel(app: Application) : AppViewModel(app) {
     /**
      * Fetch the canteen offers asynchronously. Updates will be provided through a LiveData object.
      *
-     * @param canteen           canteen from which to fetch offers from
-     * @param onRefreshUpdate   action to execute when a status update is available
-     * @param onFinish          action to execute when the operation has finished
+     * @param canteen   canteen from which to fetch offers from
+     * @param onFinish  action to execute when the operation has finished
+     * @param onError   action to execute when the operation encountered an error
      */
-    fun fetchOffers(canteen: Int, onRefreshUpdate: (status: Int) -> Unit, onFinish: () -> Unit) {
-        doAsync { parser.parse(canteen, onRefreshUpdate, onFinish) }
+    fun fetchOffers(
+        canteen: Int,
+        onFinish: () -> Unit,
+        onError: () -> Unit,
+    ) {
+        viewModelScope.launch(Dispatchers.IO) {
+            parser.parse(canteen, onFinish, onError)
+        }
     }
 
     fun registerDietaryPreferencesUpdate() {
         repo.dietaryPreferencesUpdate.postValue(repo.dietaryPreferencesUpdate.value?.plus(1))
     }
-
-    /**
-     * Retrieves the amount of dates represented in the offers stored locally. Can be observed.
-     *
-     * @return  date count as LiveData
-     */
-    fun getDateCount(): LiveData<Int> = repo.getDateCount()
 
     /**
      * Updates a given dietary preference to a new value.
@@ -77,12 +70,6 @@ class CanteenViewModel(app: Application) : AppViewModel(app) {
      * @return      whether the preference needs to be met
      */
     fun getPreference(pref: DietaryPreferences): Boolean = repo.getBooleanPreference(pref)
-
-    /**
-     * This value determines whether the user wants to have allergens marked.
-     */
-    val preferenceAllergen: Boolean
-        get() = repo.getBooleanPreference(SettingsPreferences.ALLERGEN, defaultValue = true)
 
     /**
      * This value determines which canteen the user has selected.

@@ -5,7 +5,10 @@ import android.content.res.Resources
 import android.util.TypedValue
 import android.widget.Toast
 import androidx.annotation.AttrRes
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import com.denizk0461.studip.R
 import com.denizk0461.studip.exception.AcademicQuarterNotApplicableException
+import com.google.android.material.snackbar.Snackbar
 import kotlin.jvm.Throws
 
 /**
@@ -40,6 +43,15 @@ fun Resources.Theme.getThemedColor(@AttrRes id: Int): Int = TypedValue().also { 
  */
 fun showToast(context: Context, text: String) {
     Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+}
+
+fun Resources.Theme.showErrorSnackBar(view: CoordinatorLayout, text: String) {
+    Snackbar
+        .make(view, text, Snackbar.LENGTH_SHORT)
+        // Set colours to signify an error
+        .setBackgroundTint(getThemedColor(R.attr.colorErrorContainer))
+        .setTextColor(getThemedColor(R.attr.colorOnErrorContainer))
+        .show()
 }
 
 /**

@@ -20,7 +20,8 @@
     </string-array>
 
     <string name="fetch_error_snack">Something went wrong!</string>
-    
+    <string name="canteen_fetch_error">Couldn\'t retrieve the canteen plan!</string>
+
     <string name="save">Save</string>
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>

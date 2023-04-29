@@ -139,6 +139,8 @@ enum class DietaryPreferences(val value: String) {
 
         const val TEMPLATE_EMPTY: String = ".........."
 
+        val NONE_MET: Object = construct(TEMPLATE_EMPTY)
+
         /**
          * Constructs a DietaryPrefObject from a regex string. String must be 10 characters long.
          * A char equal to C_TRUE is treated as a true boolean value. Any other char is treated as a

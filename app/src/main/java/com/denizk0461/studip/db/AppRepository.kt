@@ -79,25 +79,11 @@ class AppRepository(app: Application) {
     fun getCanteenOpeningHours(): String = dao.getCanteenOpeningHours()
 
     /**
-     * Retrieves all canteen offers.
-     *
-     * @return all canteen offers exposed through a LiveData object
-     */
-    val allOffers: LiveData<List<CanteenOffer>> = dao.allOffers
-
-    /**
      * Retrieves all canteen offers that match given day.
      *
      * @return all canteen offers matching the given day exposed through a LiveData object
      */
     fun getOffersByDay(day: Int): LiveData<List<CanteenOffer>> = dao.getOffersByDay(day)
-
-    /**
-     * Retrieves the amount of dates represented in the offers stored locally. Can be observed.
-     *
-     * @return  date count as LiveData
-     */
-    fun getDateCount(): LiveData<Int> = dao.getDateCount()
 
     /**
      * Updates a schedule element.
@@ -122,7 +108,7 @@ class AppRepository(app: Application) {
      *
      * @return a list of instances of canteen offer dates
      */
-    fun getDates(): List<OfferDate> = dao.getDates()
+    fun getDates(): LiveData<List<OfferDate>> = dao.getDates()
 
     /**
      * Retrieves the regex string used to determine the user's dietary preferences, or, if no

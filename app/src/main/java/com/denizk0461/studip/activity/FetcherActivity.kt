@@ -8,10 +8,9 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.lifecycle.ViewModelProvider
 import com.denizk0461.studip.R
-import com.denizk0461.studip.data.getThemedColor
+import com.denizk0461.studip.data.showErrorSnackBar
 import com.denizk0461.studip.databinding.ActivityFetcherBinding
 import com.denizk0461.studip.viewmodel.FetcherViewModel
-import com.google.android.material.snackbar.Snackbar
 import java.io.IOException
 import java.net.URLDecoder
 
@@ -90,18 +89,8 @@ class FetcherActivity : Activity() {
 //                        finish()
 //                    }
                 } catch (e: IOException) {
-
                     // Let the user know that an error occurred
-                    Snackbar
-                        .make(
-                            binding.rootView,
-                            getString(R.string.fetch_error_snack),
-                            Snackbar.LENGTH_SHORT
-                        )
-                        // Set colours to signify an error
-                        .setBackgroundTint(theme.getThemedColor(R.attr.colorErrorContainer))
-                        .setTextColor(theme.getThemedColor(R.attr.colorOnErrorContainer))
-                        .show()
+                    theme.showErrorSnackBar(binding.rootView, getString(R.string.fetch_error_snack))
                 }
             }
         }

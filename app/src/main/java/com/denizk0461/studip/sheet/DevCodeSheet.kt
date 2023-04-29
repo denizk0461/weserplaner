@@ -44,11 +44,11 @@ class DevCodeSheet(
              *
              * About the inks; they are safe (which is suspicious of me to say), just encoded so
              * people can't just look at the file and figure out all the codes! Of course, they're
-             * easily decoded, but who would go for that? You would have to be a pretty big nerd to
-             * do that. Then again, I was the one who encoded all of these links in the first place,
-             * so I suppose the joke's on me...
+             * easily decoded, but who would go for that? You would have to have a lot of time to
+             * waste to do that. Then again, I was the one who encoded all of these links in the
+             * first place, so I suppose the joke's on me...
              *
-             * If you're reading this – why?
+             * If you're reading this, I ask you – why?
              */
             when (binding.input.text.toString().uppercase()) {
                 "U1RST0JF".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS90S2k5Wi1mNnFYNA==".d64)
@@ -59,6 +59,9 @@ class DevCodeSheet(
                 "SE9ORVNU".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9DSEg0OE5LUEFraw==".d64)
                 "QkJVT0s/".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS90Rm1PMm1TY0tHNA==".d64)
                 "SUhUU0Mq".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS85bXZ4SVdhWHZuWQ==".d64)
+                "SU5TQU5F".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS90NE9kYTlUZFYwbw==".d64)
+                "X0RSV05f".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9SUVpUUy1CWjhtcw==".d64)
+                "TUFSR0Uh".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS8tbHFxRHZXRjQ1dw==".d64)
                 "NEVENT" -> { // nuke events
                     nukeEvents()
                     showToast(context, "Nuked all events")

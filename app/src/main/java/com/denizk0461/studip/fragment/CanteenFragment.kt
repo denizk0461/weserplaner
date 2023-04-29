@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import com.denizk0461.studip.R
 import com.denizk0461.studip.adapter.CanteenOfferPageAdapter
+import com.denizk0461.studip.data.showErrorSnackBar
 import com.denizk0461.studip.databinding.FragmentCanteenBinding
 import com.denizk0461.studip.model.*
 import com.denizk0461.studip.sheet.TextSheet
@@ -37,16 +38,9 @@ class CanteenFragment : AppFragment() {
     // View model reference for providing access to the database
     private val viewModel: CanteenViewModel by viewModels()
 
-    // Elements in the canteen plan
-    private var elements: List<CanteenOffer> = listOf()
-
-    // Count of days displayed in the canteen plan
-    private var dateSize: Int = 0
-
-    // Used if no preference has been set or none can be found
-    private val emptyPreferenceRegex: String = ".........."
-
     private var openingHours = ""
+
+    private var dates: List<String> = listOf()
 
     // Instantiate the view binding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -78,10 +72,10 @@ class CanteenFragment : AppFragment() {
                     binding.buttonCanteenPicker.text = getCurrentlySelectedCanteenName()
 
                     // Display to the user that the canteen plan will be refreshed
-                    binding.swipeRefreshLayout.isRefreshing = true
+//                    binding.swipeRefreshLayout.isRefreshing = true
 
                     // Refresh the canteen menu for the newly selected canteen
-//                    refresh()
+                    refresh()
                     true
                 }
                 inflate(R.menu.menu_canteens)
@@ -92,6 +86,7 @@ class CanteenFragment : AppFragment() {
         // Set currently selected canteen to the button
         binding.buttonCanteenPicker.text = getCurrentlySelectedCanteenName()
 
+        // Set up button to display info (most likely opening hours)
         binding.buttonInfo.setOnClickListener {
             openBottomSheet(
                 TextSheet(
@@ -103,7 +98,6 @@ class CanteenFragment : AppFragment() {
                 )
             )
         }
-
 
         // Assign a preference value to every button to filter for dietary preferences
         val chipMap = mapOf(
@@ -134,8 +128,7 @@ class CanteenFragment : AppFragment() {
                  * it removes the view before immediately adding it back, this method causes a
                  * flicker.
                  * TODO implement a more efficient / better-looking method
-                 * TODO order the chips alphabetically
-                 * TODO the refreshing ability stopped working
+                 * TODO order the chips alphabetically?
                  */
                 val index = binding.chipsPreference.indexOfChild(buttonView)
                 binding.chipsPreference.removeView(buttonView)
@@ -144,64 +137,29 @@ class CanteenFragment : AppFragment() {
         }
 
         // Set up the view pager's adapter
-        viewPagerAdapter = CanteenOfferPageAdapter(
-            activity as FragmentActivity,
-        )
+        viewPagerAdapter = CanteenOfferPageAdapter(activity as FragmentActivity)
 
-        viewModel.getDateCount().observe(viewLifecycleOwner) { dateCount ->
-            viewPagerAdapter.itemCount = dateCount
-            binding.swipeRefreshLayout.isRefreshing = false
+        // Date count is observed to correctly set the amount of pages and the corresponding tabs
+        viewModel.getDates().observe(viewLifecycleOwner) { newDates ->
+
+            // Retrieve the dates individually and store them for the tab mediator to use
+            dates = newDates.map { it.date }
+
+            // Let the adapter know of the new amount of dates (pages) to display
+            viewPagerAdapter.itemCount = dates.size
         }
 
         // Assign the adapter to the view pager
         binding.viewPager.adapter = viewPagerAdapter
 
-        // Set up LiveData observer to refresh the view on update
-//        viewModel.allOffers.observe(viewLifecycleOwner) { offers ->
-//            // Update the element list stored in this fragment
-//            elements = offers
-//
-//            // Group elements by category
-//            val groupedElements = offers.groupElements().distinct()
-//
-//            // Find all dates for which items are available
-//            val newDates = groupedElements.map { it.date }.distinct()
-//
-//            // Update the date count stored in this fragment
-//            dateSize = newDates.size
-//
-//            // Update the item list in the view pager's adapter
-////            viewPagerAdapter.setNewItems(groupedElements, dateSize)
-//
-//            // Set the text for the opening hours dialogue
-//            openingHours = viewModel.getCanteenOpeningHours()
-//
-//            binding.swipeRefreshLayout.isRefreshing = false
-//
-//            // Create and attach the tab layout for the ViewPager
-//            createTabLayoutMediator(newDates)
-//        }
+        // Set up TabLayoutMediator to populate tabs
+        TabLayoutMediator(binding.dayTabLayout, binding.viewPager) { tab, position ->
+            tab.text = dates[position]
+        }.attach()
 
         // Set up functions for when the user swipes to refresh the view
         binding.swipeRefreshLayout.setOnRefreshListener {
             refresh()
-        }
-    }
-
-    /**
-     * Create and attach the object mediating the tabs for the view pager.
-     *
-     * TODO this is error-prone, likes to crash with an IndexOutOfBoundsException, and I have no
-     *  fucking idea why
-     *
-     * @param dates titles for the individual tabs
-     */
-    private fun createTabLayoutMediator(dates: List<String>) {
-        // Only attach the mediator if the list has items, otherwise an error would occur
-        if (dates.isNotEmpty()) {
-            TabLayoutMediator(binding.dayTabLayout, binding.viewPager) { tab, position ->
-                tab.text = dates[position]
-            }.attach()
         }
     }
 
@@ -223,7 +181,6 @@ class CanteenFragment : AppFragment() {
 
         // Update the view
         viewModel.registerDietaryPreferencesUpdate()
-//        viewPagerAdapter.setNewItems(elements.groupElements().distinct(), dateSize)
     }
 
     /**
@@ -258,38 +215,21 @@ class CanteenFragment : AppFragment() {
 
     /**
      * Downloads the canteen offers and refreshes them in the app.
-     * TODO handle SocketTimeoutException
      */
     private fun refresh() {
         // Retrieve new offers from the website(s)
-        viewModel.fetchOffers(viewModel.preferenceCanteen, onRefreshUpdate = { status ->
-            // TODO refresh updates
-        }, onFinish = {
+        viewModel.fetchOffers(viewModel.preferenceCanteen, onFinish = {
             /*
              * Tell the swipe refresh layout to stop refreshing.
-             * TODO if an exception is raised, this will not be fired. This must be changed
              */
-//                binding.swipeRefreshLayout.isRefreshing = false
-//                createTabLayoutMediator()
+            binding.swipeRefreshLayout.isRefreshing = false
+
+        }, onError = {
+            context?.theme?.showErrorSnackBar(
+                binding.snackbarContainer,
+                getString(R.string.canteen_fetch_error)
+            )
+            binding.swipeRefreshLayout.isRefreshing = false
         })
     }
-
-    /**
-     * Executed when an item has been clicked.
-     *
-     * @param offer item that has been clicked
-     */
-//    override fun onClick(offer: CanteenOfferGroupElement, category: String) {
-//        openBottomSheet(AllergenSheet(offer, category))
-//    }
-//
-//    /**
-//     * Executed when an item has been long-pressed.
-//     *
-//     * @param offer item that has been long-pressed
-//     * @return      whether the long press was successful
-//     */
-//    override fun onLongClick(offer: CanteenOfferGroupElement): Boolean {
-//        return false
-//    }
 }
