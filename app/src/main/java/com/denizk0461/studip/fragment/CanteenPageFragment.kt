@@ -19,12 +19,8 @@ import com.denizk0461.studip.viewmodel.CanteenPageViewModel
 /**
  * Fragment that is instantiated by [StudIPEventPageAdapter] to display individual days' pages and
  * their events.
- *
- * @param currentDay    day to display
  */
-class CanteenPageFragment(
-    private val currentDay: Int,
-) : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
+class CanteenPageFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListener {
 
     // Nullable view binding reference
     private var _binding: RecyclerViewBinding? = null
@@ -42,8 +38,18 @@ class CanteenPageFragment(
 
     private val offerList: MutableList<CanteenOffer> = mutableListOf()
 
+    /**
+     * Current day that is used to show only events of a given day (0 = Monday, 4 = Friday)
+     */
+    private var currentDay: Int = -1
+
     // Instantiate the view binding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+
+        // Retrieve current day to fetch items specifically for that day
+        currentDay = arguments?.getInt("currentDay") ?: -1
+
+        // Inflate view binding
         _binding = RecyclerViewBinding.inflate(inflater, container, false)
         return binding.root
     }

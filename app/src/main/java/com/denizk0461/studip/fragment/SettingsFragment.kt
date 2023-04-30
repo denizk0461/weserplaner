@@ -11,6 +11,8 @@ import androidx.fragment.app.viewModels
 import com.denizk0461.studip.BuildConfig
 import com.denizk0461.studip.R
 import com.denizk0461.studip.activity.FetcherActivity
+import com.denizk0461.studip.activity.ImageActivity
+import com.denizk0461.studip.data.showToast
 import com.denizk0461.studip.databinding.FragmentSettingsBinding
 import com.denizk0461.studip.sheet.DevCodeSheet
 import com.denizk0461.studip.sheet.TextSheet
@@ -36,7 +38,7 @@ class SettingsFragment : AppFragment() {
     private val viewModel: SettingsViewModel by viewModels()
 
     // Click counter on the app version button
-    private var appVersionClick = 0
+    private var appVersionClick = 1
 
     // 222
     private val mysteryLink = "https://www.youtube.com/watch?v=nhIQMCXJzLI"
@@ -129,7 +131,39 @@ class SettingsFragment : AppFragment() {
         // Set click listener for the app version button
         binding.buttonAppVersion.setOnClickListener {
             when (appVersionClick) {
-                22 -> {
+                3 -> {
+                    startActivity(Intent(context, ImageActivity::class.java).also { intent ->
+                        val bundle = Bundle()
+                        bundle.putString("img", "garbage")
+                        intent.putExtras(bundle)
+                    })
+                    appVersionClick += 1
+                }
+                10 -> {
+                    showToast(context, "ahhh yes")
+                    appVersionClick += 1
+                }
+                15 -> {
+                    showToast(context, "keep clicking")
+                    appVersionClick += 1
+                }
+                20 -> {
+                    showToast(context, "^_^")
+                    appVersionClick += 1
+                }
+                30 -> {
+                    showToast(context, "^_____^")
+                    appVersionClick += 1
+                }
+                121 -> {
+                    showToast(context, "Shouldn't you study for your exam?")
+                    appVersionClick += 1
+                }
+                200 -> {
+                    showToast(context, "\\__*")
+                    appVersionClick += 1
+                }
+                222 -> {
                     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(mysteryLink)))
                     appVersionClick = 0
                 }
@@ -145,7 +179,8 @@ class SettingsFragment : AppFragment() {
         binding.appVersionText.text =
             "${BuildConfig.VERSION_NAME}-${
                 if (BuildConfig.DEBUG) 
-                    "dev-[${SimpleDateFormat("yyyy-MM-dd, HH:mm:ss.SSS", Locale.GERMANY).format(Date(BuildConfig.TIMESTAMP))}]" 
+                    "dev-[${SimpleDateFormat("yyyy-MM-dd, HH:mm:ss.SSS", Locale.GERMANY)
+                        .format(Date(BuildConfig.TIMESTAMP))}]" 
                 else 
                     "release"
             }"

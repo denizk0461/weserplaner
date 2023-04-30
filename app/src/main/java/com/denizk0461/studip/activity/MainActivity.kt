@@ -41,20 +41,6 @@ class MainActivity : FragmentActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Open the fragment that the user specified to open on app start
-        if (
-            AppRepository.getRepositoryInstance(application)
-                .getBooleanPreference(SettingsPreferences.LAUNCH_CANTEEN_ON_START)
-        ) {
-            // Open canteen fragment
-            binding.contentMain.navView.selectedItemId = R.id.food
-            currentFragment = "canteen"
-        } else {
-            // Open event fragment
-            binding.contentMain.navView.selectedItemId = R.id.plan
-            currentFragment = "event"
-        }
-
         // Set up navigation view bar to launch fragments
         binding.contentMain.navView.setOnItemSelectedListener { item ->
             // Launch fragment based on the item that has been clicked
@@ -65,8 +51,24 @@ class MainActivity : FragmentActivity() {
             })
         }
 
-        // Launch the fragment defined in currentFragment
-        loadFragment(currentFragment)
+        // Set up bottom nav bar and the initial fragment when the app launches
+        if (savedInstanceState == null) {
+            // Open the fragment that the user specified to open on app start
+            if (AppRepository.getRepositoryInstance(application)
+                    .getBooleanPreference(SettingsPreferences.LAUNCH_CANTEEN_ON_START)
+            ) {
+                // Open canteen fragment
+                binding.contentMain.navView.selectedItemId = R.id.food
+                currentFragment = "canteen"
+            } else {
+                // Open event fragment
+                binding.contentMain.navView.selectedItemId = R.id.plan
+                currentFragment = "event"
+            }
+
+            // Launch the fragment defined in currentFragment
+            loadFragment(currentFragment)
+        }
     }
 
     /**

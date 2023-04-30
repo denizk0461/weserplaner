@@ -13,7 +13,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.StudIPTimetable"
-        tools:targetApi="31">
+        tools:targetApi="33"
+        android:localeConfig="@xml/locales_config">
 
         <activity
             android:name=".activity.MainActivity"
@@ -28,6 +29,12 @@
 
         <activity
             android:name=".activity.FetcherActivity"
+            android:exported="false"
+            android:theme="@style/Theme.StudIPTimetable">
+        </activity>
+
+        <activity
+            android:name=".activity.ImageActivity"
             android:exported="false"
             android:theme="@style/Theme.StudIPTimetable">
         </activity>

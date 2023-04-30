@@ -1,11 +1,9 @@
 package com.denizk0461.studip.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import com.denizk0461.studip.R
 import com.denizk0461.studip.adapter.StudIPEventPageAdapter
@@ -40,11 +38,6 @@ class EventFragment : AppFragment() {
     // Titles for the view pager's tabs
     private lateinit var weekdays: Array<String>
 
-//    private var viewPagerScrollPosition: Parcelable? = null
-    private var viewPagerPosition = -1
-
-    private var hasFragmentStarted = false
-
     // Instantiate the view binding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentEventBinding.inflate(inflater, container, false)
@@ -55,7 +48,7 @@ class EventFragment : AppFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Get localised weekday names
-        weekdays = context?.resources?.getStringArray(R.array.weekdays) ?: arrayOf()
+        weekdays = context.resources?.getStringArray(R.array.weekdays) ?: arrayOf()
 
         // Determine the current day
         dayOfWeek = when (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
@@ -69,7 +62,10 @@ class EventFragment : AppFragment() {
         }
 
         // Set up the view pager's adapter
-        viewPagerAdapter = StudIPEventPageAdapter(activity as FragmentActivity)
+        viewPagerAdapter = StudIPEventPageAdapter(
+            childFragmentManager,
+            lifecycle,
+        )
 
         // Assign the adapter to the view pager
         binding.viewPager.adapter = viewPagerAdapter
@@ -78,75 +74,33 @@ class EventFragment : AppFragment() {
         TabLayoutMediator(binding.dayTabLayout, binding.viewPager) { tab, position ->
             tab.text = weekdays[position]
         }.attach()
-
-        // Set up LiveData observer to refresh the view on update
-//        viewModel.allEvents.observe(viewLifecycleOwner) { events ->
-//
-//            Log.d("AAAbA?", events.toString())
-//
-//            // Update the item list in the view pager's adapter
-//            viewPagerAdapter.setNewItems(events)
-//
-//            if (!hasFragmentStarted) {
-//                // Scroll to the current day, if no page has been stored to be scrolled to
-//                switchToCurrentDayView()
-//                hasFragmentStarted = true
-////            } else {
-////                /*
-////                 * If a page was previously saved, scroll to that one instead. This is meant to
-////                 * prevent jumping from
-////                 */
-////                binding.viewPager.currentItem = viewPagerPosition
-//            }
-//        }
-    }
-
-    override fun onPause() {
-//        viewPagerPosition = binding.viewPager.currentItem
-//        Log.d("AAA?", "onpause: $viewPagerPosition")
-        super.onPause()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        binding.viewPager.currentItem = viewPagerPosition
-        Log.d("AAA?", "onresume: pos: $viewPagerPosition; vpp: ${binding.viewPager.currentItem}")
-
-        // Scroll to the current day
-//        switchToCurrentDayView()
     }
 
     /**
      * Called when the layout changes (e.g. device rotation) but NOT when the fragment is selected
      * from the bottom navigation view.
      */
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        Log.d("AAA?", "${binding.viewPager.currentItem}")
-        outState.putInt(
-            "viewPagerCurrentPage",
-            binding.viewPager.currentItem
-        )
-    }
-
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-        val restoredPage = savedInstanceState?.getInt("viewPagerCurrentPage") ?: 0
-        viewPagerPosition = restoredPage
-
-    }
+//    override fun onSaveInstanceState(outState: Bundle) {
+//        super.onSaveInstanceState(outState)
+//
+//        outState.putInt(
+//            "viewPagerCurrentPage",
+//            binding.viewPager.currentItem
+//        )
+//    }
+//
+//    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+//        super.onViewStateRestored(savedInstanceState)
+//
+//        // Retrieve
+//        val restoredPage = savedInstanceState?.getInt("viewPagerCurrentPage") ?: 0
+//
+////        binding.viewPager.currentItem = restoredPage
+//    }
 
     // Invalidate the view binding
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    /**
-     * Scroll to the current day. Current day is determined after the fragment's view has been
-     * created.
-     */
-    private fun switchToCurrentDayView() {
-        binding.viewPager.currentItem = dayOfWeek
     }
 }

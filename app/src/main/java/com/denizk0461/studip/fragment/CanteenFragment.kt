@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
-import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import com.denizk0461.studip.R
 import com.denizk0461.studip.adapter.CanteenOfferPageAdapter
@@ -137,7 +136,10 @@ class CanteenFragment : AppFragment() {
         }
 
         // Set up the view pager's adapter
-        viewPagerAdapter = CanteenOfferPageAdapter(activity as FragmentActivity)
+        viewPagerAdapter = CanteenOfferPageAdapter(
+            childFragmentManager,
+            lifecycle,
+        )
 
         // Date count is observed to correctly set the amount of pages and the corresponding tabs
         viewModel.getDates().observe(viewLifecycleOwner) { newDates ->
@@ -225,7 +227,7 @@ class CanteenFragment : AppFragment() {
             binding.swipeRefreshLayout.isRefreshing = false
 
         }, onError = {
-            context?.theme?.showErrorSnackBar(
+            context.theme?.showErrorSnackBar(
                 binding.snackbarContainer,
                 getString(R.string.canteen_fetch_error)
             )

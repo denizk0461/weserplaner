@@ -16,13 +16,8 @@ import com.denizk0461.studip.viewmodel.EventPageViewModel
 /**
  * Fragment that is instantiated by [StudIPEventPageAdapter] to display individual days' pages and
  * their events.
- *
- * @param currentDay    current day that is used to show only events of a given day (0 = Monday,
- *                      4 = Friday)
  */
-class EventPageFragment(
-    private val currentDay: Int,
-) : AppFragment(), StudIPEventItemAdapter.OnClickListener {
+class EventPageFragment : AppFragment(), StudIPEventItemAdapter.OnClickListener {
 
     // Nullable view binding reference
     private var _binding: RecyclerViewBinding? = null
@@ -39,10 +34,23 @@ class EventPageFragment(
     /**
      * Adapter that manages the page's items
      */
-    private val eventAdapter = StudIPEventItemAdapter(currentDay, this)
+    private lateinit var eventAdapter: StudIPEventItemAdapter
+
+    /**
+     * Current day that is used to show only events of a given day (0 = Monday, 4 = Friday)
+     */
+    private var currentDay = -1
 
     // Instantiate the view binding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+
+        // Retrieve current day to fetch items specifically for that day
+        currentDay = arguments?.getInt("currentDay") ?: -1
+
+        // Instantiate event adapter with the current day
+        eventAdapter = StudIPEventItemAdapter(currentDay, this)
+
+        // Inflate view binding
         _binding = RecyclerViewBinding.inflate(inflater, container, false)
         return binding.root
     }

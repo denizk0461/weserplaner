@@ -1,12 +1,12 @@
 package com.denizk0461.studip.activity
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.os.Bundle
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.denizk0461.studip.R
 import com.denizk0461.studip.data.showErrorSnackBar
@@ -19,7 +19,7 @@ import java.net.URLDecoder
  * Activity for allowing the user to log in to access and fetch their schedule from their Stud.IP
  * profile. Launched through a button in the app's settings.
  */
-class FetcherActivity : Activity() {
+class FetcherActivity : AppCompatActivity() {
 
     // View binding
     private lateinit var binding: ActivityFetcherBinding

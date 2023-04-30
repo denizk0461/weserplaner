@@ -1,18 +1,22 @@
 package com.denizk0461.studip.adapter
 
+import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.denizk0461.studip.fragment.EventPageFragment
 
 /**
  * Custom ViewPager adapter for managing multiple pages of Stud.IP events.
  *
- * @param fragmentActivity  parent fragment activity
+ * @param childFragmentManager  child fragment manager of the parent fragment
+ * @param lifecycle             parent fragment lifecycle
  */
 class StudIPEventPageAdapter(
-    fragmentActivity: FragmentActivity,
-) : FragmentStateAdapter(fragmentActivity) {
+    childFragmentManager: FragmentManager,
+    lifecycle: Lifecycle,
+) : FragmentStateAdapter(childFragmentManager, lifecycle) {
 
     /*
      * Assume that there will always be 7 pages, for 7 days - Monday through Sunday.
@@ -20,5 +24,9 @@ class StudIPEventPageAdapter(
     override fun getItemCount(): Int = 7
 
     override fun createFragment(position: Int): Fragment =
-        EventPageFragment(position)
+        EventPageFragment().also { f ->
+            val bundle = Bundle()
+            bundle.putInt("currentDay", position)
+            f.arguments = bundle
+        }
 }

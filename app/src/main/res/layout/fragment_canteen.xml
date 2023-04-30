@@ -104,6 +104,9 @@
                 android:id="@+id/chip_pref_fair"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:chipIcon="@drawable/handshake"
+                app:chipIconEnabled="true"
+                app:chipIconTint="?attr/colorText"
                 android:text="@string/pref_fair"/>
 
             <com.google.android.material.chip.Chip
@@ -111,6 +114,9 @@
                 android:id="@+id/chip_pref_fish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:chipIcon="@drawable/fish"
+                app:chipIconEnabled="true"
+                app:chipIconTint="?attr/colorText"
                 android:text="@string/pref_fish"/>
 
             <com.google.android.material.chip.Chip
@@ -118,6 +124,9 @@
                 android:id="@+id/chip_pref_poultry"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:chipIcon="@drawable/chicken"
+                app:chipIconEnabled="true"
+                app:chipIconTint="?attr/colorText"
                 android:text="@string/pref_poultry"/>
 
             <com.google.android.material.chip.Chip
@@ -125,6 +134,9 @@
                 android:id="@+id/chip_pref_lamb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:chipIcon="@drawable/sheep"
+                app:chipIconEnabled="true"
+                app:chipIconTint="?attr/colorText"
                 android:text="@string/pref_lamb"/>
 
             <com.google.android.material.chip.Chip
@@ -132,6 +144,9 @@
                 android:id="@+id/chip_pref_vital"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:chipIcon="@drawable/yoga"
+                app:chipIconEnabled="true"
+                app:chipIconTint="?attr/colorText"
                 android:text="@string/pref_vital"/>
 
             <com.google.android.material.chip.Chip
@@ -139,6 +154,9 @@
                 android:id="@+id/chip_pref_beef"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:chipIcon="@drawable/cow"
+                app:chipIconEnabled="true"
+                app:chipIconTint="?attr/colorText"
                 android:text="@string/pref_beef"/>
 
             <com.google.android.material.chip.Chip
@@ -146,6 +164,9 @@
                 android:id="@+id/chip_pref_pork"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:chipIcon="@drawable/pig"
+                app:chipIconEnabled="true"
+                app:chipIconTint="?attr/colorText"
                 android:text="@string/pref_pork"/>
 
             <com.google.android.material.chip.Chip
@@ -153,6 +174,9 @@
                 android:id="@+id/chip_pref_vegetarian"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:chipIcon="@drawable/carrot"
+                app:chipIconEnabled="true"
+                app:chipIconTint="?attr/colorText"
                 android:text="@string/pref_vegetarian"/>
 
             <com.google.android.material.chip.Chip
@@ -160,6 +184,9 @@
                 android:id="@+id/chip_pref_vegan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:chipIcon="@drawable/leaf"
+                app:chipIconEnabled="true"
+                app:chipIconTint="?attr/colorText"
                 android:text="@string/pref_vegan"/>
 
             <com.google.android.material.chip.Chip
@@ -167,6 +194,9 @@
                 android:id="@+id/chip_pref_game"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:chipIcon="@drawable/deer"
+                app:chipIconEnabled="true"
+                app:chipIconTint="?attr/colorText"
                 android:text="@string/pref_game"/>
 
         </com.google.android.material.chip.ChipGroup>

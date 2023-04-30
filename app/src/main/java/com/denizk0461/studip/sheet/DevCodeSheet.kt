@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Base64
 import android.view.View
 import com.denizk0461.studip.R
+import com.denizk0461.studip.activity.ImageActivity
 import com.denizk0461.studip.data.showToast
 import com.denizk0461.studip.data.viewBinding
 import com.denizk0461.studip.databinding.SheetDevCodeBinding
@@ -63,6 +64,14 @@ class DevCodeSheet(
                 "X0RSV05f".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9SUVpUUy1CWjhtcw==".d64)
                 "TUFSR0Uh".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS8tbHFxRHZXRjQ1dw==".d64)
                 "UE9XRUxM".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9XUGMtVkVxQlBISQ==".d64)
+                "Q0FMTE1F".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS8xbTV1WnJNMnktMA==".d64)
+                "Qk9KQUNL".d64 -> {
+                    startActivity(Intent(context, ImageActivity::class.java).also { intent ->
+                        val bundle = Bundle()
+                        bundle.putString("img", "bojack")
+                        intent.putExtras(bundle)
+                    })
+                }
                 "NEVENT" -> { // nuke events
                     nukeEvents()
                     showToast(context, "Nuked all events")

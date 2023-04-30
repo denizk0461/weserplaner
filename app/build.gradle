@@ -15,6 +15,8 @@ android {
         versionCode 1
         versionName "0.4.61"
 
+        resourceConfigurations += ["en", "de"]
+
         buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

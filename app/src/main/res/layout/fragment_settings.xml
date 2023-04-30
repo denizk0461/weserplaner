@@ -1,471 +1,480 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragment.SettingsFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.SettingsFragment">
+    android:orientation="vertical">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true">
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
 
         <TextView
             android:id="@+id/app_title_bar"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:text="@string/title_settings"
-            android:textSize="32sp"
-            android:fontFamily="@font/lato_bolditalic"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/lato_bolditalic"
+            android:text="@string/title_settings"
+            android:textSize="32sp" />
 
-        </com.google.android.material.appbar.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-        <!-- Stud.IP schedule settings -->
-        <com.google.android.material.card.MaterialCardView
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:layout_marginVertical="4dp"
-            style="@style/Widget.Material3.CardView.Outlined">
+            android:orientation="vertical">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <!-- Stud.IP schedule settings -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.Material3.CardView.Outlined"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="8dp">
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginVertical="4dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:textSize="22sp"
-                    android:fontFamily="@font/lato_bolditalic"
-                    android:text="@string/settings_schedule"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginHorizontal="16dp"/>
-
-                <com.google.android.material.divider.MaterialDivider
-                    style="@style/DividerTheme"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"/>
-
-                <!-- Refresh schedule -->
                 <androidx.appcompat.widget.LinearLayoutCompat
-                    android:id="@+id/button_refresh_schedule"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="8dp"
-                    android:background="?android:attr/selectableItemBackground">
+                    android:paddingBottom="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="8dp"
                         android:fontFamily="@font/lato_bolditalic"
-                        android:text="@string/refresh_schedule_title"/>
+                        android:text="@string/settings_schedule"
+                        android:textSize="22sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <com.google.android.material.divider.MaterialDivider
+                        style="@style/DividerTheme"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="@string/refresh_schedule_subtitle"/>
+                        android:layout_marginHorizontal="16dp" />
 
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <!-- Highlight course -->
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_highlight"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="8dp">
-
+                    <!-- Refresh schedule -->
                     <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="0dp"
+                        android:id="@+id/button_refresh_schedule"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:orientation="vertical"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/switch_highlight"
-                        android:layout_marginEnd="8dp">
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="16sp"
                             android:fontFamily="@font/lato_bolditalic"
-                            android:text="@string/settings_highlight_title"/>
+                            android:text="@string/refresh_schedule_title"
+                            android:textSize="16sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:text="@string/settings_highlight_subtitle"/>
+                            android:text="@string/refresh_schedule_subtitle"
+                            android:textSize="16sp" />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
-                    <com.google.android.material.materialswitch.MaterialSwitch
-                        android:id="@+id/switch_highlight"
-                        android:layout_width="wrap_content"
+                    <!-- Highlight course -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_highlight"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="8dp">
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/switch_highlight"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/lato_bolditalic"
+                                android:text="@string/settings_highlight_title"
+                                android:textSize="16sp" />
 
-        </com.google.android.material.card.MaterialCardView>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/settings_highlight_subtitle"
+                                android:textSize="16sp" />
 
-        <!-- canteen settings -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:layout_marginVertical="4dp"
-            style="@style/Widget.Material3.CardView.Outlined">
+                        </androidx.appcompat.widget.LinearLayoutCompat>
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+                        <com.google.android.material.materialswitch.MaterialSwitch
+                            android:id="@+id/switch_highlight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- canteen settings -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.Material3.CardView.Outlined"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="8dp">
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginVertical="4dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:textSize="22sp"
-                    android:fontFamily="@font/lato_bolditalic"
-                    android:text="@string/settings_canteen"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginHorizontal="16dp"/>
-
-                <com.google.android.material.divider.MaterialDivider
-                    style="@style/DividerTheme"
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"/>
+                    android:orientation="vertical"
+                    android:paddingBottom="8dp">
 
-                <!-- Allergens -->
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_allergens"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="8dp">
-
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/switch_allergens"
-                        android:layout_marginEnd="8dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:fontFamily="@font/lato_bolditalic"
-                            android:text="@string/settings_allergens_title"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:text="@string/settings_allergens_subtitle"/>
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
-
-                    <com.google.android.material.materialswitch.MaterialSwitch
-                        android:id="@+id/switch_allergens"
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/lato_bolditalic"
+                        android:text="@string/settings_canteen"
+                        android:textSize="22sp" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <!-- Preference colouring -->
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_pref_colour"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="8dp">
-
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="0dp"
+                    <com.google.android.material.divider.MaterialDivider
+                        style="@style/DividerTheme"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/switch_pref_colour"
-                        android:layout_marginEnd="8dp">
+                        android:layout_marginHorizontal="16dp" />
 
-                        <TextView
+                    <!-- Allergens -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_allergens"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="8dp">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/switch_allergens"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/lato_bolditalic"
+                                android:text="@string/settings_allergens_title"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/settings_allergens_subtitle"
+                                android:textSize="16sp" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <com.google.android.material.materialswitch.MaterialSwitch
+                            android:id="@+id/switch_allergens"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:fontFamily="@font/lato_bolditalic"
-                            android:text="@string/settings_pref_colour_title"/>
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <!-- Preference colouring -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_pref_colour"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="8dp">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/switch_pref_colour"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/lato_bolditalic"
+                                android:text="@string/settings_pref_colour_title"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/settings_pref_colour_subtitle"
+                                android:textSize="16sp" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <com.google.android.material.materialswitch.MaterialSwitch
+                            android:id="@+id/switch_pref_colour"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:text="@string/settings_pref_colour_subtitle"/>
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                    </androidx.appcompat.widget.LinearLayoutCompat>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <com.google.android.material.materialswitch.MaterialSwitch
-                        android:id="@+id/switch_pref_colour"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- miscellaneous settings -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:layout_marginVertical="4dp"
-            style="@style/Widget.Material3.CardView.Outlined">
-
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <!-- miscellaneous settings -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.Material3.CardView.Outlined"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="8dp">
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginVertical="4dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:textSize="22sp"
-                    android:fontFamily="@font/lato_bolditalic"
-                    android:text="@string/settings_misc"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginHorizontal="16dp"/>
-
-                <com.google.android.material.divider.MaterialDivider
-                    style="@style/DividerTheme"
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"/>
+                    android:orientation="vertical"
+                    android:paddingBottom="8dp">
 
-                <!-- show canteen plan on app launch -->
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_launch_canteen"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="8dp">
-
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="0dp"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/lato_bolditalic"
+                        android:text="@string/settings_misc"
+                        android:textSize="22sp" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        style="@style/DividerTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp" />
+
+                    <!-- show canteen plan on app launch -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_launch_canteen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="8dp">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/switch_launch_canteen"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/lato_bolditalic"
+                                android:text="@string/settings_launch_canteen_title"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/settings_launch_canteen_subtitle"
+                                android:textSize="16sp" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <com.google.android.material.materialswitch.MaterialSwitch
+                            android:id="@+id/switch_launch_canteen"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <!-- crashlytics opt-in -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_crashlytics"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="8dp">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/switch_crashlytics"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/lato_bolditalic"
+                                android:text="@string/settings_crashlytics_title"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/settings_crashlytics_subtitle"
+                                android:textSize="16sp" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <com.google.android.material.materialswitch.MaterialSwitch
+                            android:id="@+id/switch_crashlytics"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <!-- Data handling -->
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/button_data_handling"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:orientation="vertical"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/switch_launch_canteen"
-                        android:layout_marginEnd="8dp">
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="16sp"
                             android:fontFamily="@font/lato_bolditalic"
-                            android:text="@string/settings_launch_canteen_title"/>
+                            android:text="@string/settings_data_title"
+                            android:textSize="16sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:text="@string/settings_launch_canteen_subtitle"/>
+                            android:text="@string/settings_data_subtitle"
+                            android:textSize="16sp" />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
-                    <com.google.android.material.materialswitch.MaterialSwitch
-                        android:id="@+id/switch_launch_canteen"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <!-- crashlytics opt-in -->
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_crashlytics"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="8dp">
-
+                    <!-- Licences -->
                     <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="0dp"
+                        android:id="@+id/button_licences"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:orientation="vertical"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/switch_crashlytics"
-                        android:layout_marginEnd="8dp">
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="16sp"
                             android:fontFamily="@font/lato_bolditalic"
-                            android:text="@string/settings_crashlytics_title"/>
+                            android:text="@string/settings_licences_title"
+                            android:textSize="16sp" />
 
                         <TextView
+                            android:id="@+id/licences_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:text="@string/settings_crashlytics_subtitle"/>
+                            android:text="@string/settings_licences_subtitle"
+                            android:textSize="16sp" />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
-                    <com.google.android.material.materialswitch.MaterialSwitch
-                        android:id="@+id/switch_crashlytics"
-                        android:layout_width="wrap_content"
+                    <!-- App version -->
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/button_app_version"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+                        android:background="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="8dp">
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/lato_bolditalic"
+                            android:text="@string/settings_app_version"
+                            android:textSize="16sp" />
 
-                <!-- Data handling -->
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:id="@+id/button_data_handling"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="8dp"
-                    android:background="?android:attr/selectableItemBackground">
+                        <TextView
+                            android:id="@+id/app_version_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/lato_bolditalic"
-                        android:text="@string/settings_data_title"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="@string/settings_data_subtitle"/>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <!-- Licences -->
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:id="@+id/button_licences"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="8dp"
-                    android:background="?android:attr/selectableItemBackground">
+            </com.google.android.material.card.MaterialCardView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/lato_bolditalic"
-                        android:text="@string/settings_licences_title"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/with_love"
+                android:textAlignment="center"
+                android:textSize="8sp"
+                tools:ignore="SmallSp" />
 
-                    <TextView
-                        android:id="@+id/licences_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="@string/settings_licences_subtitle"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-                </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.core.widget.NestedScrollView>
 
-                <!-- App version -->
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:id="@+id/button_app_version"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="8dp"
-                    android:background="?android:attr/selectableItemBackground">
+</androidx.appcompat.widget.LinearLayoutCompat>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/lato_bolditalic"
-                        android:text="@string/settings_app_version"/>
-
-                    <TextView
-                        android:id="@+id/app_version_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16sp"/>
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/with_love"
-            android:textSize="8sp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="8dp"
-            android:textAlignment="center"
-            tools:ignore="SmallSp"/>
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-</androidx.core.widget.NestedScrollView>
