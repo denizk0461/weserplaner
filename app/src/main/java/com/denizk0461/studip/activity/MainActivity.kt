@@ -42,7 +42,7 @@ class MainActivity : FragmentActivity() {
         setContentView(binding.root)
 
         // Set up navigation view bar to launch fragments
-        binding.contentMain.navView.setOnItemSelectedListener { item ->
+        binding.navView.setOnItemSelectedListener { item ->
             // Launch fragment based on the item that has been clicked
             loadFragment(when (item.itemId) {
                 R.id.food -> "canteen"
@@ -58,11 +58,11 @@ class MainActivity : FragmentActivity() {
                     .getBooleanPreference(SettingsPreferences.LAUNCH_CANTEEN_ON_START)
             ) {
                 // Open canteen fragment
-                binding.contentMain.navView.selectedItemId = R.id.food
+                binding.navView.selectedItemId = R.id.food
                 currentFragment = "canteen"
             } else {
                 // Open event fragment
-                binding.contentMain.navView.selectedItemId = R.id.plan
+                binding.navView.selectedItemId = R.id.plan
                 currentFragment = "event"
             }
 

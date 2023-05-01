@@ -162,6 +162,15 @@
 
     <string name="settings_app_version">App Version</string>
 
+    <string name="settings_app_version_10">ahhh yes</string>
+    <string name="settings_app_version_15">keep clicking</string>
+    <string name="settings_app_version_20" translatable="false">^_^</string>
+    <string name="settings_app_version_30" translatable="false">^_____^</string>
+    <string name="settings_app_version_90" translatable="false">(⎌ℕ⎌)</string>
+    <string name="settings_app_version_121">Shouldn\'t you study for your exams?</string>
+    <string name="settings_app_version_165" translatable="false">◢◤</string>
+    <string name="settings_app_version_200" translatable="false">\\__*</string>
+
     <string name="with_love">with ♡️ from Bremen-Osterholz\nmade by denizk0461 \\__*</string>
 
     <string name="de4thSpirit" translatable="false">In our hearts, she lives forevermore</string>

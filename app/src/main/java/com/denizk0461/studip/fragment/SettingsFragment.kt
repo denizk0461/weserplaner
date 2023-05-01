@@ -137,38 +137,21 @@ class SettingsFragment : AppFragment() {
                         bundle.putString("img", "garbage")
                         intent.putExtras(bundle)
                     })
-                    appVersionClick += 1
                 }
-                10 -> {
-                    showToast(context, "ahhh yes")
-                    appVersionClick += 1
-                }
-                15 -> {
-                    showToast(context, "keep clicking")
-                    appVersionClick += 1
-                }
-                20 -> {
-                    showToast(context, "^_^")
-                    appVersionClick += 1
-                }
-                30 -> {
-                    showToast(context, "^_____^")
-                    appVersionClick += 1
-                }
-                121 -> {
-                    showToast(context, "Shouldn't you study for your exam?")
-                    appVersionClick += 1
-                }
-                200 -> {
-                    showToast(context, "\\__*")
-                    appVersionClick += 1
-                }
+                10 -> showToast(context, getString(R.string.settings_app_version_10))
+                15 -> showToast(context, getString(R.string.settings_app_version_15))
+                20 -> showToast(context, getString(R.string.settings_app_version_20))
+                30 -> showToast(context, getString(R.string.settings_app_version_30))
+                90 -> showToast(context, getString(R.string.settings_app_version_90))
+                121 -> showToast(context, getString(R.string.settings_app_version_121))
+                165 -> showToast(context, getString(R.string.settings_app_version_165))
+                200 -> showToast(context, getString(R.string.settings_app_version_200))
                 222 -> {
                     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(mysteryLink)))
-                    appVersionClick = 0
+                    appVersionClick = -1
                 }
-                else -> appVersionClick += 1
             }
+            appVersionClick += 1
         }
 
         /*

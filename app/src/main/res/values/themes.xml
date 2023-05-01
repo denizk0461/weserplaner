@@ -86,4 +86,9 @@
     <style name="DividerTheme" parent="Widget.Material3.MaterialDivider">
         <item name="dividerColor">@color/md_theme_light_outlineVariant</item>
     </style>
+
+    <style name="FilterChipNoCheck" parent="Widget.Material3.Chip.Filter">
+        <item name="checkedIconEnabled">false</item>
+        <item name="checkedIcon">@null</item>
+    </style>
 </resources>

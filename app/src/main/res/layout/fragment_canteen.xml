@@ -13,6 +13,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_canteen_picker"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:fontFamily="@font/lato_bolditalic"/>
+
         <TextView
             android:id="@+id/app_title_bar"
             android:layout_width="match_parent"
@@ -20,8 +28,7 @@
             android:text="@string/title_food"
             android:textSize="32sp"
             android:fontFamily="@font/lato_bolditalic"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginHorizontal="16dp"/>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/day_tab_layout"
@@ -30,16 +37,6 @@
             app:tabMode="scrollable"/>
 
     </com.google.android.material.appbar.AppBarLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_canteen_picker"
-        style="@style/Widget.Material3.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:fontFamily="@font/lato_bolditalic"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
 
     <com.google.android.material.button.MaterialButton
         style="@style/Widget.Material3.Button.TextButton"
@@ -97,106 +94,127 @@
             android:id="@+id/chips_preference"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:animateLayoutChanges="true">
+            android:animateLayoutChanges="true"
+            android:paddingHorizontal="8dp">
 
             <com.google.android.material.chip.Chip
-                style="@style/Widget.Material3.Chip.Filter"
+                style="@style/FilterChipNoCheck"
                 android:id="@+id/chip_pref_fair"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:chipIcon="@drawable/handshake"
                 app:chipIconEnabled="true"
-                app:chipIconTint="?attr/colorText"
+                android:textColor="@color/list_chip_fair_text"
+                app:chipIconTint="@color/list_chip_fair_text"
+                app:chipBackgroundColor="@color/list_chip_fair_bg"
                 android:text="@string/pref_fair"/>
 
             <com.google.android.material.chip.Chip
-                style="@style/Widget.Material3.Chip.Filter"
+                style="@style/FilterChipNoCheck"
                 android:id="@+id/chip_pref_fish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:chipIcon="@drawable/fish"
                 app:chipIconEnabled="true"
-                app:chipIconTint="?attr/colorText"
+                android:textColor="@color/list_chip_fish_text"
+                app:chipIconTint="@color/list_chip_fish_text"
+                app:chipBackgroundColor="@color/list_chip_fish_bg"
                 android:text="@string/pref_fish"/>
 
             <com.google.android.material.chip.Chip
-                style="@style/Widget.Material3.Chip.Filter"
+                style="@style/FilterChipNoCheck"
                 android:id="@+id/chip_pref_poultry"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:chipIcon="@drawable/chicken"
                 app:chipIconEnabled="true"
-                app:chipIconTint="?attr/colorText"
+                android:textColor="@color/list_chip_poultry_text"
+                app:chipIconTint="@color/list_chip_poultry_text"
+                app:chipBackgroundColor="@color/list_chip_poultry_bg"
                 android:text="@string/pref_poultry"/>
 
             <com.google.android.material.chip.Chip
-                style="@style/Widget.Material3.Chip.Filter"
+                style="@style/FilterChipNoCheck"
                 android:id="@+id/chip_pref_lamb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:chipIcon="@drawable/sheep"
                 app:chipIconEnabled="true"
-                app:chipIconTint="?attr/colorText"
+                android:textColor="@color/list_chip_lamb_text"
+                app:chipIconTint="@color/list_chip_lamb_text"
+                app:chipBackgroundColor="@color/list_chip_lamb_bg"
                 android:text="@string/pref_lamb"/>
 
             <com.google.android.material.chip.Chip
-                style="@style/Widget.Material3.Chip.Filter"
+                style="@style/FilterChipNoCheck"
                 android:id="@+id/chip_pref_vital"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:chipIcon="@drawable/yoga"
                 app:chipIconEnabled="true"
-                app:chipIconTint="?attr/colorText"
+                android:textColor="@color/list_chip_vital_text"
+                app:chipIconTint="@color/list_chip_vital_text"
+                app:chipBackgroundColor="@color/list_chip_vital_bg"
                 android:text="@string/pref_vital"/>
 
             <com.google.android.material.chip.Chip
-                style="@style/Widget.Material3.Chip.Filter"
+                style="@style/FilterChipNoCheck"
                 android:id="@+id/chip_pref_beef"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:chipIcon="@drawable/cow"
                 app:chipIconEnabled="true"
-                app:chipIconTint="?attr/colorText"
+                android:textColor="@color/list_chip_beef_text"
+                app:chipIconTint="@color/list_chip_beef_text"
+                app:chipBackgroundColor="@color/list_chip_beef_bg"
                 android:text="@string/pref_beef"/>
 
             <com.google.android.material.chip.Chip
-                style="@style/Widget.Material3.Chip.Filter"
+                style="@style/FilterChipNoCheck"
                 android:id="@+id/chip_pref_pork"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:chipIcon="@drawable/pig"
                 app:chipIconEnabled="true"
-                app:chipIconTint="?attr/colorText"
+                android:textColor="@color/list_chip_pork_text"
+                app:chipIconTint="@color/list_chip_pork_text"
+                app:chipBackgroundColor="@color/list_chip_pork_bg"
                 android:text="@string/pref_pork"/>
 
             <com.google.android.material.chip.Chip
-                style="@style/Widget.Material3.Chip.Filter"
+                style="@style/FilterChipNoCheck"
                 android:id="@+id/chip_pref_vegetarian"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:chipIcon="@drawable/carrot"
                 app:chipIconEnabled="true"
-                app:chipIconTint="?attr/colorText"
+                android:textColor="@color/list_chip_vegetarian_text"
+                app:chipIconTint="@color/list_chip_vegetarian_text"
+                app:chipBackgroundColor="@color/list_chip_vegetarian_bg"
                 android:text="@string/pref_vegetarian"/>
 
             <com.google.android.material.chip.Chip
-                style="@style/Widget.Material3.Chip.Filter"
+                style="@style/FilterChipNoCheck"
                 android:id="@+id/chip_pref_vegan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:chipIcon="@drawable/leaf"
                 app:chipIconEnabled="true"
-                app:chipIconTint="?attr/colorText"
+                android:textColor="@color/list_chip_vegan_text"
+                app:chipIconTint="@color/list_chip_vegan_text"
+                app:chipBackgroundColor="@color/list_chip_vegan_bg"
                 android:text="@string/pref_vegan"/>
 
             <com.google.android.material.chip.Chip
-                style="@style/Widget.Material3.Chip.Filter"
+                style="@style/FilterChipNoCheck"
                 android:id="@+id/chip_pref_game"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:chipIcon="@drawable/deer"
                 app:chipIconEnabled="true"
-                app:chipIconTint="?attr/colorText"
+                android:textColor="@color/list_chip_game_text"
+                app:chipIconTint="@color/list_chip_game_text"
+                app:chipBackgroundColor="@color/list_chip_game_bg"
                 android:text="@string/pref_game"/>
 
         </com.google.android.material.chip.ChipGroup>

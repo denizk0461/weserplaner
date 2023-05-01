@@ -155,5 +155,9 @@
 
     <string name="settings_app_version">App-Version</string>
 
-    <string name="with_love">mit ♡️ aus Bremen-Osterholz\von denizk0461 \\__*</string>
+    <string name="settings_app_version_10">oh jaa</string>
+    <string name="settings_app_version_15">klick weiter</string>
+    <string name="settings_app_version_121">Solltest du nicht für deine Klausuren lernen?</string>
+
+    <string name="with_love">mit ♡️ aus Bremen-Osterholz\nvon denizk0461 \\__*</string>
 </resources>
