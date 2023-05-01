@@ -1,6 +1,7 @@
 package com.denizk0461.studip.viewmodel
 
 import android.app.Application
+import com.denizk0461.studip.model.AllergenPreferences
 import com.denizk0461.studip.model.SettingsPreferences
 
 /**
@@ -55,6 +56,15 @@ class SettingsViewModel(app: Application) : AppViewModel(app) {
     var preferenceCourseHighlighting: Boolean
         get() = repo.getBooleanPreference(SettingsPreferences.COURSE_HIGHLIGHTING)
         set(newValue) { repo.setPreference(SettingsPreferences.COURSE_HIGHLIGHTING, newValue) }
+
+    /**
+     * This value determines which allergens the user wants to have displayed or hidden.
+     */
+    var preferenceAllergenConfig: String
+        get() = repo.getStringPreference(
+            SettingsPreferences.ALLERGEN_CONFIG, defaultValue = AllergenPreferences.TEMPLATE
+        )
+        set(newValue) { repo.setPreference(SettingsPreferences.ALLERGEN_CONFIG, newValue) }
 
     /**
      * This value determines whether the user wants to have allergens marked.

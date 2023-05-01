@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/text_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:fontFamily="@font/lato_bolditalic"
+        android:text="@string/allergens_config_header"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="8dp"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp"
+            android:paddingBottom="24dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/allergens_config_content"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/check_wheat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/allergen_wheat"
+                android:textSize="16sp"
+                android:textColor="?attr/colorText"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/check_rye"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/allergen_rye"
+                android:textSize="16sp"
+                android:textColor="?attr/colorText"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/check_barley"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/allergen_barley"
+                android:textSize="16sp"
+                android:textColor="?attr/colorText"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/check_oat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/allergen_oat"
+                android:textSize="16sp"
+                android:textColor="?attr/colorText"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/check_spelt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/allergen_spelt"
+                android:textSize="16sp"
+                android:textColor="?attr/colorText"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/check_kamut"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/allergen_kamut"
+                android:textSize="16sp"
+                android:textColor="?attr/colorText"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/check_crustaceans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/allergen_crustaceans"
+                android:textSize="16sp"
+                android:textColor="?attr/colorText"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/check_eggs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/allergen_eggs"
+                android:textSize="16sp"
+                android:textColor="?attr/colorText"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/check_fish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/allergen_fish"
+                android:textSize="16sp"
+                android:textColor="?attr/colorText"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/check_peanuts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/allergen_peanuts"
+                android:textSize="16sp"
+                android:textColor="?attr/colorText"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/check_soy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/allergen_soy"
+                android:textSize="16sp"
+                android:textColor="?attr/colorText"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/check_dairy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/allergen_dairy"
+                android:textSize="16sp"
+                android:textColor="?attr/colorText"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/check_almonds"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/allergen_almonds"
+                android:textSize="16sp"
+                android:textColor="?attr/colorText"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/check_hazelnuts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/allergen_hazelnuts"
+                android:textSize="16sp"
+                android:textColor="?attr/colorText"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/check_walnuts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/allergen_walnuts"
+                android:textSize="16sp"
+                android:textColor="?attr/colorText"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/check_cashew_nuts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/allergen_cashew_nuts"
+                android:textSize="16sp"
+                android:textColor="?attr/colorText"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/check_pecans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/allergen_pecans"
+                android:textSize="16sp"
+                android:textColor="?attr/colorText"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/check_brazil_nuts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/allergen_brazil_nuts"
+                android:textSize="16sp"
+                android:textColor="?attr/colorText"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/check_pistachios"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/allergen_pistachios"
+                android:textSize="16sp"
+                android:textColor="?attr/colorText"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/check_macadamia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/allergen_macadamia"
+                android:textSize="16sp"
+                android:textColor="?attr/colorText"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/check_celery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/allergen_celery"
+                android:textSize="16sp"
+                android:textColor="?attr/colorText"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/check_mustard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/allergen_mustard"
+                android:textSize="16sp"
+                android:textColor="?attr/colorText"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/check_sulphides"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/allergen_sulphides"
+                android:textSize="16sp"
+                android:textColor="?attr/colorText"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/check_lupins"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/allergen_lupins"
+                android:textSize="16sp"
+                android:textColor="?attr/colorText"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/check_sesame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/allergen_sesame"
+                android:textSize="16sp"
+                android:textColor="?attr/colorText"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/check_molluscs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/allergen_molluscs"
+                android:textSize="16sp"
+                android:textColor="?attr/colorText"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save"
+                app:icon="@drawable/save"
+                android:layout_gravity="end"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

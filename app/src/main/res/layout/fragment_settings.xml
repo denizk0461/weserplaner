@@ -169,6 +169,33 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp" />
 
+                    <!-- Configure allergens -->
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/button_allergens_config"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/lato_bolditalic"
+                            android:text="@string/allergens_config_title"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/allergens_config_subtitle"
+                            android:textSize="16sp" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
                     <!-- Allergens -->
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/layout_allergens"

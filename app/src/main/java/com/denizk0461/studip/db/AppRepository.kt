@@ -224,7 +224,7 @@ class AppRepository(app: Application) {
     // --- settings preferences --- //
 
     /**
-     * Retrieves ta user-set boolean preference.
+     * Retrieves a user-set boolean preference.
      *
      * @param pref  preference to retrieve
      * @return      whether the user set this preference
@@ -233,7 +233,16 @@ class AppRepository(app: Application) {
         prefs.getBoolean(pref.key, defaultValue)
 
     /**
-     * Retrieves ta user-set integer preference.
+     * Retrieves a user-set string preference.
+     *
+     * @param pref  preference to retrieve
+     * @return      string that was set
+     */
+    fun getStringPreference(pref: SettingsPreferences, defaultValue: String = ""): String =
+        prefs.getString(pref.key, defaultValue) ?: ""
+
+    /**
+     * Retrieves a user-set integer preference.
      *
      * @param pref  preference to retrieve
      * @return      whether the user set this preference
@@ -248,6 +257,16 @@ class AppRepository(app: Application) {
      */
     fun setPreference(pref: SettingsPreferences, newValue: Boolean) {
         prefs.edit().putBoolean(pref.key, newValue).apply()
+    }
+
+    /**
+     * Updates a user-set string preference.
+     *
+     * @param pref      preference to set
+     * @param newValue  new value to set the preference to
+     */
+    fun setPreference(pref: SettingsPreferences, newValue: String) {
+        prefs.edit().putString(pref.key, newValue).apply()
     }
 
     /**

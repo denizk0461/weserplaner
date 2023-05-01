@@ -34,8 +34,10 @@ class CanteenPageFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListen
     // View model reference for providing access to the database
     private val viewModel: CanteenPageViewModel by viewModels()
 
+    // Recycler view adapter
     private lateinit var recyclerViewAdapter: CanteenOfferItemAdapter
 
+    // List of offers, stored locally to re-set them upon dietary preference update
     private val offerList: MutableList<CanteenOffer> = mutableListOf()
 
     /**
@@ -57,6 +59,7 @@ class CanteenPageFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Set up recycler view adapter
         recyclerViewAdapter = CanteenOfferItemAdapter(
             this,
             viewModel.preferenceAllergen,
@@ -74,6 +77,7 @@ class CanteenPageFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListen
             // Animate creation of new page
             scheduleLayoutAnimation()
 
+            // Observe offers and re-set them if they change
             viewModel.getOffersByDay(currentDay).observe(viewLifecycleOwner) { offers ->
                 offerList.clear()
                 offerList.addAll(offers)
@@ -81,13 +85,11 @@ class CanteenPageFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListen
             }
         }
 
+        // Observe dietary preference updates and re-set the items if a change is detected
         viewModel.dietaryPreferencesUpdate.observe(viewLifecycleOwner) {
-            filterList()
+            // Re-set the list of items to the recycler view, forcing an update
+            recyclerViewAdapter.setNewData(offerList.filterElements().groupElements().distinct())
         }
-    }
-
-    private fun filterList() {
-        recyclerViewAdapter.setNewData(offerList.filterElements().groupElements().distinct())
     }
 
     /**
@@ -120,12 +122,20 @@ class CanteenPageFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListen
         }
     }
 
+    /**
+     * Filters the list of canteen offers by dietary and allergen preferences.
+     *
+     * @return  filtered list of offers
+     */
     private fun List<CanteenOffer>.filterElements(): List<CanteenOffer> {
 
         // Get dietary preference regex
         val prefsRegex = getPrefRegex()
+        val allergenPrefs = viewModel.preferenceAllergenConfig
+        val allergenFilteredList = mutableListOf<CanteenOffer>()
 
-        return if (prefsRegex.toString() == DietaryPreferences.TEMPLATE_EMPTY) {
+        // Filter offers not conforming to the dietary preferences set by the user
+        val newList = if (prefsRegex.toString() == DietaryPreferences.TEMPLATE_EMPTY) {
             // Show all elements and skip filtering if no preference is set
             this
         } else {
@@ -133,6 +143,35 @@ class CanteenPageFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListen
             this.filter {
                 prefsRegex.matches(it.dietaryPreferences)
             }
+        }
+
+        // Filter offers containing allergens the user wishes to have hidden
+        return if (allergenPrefs.isBlank()) {
+            // If no preferences have been set by the user, skip the checks
+            newList
+        } else {
+            // If the user has set allergens, check each item individually
+            newList.forEach outer@{ item ->
+
+                // If the item in question doesn't contain any allergens, skip the check
+                if (item.allergens.isBlank()) {
+                    // Add the item to the new list directly
+                    allergenFilteredList.add(item)
+                } else {
+                    // Check each individual allergen in the offering
+                    item.allergens.split(",").forEach inner@{ allergen ->
+
+                        // If an allergen can be found in the user-excluded list, stop checking
+                        if (allergenPrefs.contains(allergen)) {
+                            return@outer
+                        }
+                    }
+                    // If no allergens in the offering are present in the exclusion list, add it
+                    allergenFilteredList.add(item)
+                }
+            }
+            // Return the allergen-filtered list
+            allergenFilteredList
         }
     }
 

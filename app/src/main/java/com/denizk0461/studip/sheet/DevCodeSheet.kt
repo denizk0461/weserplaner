@@ -65,6 +65,7 @@ class DevCodeSheet(
                 "TUFSR0Uh".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS8tbHFxRHZXRjQ1dw==".d64)
                 "UE9XRUxM".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9XUGMtVkVxQlBISQ==".d64)
                 "Q0FMTE1F".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS8xbTV1WnJNMnktMA==".d64)
+                "SkFNSVJP".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9fMVZoT2c0N3ozNA==".d64)
                 "Qk9KQUNL".d64 -> {
                     startActivity(Intent(context, ImageActivity::class.java).also { intent ->
                         val bundle = Bundle()

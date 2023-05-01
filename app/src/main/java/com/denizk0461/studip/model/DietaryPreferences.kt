@@ -70,7 +70,7 @@ enum class DietaryPreferences(val value: String) {
     /**
      * Offer has encountered an error.
      */
-    ERROR("onError")
+    ERROR("onError"),
     ;
 
     /**

@@ -133,6 +133,11 @@
     <string name="settings_highlight_title">Markiere meinen nächsten Kurs</string>
     <string name="settings_highlight_subtitle">Funktioniert nur wenn Kurse sich nicht überschneiden!</string>
 
+    <string name="allergens_config_title">Verstecke Angebote mit bestimmten Allergenen</string>
+    <string name="allergens_config_subtitle">Angebote mit ausgeschlossenen Allergenen werden Dir nicht angezeigt</string>
+    <string name="allergens_config_header">Stelle ein, welche Allergene Du vermeiden möchtest</string>
+    <string name="allergens_config_content">Achtung: bitte verlasse Dich nicht vollständig auf diese Funktion. Stelle immer in der Mensa, die Du besuchst, sicher, dass die Stoffe, auf die Du allergisch reagierst, nicht in deren Angeboten vorhanden sind.</string>
+
     <string name="settings_allergens_title">Markiere Angebote mit Allergenen mit einem Stern*</string>
     <string name="settings_allergens_subtitle">Wird auch für Zusatzstoffe genutzt</string>
 

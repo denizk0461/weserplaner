@@ -2,6 +2,7 @@ package com.denizk0461.studip.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import com.denizk0461.studip.model.AllergenPreferences
 import com.denizk0461.studip.model.CanteenOffer
 import com.denizk0461.studip.model.DietaryPreferences
 import com.denizk0461.studip.model.SettingsPreferences
@@ -24,6 +25,14 @@ class CanteenPageViewModel(app: Application) : AppViewModel(app) {
      * @return dietary preferences
      */
     fun getDietaryPrefs(): DietaryPreferences.Object = repo.getDietaryPrefsAsObject()
+
+    /**
+     * This value determines which allergens the user wants to have displayed or hidden.
+     */
+    val preferenceAllergenConfig: String
+        get() = repo.getStringPreference(
+            SettingsPreferences.ALLERGEN_CONFIG, defaultValue = AllergenPreferences.TEMPLATE
+        )
 
     /**
      * This value determines whether the user wants to have allergens marked.

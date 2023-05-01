@@ -138,6 +138,11 @@
     <string name="settings_highlight_title">Highlight next course</string>
     <string name="settings_highlight_subtitle">Only works properly if courses don\'t overlap!</string>
 
+    <string name="allergens_config_title">Hide offers containing certain allergens</string>
+    <string name="allergens_config_subtitle">Offers with excluded allergens won\'t be shown to you</string>
+    <string name="allergens_config_header">Set which allergens you\'d like to avoid</string>
+    <string name="allergens_config_content">Note: please don\'t entirely rely on this. Always check the notices displayed at the canteen you\'re visiting to confirm substances you may be allergic against are not present in their offerings.</string>
+
     <string name="settings_allergens_title">Mark offers with allergens with a star*</string>
     <string name="settings_allergens_subtitle">Also applies to additives</string>
 

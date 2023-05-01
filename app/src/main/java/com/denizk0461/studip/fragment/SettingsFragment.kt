@@ -14,6 +14,8 @@ import com.denizk0461.studip.activity.FetcherActivity
 import com.denizk0461.studip.activity.ImageActivity
 import com.denizk0461.studip.data.showToast
 import com.denizk0461.studip.databinding.FragmentSettingsBinding
+import com.denizk0461.studip.model.AllergenPreferences
+import com.denizk0461.studip.sheet.AllergenConfigSheet
 import com.denizk0461.studip.sheet.DevCodeSheet
 import com.denizk0461.studip.sheet.TextSheet
 import com.denizk0461.studip.viewmodel.SettingsViewModel
@@ -63,6 +65,16 @@ class SettingsFragment : AppFragment() {
             setOnCheckedChangeListener { _, newValue ->
                 viewModel.preferenceCourseHighlighting = newValue
             }
+        }
+
+        binding.buttonAllergensConfig.setOnClickListener {
+            openBottomSheet(
+                AllergenConfigSheet(
+                    AllergenPreferences.construct(viewModel.preferenceAllergenConfig)
+                ) { obj ->
+                    viewModel.preferenceAllergenConfig = obj.deconstruct()
+                }
+            )
         }
 
         // Set up switch for displaying allergens

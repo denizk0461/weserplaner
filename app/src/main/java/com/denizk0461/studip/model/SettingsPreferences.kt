@@ -9,6 +9,11 @@ package com.denizk0461.studip.model
 enum class SettingsPreferences(val key: String) {
 
     /**
+     * Which allergens the user wants displayed or hidden.
+     */
+    ALLERGEN_CONFIG("setting_allergen_config"),
+
+    /**
      * Whether the user wants to have allergens displayed in the canteen overview.
      */
     ALLERGEN("setting_allergen"),

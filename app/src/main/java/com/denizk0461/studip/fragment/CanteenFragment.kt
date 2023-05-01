@@ -27,7 +27,6 @@ class CanteenFragment : AppFragment() {
     /*
      * Non-null reference to the view binding. This property is only valid between onCreateView and
      * onDestroyView.
-     * BUG if the fragment is changed before the refresh is finished, the app crashes with a NPE
      */
     private val binding get() = _binding!!
 
