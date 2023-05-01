@@ -20,6 +20,7 @@
             android:name=".activity.MainActivity"
             android:windowSoftInputMode="adjustPan"
             android:exported="true"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/Theme.StudIPTimetable">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,12 +31,14 @@
         <activity
             android:name=".activity.FetcherActivity"
             android:exported="false"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/Theme.StudIPTimetable">
         </activity>
 
         <activity
             android:name=".activity.ImageActivity"
             android:exported="false"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/Theme.StudIPTimetable">
         </activity>
     </application>
