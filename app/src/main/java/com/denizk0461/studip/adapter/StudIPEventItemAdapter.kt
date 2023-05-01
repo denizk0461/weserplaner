@@ -3,6 +3,7 @@ package com.denizk0461.studip.adapter
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.denizk0461.studip.data.AppDiffUtilCallback
@@ -88,33 +89,49 @@ class StudIPEventItemAdapter(
 
             holder.binding.cardBackground.apply {
                 // Set the card's background colour to a desaturated shade of the primary colour
-                backgroundTintList = ColorStateList.valueOf(theme.getThemedColor(R.attr.colorSecondaryContainer))
+                backgroundTintList =
+                    ColorStateList.valueOf(theme.getThemedColor(R.attr.colorSecondaryContainer))
 
                 // Hide card stroke
                 strokeColor = context.getColor(android.R.color.transparent)
             }
             // Set the divider colour to the text colour
-            holder.binding.divider.dividerColor = theme.getThemedColor(com.denizk0461.studip.R.attr.colorText)
+            holder.binding.divider.dividerColor =
+                theme.getThemedColor(com.denizk0461.studip.R.attr.colorText)
+
+            // Set ripple colour
+            holder.binding.linearLayout.background = getDrawable(
+                holder.binding.root.context,
+                com.denizk0461.studip.R.drawable.selectable_item_background_highlighted,
+            )
+
         // Otherwise, apply colours to ensure that the item will not be highlighted
         } else {
             holder.binding.cardBackground.apply {
                 // Set the card's background colour to its default value
-                backgroundTintList = ColorStateList.valueOf(theme.getThemedColor(R.attr.colorSurface))
+                backgroundTintList =
+                    ColorStateList.valueOf(theme.getThemedColor(R.attr.colorSurface))
 
                 // Set the card's stroke to its default colour
                 strokeColor = theme.getThemedColor(R.attr.colorOutline)
             }
             // Set the divider colour to its default value
             holder.binding.divider.dividerColor = theme.getThemedColor(R.attr.colorOutlineVariant)
+
+            // Set ripple colour
+            holder.binding.linearLayout.background = getDrawable(
+                holder.binding.root.context,
+                com.denizk0461.studip.R.drawable.selectable_item_background,
+            )
         }
 
         // Set up single click listener
-        holder.binding.cardBackground.setOnClickListener {
+        holder.binding.linearLayout.setOnClickListener {
             onClickListener.onClick(currentItem)
         }
 
         // Set up long press listener
-        holder.binding.cardBackground.setOnLongClickListener {
+        holder.binding.linearLayout.setOnLongClickListener {
             onClickListener.onLongClick(currentItem)
         }
     }
@@ -151,7 +168,9 @@ class StudIPEventItemAdapter(
      */
     private fun StudIPEvent.isCurrentCourse(calendar: Calendar): Boolean =
         (calendar.get(Calendar.DAY_OF_WEEK) == this.day.toCalendarDay()) &&
-                ((calendar.get(Calendar.MINUTE) + calendar.get(Calendar.HOUR_OF_DAY) * 60) < this.timeslotEnd.parseToMinutes())
+                ((calendar.get(Calendar.MINUTE) + calendar.get(
+                    Calendar.HOUR_OF_DAY
+                ) * 60) < this.timeslotEnd.parseToMinutes())
 
     /**
      * Converts a numeric value as defined in StudIPEvent.kt to a calendar day. Used to convert from

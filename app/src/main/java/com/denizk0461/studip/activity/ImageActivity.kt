@@ -26,6 +26,7 @@ class ImageActivity : AppCompatActivity() {
         binding.imageView.setImageResource(when (intent.extras?.getString("img") ?: "") {
             "bojack" -> { R.drawable.man }
             "garbage" -> { R.drawable.garbage }
+            "bcells" -> { R.drawable.bcells }
             else -> { R.drawable.engineering }
         })
     }

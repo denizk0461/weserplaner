@@ -3,6 +3,7 @@ package com.denizk0461.studip.sheet
 import android.os.Bundle
 import android.view.View
 import com.denizk0461.studip.R
+import com.denizk0461.studip.data.showToast
 import com.denizk0461.studip.data.viewBinding
 import com.denizk0461.studip.databinding.SheetAllergenConfigBinding
 import com.denizk0461.studip.model.AllergenPreferences
@@ -99,6 +100,9 @@ class AllergenConfigSheet(
                 )
             )
         }
+
+        // Tell the user that saving was successful
+        showToast(context, getString(R.string.allergens_config_confirmation))
 
         // Close the sheet
         dismiss()

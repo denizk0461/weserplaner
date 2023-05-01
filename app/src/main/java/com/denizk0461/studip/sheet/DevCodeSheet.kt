@@ -73,6 +73,13 @@ class DevCodeSheet(
                         intent.putExtras(bundle)
                     })
                 }
+                "QkNFTExT".d64 -> {
+                    startActivity(Intent(context, ImageActivity::class.java).also { intent ->
+                        val bundle = Bundle()
+                        bundle.putString("img", "bcells")
+                        intent.putExtras(bundle)
+                    })
+                }
                 "NEVENT" -> { // nuke events
                     nukeEvents()
                     showToast(context, "Nuked all events")
@@ -97,7 +104,6 @@ class DevCodeSheet(
                     nukeEverything()
                     showToast(context, "Nuked everything")
                 }
-                "HACK()" -> showToast(context, "Hack attempt unsuccessful")
                 else -> showToast(context, "Code is invalid")
             }
             dismiss()

@@ -5,8 +5,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:paddingBottom="16dp"
-    android:paddingHorizontal="24dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <com.google.android.material.bottomsheet.BottomSheetDragHandleView
@@ -25,7 +23,8 @@
             android:textSize="22sp"
             android:fontFamily="@font/lato_blackitalic"
             android:text="@string/sheet_schedule_update_header"
-            android:layout_gravity="start|center_vertical"/>
+            android:layout_gravity="start|center_vertical"
+            android:paddingHorizontal="24dp"/>
 
         <com.google.android.material.button.MaterialButton
             style="@style/Widget.Material3.Button.TextButton"
@@ -36,146 +35,163 @@
             app:icon="@drawable/cross"
             app:iconPadding="0dp"
             android:layout_gravity="end|center_vertical"
-            app:iconTint="?attr/colorOnSurfaceVariant"/>
+            app:iconTint="?attr/colorOnSurfaceVariant"
+            android:paddingHorizontal="24dp"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:hint="@string/sheet_schedule_update_title_hint"
-        app:boxStrokeColor="@color/selector_text_input"
-        app:hintTextColor="@color/selector_text_input">
+        android:scrollbars="vertical">
 
-        <com.google.android.material.textfield.TextInputEditText
-            style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
-            android:textColor="?attr/colorOnSurfaceVariant"
-            android:id="@+id/edit_text_title"
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="8dp">
-
-        <!-- lecturers -->
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="4dp"
-            android:maxLines="1"
-            android:scrollHorizontally="true"
-            android:hint="@string/sheet_schedule_update_lecturers_hint"
-            app:boxStrokeColor="@color/selector_text_input"
-            app:hintTextColor="@color/selector_text_input">
+            android:orientation="vertical"
+            android:paddingBottom="16dp"
+            android:paddingHorizontal="24dp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
-                android:textColor="?attr/colorOnSurfaceVariant"
-                android:id="@+id/edit_text_lecturers"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"/>
+                android:layout_marginBottom="8dp"
+                android:hint="@string/sheet_schedule_update_title_hint"
+                app:boxStrokeColor="@color/selector_text_input"
+                app:hintTextColor="@color/selector_text_input">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:id="@+id/edit_text_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-        <!-- room -->
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginBottom="8dp"
-            android:maxLines="1"
-            android:scrollHorizontally="true"
-            android:hint="@string/sheet_schedule_update_room_hint"
-            app:boxStrokeColor="@color/selector_text_input"
-            app:hintTextColor="@color/selector_text_input">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
-                android:textColor="?attr/colorOnSurfaceVariant"
-                android:id="@+id/edit_text_room"
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"/>
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <!-- lecturers -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="4dp"
+                    android:maxLines="1"
+                    android:scrollHorizontally="true"
+                    android:hint="@string/sheet_schedule_update_lecturers_hint"
+                    app:boxStrokeColor="@color/selector_text_input"
+                    app:hintTextColor="@color/selector_text_input">
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+                    <com.google.android.material.textfield.TextInputEditText
+                        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:id="@+id/edit_text_lecturers"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"/>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_academic_quarter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        app:icon="@drawable/lightbulb"
-        android:text="@string/sheet_schedule_update_hint_quarter"
-        android:layout_gravity="end"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="8dp">
+                <!-- room -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="8dp"
+                    android:maxLines="1"
+                    android:scrollHorizontally="true"
+                    android:hint="@string/sheet_schedule_update_room_hint"
+                    app:boxStrokeColor="@color/selector_text_input"
+                    app:hintTextColor="@color/selector_text_input">
 
-        <com.google.android.material.button.MaterialButton
-            style="@style/Widget.Material3.Button.OutlinedButton"
-            android:id="@+id/button_time_start"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:strokeColor="?attr/colorOutlineVariant"/>
+                    <com.google.android.material.textfield.TextInputEditText
+                        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:id="@+id/edit_text_room"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sheet_schedule_update_timeslot_middle"
-            android:layout_marginHorizontal="8dp"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.button.MaterialButton
-            style="@style/Widget.Material3.Button.OutlinedButton"
-            android:id="@+id/button_time_end"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:strokeColor="?attr/colorOutlineVariant"/>
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_academic_quarter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:icon="@drawable/lightbulb"
+                android:text="@string/sheet_schedule_update_hint_quarter"
+                android:layout_gravity="end"/>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="end"
-        android:layout_marginBottom="8dp">
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_delete"
-            style="@style/Widget.Material3.Button.TonalButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/delete"
-            app:icon="@drawable/delete"
-            android:layout_marginEnd="8dp"/>
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:id="@+id/button_time_start"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:strokeColor="?attr/colorOutlineVariant"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_save"
-            style="@style/Widget.Material3.Button.TonalButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/save"
-            app:icon="@drawable/save"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sheet_schedule_update_timeslot_middle"
+                    android:layout_marginHorizontal="8dp"/>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:id="@+id/button_time_end"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:strokeColor="?attr/colorOutlineVariant"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="end"
+                android:layout_marginBottom="8dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_delete"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/delete"
+                    app:icon="@drawable/delete"
+                    android:layout_marginEnd="8dp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_save"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/save"
+                    app:icon="@drawable/save"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

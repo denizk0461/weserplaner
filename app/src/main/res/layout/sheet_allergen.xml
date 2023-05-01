@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="16dp"
-    android:paddingHorizontal="24dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <com.google.android.material.bottomsheet.BottomSheetDragHandleView
@@ -19,7 +18,8 @@
         android:layout_height="wrap_content"
         android:textSize="22sp"
         android:fontFamily="@font/lato_blackitalic"
-        android:layout_marginBottom="2dp"/>
+        android:layout_marginBottom="2dp"
+        android:paddingHorizontal="24dp"/>
 
     <TextView
         android:id="@+id/text_title"
@@ -27,35 +27,44 @@
         android:layout_height="wrap_content"
         android:textSize="22sp"
         android:fontFamily="@font/lato_bolditalic"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="8dp"
+        android:paddingHorizontal="24dp"/>
 
-<!--    <androidx.core.widget.NestedScrollView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:scrollbars="vertical">-->
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/container_preferences"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="8dp"/>
+        android:scrollbars="vertical">
 
-    <TextView
-        android:id="@+id/text_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"/>
-<!--    android:textSize="16sp"-->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp">
 
-    <TextView
-        android:id="@+id/text_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:fontFamily="@font/lato_bolditalic"
-        android:layout_marginTop="4dp"/>
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/container_preferences"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="8dp"/>
 
-<!--    </androidx.core.widget.NestedScrollView>-->
+            <TextView
+                android:id="@+id/text_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"/>
+        <!--    android:textSize="16sp"-->
+
+            <TextView
+                android:id="@+id/text_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:fontFamily="@font/lato_bolditalic"
+                android:layout_marginTop="4dp"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

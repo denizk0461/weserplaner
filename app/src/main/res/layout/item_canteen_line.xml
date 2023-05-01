@@ -6,7 +6,7 @@
     android:orientation="horizontal"
     android:clickable="true"
     android:focusable="true"
-    android:background="?android:attr/selectableItemBackground"
+    android:background="@drawable/selectable_item_background"
     android:paddingHorizontal="16dp"
     android:paddingVertical="2dp">
 
