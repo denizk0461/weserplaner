@@ -43,7 +43,6 @@ class CanteenPageViewModel(app: Application) : AppViewModel(app) {
     /**
      * This value determines which canteen the user has selected.
      */
-    var preferenceColour: Boolean
-        get() = repo.getBooleanPreference(SettingsPreferences.COLOUR_PREFS)
-        set(newValue) { repo.setPreference(SettingsPreferences.COLOUR_PREFS, newValue) }
+    val preferenceColour: Boolean
+        get() = repo.getBooleanPreference(SettingsPreferences.COLOUR_PREFS, defaultValue = true)
 }

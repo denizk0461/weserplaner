@@ -44,6 +44,15 @@
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
+            <TextView
+                android:id="@+id/app_title_bar"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="@string/title_food"
+                android:textSize="32sp"
+                android:fontFamily="@font/lato_bolditalic"
+                android:layout_marginHorizontal="16dp"/>
+
             <HorizontalScrollView
                 android:id="@+id/scroll_view_chip"
                 android:layout_width="match_parent"
@@ -180,15 +189,6 @@
                 </com.google.android.material.chip.ChipGroup>
 
             </HorizontalScrollView>
-
-            <TextView
-                android:id="@+id/app_title_bar"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:text="@string/title_food"
-                android:textSize="32sp"
-                android:fontFamily="@font/lato_bolditalic"
-                android:layout_marginHorizontal="16dp"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

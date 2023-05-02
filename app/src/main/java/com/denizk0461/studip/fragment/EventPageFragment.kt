@@ -48,7 +48,11 @@ class EventPageFragment : AppFragment(), StudIPEventItemAdapter.OnClickListener 
         currentDay = arguments?.getInt("currentDay") ?: -1
 
         // Instantiate event adapter with the current day
-        eventAdapter = StudIPEventItemAdapter(currentDay, this)
+        eventAdapter = StudIPEventItemAdapter(
+            currentDay,
+            viewModel.preferenceCourseHighlighting,
+            this,
+        )
 
         // Inflate view binding
         _binding = RecyclerViewBinding.inflate(inflater, container, false)

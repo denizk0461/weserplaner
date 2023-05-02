@@ -124,17 +124,6 @@ class CanteenFragment : AppFragment() {
             chip.setOnCheckedChangeListener { buttonView, newValue ->
                 // Save the preference change to persistent storage
                 setPreference(pref, newValue)
-
-                /*
-                 * Force an animation on click. This is a subpar method from StackOverflow. Since
-                 * it removes the view before immediately adding it back, this method causes a
-                 * flicker.
-                 * TODO implement a more efficient / better-looking method
-                 * TODO order the chips alphabetically?
-                 */
-//                val index = binding.chipsPreference.indexOfChild(buttonView)
-//                binding.chipsPreference.removeView(buttonView)
-//                binding.chipsPreference.addView(buttonView, index)
             }
         }
 
@@ -152,6 +141,8 @@ class CanteenFragment : AppFragment() {
 
             // Let the adapter know of the new amount of dates (pages) to display
             viewPagerAdapter.itemCount = dates.size
+
+            openingHours = viewModel.getCanteenOpeningHours()
         }
 
         // Assign the adapter to the view pager

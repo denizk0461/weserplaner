@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/plan"
+        android:id="@+id/schedule"
         android:icon="@drawable/design"
         android:title="@string/nav_schedule"
         android:enabled="true"/>
     <item
-        android:id="@+id/food"
+        android:id="@+id/canteen"
         android:icon="@drawable/restaurant"
         android:title="@string/nav_food"
         android:enabled="true"/>

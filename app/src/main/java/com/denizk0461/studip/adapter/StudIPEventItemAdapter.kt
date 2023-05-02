@@ -24,6 +24,7 @@ import java.util.*
  */
 class StudIPEventItemAdapter(
     private val currentDay: Int,
+    private val highlightNextCourse: Boolean,
     private val onClickListener: OnClickListener,
 ) : RecyclerView.Adapter<StudIPEventItemAdapter.EventViewHolder>() {
 
@@ -80,10 +81,11 @@ class StudIPEventItemAdapter(
         val theme = holder.binding.root.context.theme
 
         /*
-         * Highlight the next upcoming course of the day if the day of the adapter matches the
-         * current day, and if no other course has been highlighted, to avoid double highlighting.
+         * Highlight the next upcoming course of the day if the user selected the option, if the day
+         * of the adapter matches the current day, and if no other course has been highlighted, to
+         * avoid double highlighting.
          */
-        if (!isAnyCourseHighlighted && currentItem.isCurrentCourse(currentCalendar)) {
+        if (highlightNextCourse && !isAnyCourseHighlighted && currentItem.isCurrentCourse(currentCalendar)) {
             // Ensure that no other course will be highlighted
             isAnyCourseHighlighted = true
 

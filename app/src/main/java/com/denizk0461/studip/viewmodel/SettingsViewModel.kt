@@ -15,7 +15,10 @@ class SettingsViewModel(app: Application) : AppViewModel(app) {
      * highlighted.
      */
     var preferenceCourseHighlighting: Boolean
-        get() = repo.getBooleanPreference(SettingsPreferences.COURSE_HIGHLIGHTING)
+        get() = repo.getBooleanPreference(
+            SettingsPreferences.COURSE_HIGHLIGHTING,
+            defaultValue = true
+        )
         set(newValue) { repo.setPreference(SettingsPreferences.COURSE_HIGHLIGHTING, newValue) }
 
     /**
@@ -36,7 +39,7 @@ class SettingsViewModel(app: Application) : AppViewModel(app) {
      * This value determines which canteen the user has selected.
      */
     var preferenceColour: Boolean
-        get() = repo.getBooleanPreference(SettingsPreferences.COLOUR_PREFS)
+        get() = repo.getBooleanPreference(SettingsPreferences.COLOUR_PREFS, defaultValue = true)
         set(newValue) { repo.setPreference(SettingsPreferences.COLOUR_PREFS, newValue) }
 
     /**
