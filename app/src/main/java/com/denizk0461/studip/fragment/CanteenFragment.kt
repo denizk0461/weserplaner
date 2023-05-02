@@ -8,10 +8,10 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.viewModels
 import com.denizk0461.studip.R
 import com.denizk0461.studip.adapter.CanteenOfferPageAdapter
+import com.denizk0461.studip.data.getTextSheet
 import com.denizk0461.studip.data.showErrorSnackBar
 import com.denizk0461.studip.databinding.FragmentCanteenBinding
 import com.denizk0461.studip.model.*
-import com.denizk0461.studip.sheet.TextSheet
 import com.denizk0461.studip.viewmodel.CanteenViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -87,7 +87,7 @@ class CanteenFragment : AppFragment() {
         // Set up button to display info (most likely opening hours)
         binding.buttonInfo.setOnClickListener {
             openBottomSheet(
-                TextSheet(
+                getTextSheet(
                     getString(
                         R.string.canteen_opening_hours,
                         getCurrentlySelectedCanteenName()

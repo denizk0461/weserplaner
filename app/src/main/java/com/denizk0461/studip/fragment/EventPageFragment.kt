@@ -74,7 +74,6 @@ class EventPageFragment : AppFragment(), StudIPEventItemAdapter.OnClickListener 
 
         // Set up LiveData observer to refresh the view on update
         viewModel.getEventsForDay(currentDay).observe(viewLifecycleOwner) { events ->
-
             eventAdapter.setNewData(events)
         }
     }
@@ -85,11 +84,13 @@ class EventPageFragment : AppFragment(), StudIPEventItemAdapter.OnClickListener 
 
     override fun onLongClick(event: StudIPEvent): Boolean {
         // Open a bottom sheet to edit the event
-        openBottomSheet(ScheduleUpdateSheet(event, onUpdate = { eventToUpdate ->
-            viewModel.update(eventToUpdate)
-        }, onDelete = { eventToDelete ->
-            viewModel.delete(eventToDelete)
-        }))
+        openBottomSheet(
+            ScheduleUpdateSheet().also { sheet ->
+                val bundle = Bundle()
+                bundle.putParcelable("event", event)
+                sheet.arguments = bundle
+            }
+        )
         return true
     }
 }

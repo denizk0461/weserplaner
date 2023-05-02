@@ -12,12 +12,11 @@ import com.denizk0461.studip.BuildConfig
 import com.denizk0461.studip.R
 import com.denizk0461.studip.activity.FetcherActivity
 import com.denizk0461.studip.activity.ImageActivity
+import com.denizk0461.studip.data.getTextSheet
 import com.denizk0461.studip.data.showToast
 import com.denizk0461.studip.databinding.FragmentSettingsBinding
-import com.denizk0461.studip.model.AllergenPreferences
 import com.denizk0461.studip.sheet.AllergenConfigSheet
 import com.denizk0461.studip.sheet.DevCodeSheet
-import com.denizk0461.studip.sheet.TextSheet
 import com.denizk0461.studip.viewmodel.SettingsViewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -67,13 +66,10 @@ class SettingsFragment : AppFragment() {
             }
         }
 
+        // Set up button to set allergens
         binding.buttonAllergensConfig.setOnClickListener {
             openBottomSheet(
-                AllergenConfigSheet(
-                    AllergenPreferences.construct(viewModel.preferenceAllergenConfig)
-                ) { obj ->
-                    viewModel.preferenceAllergenConfig = obj.deconstruct()
-                }
+                AllergenConfigSheet()
             )
         }
 
@@ -111,16 +107,18 @@ class SettingsFragment : AppFragment() {
 
         // Set click listener for the data handling dialogue
         binding.buttonDataHandling.setOnClickListener {
-            openBottomSheet(TextSheet(
+            openBottomSheet(
+                getTextSheet(
                 getString(R.string.settings_data_sheet_header),
                     getString(R.string.settings_data_sheet_content),
-            ))
+                )
+            )
         }
 
         // Set click listener for showing licences dialogue
         binding.buttonLicences.setOnClickListener {
             openBottomSheet(
-                TextSheet(
+                getTextSheet(
                     getString(R.string.sheet_licences_header),
                     getString(R.string.sheet_licences_content),
                 )
@@ -129,14 +127,7 @@ class SettingsFragment : AppFragment() {
 
         // Set long click listener for licences button to open dev code sheet
         binding.buttonLicences.setOnLongClickListener {
-            openBottomSheet(DevCodeSheet(
-                viewModel::nukeEvents,
-                viewModel::nukeOfferItems,
-                viewModel::nukeOfferCategories,
-                viewModel::nukeOfferCanteens,
-                viewModel::nukeOfferDates,
-                viewModel::nukeEverything,
-            ))
+            openBottomSheet(DevCodeSheet())
             true
         }
 

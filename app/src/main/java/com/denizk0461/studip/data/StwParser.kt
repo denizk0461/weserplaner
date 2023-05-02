@@ -130,7 +130,7 @@ class StwParser(application: Application) {
 
         /*
          * Retrieve the opening hours for the canteen.
-         * TODO this formatting sucks
+         * TODO this formatting sucks and also this doesn't work
          */
         var openingHours = ""
 

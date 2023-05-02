@@ -230,7 +230,15 @@ class CanteenPageFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListen
      * @param offer item that has been clicked
      */
     override fun onClick(offer: CanteenOfferGroupElement, category: String) {
-        openBottomSheet(AllergenSheet(offer, category, viewModel.preferenceColour))
+        openBottomSheet(
+            AllergenSheet().also { sheet ->
+                val bundle = Bundle()
+                bundle.putParcelable("offer", offer)
+                bundle.putString("category", category)
+                bundle.putBoolean("preferenceColour", viewModel.preferenceColour)
+                sheet.arguments = bundle
+            }
+        )
     }
 
     /**

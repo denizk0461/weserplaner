@@ -2,29 +2,33 @@ package com.denizk0461.studip.sheet
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
 import com.denizk0461.studip.R
 import com.denizk0461.studip.data.showToast
 import com.denizk0461.studip.data.viewBinding
 import com.denizk0461.studip.databinding.SheetAllergenConfigBinding
 import com.denizk0461.studip.model.AllergenPreferences
+import com.denizk0461.studip.viewmodel.AllergenConfigViewModel
 
 /**
  * Configuration sheet for the user to pick substances they are allergic against. Offers containing
  * these allergens will be hidden.
- *
- * @param currentAllergenConfig currently set allergen preference
- * @param onUpdate              action to execute to store the allergen preferences
  */
-class AllergenConfigSheet(
-    private val currentAllergenConfig: AllergenPreferences.Object,
-    private val onUpdate: (obj: AllergenPreferences.Object) -> Unit,
-) : AppSheet(R.layout.sheet_allergen_config) {
+class AllergenConfigSheet : AppSheet(R.layout.sheet_allergen_config) {
 
     // View binding
     private val binding: SheetAllergenConfigBinding by viewBinding(SheetAllergenConfigBinding::bind)
 
+    // View model
+    private val viewModel: AllergenConfigViewModel by viewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Retrieve allergens as currently set by the user from view model
+        val currentAllergenConfig = AllergenPreferences.construct(
+            viewModel.preferenceAllergenConfig
+        )
 
         // Set all check boxes to the currently set values
         binding.apply {
@@ -69,36 +73,34 @@ class AllergenConfigSheet(
 
         binding.apply {
             // Save the new preferences
-            onUpdate(
-                AllergenPreferences.Object(
-                    hasWheat = checkWheat.isChecked,
-                    hasRye = checkRye.isChecked,
-                    hasBarley = checkBarley.isChecked,
-                    hasOats = checkOat.isChecked,
-                    hasSpelt = checkSpelt.isChecked,
-                    hasKamut = checkKamut.isChecked,
-                    hasCrustaceans = checkCrustaceans.isChecked,
-                    hasEggs = checkEggs.isChecked,
-                    hasFish = checkFish.isChecked,
-                    hasPeanuts = checkPeanuts.isChecked,
-                    hasSoy = checkSoy.isChecked,
-                    hasDairy = checkDairy.isChecked,
-                    hasAlmonds = checkAlmonds.isChecked,
-                    hasHazelnuts = checkHazelnuts.isChecked,
-                    hasWalnuts = checkWalnuts.isChecked,
-                    hasCashewNuts = checkCashewNuts.isChecked,
-                    hasPecans = checkPecans.isChecked,
-                    hasBrazilNuts = checkBrazilNuts.isChecked,
-                    hasPistachios = checkPistachios.isChecked,
-                    hasMacadamia = checkMacadamia.isChecked,
-                    hasCelery = checkCelery.isChecked,
-                    hasMustard = checkMustard.isChecked,
-                    hasSulphides = checkSulphides.isChecked,
-                    hasLupins = checkLupins.isChecked,
-                    hasSesame = checkSesame.isChecked,
-                    hasMolluscs = checkMolluscs.isChecked,
-                )
-            )
+            viewModel.preferenceAllergenConfig = AllergenPreferences.Object(
+                hasWheat = checkWheat.isChecked,
+                hasRye = checkRye.isChecked,
+                hasBarley = checkBarley.isChecked,
+                hasOats = checkOat.isChecked,
+                hasSpelt = checkSpelt.isChecked,
+                hasKamut = checkKamut.isChecked,
+                hasCrustaceans = checkCrustaceans.isChecked,
+                hasEggs = checkEggs.isChecked,
+                hasFish = checkFish.isChecked,
+                hasPeanuts = checkPeanuts.isChecked,
+                hasSoy = checkSoy.isChecked,
+                hasDairy = checkDairy.isChecked,
+                hasAlmonds = checkAlmonds.isChecked,
+                hasHazelnuts = checkHazelnuts.isChecked,
+                hasWalnuts = checkWalnuts.isChecked,
+                hasCashewNuts = checkCashewNuts.isChecked,
+                hasPecans = checkPecans.isChecked,
+                hasBrazilNuts = checkBrazilNuts.isChecked,
+                hasPistachios = checkPistachios.isChecked,
+                hasMacadamia = checkMacadamia.isChecked,
+                hasCelery = checkCelery.isChecked,
+                hasMustard = checkMustard.isChecked,
+                hasSulphides = checkSulphides.isChecked,
+                hasLupins = checkLupins.isChecked,
+                hasSesame = checkSesame.isChecked,
+                hasMolluscs = checkMolluscs.isChecked,
+            ).deconstruct()
         }
 
         // Tell the user that saving was successful

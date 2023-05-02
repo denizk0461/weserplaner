@@ -1,5 +1,7 @@
 package com.denizk0461.studip.model
 
+import android.os.Parcel
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -27,8 +29,7 @@ data class StudIPEvent(
     val timeslotEnd: String,
     val timeslotId: Int,
     val colour: Int = 0,
-) {
-
+) : Parcelable {
     /**
      * Parse timeslotStart and timeslotEnd into an easily readable string in the following format:
      * 12:15 – 13:45
@@ -36,8 +37,6 @@ data class StudIPEvent(
      * @return formatted time string
      */
     fun timeslot(): String = "$timeslotStart – $timeslotEnd"
-
-    // Auto-generated methods. Necessary for [AppDiffUtilCallback]
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -69,5 +68,39 @@ data class StudIPEvent(
         result = 31 * result + timeslotId
         result = 31 * result + colour
         return result
+    }
+
+    constructor(source: Parcel) : this(
+        source.readInt(),
+        source.readString() ?: "",
+        source.readString() ?: "",
+        source.readString() ?: "",
+        source.readInt(),
+        source.readString() ?: "",
+        source.readString() ?: "",
+        source.readInt(),
+        source.readInt(),
+    )
+
+    override fun describeContents(): Int = 0
+
+    override fun writeToParcel(dest: Parcel, flags: Int): Unit = with(dest) {
+        writeInt(eventId)
+        writeString(title)
+        writeString(lecturer)
+        writeString(room)
+        writeInt(day)
+        writeString(timeslotStart)
+        writeString(timeslotEnd)
+        writeInt(timeslotId)
+        writeInt(colour)
+    }
+
+    companion object {
+        @JvmField
+        val CREATOR: Parcelable.Creator<StudIPEvent> = object : Parcelable.Creator<StudIPEvent> {
+            override fun createFromParcel(source: Parcel): StudIPEvent = StudIPEvent(source)
+            override fun newArray(size: Int): Array<StudIPEvent?> = arrayOfNulls(size)
+        }
     }
 }

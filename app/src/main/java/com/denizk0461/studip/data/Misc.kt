@@ -2,12 +2,17 @@ package com.denizk0461.studip.data
 
 import android.content.Context
 import android.content.res.Resources
+import android.os.Build
+import android.os.Bundle
+import android.os.Parcelable
 import android.util.TypedValue
 import android.widget.Toast
 import androidx.annotation.AttrRes
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.denizk0461.studip.R
 import com.denizk0461.studip.exception.AcademicQuarterNotApplicableException
+import com.denizk0461.studip.exception.ParcelNotFoundException
+import com.denizk0461.studip.sheet.TextSheet
 import com.google.android.material.snackbar.Snackbar
 import kotlin.jvm.Throws
 
@@ -53,6 +58,41 @@ fun Resources.Theme.showErrorSnackBar(view: CoordinatorLayout, text: String) {
         .setTextColor(getThemedColor(R.attr.colorOnErrorContainer))
         .show()
 }
+
+/**
+ * Retrieve a [TextSheet] with text content added as arguments bundle.
+ *
+ * @param header    header of the sheet
+ * @param content   text content of the sheet
+ * @return          sheet with text added
+ */
+fun getTextSheet(header: String, content: String): TextSheet = TextSheet().also { sheet ->
+    val bundle = Bundle()
+    bundle.putString("header", header)
+    bundle.putString("content", content)
+    sheet.arguments = bundle
+}
+
+/**
+ * Retrieves a Parcelable object from a given instance of [Bundle].
+ *
+ * @param T                         type of the object to retrieve
+ * @param key                       string key to retrieve the object from the [Bundle]
+ * @throws ParcelNotFoundException  if the Parcel couldn't be retrieved
+ */
+@Throws(ParcelNotFoundException::class)
+inline fun <reified T : Parcelable> Bundle?.getParcelableCompat(key: String): T =
+    /*
+     * Since the old getParcelable() call is deprecated since API 33 (Tiramisu) and replaced with a
+     * type-safe version, and no AppCompat version is available as of now, this API level check is
+     * necessary instead.
+     */
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        this?.getParcelable(key, T::class.java)
+    } else {
+        @Suppress("DEPRECATION")
+        this?.getParcelable(key) as? T
+    } ?: throw ParcelNotFoundException()
 
 /**
  * Provides a conversion method between a timestamp ending in a full hour, and one with an academic

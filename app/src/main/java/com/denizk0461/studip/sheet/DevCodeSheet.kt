@@ -5,35 +5,26 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Base64
 import android.view.View
+import androidx.fragment.app.viewModels
 import com.denizk0461.studip.R
 import com.denizk0461.studip.activity.ImageActivity
 import com.denizk0461.studip.data.showToast
 import com.denizk0461.studip.data.viewBinding
 import com.denizk0461.studip.databinding.SheetDevCodeBinding
+import com.denizk0461.studip.viewmodel.DevCodeViewModel
 import java.nio.charset.StandardCharsets
 
 /**
  * Sheet that presents the user / developer with a text field to input developer codes / cheat
  * codes.
- *
- * @param nukeEvents            deletes all events
- * @param nukeOfferItems        deletes all canteen items
- * @param nukeOfferCategories   deletes all canteen categories
- * @param nukeOfferCanteens     deletes all canteens
- * @param nukeOfferDates        deletes all canteen dates
- * @param nukeEverything        deletes everything
  */
-class DevCodeSheet(
-    private val nukeEvents: () -> Unit,
-    private val nukeOfferItems: () -> Unit,
-    private val nukeOfferCategories: () -> Unit,
-    private val nukeOfferCanteens: () -> Unit,
-    private val nukeOfferDates: () -> Unit,
-    private val nukeEverything: () -> Unit,
-) : AppSheet(R.layout.sheet_dev_code) {
+class DevCodeSheet : AppSheet(R.layout.sheet_dev_code) {
 
     // View binding
     private val binding: SheetDevCodeBinding by viewBinding(SheetDevCodeBinding::bind)
+
+    // View model
+    private val viewModel: DevCodeViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -81,27 +72,27 @@ class DevCodeSheet(
                     })
                 }
                 "NEVENT" -> { // nuke events
-                    nukeEvents()
+                    viewModel.nukeEvents()
                     showToast(context, "Nuked all events")
                 }
                 "NCANTE" -> { // nuke canteens
-                    nukeOfferCanteens()
+                    viewModel.nukeOfferCanteens()
                     showToast(context, "Nuked all canteens")
                 }
                 "NDATES" -> { // nuke dates
-                    nukeOfferDates()
+                    viewModel.nukeOfferDates()
                     showToast(context, "Nuked all dates")
                 }
                 "NCATEG" -> { // nuke categories
-                    nukeOfferCategories()
+                    viewModel.nukeOfferCategories()
                     showToast(context, "Nuked all categories")
                 }
                 "NITEMS" -> { // nuke items
-                    nukeOfferItems()
+                    viewModel.nukeOfferItems()
                     showToast(context, "Nuked all items")
                 }
                 "NEVERY" -> { // nuke everything
-                    nukeEverything()
+                    viewModel.nukeEverything()
                     showToast(context, "Nuked everything")
                 }
                 else -> showToast(context, "Code is invalid")

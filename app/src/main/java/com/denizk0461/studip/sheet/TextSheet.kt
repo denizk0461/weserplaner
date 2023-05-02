@@ -8,20 +8,20 @@ import com.denizk0461.studip.databinding.SheetTextBinding
 
 /**
  * Bottom sheet used for displaying any sort of text to the user.
- *
- * @param header    headline for the window
- * @param content   content text for the window
  */
-class TextSheet(
-    private val header: String,
-    private val content: String,
-) : AppSheet(R.layout.sheet_text) {
+class TextSheet : AppSheet(R.layout.sheet_text) {
 
     // View binding
     private val binding: SheetTextBinding by viewBinding(SheetTextBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Retrieve headline for the window
+        val header = arguments?.getString("header") ?: ""
+
+        // Retrieve content for the window
+        val content = arguments?.getString("content") ?: ""
 
         // Set text values
         binding.apply {

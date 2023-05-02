@@ -17,18 +17,4 @@ class EventPageViewModel(app: Application) : AppViewModel(app) {
      * @return  Stud.IP events for a certain day exposed through a LiveData object
      */
     fun getEventsForDay(day: Int): LiveData<List<StudIPEvent>> = repo.getEventsForDay(day)
-
-    /**
-     * Updates a schedule element.
-     *
-     * @param event the event to update
-     */
-    fun update(event: StudIPEvent) { doAsync { repo.update(event) } }
-
-    /**
-     * Deletes a schedule element.
-     *
-     * @param event the event to delete
-     */
-    fun delete(event: StudIPEvent) { doAsync { repo.delete(event) } }
 }
