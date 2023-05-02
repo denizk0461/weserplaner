@@ -21,6 +21,6 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="@dimen/fab_margin"
-        app:srcCompat="@drawable/check" />
+        app:srcCompat="@drawable/save"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -9,6 +9,7 @@ import android.util.TypedValue
 import android.widget.Toast
 import androidx.annotation.AttrRes
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.denizk0461.studip.R
 import com.denizk0461.studip.exception.AcademicQuarterNotApplicableException
 import com.denizk0461.studip.exception.ParcelNotFoundException
@@ -93,6 +94,19 @@ inline fun <reified T : Parcelable> Bundle?.getParcelableCompat(key: String): T 
         @Suppress("DEPRECATION")
         this?.getParcelable(key) as? T
     } ?: throw ParcelNotFoundException()
+
+/**
+ * Applies a rainbow colour effect to a progress circle of a given [SwipeRefreshLayout]. The circle
+ * will rotate through 4 different colours during the refresh process.
+ */
+fun SwipeRefreshLayout.setRainbowProgressCircle() {
+    setColorSchemeColors(
+        context.getColor(R.color.beef_light_primary),
+        context.getColor(R.color.fair_light_primary),
+        context.getColor(R.color.vital_light_primary),
+        context.getColor(R.color.poultry_dark_primary),
+    )
+}
 
 /**
  * Provides a conversion method between a timestamp ending in a full hour, and one with an academic

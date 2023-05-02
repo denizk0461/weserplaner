@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import com.denizk0461.studip.R
 import com.denizk0461.studip.adapter.CanteenOfferPageAdapter
 import com.denizk0461.studip.data.getTextSheet
+import com.denizk0461.studip.data.setRainbowProgressCircle
 import com.denizk0461.studip.data.showErrorSnackBar
 import com.denizk0461.studip.databinding.FragmentCanteenBinding
 import com.denizk0461.studip.model.*
@@ -48,6 +49,9 @@ class CanteenFragment : AppFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Set progress circle colours
+        binding.swipeRefreshLayout.setRainbowProgressCircle()
 
         // Open the menu for the canteen picker button
         binding.buttonCanteenPicker.setOnClickListener {
@@ -128,9 +132,9 @@ class CanteenFragment : AppFragment() {
                  * TODO implement a more efficient / better-looking method
                  * TODO order the chips alphabetically?
                  */
-                val index = binding.chipsPreference.indexOfChild(buttonView)
-                binding.chipsPreference.removeView(buttonView)
-                binding.chipsPreference.addView(buttonView, index)
+//                val index = binding.chipsPreference.indexOfChild(buttonView)
+//                binding.chipsPreference.removeView(buttonView)
+//                binding.chipsPreference.addView(buttonView, index)
             }
         }
 
@@ -226,10 +230,14 @@ class CanteenFragment : AppFragment() {
             binding.swipeRefreshLayout.isRefreshing = false
 
         }, onError = {
+            // Tell the user that an error occurred
             context.theme?.showErrorSnackBar(
                 binding.snackbarContainer,
                 getString(R.string.canteen_fetch_error)
             )
+            /*
+             * Tell the swipe refresh layout to stop refreshing.
+             */
             binding.swipeRefreshLayout.isRefreshing = false
         })
     }
