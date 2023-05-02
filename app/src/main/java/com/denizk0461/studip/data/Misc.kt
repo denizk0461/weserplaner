@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.TypedValue
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.AttrRes
 import androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -51,13 +52,15 @@ fun showToast(context: Context, text: String) {
     Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
 }
 
-fun Resources.Theme.showErrorSnackBar(view: CoordinatorLayout, text: String) {
-    Snackbar
+fun Resources.Theme.showErrorSnackBar(view: CoordinatorLayout, text: String, anchor: View? = null) {
+    val s = Snackbar
         .make(view, text, Snackbar.LENGTH_SHORT)
         // Set colours to signify an error
         .setBackgroundTint(getThemedColor(R.attr.colorErrorContainer))
         .setTextColor(getThemedColor(R.attr.colorOnErrorContainer))
-        .show()
+
+    anchor?.let { a -> s.setAnchorView(a) }
+    s.show()
 }
 
 /**

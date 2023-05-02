@@ -141,7 +141,6 @@ class SettingsFragment : AppFragment() {
                         intent.putExtras(bundle)
                     })
                 }
-                10 -> showToast(context, getString(R.string.settings_app_version_10))
                 15 -> showToast(context, getString(R.string.settings_app_version_15))
                 20 -> showToast(context, getString(R.string.settings_app_version_20))
                 30 -> showToast(context, getString(R.string.settings_app_version_30))
@@ -151,7 +150,10 @@ class SettingsFragment : AppFragment() {
                 200 -> showToast(context, getString(R.string.settings_app_version_200))
                 222 -> {
                     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(mysteryLink)))
-                    appVersionClick = -1
+                }
+                238 -> { // after 222 has been reached, this loops every 16 clicks
+                    showToast(context, resources.getStringArray(R.array.cheesy).random())
+                    appVersionClick = 222
                 }
             }
             appVersionClick += 1

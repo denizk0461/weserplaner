@@ -128,17 +128,23 @@ enum class DietaryPreferences(val value: String) {
     companion object {
 
         /**
-         * Char used to construct a regex to denote that a preference is met
+         * Char used to construct a regex to denote that a preference is met.
          */
         const val C_TRUE: Char = 't'
 
         /**
-         * Char used to construct a regex to denote that a preference is not met
+         * Char used to construct a regex to denote that a preference is not met.
          */
         const val C_FALSE: Char = '.'
 
+        /**
+         * Default value for preferences if none are set.
+         */
         const val TEMPLATE_EMPTY: String = ".........."
 
+        /**
+         * Object denoting that no dietary preferences apply.
+         */
         val NONE_MET: Object = construct(TEMPLATE_EMPTY)
 
         /**

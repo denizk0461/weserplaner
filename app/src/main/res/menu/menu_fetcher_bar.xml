@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/close"
+        android:icon="@drawable/cross"
+        android:title="@string/fetch_bar_close_title"
+        android:contentDescription="@string/fetch_bar_close_desc"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/refresh"
+        android:icon="@drawable/refresh"
+        android:title="@string/fetch_bar_refresh_title"
+        android:contentDescription="@string/fetch_bar_refresh_desc"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/help"
+        android:icon="@drawable/info"
+        android:title="@string/fetch_bar_help_title"
+        android:contentDescription="@string/fetch_bar_help_desc"
+        app:showAsAction="ifRoom"/>
+</menu>

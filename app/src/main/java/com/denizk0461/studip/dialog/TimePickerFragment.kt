@@ -7,20 +7,18 @@ import android.os.Bundle
 import android.widget.TimePicker
 
 /**
- * Dialogue used for letting the user pick a timestamp.
+ * Dialogue used for letting the user pick a timestamp. TODO crashes on config change (multitask)
  *
- * @param timestamp     timestamp that is to be edited
  * @param listener      listener for when the user finishes setting a time
  * @param isEventStart  whether the timestamp to be edited is the start of the event
  */
 class TimePickerFragment(
-    private val timestamp: String,
     private val listener: OnTimeSetListener,
     private val isEventStart: Boolean,
 ) : DialogFragment(), TimePickerDialog.OnTimeSetListener {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val timestampSplit = timestamp.split(":")
+        val timestampSplit = (arguments?.getString("timestamp") ?: "").split(":")
         return TimePickerDialog(
             activity,
             this,

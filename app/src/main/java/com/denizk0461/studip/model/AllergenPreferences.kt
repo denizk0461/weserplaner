@@ -1,65 +1,38 @@
 package com.denizk0461.studip.model
 
 // TODO KDoc
-enum class AllergenPreferences {
-    GLUTEN_WHEAT,
-    GLUTEN_RYE,
-    GLUTEN_BARLEY,
-    GLUTEN_OATS,
-    GLUTEN_SPELT,
-    GLUTEN_KAMUT,
-    CRUSTACEANS,
-    EGGS,
-    FISH,
-    PEANUTS,
-    SOY,
-    DAIRY,
-    ALMONDS,
-    HAZELNUTS,
-    WALNUTS,
-    CASHEW_NUTS,
-    PECANS,
-    BRAZIL_NUTS,
-    PISTACHIOS,
-    MACADAMIA,
-    CELERY,
-    MUSTARD,
-    SULPHIDES,
-    LUPINS,
-    SESAME,
-    MOLLUSCS,
-    ;
+class AllergenPreferences {
 
     /**
      * Object that holds allergy preferences. Can be used to hold both the user-set values as well
      * as the values of an individual canteen item.
      *
-     * @param hasWheat
-     * @param hasRye
-     * @param hasBarley
-     * @param hasOats
-     * @param hasSpelt
-     * @param hasKamut
-     * @param hasCrustaceans
-     * @param hasEggs
-     * @param hasFish
-     * @param hasPeanuts
-     * @param hasSoy
-     * @param hasDairy
-     * @param hasAlmonds
-     * @param hasHazelnuts
-     * @param hasWalnuts
-     * @param hasCashewNuts
-     * @param hasPecans
-     * @param hasBrazilNuts
-     * @param hasPistachios
-     * @param hasMacadamia
-     * @param hasCelery
-     * @param hasMustard
-     * @param hasSulphides
-     * @param hasLupins
-     * @param hasSesame
-     * @param hasMolluscs
+     * @param hasWheat          whether the offer contains gluten through wheat
+     * @param hasRye            whether the offer contains gluten through rye
+     * @param hasBarley         whether the offer contains gluten through barley
+     * @param hasOats           whether the offer contains gluten through oats
+     * @param hasSpelt          whether the offer contains gluten through spelt
+     * @param hasKamut          whether the offer contains gluten through kamut
+     * @param hasCrustaceans    whether the offer contains crustaceans
+     * @param hasEggs           whether the offer contains eggs
+     * @param hasFish           whether the offer contains fish
+     * @param hasPeanuts        whether the offer contains peanuts
+     * @param hasSoy            whether the offer contains soy
+     * @param hasDairy          whether the offer contains dairy
+     * @param hasAlmonds        whether the offer contains almonds
+     * @param hasHazelnuts      whether the offer contains hazelnuts
+     * @param hasWalnuts        whether the offer contains walnuts
+     * @param hasCashewNuts     whether the offer contains cashew nuts
+     * @param hasPecans         whether the offer contains pecan nuts
+     * @param hasBrazilNuts     whether the offer contains brazil nuts
+     * @param hasPistachios     whether the offer contains pistachios
+     * @param hasMacadamia      whether the offer contains macadamia nuts
+     * @param hasCelery         whether the offer contains celery
+     * @param hasMustard        whether the offer contains mustard
+     * @param hasSulphides      whether the offer contains highly concentrated sulphides
+     * @param hasLupins         whether the offer contains lupins
+     * @param hasSesame         whether the offer contains sesame
+     * @param hasMolluscs       whether the offer contains molluscs
      */
     data class Object(
         val hasWheat: Boolean,
@@ -130,15 +103,16 @@ enum class AllergenPreferences {
     }
 
     companion object {
-        const val C_TRUE: Char = 'y'
-        const val C_FALSE: Char = 'n'
 
+        /**
+         * Template string representing no allergens.
+         */
         const val TEMPLATE: String = ""
 
         /**
          * Constructs an AllergenPreferenceObject from a string.
          *
-         * @param input string that must be 26 characters long
+         * @param input string that must be 26 characters long. This will NOT be checked
          * @return      instance of AllergenPreferences.Object with preferences inserted
          */
         fun construct(input: String): Object {
@@ -172,37 +146,5 @@ enum class AllergenPreferences {
                 elements.contains("n"),
             )
         }
-//        String(
-//            charArrayOf(
-//                charFor(obj.hasWheat),
-//                charFor(obj.hasRye),
-//                charFor(obj.hasBarley),
-//                charFor(obj.hasOats),
-//                charFor(obj.hasSpelt),
-//                charFor(obj.hasKamut),
-//                charFor(obj.hasCrustaceans),
-//                charFor(obj.hasEggs),
-//                charFor(obj.hasFish),
-//                charFor(obj.hasPeanuts),
-//                charFor(obj.hasSoy),
-//                charFor(obj.hasDairy),
-//                charFor(obj.hasAlmonds),
-//                charFor(obj.hasHazelnuts),
-//                charFor(obj.hasWalnuts),
-//                charFor(obj.hasCashewNuts),
-//                charFor(obj.hasPecans),
-//                charFor(obj.hasBrazilNuts),
-//                charFor(obj.hasPistachios),
-//                charFor(obj.hasMacadamia),
-//                charFor(obj.hasCelery),
-//                charFor(obj.hasMustard),
-//                charFor(obj.hasSulphides),
-//                charFor(obj.hasLupins),
-//                charFor(obj.hasSesame),
-//                charFor(obj.hasMolluscs),
-//            )
-//        )
-
-        private fun charFor(pref: Boolean) = if (pref) C_TRUE else C_FALSE
     }
 }

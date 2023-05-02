@@ -23,8 +23,19 @@
     <string name="fetch_error_webpage_snack">You must navigate to your schedule!</string>
     <string name="canteen_fetch_error">Couldn\'t retrieve the canteen plan!</string>
 
+    <string name="fetch_bar_close_title">Close</string>
+    <string name="fetch_bar_close_desc">Close the website without saving anything</string>
+    <string name="fetch_bar_refresh_title">Refresh</string>
+    <string name="fetch_bar_refresh_desc">Refresh the page</string>
+    <string name="fetch_bar_help_title">Help</string>
+    <string name="fetch_bar_help_desc">Show help</string>
+    <string name="fetch_bar_help_sheet_title">How to save your timetable in the app</string>
+    <string name="fetch_bar_help_sheet_content"> • Log in with your Stud.IP login\n • Open your timetable view (in case it doesn\'t open automatically)\n • Click the \'save\' button in the bottom right corner\n • Done!</string>
+    <string name="fetch_bar_save_desc">Save the timetable in the app</string>
+
     <string name="save">Save</string>
     <string name="delete">Delete</string>
+    <string name="sheet_schedule_update_delete_confirm">Sure?</string>
     <string name="cancel">Cancel</string>
     <string name="confirm">Confirm</string>
     <string name="sheet_schedule_update_header">Edit Event</string>
@@ -153,7 +164,7 @@
     <string name="settings_pref_colour_subtitle">This colours the icons similar to how they look the website</string> <!-- TODO this text sucks, DE too -->
 
     <string name="settings_launch_canteen_title">Show canteen plan on app launch</string>
-    <string name="settings_launch_canteen_subtitle">Otherwise your schedule will be shown at launch</string>
+    <string name="settings_launch_canteen_subtitle">Otherwise your schedule will be shown at launch; CURRENTLY BROKEN</string>
 
     <string name="settings_crashlytics_title">Opt-in to sharing crash data</string>
     <string name="settings_crashlytics_subtitle">Data will be anonymised</string> <!-- TODO is this true? -->
@@ -170,7 +181,6 @@
 
     <string name="settings_app_version">App Version</string>
 
-    <string name="settings_app_version_10">ahhh yes</string>
     <string name="settings_app_version_15">keep clicking</string>
     <string name="settings_app_version_20" translatable="false">^_^</string>
     <string name="settings_app_version_30" translatable="false">^_____^</string>
@@ -181,5 +191,13 @@
 
     <string name="with_love">with ♡️ from Bremen-Osterholz\nmade by denizk0461 \\__*</string>
 
-    <string name="de4thSpirit" translatable="false">In our hearts, she lives forevermore</string>
+    <string-array name="cheesy" translatable="false">
+        <item>in our hearts, she lives forevermore</item>
+        <item>it\'s only real when it hurts</item>
+        <item>can\'t go back in time – every second is a new one</item>
+        <item>doctor, i am the great clown Pagliacci</item>
+        <item>if we only had one more day, what is the last thing you\'d say?</item>
+        <item>love with your heart, use your head for everything else</item>
+        <item>if I die, I hope I\'m buried in a forest – that is, if any of it\'s left</item>
+    </string-array>
 </resources>

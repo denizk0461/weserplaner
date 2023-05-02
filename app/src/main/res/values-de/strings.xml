@@ -23,8 +23,19 @@
     <string name="fetch_error_webpage_snack">Du musst deinen Stundenplan öffnen!</string>
     <string name="canteen_fetch_error">Mensaplan konnte nicht heruntergeladen werden!</string>
 
+    <string name="fetch_bar_close_title">Schließen</string>
+    <string name="fetch_bar_close_desc">Schließe die Webseite, ohne etwas zu speichern</string>
+    <string name="fetch_bar_refresh_title">Aktualisieren</string>
+    <string name="fetch_bar_refresh_desc">Aktualisiere die Webseite</string>
+    <string name="fetch_bar_help_title">Hilfe</string>
+    <string name="fetch_bar_help_desc">Zeige Hilfe</string>
+    <string name="fetch_bar_help_sheet_title">Wie Du Deinen Stundenplan in der App speichern kannst</string>
+    <string name="fetch_bar_help_sheet_content"> • Logge dich mit deinem Stud.IP-Login ein\n • Öffne deinen Stundenplan (falls er sich nicht automatisch öffnet)\n • Klicke auf den \'Speichern\'-Knopf rechts in der unteren Ecke\n • Fertig!</string>
+    <string name="fetch_bar_save_desc">Speichere den Stundenplan in der App ab</string>
+
     <string name="save">Speichern</string>
     <string name="delete">Löschen</string>
+    <string name="sheet_schedule_update_delete_confirm">Sicher?</string>
     <string name="cancel">Abbrechen</string>
     <string name="confirm">Bestätigen</string>
     <string name="sheet_schedule_update_header">Veranstaltung bearbeiten</string>
@@ -164,7 +175,6 @@
 
     <string name="settings_app_version">App-Version</string>
 
-    <string name="settings_app_version_10">oh jaa</string>
     <string name="settings_app_version_15">klick weiter</string>
     <string name="settings_app_version_121">Solltest du nicht für deine Klausuren lernen?</string>
 

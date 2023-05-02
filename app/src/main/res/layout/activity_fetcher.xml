@@ -8,19 +8,25 @@
     <WebView
         android:id="@+id/webview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:layout_height="match_parent"/>
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        style="@style/Widget.Material3.BottomAppBar"
+        android:id="@+id/bottom_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:menu="@menu/menu_fetcher_bar"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="@dimen/fab_margin"
-        app:srcCompat="@drawable/save"/>
+        app:srcCompat="@drawable/save"
+        android:contentDescription="@string/fetch_bar_save_desc"
+        app:layout_anchor="@id/bottom_app_bar"/>
+<!--    android:layout_gravity="bottom|end"-->
+<!--    android:layout_marginEnd="@dimen/fab_margin"-->
+<!--    android:layout_marginBottom="@dimen/fab_margin"-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

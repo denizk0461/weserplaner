@@ -37,6 +37,9 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update), TimePicker
     // View model
     private val viewModel: ScheduleUpdateViewModel by viewModels()
 
+    // Whether the user has once clicked the delete button; used to prevent an accidental click
+    private var hasClickedDelete: Boolean = false
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -54,6 +57,7 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update), TimePicker
             binding.editTextLecturers.setText(event.lecturer)
             binding.editTextRoom.setText(event.room)
 
+
             /*
              * Show academic quarter suggestion if it is applicable. For this to be the case, both the
              * start timestamp and the end timestamp must match up in a pattern that would make it
@@ -62,63 +66,63 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update), TimePicker
              *
              * 13:00 - 15:30 -> likely no academic quarter intended
              */
-            binding.buttonAcademicQuarter.visibility = if (
-                timeslotsAcademicQuarter.contains(timeslotStart) &&
-                timeslotsAcademicQuarter.contains(timeslotEnd)
-            ) {
-                binding.buttonAcademicQuarter.setOnClickListener {
-                    try {
-                        // Retrieve new timestamps with the academic quarter applied, or throw a tantrum
-                        val newStart = getTimestampAcademicQuarterStart(timeslotStart)
-                        val newEnd = getTimestampAcademicQuarterEnd(timeslotEnd)
+            binding.buttonAcademicQuarter.setOnClickListener {
+                try {
+                    // Retrieve new timestamps with the academic quarter applied, or throw a tantrum
+                    val newStart = getTimestampAcademicQuarterStart(timeslotStart)
+                    val newEnd = getTimestampAcademicQuarterEnd(timeslotEnd)
 
-                        // Set the buttons to the new timesatmps
-                        timeslotStart = newStart
-                        binding.buttonTimeStart.text = newStart
-                        timeslotEnd = newEnd
-                        binding.buttonTimeEnd.text = newEnd
+                    // Set the buttons to the new timesatmps
+                    timeslotStart = newStart
+                    binding.buttonTimeStart.text = newStart
+                    timeslotEnd = newEnd
+                    binding.buttonTimeEnd.text = newEnd
 
-                        /*
+                    /*
                      * Attempt to fix the issue of the bottom sheet jumping up when hiding the
                      * button.
                      */
-                        TransitionManager.beginDelayedTransition(binding.sheet.parent as ViewGroup)
-                        binding.buttonAcademicQuarter.visibility = View.GONE
+                    TransitionManager.beginDelayedTransition(binding.sheet.parent as ViewGroup)
+                    binding.buttonAcademicQuarter.visibility = View.GONE
 
-                        // Catch if a timeslot couldn't be found in the list, and tell the user
-                    } catch (e: AcademicQuarterNotApplicableException) {
-                        showToast(
-                            context,
-                            getString(R.string.sheet_schedule_update_hint_quarter_error)
-                        )
-                    }
+                    // Catch if a timeslot couldn't be found in the list, and tell the user
+                } catch (e: AcademicQuarterNotApplicableException) {
+                    showToast(
+                        context,
+                        getString(R.string.sheet_schedule_update_hint_quarter_error)
+                    )
                 }
-
-                // If the pattern applies, show the button to the user
-                View.VISIBLE
-            } else {
-                // Hide the button if the action is not necessary or applicable
-                View.GONE
             }
+
+            binding.buttonAcademicQuarter.visibility = getVisibilityForAcademicQuarter(
+                timeslotsAcademicQuarter.contains(timeslotStart),
+                timeslotsAcademicQuarter.contains(timeslotEnd),
+            )
 
             // Prepare timestamp buttons
             binding.buttonTimeStart.text = timeslotStart
             binding.buttonTimeStart.setOnClickListener {
                 // Launch a time picker dialogue to pick a new start timestamp
                 TimePickerFragment(
-                    binding.buttonTimeStart.text.toString(),
                     this,
                     true,
-                ).show((context as FragmentActivity).supportFragmentManager, "timePicker")
+                ).also { sheet ->
+                    val bundle = Bundle()
+                    bundle.putString("timestamp", binding.buttonTimeStart.text.toString())
+                    sheet.arguments = bundle
+                }.show((context as FragmentActivity).supportFragmentManager, "timePicker")
             }
             binding.buttonTimeEnd.text = timeslotEnd
             binding.buttonTimeEnd.setOnClickListener {
                 // Launch a time picker dialogue to pick a new end timestamp
                 TimePickerFragment(
-                    binding.buttonTimeEnd.text.toString(),
                     this,
                     false,
-                ).show((context as FragmentActivity).supportFragmentManager, "timePicker")
+                ).also { sheet ->
+                    val bundle = Bundle()
+                    bundle.putString("timestamp", binding.buttonTimeEnd.text.toString())
+                    sheet.arguments = bundle
+                }.show((context as FragmentActivity).supportFragmentManager, "timePicker")
             }
 
             /*
@@ -134,9 +138,20 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update), TimePicker
 
             // Prepare delete button
             binding.buttonDelete.setOnClickListener {
-                viewModel.delete(event)
-                // Dismiss the sheet upon deletion
-                dismiss()
+                /*
+                 * Check if the user has already clicked the button before; this is done to prevent
+                 * accidentally deleting an event.
+                 */
+                if (hasClickedDelete) {
+                    viewModel.delete(event)
+                    // Dismiss the sheet upon deletion
+                    dismiss()
+                } else {
+                    // Update the text to show the user that they clicked the button once
+                    TransitionManager.beginDelayedTransition(binding.buttonContainer as ViewGroup)
+                    binding.buttonDelete.text = getString(R.string.sheet_schedule_update_delete_confirm)
+                    hasClickedDelete = true
+                }
             }
 
             // Prepare update/save button
@@ -193,6 +208,26 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update), TimePicker
                 timeslotEnd = newTimestamp
                 binding.buttonTimeEnd.text = newTimestamp
             }
+
+            // Set appropriate visibility to the academic quarter button
+            TransitionManager.beginDelayedTransition(binding.sheet.parent as ViewGroup)
+            binding.buttonAcademicQuarter.visibility = getVisibilityForAcademicQuarter(
+                timeslotsAcademicQuarter.contains(timeslotStart),
+                timeslotsAcademicQuarter.contains(timeslotEnd),
+            )
         }
     }
+
+    /**
+     * Determines which visibility the academic quarter button should have given the timestamps.
+     *
+     * @param isStartValid  whether the starting timestamp can be converted to an academic quarter
+     * @param isEndValid    whether the ending timestamp can be converted to an academic quarter
+     */
+    private fun getVisibilityForAcademicQuarter(isStartValid: Boolean, isEndValid: Boolean): Int =
+        if (isStartValid && isEndValid) {
+            View.VISIBLE
+        } else {
+            View.GONE
+        }
 }

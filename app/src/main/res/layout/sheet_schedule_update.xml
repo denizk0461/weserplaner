@@ -165,11 +165,13 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/button_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="end"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="8dp"
+                android:animateLayoutChanges="true">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_delete"

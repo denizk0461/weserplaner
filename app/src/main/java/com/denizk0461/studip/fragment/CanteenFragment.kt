@@ -121,7 +121,7 @@ class CanteenFragment : AppFragment() {
             chip.isChecked = getPreference(pref)
 
             // Set a listener for when the user clicks the chip
-            chip.setOnCheckedChangeListener { buttonView, newValue ->
+            chip.setOnCheckedChangeListener { _, newValue ->
                 // Save the preference change to persistent storage
                 setPreference(pref, newValue)
             }

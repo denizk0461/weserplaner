@@ -24,7 +24,7 @@ class AppRepository(app: Application) {
     private val dietaryPrefString = "prefs_obj"
 
     // Blank dietary preference regular expression
-    private val blankDietaryPrefs: String = DietaryPreferences.C_FALSE.toString().repeat(10)
+    private val blankDietaryPrefs: String = DietaryPreferences.TEMPLATE_EMPTY
 
     /**
      * Used to observe just to register an update of the user-set dietary preferences.
