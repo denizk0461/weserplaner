@@ -91,6 +91,7 @@ class EventPageFragment : AppFragment(), StudIPEventItemAdapter.OnClickListener 
         openBottomSheet(
             ScheduleUpdateSheet().also { sheet ->
                 val bundle = Bundle()
+                bundle.putBoolean("isEditing", true)
                 bundle.putParcelable("event", event)
                 sheet.arguments = bundle
             }

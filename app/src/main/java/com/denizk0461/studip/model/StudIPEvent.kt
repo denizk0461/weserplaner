@@ -20,7 +20,7 @@ import androidx.room.PrimaryKey
  */
 @Entity(tableName = "studip_events")
 data class StudIPEvent(
-    @PrimaryKey val eventId: Int,
+    @PrimaryKey(autoGenerate = true) val eventId: Int = 0,
     val title: String,
     val lecturer: String,
     val room: String,

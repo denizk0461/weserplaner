@@ -25,9 +25,6 @@ class StudIPParser(application: Application) {
      */
     @Throws(IOException::class)
     fun parse(html: String): Int {
-        // Primary key value to uniquely identify entries in the database
-        var id = 0
-
         // Counts how many elements could not be successfully fetched
         var elementsNotFetched = 0
 
@@ -92,7 +89,6 @@ class StudIPParser(application: Application) {
 
                 // Construct the newly scraped Stud.IP event
                 val event = StudIPEvent(
-                    eventId = id,
                     title = parsedTitle,
                     lecturer = parsedLecturers,
                     room = entryInfo.getOrQuestionMark(1),
@@ -104,9 +100,6 @@ class StudIPParser(application: Application) {
 
                 // Add the new element to the temporary list
                 newEvents.add(event)
-
-                // Raise the primary key value by 1 to avoid not fulfilling the unique constraint
-                id += 1
             }
         }
 

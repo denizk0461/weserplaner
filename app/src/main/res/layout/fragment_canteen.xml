@@ -17,19 +17,32 @@
             android:orientation="vertical"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_canteen_picker"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_gravity="start"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/lato_bolditalic"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginHorizontal="16dp">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/button_canteen_picker"
-                    style="@style/Widget.Material3.Button.TextButton"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/app_title_bar"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:layout_gravity="start"
-                    android:fontFamily="@font/lato_bolditalic"/>
+                    android:text="@string/title_food"
+                    android:textSize="32sp"
+                    android:fontFamily="@font/lato_bolditalic"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/button_info"/>
 
                 <com.google.android.material.button.MaterialButton
                     style="@style/Widget.Material3.Button.TextButton"
@@ -39,19 +52,13 @@
                     android:minWidth="0dp"
                     app:icon="@drawable/info"
                     app:iconPadding="0dp"
-                    android:layout_gravity="end"
-                    app:iconTint="?attr/colorOnSurfaceVariant"/>
+                    android:layout_gravity="center_vertical|end"
+                    app:iconTint="?attr/colorOnSurfaceVariant"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <TextView
-                android:id="@+id/app_title_bar"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:text="@string/title_food"
-                android:textSize="32sp"
-                android:fontFamily="@font/lato_bolditalic"
-                android:layout_marginHorizontal="16dp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <HorizontalScrollView
                 android:id="@+id/scroll_view_chip"
@@ -214,6 +221,16 @@
             android:layout_height="match_parent"/>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_refresh_offers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/refresh"
+        android:contentDescription="@string/canteen_fab_refresh_content_desc"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin"/>
 
 <!--    <androidx.coordinatorlayout.widget.CoordinatorLayout-->
 <!--        android:id="@+id/snackbar_container"-->

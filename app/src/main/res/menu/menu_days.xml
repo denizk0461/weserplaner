@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/monday"
+        android:title="@string/monday"
+        android:enabled="true"/>
+    <item
+        android:id="@+id/tuesday"
+        android:title="@string/tuesday"
+        android:enabled="true"/>
+    <item
+        android:id="@+id/wednesday"
+        android:title="@string/wednesday"
+        android:enabled="true"/>
+    <item
+        android:id="@+id/thursday"
+        android:title="@string/thursday"
+        android:enabled="true"/>
+    <item
+        android:id="@+id/friday"
+        android:title="@string/friday"
+        android:enabled="true"/>
+    <item
+        android:id="@+id/saturday"
+        android:title="@string/saturday"
+        android:enabled="true"/>
+    <item
+        android:id="@+id/sunday"
+        android:title="@string/sunday"
+        android:enabled="true"/>
+</menu>

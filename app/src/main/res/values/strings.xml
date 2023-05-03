@@ -43,7 +43,8 @@
     <string name="sheet_schedule_update_delete_confirm">Sure?</string>
     <string name="cancel">Cancel</string>
     <string name="confirm">Confirm</string>
-    <string name="sheet_schedule_update_header">Edit Event</string>
+    <string name="sheet_schedule_update_header_edit">Edit event</string>
+    <string name="sheet_schedule_update_header_add">Add event</string>
     <string name="sheet_schedule_update_title_hint">Event title</string>
     <string name="sheet_schedule_update_lecturers_hint">Lecturer(s)</string>
     <string name="sheet_schedule_update_room_hint">Room</string>
@@ -52,9 +53,11 @@
     <string name="sheet_schedule_update_hint_quarter_error">Sorry, an error occurred!</string>
     <string name="sheet_schedule_update_timestamp_error_start">The course can\'t begin after it ends!</string>
     <string name="sheet_schedule_update_timestamp_error_end">The course can\'t end before it begins!</string>
+    <string name="sheet_schedule_update_text_field_empty_error">This field cannot be empty</string>
 
     <string name="canteen_no_offer_header">No offers</string>
     <string name="canteen_no_offer_desc">There are no offers available for this day</string>
+    <string name="canteen_fab_refresh_content_desc">Refresh offers</string>
 
     <string name="sheet_licences_header">Licences</string>
     <string name="sheet_licences_content" translatable="false">Android developer resources provided by Google.\nhttps://developer.android.com/\n\nCrash reporting provided by Google.\nhttps://firebase.google.com/products/crashlytics/\n\nDesign guidelines, icons, and colour palette provided by Google.\nhttps://m3.material.io/\n\nAdditional icons provided by Flaticon.\nhttps://www.flaticon.com/\n\nWeb scraping functionality provided by Jonathan Hedley.\nhttps://jhy.io/ | https://jsoup.org/</string>

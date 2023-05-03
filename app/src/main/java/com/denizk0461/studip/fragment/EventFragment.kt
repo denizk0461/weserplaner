@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import com.denizk0461.studip.R
 import com.denizk0461.studip.adapter.StudIPEventPageAdapter
 import com.denizk0461.studip.databinding.FragmentEventBinding
+import com.denizk0461.studip.sheet.ScheduleUpdateSheet
 import com.denizk0461.studip.viewmodel.EventViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import java.util.*
@@ -74,6 +75,16 @@ class EventFragment : AppFragment() {
         TabLayoutMediator(binding.dayTabLayout, binding.viewPager) { tab, position ->
             tab.text = weekdays[position]
         }.attach()
+
+        binding.fabAddEvent.setOnClickListener {
+            openBottomSheet(
+                ScheduleUpdateSheet().also { sheet ->
+                    val bundle = Bundle()
+                    bundle.putBoolean("isEditing", false)
+                    sheet.arguments = bundle
+                }
+            )
+        }
     }
 
     /**

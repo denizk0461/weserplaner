@@ -127,6 +127,15 @@ class CanteenFragment : AppFragment() {
             }
         }
 
+        // Set up floating action button for refreshing the canteen offers
+        binding.fabRefreshOffers.setOnClickListener {
+            // Display to the user that a refresh is in progress
+            binding.swipeRefreshLayout.isRefreshing = true
+
+            // Refresh the offers
+            refresh()
+        }
+
         // Set up the view pager's adapter
         viewPagerAdapter = CanteenOfferPageAdapter(
             childFragmentManager,

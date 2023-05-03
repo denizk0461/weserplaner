@@ -43,7 +43,8 @@
     <string name="sheet_schedule_update_delete_confirm">Sicher?</string>
     <string name="cancel">Abbrechen</string>
     <string name="confirm">Bestätigen</string>
-    <string name="sheet_schedule_update_header">Veranstaltung bearbeiten</string>
+    <string name="sheet_schedule_update_header_edit">Veranstaltung bearbeiten</string>
+    <string name="sheet_schedule_update_header_add">Veranstaltung hinzufügen</string>
     <string name="sheet_schedule_update_title_hint">Veranstaltungstitel</string>
     <string name="sheet_schedule_update_lecturers_hint">Dozierende(r)</string>
     <string name="sheet_schedule_update_room_hint">Raum</string>
@@ -51,9 +52,11 @@
     <string name="sheet_schedule_update_hint_quarter_error">Sorry, ein Fehler ist aufgetreten!</string>
     <string name="sheet_schedule_update_timestamp_error_start">Der Kurs kann nicht anfangen nachdem er aufhört!</string>
     <string name="sheet_schedule_update_timestamp_error_end">Der Kurs kann nicht enden bevor er anfängt!</string>
+    <string name="sheet_schedule_update_text_field_empty_error">Dieses Feld darf nicht leer sein</string>
 
     <string name="canteen_no_offer_header">Kein Angebot</string>
     <string name="canteen_no_offer_desc">Für diesen Tag sind keine Angebote vorhanden</string>
+    <string name="canteen_fab_refresh_content_desc">Aktualisiere Angebote</string>
 
     <string name="sheet_licences_header">Lizenzen</string>
 

@@ -86,6 +86,15 @@ class AppRepository(app: Application) {
     fun getOffersByDay(day: Int): LiveData<List<CanteenOffer>> = dao.getOffersByDay(day)
 
     /**
+     * Inserts a new schedule element.
+     *
+     * @param event the event to save
+     */
+    fun insert(event: StudIPEvent) {
+        dao.insert(event)
+    }
+
+    /**
      * Updates a schedule element.
      *
      * @param event the event to update

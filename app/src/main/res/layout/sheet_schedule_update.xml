@@ -18,11 +18,11 @@
         android:layout_marginBottom="8dp">
 
         <TextView
+            android:id="@+id/sheet_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="22sp"
             android:fontFamily="@font/lato_blackitalic"
-            android:text="@string/sheet_schedule_update_header"
             android:layout_gravity="start|center_vertical"
             android:paddingHorizontal="24dp"/>
 
@@ -124,6 +124,14 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:icon="@drawable/edit_calendar"
+                android:layout_gravity="end"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_academic_quarter"
