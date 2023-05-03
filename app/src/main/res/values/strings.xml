@@ -192,12 +192,9 @@
     <string name="with_love">with ♡️ from Bremen-Osterholz\nmade by denizk0461 \\__*</string>
 
     <string-array name="cheesy" translatable="false">
-        <item>in our hearts, she lives forevermore</item>
         <item>it\'s only real when it hurts</item>
-        <item>can\'t go back in time – every second is a new one</item>
-        <item>doctor, i am the great clown Pagliacci</item>
+        <item>can\'t go back in time, every second is a new one</item>
         <item>if we only had one more day, what is the last thing you\'d say?</item>
         <item>love with your heart, use your head for everything else</item>
-        <item>if I die, I hope I\'m buried in a forest – that is, if any of it\'s left</item>
     </string-array>
 </resources>

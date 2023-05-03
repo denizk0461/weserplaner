@@ -12,7 +12,7 @@ import com.denizk0461.studip.data.getTimestampAcademicQuarterEnd
 import com.denizk0461.studip.data.getTimestampAcademicQuarterStart
 import com.denizk0461.studip.data.parseToMinutes
 import com.denizk0461.studip.data.showToast
-import com.denizk0461.studip.data.timeslotsAcademicQuarter
+import com.denizk0461.studip.data.timeslotsForAcademicQuarter
 import com.denizk0461.studip.data.viewBinding
 import com.denizk0461.studip.databinding.SheetScheduleUpdateBinding
 import com.denizk0461.studip.dialog.TimePickerFragment
@@ -95,8 +95,8 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update), TimePicker
             }
 
             binding.buttonAcademicQuarter.visibility = getVisibilityForAcademicQuarter(
-                timeslotsAcademicQuarter.contains(timeslotStart),
-                timeslotsAcademicQuarter.contains(timeslotEnd),
+                timeslotsForAcademicQuarter.contains(timeslotStart),
+                timeslotsForAcademicQuarter.contains(timeslotEnd),
             )
 
             // Prepare timestamp buttons
@@ -212,8 +212,8 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update), TimePicker
             // Set appropriate visibility to the academic quarter button
             TransitionManager.beginDelayedTransition(binding.sheet.parent as ViewGroup)
             binding.buttonAcademicQuarter.visibility = getVisibilityForAcademicQuarter(
-                timeslotsAcademicQuarter.contains(timeslotStart),
-                timeslotsAcademicQuarter.contains(timeslotEnd),
+                timeslotsForAcademicQuarter.contains(timeslotStart),
+                timeslotsForAcademicQuarter.contains(timeslotEnd),
             )
         }
     }

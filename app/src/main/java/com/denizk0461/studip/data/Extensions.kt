@@ -18,8 +18,8 @@ import com.denizk0461.studip.sheet.TextSheet
 import com.google.android.material.snackbar.Snackbar
 import kotlin.jvm.Throws
 
-/**
- * Miscellaneous functions and variables that don't belong into any specific class.
+/*
+ * Miscellaneous common functions and variables used in many classes.
  */
 
 /**
@@ -112,10 +112,9 @@ fun SwipeRefreshLayout.setRainbowProgressCircle() {
 }
 
 /**
- * Provides a conversion method between a timestamp ending in a full hour, and one with an academic
- * quarter applied.
+ * Timeslots for which a conversion to an academic quarter is applicable.
  */
-val timeslotsAcademicQuarter: List<String> = listOf(
+val timeslotsForAcademicQuarter: List<String> = listOf(
     "0:00",
     "2:00",
     "4:00",

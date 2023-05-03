@@ -4,6 +4,8 @@ import android.app.Application
 import com.denizk0461.studip.db.AppRepository
 import com.denizk0461.studip.model.StudIPEvent
 import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
+import org.jsoup.nodes.Element
 import java.io.IOException
 import kotlin.jvm.Throws
 
@@ -35,26 +37,13 @@ class StudIPParser(application: Application) {
         val newEvents = mutableListOf<StudIPEvent>()
 
         /*
-         * Fetch all columns from Monday through Friday to parse and assign the events of each day
-         * individually and accordingly.
-         * TODO this must be dynamic. As it is, it assumes that the first day is always Monday,
-         *  which needs not be the case. The timetable can be customised by the user by removing
-         *  days. Also, Sunday is treated as the first day in Stud.IP FOR SOME REASON, so the app
-         *  needs to handle this appropriately.
+         * Iterate through all columns to parse and assign the events of each day individually and
+         * accordingly.
          */
-        val columns = arrayOf(
-            doc.getElementById("calendar_view_1_column_0"),
-            doc.getElementById("calendar_view_1_column_1"),
-            doc.getElementById("calendar_view_1_column_2"),
-            doc.getElementById("calendar_view_1_column_3"),
-            doc.getElementById("calendar_view_1_column_4"),
-        )
-
-        // Iterate through each day
-        columns.forEachIndexed { index, element ->
+        doc.getDateIndices().forEach { (index, element) ->
 
             // Iterate through all events scheduled for a given day
-            element?.getElementsByClass("schedule_entry")?.forEach { entry ->
+            element.getElementsByClass("schedule_entry").forEach { entry ->
                 /*
                  * Retrieve the event's header. This will contain the event's title as well as the
                  * lecturers holding the event.
@@ -111,5 +100,52 @@ class StudIPParser(application: Application) {
 
         // After fetching has finished, save the list of new items into persistent storage
         repo.insertEvents(newEvents)
+    }
+
+    /**
+     * Finds and returns all columns that are present in the given timetable and maps them to their
+     * respective date indices (0 = Monday, 4 = Friday, 6 = Sunday). Returns an empty list if no
+     * elements could be found.
+     *
+     * @return  table columns paired with their day indices
+     */
+    private fun Document.getDateIndices(): List<Pair<Int, Element>> {
+        // Create list to insert values into
+        val list = mutableListOf<Pair<Int, Element>>()
+
+        // Find headers that include day information for every schedule column
+        val headers = getElementById("schedule_data")
+            ?.getElementsByTag("thead")
+            ?.get(0)
+            ?.getElementsByTag("td") ?: return list
+
+        // Iterate through all headers
+        for (index in 1 until headers.size) {
+
+            /*
+             * Check which days are present. Two strings are provided to ensure this process works
+             * no matter whether the user has set their Stud.IP to English or German. Only these two
+             * languages because Stud.IP doesn't seem to support any other languages.
+             */
+            val dayIndex = when (headers[index].text()) {
+                "Mon.", "Mo" -> 0
+                "Tue.", "Di" -> 1
+                "Wed.", "Mi" -> 2
+                "Thu.", "Do" -> 3
+                "Fri.", "Fr" -> 4
+                "Sat.", "Sa" -> 5
+                "Sun.", "So" -> 6
+                else -> continue
+            }
+
+            // Add the days found to the list
+            list.add(Pair(
+                dayIndex,
+                getElementById("calendar_view_1_column_${dayIndex}") ?: continue,
+            ))
+        }
+
+        // Return the list of columns
+        return list
     }
 }
