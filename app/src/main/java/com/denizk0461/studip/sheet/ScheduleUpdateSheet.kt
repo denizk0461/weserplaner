@@ -203,8 +203,11 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update), TimePicker
                         else -> Pair(0, R.string.monday) // assume Monday
                     }
 
+                    // Store the new day
                     selectedDay = newDay
 
+                    // Prepare layout animation
+                    TransitionManager.beginDelayedTransition(binding.sheet.parent as ViewGroup)
                     // Set newly selected day to the button
                     binding.buttonDay.text = getString(newDayId)
 
@@ -277,7 +280,7 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update), TimePicker
             }.show((context as FragmentActivity).supportFragmentManager, "timePicker")
         }
 
-        // Prepare cancel button
+        // Set up close button
         binding.buttonCancel.setOnClickListener {
             // Do nothing and dismiss the sheet
             dismiss()
@@ -334,7 +337,7 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update), TimePicker
         // Check if the title field is blank
         if (binding.editTextTitle.text.toString().isBlank()) {
             // Set an error on the title field
-            binding.editTextTitle.error =
+            binding.textLayoutTitle.error =
                 getString(R.string.sheet_schedule_update_text_field_empty_error)
 
             // Set that the action must not be executed
@@ -344,7 +347,7 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update), TimePicker
         // Check if the lecturer field is blank
         if (binding.editTextLecturers.text.toString().isBlank()) {
             // Set an error on the lecturer field
-            binding.editTextLecturers.error =
+            binding.textLayoutLecturers.error =
                 getString(R.string.sheet_schedule_update_text_field_empty_error)
 
             // Set that the action must not be executed
@@ -354,7 +357,7 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update), TimePicker
         // Check if the room field is blank
         if (binding.editTextRoom.text.toString().isBlank()) {
             // Set an error on the room field
-            binding.editTextRoom.error =
+            binding.textLayoutRoom.error =
                 getString(R.string.sheet_schedule_update_text_field_empty_error)
 
             // Set that the action must not be executed

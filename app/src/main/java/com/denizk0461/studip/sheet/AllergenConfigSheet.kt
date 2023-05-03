@@ -64,6 +64,12 @@ class AllergenConfigSheet : AppSheet(R.layout.sheet_allergen_config) {
         binding.buttonSave.setOnClickListener {
             saveAllergenPrefs()
         }
+
+        // Set up close button
+        binding.buttonCancel.setOnClickListener {
+            // Do nothing and dismiss the sheet
+            dismiss()
+        }
     }
 
     /**

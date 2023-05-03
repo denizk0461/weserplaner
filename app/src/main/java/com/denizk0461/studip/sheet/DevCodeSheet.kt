@@ -99,6 +99,12 @@ class DevCodeSheet : AppSheet(R.layout.sheet_dev_code) {
             }
             dismiss()
         }
+
+        // Set up close button
+        binding.buttonCancel.setOnClickListener {
+            // Do nothing and dismiss the sheet
+            dismiss()
+        }
     }
 
     /**
@@ -113,13 +119,6 @@ class DevCodeSheet : AppSheet(R.layout.sheet_dev_code) {
         // Give the user a slight dopamine boost
         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(link)))
     }
-
-    /**
-     * Encodes a string to Base64.
-     *
-     * @return the encoded string
-     */
-    private val String.e64: String get() = Base64.encodeToString(this.toByteArray(), Base64.DEFAULT)
 
 
     /**

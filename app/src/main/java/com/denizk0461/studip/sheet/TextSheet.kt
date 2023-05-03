@@ -28,5 +28,11 @@ class TextSheet : AppSheet(R.layout.sheet_text) {
             textHeader.text = header
             textContent.text = content
         }
+
+        // Set up close button
+        binding.buttonCancel.setOnClickListener {
+            // Do nothing and dismiss the sheet
+            dismiss()
+        }
     }
 }

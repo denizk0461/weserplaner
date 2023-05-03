@@ -230,7 +230,8 @@
         android:contentDescription="@string/canteen_fab_refresh_content_desc"
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="@dimen/fab_margin"/>
+        android:layout_marginBottom="@dimen/fab_margin"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"/>
 
 <!--    <androidx.coordinatorlayout.widget.CoordinatorLayout-->
 <!--        android:id="@+id/snackbar_container"-->

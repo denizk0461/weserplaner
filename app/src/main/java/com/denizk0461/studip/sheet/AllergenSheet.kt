@@ -95,6 +95,12 @@ class AllergenSheet : AppSheet(R.layout.sheet_allergen) {
                     textPrice.text = offer.price
                 }
             }
+
+            // Set up close button
+            binding.buttonCancel.setOnClickListener {
+                // Do nothing and dismiss the sheet
+                dismiss()
+            }
         } catch (e: ParcelNotFoundException) {
             // Tell the user that something went wrong when retrieving Parcelable
             showToast(context, getString(R.string.canteen_page_allergen_sheet_error))

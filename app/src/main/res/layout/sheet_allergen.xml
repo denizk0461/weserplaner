@@ -12,14 +12,37 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
 
-    <TextView
-        android:id="@+id/text_category"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:fontFamily="@font/lato_blackitalic"
         android:layout_marginBottom="2dp"
-        android:paddingHorizontal="24dp"/>
+        android:paddingHorizontal="24dp">
+
+        <TextView
+            android:id="@+id/text_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:fontFamily="@font/lato_blackitalic"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/button_cancel"/>
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.Material3.Button.TextButton"
+            android:id="@+id/button_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="0dp"
+            app:icon="@drawable/cross"
+            app:iconPadding="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:iconTint="?attr/colorOnSurfaceVariant"
+            android:layout_marginStart="16dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/text_title"

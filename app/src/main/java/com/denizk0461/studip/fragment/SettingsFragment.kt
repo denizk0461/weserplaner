@@ -131,6 +131,12 @@ class SettingsFragment : AppFragment() {
             true
         }
 
+        val cheesyWisdoms: MutableList<String> = resources
+            .getStringArray(R.array.cheesy_wisdoms)
+            .toList()
+            .shuffled()
+            .toMutableList()
+
         // Set click listener for the app version button
         binding.buttonAppVersion.setOnClickListener {
             when (appVersionClick) {
@@ -152,10 +158,30 @@ class SettingsFragment : AppFragment() {
                     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(mysteryLink)))
                 }
                 238 -> { // after 222 has been reached, this loops every 16 clicks
-                    showToast(context, resources.getStringArray(R.array.cheesy).random())
+                    // Show the next cheesy wisdom
+                    showToast(context, cheesyWisdoms[0])
+
+                    // Remove the cheesy wisdom from the list
+                    cheesyWisdoms.removeAt(0)
+
+                    // Get new cheesy wisdoms if cheesy wisdoms have run out
+                    if (cheesyWisdoms.isEmpty()) {
+                        cheesyWisdoms.addAll(resources
+                            .getStringArray(R.array.cheesy_wisdoms)
+                            .toList()
+                            .shuffled()
+                        )
+                    }
+
+                    /*
+                     * Reset to 222 to make the user click 16 times again before the next cheesy
+                     * wisdom is shown.
+                     */
                     appVersionClick = 222
                 }
             }
+
+            // Increment click counter
             appVersionClick += 1
         }
 
