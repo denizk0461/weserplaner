@@ -23,6 +23,11 @@
     <string name="fetch_error_webpage_snack">You must navigate to your schedule!</string>
     <string name="canteen_fetch_error">Couldn\'t retrieve the canteen plan!</string>
 
+    <!-- plurals resource cannot be used here; view German translation for details -->
+    <string name="toast_fetch_finished_zero">Your schedule has been refreshed!</string>
+    <string name="toast_fetch_finished_one">Your schedule has been refreshed, but one item could not be saved.</string>
+    <string name="toast_fetch_finished_other">Your schedule has been refreshed, but %d items could not be saved.</string>
+
     <string name="fetch_bar_close_title">Close</string>
     <string name="fetch_bar_close_desc">Close the website without saving anything</string>
     <string name="fetch_bar_refresh_title">Refresh</string>
@@ -137,8 +142,6 @@
     <string name="nav_schedule">Schedule</string>
     <string name="nav_food">Canteens</string>
     <string name="nav_settings">Settings</string>
-
-    <string name="toast_fetch_finished">Your schedule has been refreshed!</string>
 
     <string name="settings_general">General</string>
     <string name="settings_schedule">Stud.IP Schedule</string>

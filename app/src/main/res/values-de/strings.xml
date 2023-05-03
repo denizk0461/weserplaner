@@ -23,6 +23,11 @@
     <string name="fetch_error_webpage_snack">Du musst deinen Stundenplan öffnen!</string>
     <string name="canteen_fetch_error">Mensaplan konnte nicht heruntergeladen werden!</string>
 
+    <!-- plurals string resource cannot be used here because Android doesn't treat 0 differently from 2 -->
+    <string name="toast_fetch_finished_zero">Dein Stundenplan wurde aktualisiert!</string>
+    <string name="toast_fetch_finished_one">Dein Stundenplan wurde aktualisiert, doch eine Veranstaltung konnte nicht heruntergeladen werden.</string>
+    <string name="toast_fetch_finished_other">Dein Stundenplan wurde aktualisiert, doch %d Veranstaltungen konnten nicht heruntergeladen werden.</string>
+
     <string name="fetch_bar_close_title">Schließen</string>
     <string name="fetch_bar_close_desc">Schließe die Webseite, ohne etwas zu speichern</string>
     <string name="fetch_bar_refresh_title">Aktualisieren</string>
@@ -133,8 +138,6 @@
     <string name="nav_schedule">Stundenplan</string>
     <string name="nav_food">Mensa</string>
     <string name="nav_settings">Einstellungen</string>
-
-    <string name="toast_fetch_finished">Dein Stundenplan wurde aktualisiert!</string>
 
     <string name="settings_general">Allgemein</string>
     <string name="settings_schedule">Stud.IP-Stundenplan</string>

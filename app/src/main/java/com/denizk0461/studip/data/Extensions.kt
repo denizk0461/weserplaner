@@ -23,15 +23,17 @@ import kotlin.jvm.Throws
  */
 
 /**
- * Converts a time stamp string to its numeric value in minutes.
+ * Converts a time stamp string to its numeric value in minutes. Returns 0 on error.
  * Example: 13:20. (20 minutes) + (13 hours * 60 minutes) = 800 minutes.
  *
  * @return  minute value of the string
  */
-fun String.parseToMinutes(): Int {
-    val parts = split(":")
-    return (parts[0].toInt() * 60) + parts[1].toInt()
-}
+fun String.parseToMinutes(): Int = try {
+        val parts = split(":")
+        (parts[0].toInt() * 60) + parts[1].toInt()
+    } catch (e: IndexOutOfBoundsException) {
+        0
+    }
 
 /**
  * Retrieves a specified colour customised to the currently applied theme.

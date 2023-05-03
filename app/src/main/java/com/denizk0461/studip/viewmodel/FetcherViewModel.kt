@@ -23,9 +23,9 @@ class FetcherViewModel(app: Application) : AppViewModel(app) {
      * @param html  source code of the schedule website
      */
     @Throws(IOException::class)
-    fun parse(html: String) {
-        doAsync {
+    fun parse(html: String): Int =
+        returnBlocking {
             parser.parse(html)
         }
-    }
+
 }

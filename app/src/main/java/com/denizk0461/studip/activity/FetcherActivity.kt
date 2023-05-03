@@ -102,11 +102,17 @@ class FetcherActivity : FragmentActivity() {
                 ) { p0 ->
                     try {
                         // Decode HTML and parse it into a list of StudIPEvent.kt
-                        // TODO add a tutorial for the user to know what to do
-                        viewModel.parse(URLDecoder.decode(p0, "UTF-8"))
+                        val elementsNotFetched = viewModel.parse(URLDecoder.decode(p0, "UTF-8"))
 
-                        // Notify the user that the fetch was successful
-                        showToast(this, getString(R.string.toast_fetch_finished))
+                        /*
+                         * Notify the user that the fetch was successful, and tell the user how many
+                         * items could not be fetched.
+                         */
+                        showToast(this, when (elementsNotFetched) {
+                            0 -> getString(R.string.toast_fetch_finished_zero)
+                            1 -> getString(R.string.toast_fetch_finished_one)
+                            else -> getString(R.string.toast_fetch_finished_other, elementsNotFetched)
+                        })
 
                         // Close the activity
                         finish()

@@ -17,15 +17,19 @@ class StudIPParser(application: Application) {
     private val repo: AppRepository = AppRepository.getRepositoryInstance(application)
 
     /**
-     * Parse a given HTML string. HTML must be of a Stud.IP timetable.
+     * Parse a given HTML string. HTML must be of a Stud.IP timetable. May skip elements that don't
+     * provide full information on an event (title, timeslot, lecturers, room).
      *
      * @param html          website content of the Stud.IP timetable
      * @throws IOException  when an error in fetching or the database transaction occurs
      */
     @Throws(IOException::class)
-    fun parse(html: String) {
+    fun parse(html: String): Int {
         // Primary key value to uniquely identify entries in the database
         var id = 0
+
+        // Counts how many elements could not be successfully fetched
+        var elementsNotFetched = 0
 
         // Parse the HTML using Jsoup to traverse the document
         val doc = Jsoup.parse(html)
@@ -43,7 +47,7 @@ class StudIPParser(application: Application) {
         doc.getDateIndices().forEach { (index, element) ->
 
             // Iterate through all events scheduled for a given day
-            element.getElementsByClass("schedule_entry").forEach { entry ->
+            element.getElementsByClass("schedule_entry").forEach loop@{ entry ->
                 /*
                  * Retrieve the event's header. This will contain the event's title as well as the
                  * lecturers holding the event.
@@ -57,10 +61,21 @@ class StudIPParser(application: Application) {
                 val delimiter = entryHeader.lastIndexOf('(')
 
                 // Retrieve the title of the event from the header string
-                val parsedTitle = entryHeader.substring(0 until delimiter).trim()
+                val parsedTitle = try {
+                    entryHeader.substring(0 until delimiter).trim()
+                } catch (e: StringIndexOutOfBoundsException) {
+                    elementsNotFetched += 1
+                    return@loop
+                }
 
                 // Retrieve the lecturer name(s) from the header string
-                val parsedLecturers = entryHeader.substring(delimiter + 1 until entryHeader.length - 1).trim()
+                val parsedLecturers = try {
+                    entryHeader
+                        .substring(delimiter + 1 until entryHeader.length - 1).trim()
+                } catch (e: StringIndexOutOfBoundsException) {
+                    elementsNotFetched += 1
+                    return@loop
+                }
 
                 /*
                  * Retrieve further event information. This will contain both the time slot the
@@ -72,18 +87,18 @@ class StudIPParser(application: Application) {
                 // Retrieve the time slot and split it into start and end time stamps
                 val timeSlot = entryInfo[0].split(" - ")
 
-                // Time the event starts at
-                val eventStart = timeSlot[0]
+                // Time the course starts at
+                val eventStart = timeSlot.getOrQuestionMark(0)
 
                 // Construct the newly scraped Stud.IP event
                 val event = StudIPEvent(
                     eventId = id,
                     title = parsedTitle,
                     lecturer = parsedLecturers,
-                    room = entryInfo[1],
+                    room = entryInfo.getOrQuestionMark(1),
                     day = index,
                     timeslotStart = eventStart,
-                    timeslotEnd = timeSlot[1],
+                    timeslotEnd = timeSlot.getOrQuestionMark(1),
                     timeslotId = eventStart.parseToMinutes(),
                 )
 
@@ -100,6 +115,9 @@ class StudIPParser(application: Application) {
 
         // After fetching has finished, save the list of new items into persistent storage
         repo.insertEvents(newEvents)
+
+        // Return the count of elements that were not able to be fetched
+        return elementsNotFetched
     }
 
     /**
@@ -141,11 +159,22 @@ class StudIPParser(application: Application) {
             // Add the days found to the list
             list.add(Pair(
                 dayIndex,
+                /*
+                 * The index of the columns doesn't seem to depend on the other elements in the
+                 * table. Friday will always have the index 4 ("calendar_view_1_column_4") even if
+                 * Monday through Thursday are hidden from the schedule.
+                 */
                 getElementById("calendar_view_1_column_${dayIndex}") ?: continue,
             ))
         }
 
         // Return the list of columns
         return list
+    }
+
+    private fun List<String>.getOrQuestionMark(index: Int): String = try {
+        get(index)
+    } catch (e: IndexOutOfBoundsException) {
+        "?"
     }
 }
