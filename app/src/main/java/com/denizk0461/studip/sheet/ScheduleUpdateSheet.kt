@@ -1,6 +1,8 @@
 package com.denizk0461.studip.sheet
 
 import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
@@ -26,7 +28,7 @@ import com.denizk0461.studip.viewmodel.ScheduleUpdateViewModel
 /**
  * Update sheet to allow the user to edit attributes for a specific schedule event.
  */
-class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update), TimePickerFragment.OnTimeSetListener {
+class ScheduleUpdateSheet() : AppSheet(R.layout.sheet_schedule_update), TimePickerFragment.OnTimeSetListener {
 
     // Editable fields
     private var timeslotStart = "12:00"
@@ -47,6 +49,15 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update), TimePicker
 
     // Day the event is scheduled for, default is Monday
     private var selectedDay = 0
+
+    constructor(parcel: Parcel) : this() {
+        timeslotStart = parcel.readString() ?: ""
+        timeslotEnd = parcel.readString() ?: ""
+        colour = parcel.readInt()
+        hasClickedDelete = parcel.readByte() != 0.toByte()
+        isEditing = parcel.readByte() != 0.toByte()
+        selectedDay = parcel.readInt()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -274,11 +285,10 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update), TimePicker
         binding.buttonTimeStart.text = timeslotStart
         binding.buttonTimeStart.setOnClickListener {
             // Launch a time picker dialogue to pick a new start timestamp
-            TimePickerFragment(
-                this,
-                true,
-            ).also { sheet ->
+            TimePickerFragment().also { sheet ->
                 val bundle = Bundle()
+                bundle.putParcelable("interface", this)
+                bundle.putBoolean("isEventStart", true)
                 bundle.putString("timestamp", binding.buttonTimeStart.text.toString())
                 sheet.arguments = bundle
             }.show((context as FragmentActivity).supportFragmentManager, "timePicker")
@@ -286,11 +296,10 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update), TimePicker
         binding.buttonTimeEnd.text = timeslotEnd
         binding.buttonTimeEnd.setOnClickListener {
             // Launch a time picker dialogue to pick a new end timestamp
-            TimePickerFragment(
-                this,
-                false,
-            ).also { sheet ->
+            TimePickerFragment().also { sheet ->
                 val bundle = Bundle()
+                bundle.putParcelable("interface", this)
+                bundle.putBoolean("isEventStart", false)
                 bundle.putString("timestamp", binding.buttonTimeEnd.text.toString())
                 sheet.arguments = bundle
             }.show((context as FragmentActivity).supportFragmentManager, "timePicker")
@@ -398,4 +407,27 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update), TimePicker
         } else {
             View.GONE
         }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(timeslotStart)
+        parcel.writeString(timeslotEnd)
+        parcel.writeInt(colour)
+        parcel.writeByte(if (hasClickedDelete) 1 else 0)
+        parcel.writeByte(if (isEditing) 1 else 0)
+        parcel.writeInt(selectedDay)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<ScheduleUpdateSheet> {
+        override fun createFromParcel(parcel: Parcel): ScheduleUpdateSheet {
+            return ScheduleUpdateSheet(parcel)
+        }
+
+        override fun newArray(size: Int): Array<ScheduleUpdateSheet?> {
+            return arrayOfNulls(size)
+        }
+    }
 }

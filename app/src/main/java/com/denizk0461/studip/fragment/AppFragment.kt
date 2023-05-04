@@ -2,7 +2,6 @@ package com.denizk0461.studip.fragment
 
 import android.content.Context
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import com.denizk0461.studip.sheet.AppSheet
 
 /**
@@ -30,6 +29,6 @@ open class AppFragment : Fragment() {
      * @param sheet element that will be displayed
      */
     protected fun openBottomSheet(sheet: AppSheet) {
-        sheet.show((context as FragmentActivity).supportFragmentManager, sheet.javaClass.simpleName)
+        sheet.show(childFragmentManager, sheet.javaClass.simpleName)
     }
 }
