@@ -91,6 +91,8 @@ class FetcherActivity : FragmentActivity() {
          */
         binding.webview.loadUrl("https://elearning.uni-bremen.de/index.php?again=yes")
 
+        binding.webview
+
         binding.fab.setOnClickListener {
 
             if (binding.webview.url?.contains(

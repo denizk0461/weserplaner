@@ -53,6 +53,8 @@
     <string name="sheet_schedule_update_timestamp_error_start">Der Kurs kann nicht anfangen nachdem er aufhört!</string>
     <string name="sheet_schedule_update_timestamp_error_end">Der Kurs kann nicht enden bevor er anfängt!</string>
     <string name="sheet_schedule_update_text_field_empty_error">Dieses Feld darf nicht leer sein</string>
+    <string name="sheet_schedule_update_time_dialog_start_hint">Startzeit der Veranstaltung</string>
+    <string name="sheet_schedule_update_time_dialog_end_hint">Schlusszeit der Veranstaltung</string>
 
     <string name="canteen_no_offer_header">Kein Angebot</string>
     <string name="canteen_no_offer_desc">Für diesen Tag sind keine Angebote vorhanden</string>

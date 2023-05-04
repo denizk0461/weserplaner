@@ -1,13 +1,10 @@
 package com.denizk0461.studip.sheet
 
 import android.os.Bundle
-import android.os.Parcel
-import android.os.Parcelable
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import androidx.transition.TransitionManager
 import com.denizk0461.studip.R
@@ -19,16 +16,17 @@ import com.denizk0461.studip.data.showToast
 import com.denizk0461.studip.data.timeslotsForAcademicQuarter
 import com.denizk0461.studip.data.viewBinding
 import com.denizk0461.studip.databinding.SheetScheduleUpdateBinding
-import com.denizk0461.studip.dialog.TimePickerFragment
 import com.denizk0461.studip.exception.AcademicQuarterNotApplicableException
 import com.denizk0461.studip.exception.ParcelNotFoundException
 import com.denizk0461.studip.model.StudIPEvent
 import com.denizk0461.studip.viewmodel.ScheduleUpdateViewModel
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 
 /**
  * Update sheet to allow the user to edit attributes for a specific schedule event.
  */
-class ScheduleUpdateSheet() : AppSheet(R.layout.sheet_schedule_update), TimePickerFragment.OnTimeSetListener {
+class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update) {
 
     // Editable fields
     private var timeslotStart = "12:00"
@@ -49,15 +47,6 @@ class ScheduleUpdateSheet() : AppSheet(R.layout.sheet_schedule_update), TimePick
 
     // Day the event is scheduled for, default is Monday
     private var selectedDay = 0
-
-    constructor(parcel: Parcel) : this() {
-        timeslotStart = parcel.readString() ?: ""
-        timeslotEnd = parcel.readString() ?: ""
-        colour = parcel.readInt()
-        hasClickedDelete = parcel.readByte() != 0.toByte()
-        isEditing = parcel.readByte() != 0.toByte()
-        selectedDay = parcel.readInt()
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -281,28 +270,26 @@ class ScheduleUpdateSheet() : AppSheet(R.layout.sheet_schedule_update), TimePick
             }
         }
 
-        // Prepare timestamp buttons
+        // Prepare timestamp start button
         binding.buttonTimeStart.text = timeslotStart
         binding.buttonTimeStart.setOnClickListener {
             // Launch a time picker dialogue to pick a new start timestamp
-            TimePickerFragment().also { sheet ->
-                val bundle = Bundle()
-                bundle.putParcelable("interface", this)
-                bundle.putBoolean("isEventStart", true)
-                bundle.putString("timestamp", binding.buttonTimeStart.text.toString())
-                sheet.arguments = bundle
-            }.show((context as FragmentActivity).supportFragmentManager, "timePicker")
+            createTimePicker(binding.buttonTimeStart.text.toString(), true).also { picker ->
+                picker.addOnPositiveButtonClickListener {
+                    onTimeSet(picker.hour, picker.minute, true)
+                }
+            }.show(childFragmentManager, "timePickerStart")
         }
+
+        // Prepare timestamp end button
         binding.buttonTimeEnd.text = timeslotEnd
         binding.buttonTimeEnd.setOnClickListener {
             // Launch a time picker dialogue to pick a new end timestamp
-            TimePickerFragment().also { sheet ->
-                val bundle = Bundle()
-                bundle.putParcelable("interface", this)
-                bundle.putBoolean("isEventStart", false)
-                bundle.putString("timestamp", binding.buttonTimeEnd.text.toString())
-                sheet.arguments = bundle
-            }.show((context as FragmentActivity).supportFragmentManager, "timePicker")
+            createTimePicker(binding.buttonTimeEnd.text.toString(), false).also { picker ->
+                picker.addOnPositiveButtonClickListener {
+                    onTimeSet(picker.hour, picker.minute, false)
+                }
+            }.show(childFragmentManager, "timePickerEnd")
         }
 
         // Set up close button
@@ -313,13 +300,13 @@ class ScheduleUpdateSheet() : AppSheet(R.layout.sheet_schedule_update), TimePick
     }
 
     /**
-     * Checks and stores a new timestamp after the user picks one through [TimePickerFragment].
+     * Checks and stores a new timestamp after the user picks one through [MaterialTimePicker].
      *
      * @param hours         newly set hour
      * @param minutes       newly set minute
      * @param isEventStart  whether this timestamp is for the start of the course
      */
-    override fun onTimeSet(hours: Int, minutes: Int, isEventStart: Boolean) {
+    private fun onTimeSet(hours: Int, minutes: Int, isEventStart: Boolean) {
         // Parse the separate ints into a timestamp string. Add a leading zero if necessary.
         val newTimestamp = "$hours:${String.format("%02d", minutes)}"
 
@@ -408,26 +395,24 @@ class ScheduleUpdateSheet() : AppSheet(R.layout.sheet_schedule_update), TimePick
             View.GONE
         }
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(timeslotStart)
-        parcel.writeString(timeslotEnd)
-        parcel.writeInt(colour)
-        parcel.writeByte(if (hasClickedDelete) 1 else 0)
-        parcel.writeByte(if (isEditing) 1 else 0)
-        parcel.writeInt(selectedDay)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<ScheduleUpdateSheet> {
-        override fun createFromParcel(parcel: Parcel): ScheduleUpdateSheet {
-            return ScheduleUpdateSheet(parcel)
-        }
-
-        override fun newArray(size: Int): Array<ScheduleUpdateSheet?> {
-            return arrayOfNulls(size)
-        }
+    /**
+     * Creates a new time picker dialog.
+     *
+     * @param timestamp     timestamp to edit
+     * @param isEventStart  whether the user is editing the start or the end of the event
+     * @return              new [MaterialTimePicker]
+     */
+    private fun createTimePicker(timestamp: String, isEventStart: Boolean): MaterialTimePicker {
+        val timestampSplit = timestamp.split(":")
+        return MaterialTimePicker.Builder()
+            .setTimeFormat(TimeFormat.CLOCK_24H)
+            .setHour(timestampSplit[0].toInt())
+            .setMinute(timestampSplit[1].toInt())
+            .setTitleText(getString(if (isEventStart) {
+                R.string.sheet_schedule_update_time_dialog_start_hint
+            } else {
+                R.string.sheet_schedule_update_time_dialog_end_hint
+            }))
+            .build()
     }
 }

@@ -80,9 +80,24 @@
         <item name="colorOnPrimaryGame">@color/game_dark_onPrimary</item>
         <item name="colorContainerGame">@color/game_dark_container</item>
         <item name="colorOnContainerGame">@color/game_dark_onContainer</item>
+
+        <item name="materialTimePickerTheme">@style/TimeDialogTheme</item>
     </style>
 
     <style name="DividerTheme" parent="Widget.Material3.MaterialDivider">
         <item name="dividerColor">@color/md_theme_dark_outlineVariant</item>
+    </style>
+
+    <style name="TimeDialogTheme" parent="ThemeOverlay.MaterialComponents.Dialog">
+        <item name="android:colorAccent">@color/md_theme_dark_primary</item>
+        <item name="android:colorPrimary">@color/md_theme_dark_primary</item>
+        <item name="android:colorPrimaryDark">@color/md_theme_dark_secondary</item>
+<!--        <item name="buttonBarPositiveButtonStyle">@style/TextButton</item>-->
+<!--        <item name="buttonBarNegativeButtonStyle">@style/TextButton</item>-->
+    </style>
+
+    <style name="TextButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/md_theme_dark_primary</item>
+        <item name="backgroundTint">@color/md_theme_dark_primary</item>
     </style>
 </resources>
