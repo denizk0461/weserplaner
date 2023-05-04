@@ -53,53 +53,18 @@ class CanteenFragment : AppFragment() {
         // Set progress circle colours
         binding.swipeRefreshLayout.setRainbowProgressCircle()
 
-        // Open the menu for the canteen picker button
-        binding.buttonCanteenPicker.setOnClickListener {
-            PopupMenu(binding.root.context, binding.buttonCanteenPicker).apply {
-                setOnMenuItemClickListener { item ->
-                    viewModel.preferenceCanteen = when (item?.itemId) {
-                        R.id.mensa_uni -> 0
-                        R.id.cafe_central -> 1
-                        R.id.mensa_nw1 -> 2
-                        R.id.cafeteria_gw2 -> 3
-                        R.id.mensa_neustadt -> 4
-                        R.id.mensa_werder -> 5
-                        R.id.mensa_airport -> 6
-                        R.id.mensa_bhv -> 7
-                        R.id.cafeteria_bhv -> 8
-                        R.id.mensa_hfk -> 9
-                        else -> 0
-                    }
-                    // Set newly selected canteen to the button
-                    binding.buttonCanteenPicker.text = getCurrentlySelectedCanteenName()
-
-                    // Display to the user that the canteen plan will be refreshed
-                    binding.swipeRefreshLayout.isRefreshing = true
-
-                    // Refresh the canteen menu for the newly selected canteen
-                    refresh()
-                    true
-                }
-                inflate(R.menu.menu_canteens)
-                show()
-            }
-        }
-
         // Set currently selected canteen to the button
-        binding.buttonCanteenPicker.text = getCurrentlySelectedCanteenName()
+//        binding.buttonCanteenPicker.text = getCurrentlySelectedCanteenName()
+        binding.appTitleBar.text = getString(
+            R.string.title_canteen_template,
+            getCurrentlySelectedCanteenName(),
+        )
+        binding.appTitleBar.isSelected = true
 
         // Set up button to display info (most likely opening hours)
-        binding.buttonInfo.setOnClickListener {
-            openBottomSheet(
-                getTextSheet(
-                    getString(
-                        R.string.canteen_opening_hours,
-                        getCurrentlySelectedCanteenName()
-                    ),
-                    openingHours
-                )
-            )
-        }
+//        binding.buttonInfo.setOnClickListener {
+//
+//        }
 
         // Assign a preference value to every button to filter for dietary preferences
         val chipMap = mapOf(
@@ -124,6 +89,55 @@ class CanteenFragment : AppFragment() {
             chip.setOnCheckedChangeListener { _, newValue ->
                 // Save the preference change to persistent storage
                 setPreference(pref, newValue)
+            }
+        }
+
+        // Set up floating action button for viewing the opening hours
+        binding.fabOpeningHours.setOnClickListener {
+            openBottomSheet(
+                getTextSheet(
+                    getString(
+                        R.string.canteen_opening_hours,
+                        getCurrentlySelectedCanteenName()
+                    ),
+                    openingHours
+                )
+            )
+        }
+
+        // Set up floating action button for switching the canteen
+        binding.fabSwitchCanteen.setOnClickListener {
+            PopupMenu(binding.root.context, binding.fabSwitchCanteen).apply {
+                setOnMenuItemClickListener { item ->
+                    viewModel.preferenceCanteen = when (item?.itemId) {
+                        R.id.mensa_uni -> 0
+                        R.id.cafe_central -> 1
+                        R.id.mensa_nw1 -> 2
+                        R.id.cafeteria_gw2 -> 3
+                        R.id.mensa_neustadt -> 4
+                        R.id.mensa_werder -> 5
+                        R.id.mensa_airport -> 6
+                        R.id.mensa_bhv -> 7
+                        R.id.cafeteria_bhv -> 8
+                        R.id.mensa_hfk -> 9
+                        else -> 0
+                    }
+                    // Set newly selected canteen to the button
+//                    binding.buttonCanteenPicker.text = getCurrentlySelectedCanteenName()
+                    binding.appTitleBar.text = getString(
+                        R.string.title_canteen_template,
+                        getCurrentlySelectedCanteenName(),
+                    )
+
+                    // Display to the user that the canteen plan will be refreshed
+                    binding.swipeRefreshLayout.isRefreshing = true
+
+                    // Refresh the canteen menu for the newly selected canteen
+                    refresh()
+                    true
+                }
+                inflate(R.menu.menu_canteens)
+                show()
             }
         }
 
@@ -224,21 +238,27 @@ class CanteenFragment : AppFragment() {
     private fun refresh() {
         // Retrieve new offers from the website(s)
         viewModel.fetchOffers(viewModel.preferenceCanteen, onFinish = {
-            /*
-             * Tell the swipe refresh layout to stop refreshing.
-             */
-            binding.swipeRefreshLayout.isRefreshing = false
+            // Check if the fragment is still active
+            if (_binding != null) {
+                /*
+                 * Tell the swipe refresh layout to stop refreshing.
+                 */
+                binding.swipeRefreshLayout.isRefreshing = false
+            }
 
         }, onError = {
-            // Tell the user that an error occurred
-            context.theme?.showErrorSnackBar(
-                binding.snackbarContainer,
-                getString(R.string.canteen_fetch_error)
-            )
-            /*
+            // Check if the fragment is still active
+            if (_binding != null) {
+                // Tell the user that an error occurred
+                context.theme?.showErrorSnackBar(
+                    binding.snackbarContainer,
+                    getString(R.string.canteen_fetch_error)
+                )
+                /*
              * Tell the swipe refresh layout to stop refreshing.
              */
-            binding.swipeRefreshLayout.isRefreshing = false
+                binding.swipeRefreshLayout.isRefreshing = false
+            }
         })
     }
 }

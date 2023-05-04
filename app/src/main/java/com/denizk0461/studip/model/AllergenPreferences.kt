@@ -1,6 +1,10 @@
 package com.denizk0461.studip.model
 
-// TODO KDoc
+/**
+ * Class for managing allergen preferences. The user can tell the app which substances they are
+ * allergic against, and the functions in this class can be used to filter out offers containing
+ * allergens that could kill them.
+ */
 class AllergenPreferences {
 
     /**
@@ -69,8 +73,13 @@ class AllergenPreferences {
          * @return      string with preferences inserted
          */
         fun deconstruct(): String {
+            // Create an empty list
             val array = arrayListOf<String>()
 
+            /*
+             * Add the symbols for the allergens to the list. Allergen symbols derived from the
+             * allergen list at stw-bremen.de
+             */
             if (hasWheat) array.add("a1")
             if (hasRye) array.add("a2")
             if (hasBarley) array.add("a3")
@@ -98,6 +107,7 @@ class AllergenPreferences {
             if (hasSesame) array.add("m")
             if (hasMolluscs) array.add("n")
 
+            // Join the individual symbols to a single string
             return array.joinToString(",")
         }
     }
@@ -116,6 +126,7 @@ class AllergenPreferences {
          * @return      instance of AllergenPreferences.Object with preferences inserted
          */
         fun construct(input: String): Object {
+            // Split the string into its individual components
             val elements = input.split(",")
             return Object(
                 elements.contains("a1"),

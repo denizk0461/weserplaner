@@ -35,7 +35,6 @@ class StudIPEventItemAdapter(
 
     /**
      * Retrieve an instance of Calendar to check whether the adapter's day matches the current day.
-     * TODO this can be optimised by checking in EventPageFragment.kt and delivering a boolean
      */
     private val currentCalendar = Calendar.getInstance()
 

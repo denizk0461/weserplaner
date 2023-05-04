@@ -59,6 +59,8 @@
 
     <string name="canteen_no_offer_header">No offers</string>
     <string name="canteen_no_offer_desc">There are no offers available for this day</string>
+    <string name="canteen_fab_opening_hours_content_desc">Show opening hours</string>
+    <string name="canteen_fab_switch_canteen_content_desc">Switch canteen</string>
     <string name="canteen_fab_refresh_content_desc">Refresh offers</string>
 
     <string name="sheet_licences_header">Licences</string>
@@ -66,6 +68,7 @@
 
     <string name="title_schedule">Your Schedule</string>
     <string name="title_food">Canteen Offers</string>
+    <string name="title_canteen_template">%s – Offers</string>
     <string name="title_settings">App Settings</string>
 
     <string name="canteen_opening_hours">%s – Opening Hours</string>

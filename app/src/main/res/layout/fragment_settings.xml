@@ -22,7 +22,7 @@
             android:fontFamily="@font/lato_bolditalic"
             android:text="@string/title_settings"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            android:textSize="32sp"/>
+            android:textSize="28sp"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 

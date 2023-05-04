@@ -128,10 +128,7 @@ class StwParser(application: Application) {
         // Parse the HTML using Jsoup to traverse the document
         val doc = Jsoup.connect(url).get()
 
-        /*
-         * Retrieve the opening hours for the canteen.
-         * TODO this formatting sucks and also this doesn't work
-         */
+        // Retrieve the opening hours for the canteen
         var openingHours = ""
 
         // Iterate through all wrappers that could contain opening hours
@@ -139,10 +136,7 @@ class StwParser(application: Application) {
             // Element is not for providing contact details
             if (it.getElementsByClass("contact-person-name").size == 0) {
 
-                /*
-                 * Retrieve all opening hours.
-                 * TODO this slows down the fetch SIGNIFICANTLY, but why?
-                 */
+                // Retrieve all opening hours.
                 it.children().forEach { element ->
                     if (element.tag().toString() == "p") {
                         openingHours += element.textWithBreaks().trim() + "\n" // Uni-Mensa is not parsed properly
