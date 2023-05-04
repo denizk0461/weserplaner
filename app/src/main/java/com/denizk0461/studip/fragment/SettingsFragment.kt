@@ -59,6 +59,14 @@ class SettingsFragment : AppFragment() {
         }
 
         // Set up switch for highlighting the next course in the schedule
+        binding.switchCurrentDay.apply {
+            isChecked = viewModel.preferenceCurrentDay
+            setOnCheckedChangeListener { _, newValue ->
+                viewModel.preferenceCurrentDay = newValue
+            }
+        }
+
+        // Set up switch for highlighting the next course in the schedule
         binding.switchHighlight.apply {
             isChecked = viewModel.preferenceCourseHighlighting
             setOnCheckedChangeListener { _, newValue ->

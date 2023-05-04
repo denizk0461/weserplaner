@@ -150,6 +150,9 @@
     <string name="refresh_schedule_title">Aktualisiere Deinen Stud.IP-Stundenplan</string>
     <string name="refresh_schedule_subtitle">Dies wird alle Anpassungen löschen!</string>
 
+    <string name="settings_current_day_title">Starte Stundenplan am heutigen Tag</string>
+    <string name="settings_current_day_subtitle">Ansonsten wird Montag beim Start angezeigt</string>
+
     <string name="settings_highlight_title">Markiere den nächsten Kurs</string>
     <string name="settings_highlight_subtitle">Funktioniert nur, wenn Kurse sich nicht überschneiden!</string>
 

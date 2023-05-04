@@ -154,6 +154,9 @@
     <string name="refresh_schedule_title">Refresh your Stud.IP schedule</string>
     <string name="refresh_schedule_subtitle">This will clear any customisations!</string>
 
+    <string name="settings_current_day_title">Launch timetable on current day</string>
+    <string name="settings_current_day_subtitle">If unselected, Monday will be shown on launch instead</string>
+
     <string name="settings_highlight_title">Highlight next course</string>
     <string name="settings_highlight_subtitle">Only works properly if courses don\'t overlap!</string>
 
@@ -167,10 +170,10 @@
     <string name="settings_allergens_subtitle">Also applies to additives</string>
 
     <string name="settings_pref_colour_title">Colour dietary preferences</string>
-    <string name="settings_pref_colour_subtitle">This colours the icons similar to how they look the website</string> <!-- TODO this text sucks, DE too -->
+    <string name="settings_pref_colour_subtitle">Icons will be coloured similarly to how they look the website</string> <!-- TODO this text sucks, DE too -->
 
     <string name="settings_launch_canteen_title">Show canteen plan on app launch</string>
-    <string name="settings_launch_canteen_subtitle">Otherwise your schedule will be shown at launch; CURRENTLY BROKEN</string>
+    <string name="settings_launch_canteen_subtitle">Otherwise your schedule will be shown at launch</string>
 
     <string name="settings_crashlytics_title">Opt-in to sharing crash data</string>
     <string name="settings_crashlytics_subtitle">Data will be anonymised</string> <!-- TODO is this true? -->
@@ -203,5 +206,6 @@
         <item>if we only had one more day, what is the last thing you\'d say?</item>
         <item>love with your heart, use your head for everything else</item>
         <item>trans rights are human rights 🏳️‍⚧️</item>
+        <item>i wouldn\'t risk any more than six minutes</item>
     </string-array>
 </resources>

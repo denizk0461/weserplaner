@@ -33,9 +33,6 @@ class EventFragment : AppFragment() {
     // View model reference for providing access to the database
     private val viewModel: EventViewModel by viewModels()
 
-    // Used to determine the current day
-    private var dayOfWeek: Int = 0
-
     // Titles for the view pager's tabs
     private lateinit var weekdays: Array<String>
 
@@ -51,17 +48,6 @@ class EventFragment : AppFragment() {
         // Get localised weekday names
         weekdays = context.resources?.getStringArray(R.array.weekdays) ?: arrayOf()
 
-        // Determine the current day
-        dayOfWeek = when (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
-            Calendar.TUESDAY -> 1
-            Calendar.WEDNESDAY -> 2
-            Calendar.THURSDAY -> 3
-            Calendar.FRIDAY -> 4
-            Calendar.SATURDAY -> 5
-            Calendar.SUNDAY -> 6
-            else -> 0 // assume Monday
-        }
-
         // Set up the view pager's adapter
         viewPagerAdapter = StudIPEventPageAdapter(
             childFragmentManager,
@@ -75,6 +61,27 @@ class EventFragment : AppFragment() {
         TabLayoutMediator(binding.dayTabLayout, binding.viewPager) { tab, position ->
             tab.text = weekdays[position]
         }.attach()
+
+        // Set the view pager's current page to the current day, if the user chose this option
+        if (viewModel.preferenceCurrentDay) {
+
+            /*
+             * Determine the current day and go to the respective page.
+             * BUG: this selects the correct tab and changes the page, but it doesn't highlight
+             * the tab that has been selected. binding.viewPager.currentPage encounters the same bug
+             */
+            binding.dayTabLayout.getTabAt(
+                when (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
+                    Calendar.TUESDAY -> 1
+                    Calendar.WEDNESDAY -> 2
+                    Calendar.THURSDAY -> 3
+                    Calendar.FRIDAY -> 4
+                    Calendar.SATURDAY -> 5
+                    Calendar.SUNDAY -> 6
+                    else -> 0 // assume Monday
+                }
+            )?.select()
+        }
 
         binding.fabAddEvent.setOnClickListener {
             openBottomSheet(

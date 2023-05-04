@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import androidx.transition.TransitionManager
@@ -171,11 +172,20 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update), TimePicker
          *  filter buttons with checkmarks when they're selected maybe?
          */
 
-        // Set visibility for academic quarter button based on whether the change applies
-        binding.buttonAcademicQuarter.visibility = getVisibilityForAcademicQuarter(
-            timeslotsForAcademicQuarter.contains(timeslotStart),
-            timeslotsForAcademicQuarter.contains(timeslotEnd),
-        )
+        // Set title text field to remove error messages when the user edits the text
+        binding.editTextTitle.addTextChangedListener {
+            binding.textLayoutTitle.error = null
+        }
+
+        // Set lecturers text field to remove error messages when the user edits the text
+        binding.editTextLecturers.addTextChangedListener {
+            binding.textLayoutLecturers.error = null
+        }
+
+        // Set room text field to remove error messages when the user edits the text
+        binding.editTextRoom.addTextChangedListener {
+            binding.textLayoutRoom.error = null
+        }
 
         // Retrieve new values for the day of the current event
         binding.buttonDay.text = getString(when (selectedDay) {
@@ -226,6 +236,12 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update), TimePicker
          *
          * 13:00 - 15:30 -> likely no academic quarter intended
          */
+        binding.buttonAcademicQuarter.visibility = getVisibilityForAcademicQuarter(
+            timeslotsForAcademicQuarter.contains(timeslotStart),
+            timeslotsForAcademicQuarter.contains(timeslotEnd),
+        )
+
+        // Set up academic quarter button
         binding.buttonAcademicQuarter.setOnClickListener {
             try {
                 // Retrieve new timestamps with the academic quarter applied, or throw a tantrum

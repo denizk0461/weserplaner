@@ -19,6 +19,11 @@ enum class SettingsPreferences(val key: String) {
     ALLERGEN("setting_allergen"),
 
     /**
+     * Whether the user wants their timetable on the current day.
+     */
+    CURRENT_DAY("settings_current_day"),
+
+    /**
      * Whether the user wants the next course in his schedule to be highlighted.
      */
     COURSE_HIGHLIGHTING("setting_highlight"),

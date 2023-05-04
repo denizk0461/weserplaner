@@ -11,6 +11,15 @@ import com.denizk0461.studip.model.SettingsPreferences
 class SettingsViewModel(app: Application) : AppViewModel(app) {
 
     /**
+     * This value determines whether the user wants their timetable to launch with the current day.
+     */
+    var preferenceCurrentDay: Boolean
+        get() = repo.getBooleanPreference(
+            SettingsPreferences.CURRENT_DAY,
+        )
+        set(newValue) { repo.setPreference(SettingsPreferences.CURRENT_DAY, newValue) }
+
+    /**
      * This value determines whether the user wants to have the next course in their schedule
      * highlighted.
      */

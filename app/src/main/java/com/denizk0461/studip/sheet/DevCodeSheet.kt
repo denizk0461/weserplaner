@@ -120,7 +120,6 @@ class DevCodeSheet : AppSheet(R.layout.sheet_dev_code) {
         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(link)))
     }
 
-
     /**
      * Decodes Base64 to a regular string.
      *

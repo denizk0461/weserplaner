@@ -24,6 +24,7 @@ class FetcherActivity : FragmentActivity() {
 
     // View binding
     private lateinit var binding: ActivityFetcherBinding
+
     // View model
     private lateinit var viewModel: FetcherViewModel
 
@@ -36,7 +37,9 @@ class FetcherActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
 
         // Instantiate view model
-        viewModel = ViewModelProvider.AndroidViewModelFactory(this.application).create(FetcherViewModel::class.java)
+        viewModel = ViewModelProvider.AndroidViewModelFactory(application)
+            .create(FetcherViewModel::class.java)
+
         // Inflate view binding and bind to this activity
         binding = ActivityFetcherBinding.inflate(layoutInflater)
         setContentView(binding.root)
