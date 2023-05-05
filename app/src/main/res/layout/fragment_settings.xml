@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
             android:fontFamily="@font/lato_bolditalic"
             android:text="@string/title_settings"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
@@ -35,7 +36,8 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="8dp">
 
             <!-- Stud.IP schedule settings -->
             <com.google.android.material.card.MaterialCardView

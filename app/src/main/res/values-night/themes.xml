@@ -80,9 +80,19 @@
         <item name="colorOnPrimaryGame">@color/game_dark_onPrimary</item>
         <item name="colorContainerGame">@color/game_dark_container</item>
         <item name="colorOnContainerGame">@color/game_dark_onContainer</item>
+
+        <item name="materialTimePickerTheme">@style/TimePickerTheme</item>
     </style>
 
     <style name="DividerTheme" parent="Widget.Material3.MaterialDivider">
         <item name="dividerColor">@color/md_theme_dark_outlineVariant</item>
+    </style>
+
+    <style name="TimePickerTheme" parent="ThemeOverlay.MaterialComponents.TimePicker">
+        <item name="borderlessButtonStyle">@style/TimePickerButtonStyle</item>
+    </style>
+
+    <style name="TimePickerButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/md_theme_dark_primary</item>
     </style>
 </resources>

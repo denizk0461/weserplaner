@@ -80,6 +80,8 @@
         <item name="colorOnPrimaryGame">@color/game_light_onPrimary</item>
         <item name="colorContainerGame">@color/game_light_container</item>
         <item name="colorOnContainerGame">@color/game_light_onContainer</item>
+
+        <item name="materialTimePickerTheme">@style/TimePickerTheme</item>
     </style>
 
     <style name="Theme.StudIPTimetable" parent="Base.Theme.StudIPTimetable" />
@@ -91,5 +93,13 @@
     <style name="FilterChipNoCheck" parent="Widget.Material3.Chip.Filter">
         <item name="checkedIconEnabled">false</item>
         <item name="checkedIcon">@null</item>
+    </style>
+
+    <style name="TimePickerTheme" parent="ThemeOverlay.MaterialComponents.TimePicker">
+        <item name="borderlessButtonStyle">@style/TimePickerButtonStyle</item>
+    </style>
+
+    <style name="TimePickerButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/md_theme_light_primary</item>
     </style>
 </resources>
