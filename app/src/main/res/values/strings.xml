@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Stud.IP Timetable</string>
 
+    <string name="toast_first_launch">Hey, thank you for trying out my app! ~Deniz</string>
+
     <string name="monday">Monday</string>
     <string name="tuesday">Tuesday</string>
     <string name="wednesday">Wednesday</string>
@@ -28,6 +30,7 @@
     <string name="toast_fetch_finished_one">Your schedule has been refreshed, but one item could not be saved.</string>
     <string name="toast_fetch_finished_other">Your schedule has been refreshed, but %d items could not be saved.</string>
 
+    <string name="toast_info_reminder">Click the info icon at the bottom if you need any help here.</string>
     <string name="fetch_bar_close_title">Close</string>
     <string name="fetch_bar_close_desc">Close the website without saving anything</string>
     <string name="fetch_bar_refresh_title">Refresh</string>
@@ -35,7 +38,7 @@
     <string name="fetch_bar_help_title">Help</string>
     <string name="fetch_bar_help_desc">Show help</string>
     <string name="fetch_bar_help_sheet_title">How to save your timetable in the app</string>
-    <string name="fetch_bar_help_sheet_content"> • Log in with your Stud.IP login\n • Open your timetable view (in case it doesn\'t open automatically)\n • Click the \'save\' button in the bottom right corner\n • Done!</string>
+    <string name="fetch_bar_help_sheet_content"> • Log in with your Stud.IP login\n • Open your timetable view (in case it doesn\'t open automatically)\n • Click the \'save\' button that should appear in the bottom right corner\n • Done!</string>
     <string name="fetch_bar_save_desc">Save the timetable in the app</string>
 
     <string name="save">Save</string>
@@ -185,8 +188,11 @@
 
     <string name="settings_data_title">What happens with my data?</string>
     <string name="settings_data_subtitle">Will you steal my Stud.IP login?</string>
-    <string name="settings_data_sheet_header">TL;DR: no, but Google may let me know if the app crashes on your device.</string>
-    <string name="settings_data_sheet_content">This app works standalone, which is to say, it doesn\'t ever connect to a server I own. Instead, it is a web scraper, which means that it opens a website and then downloads and analyses all the data from that website by itself. In this case, those websites are the canteen websites of the Studierendenwerk Bremen (stw-bremen.de) and the Stud.IP page (elearning.uni-bremen.de).\n\nThis works fairly easily for the canteen offers, since the plans are public and anyone can access them. However, to access your personal Stud.IP schedule, the app needs access to that website, with your account logged in. This is done by letting you log into the website by yourself (which happens when you click the button to refresh the schedule and the app opens the login page) and then clicking a button to download the content, the HTML source code, of the website. The HTML source code contains information about which elements are shown on the website and how they look, but it can never contain your personal details such as passwords, or any other sensitive data you may store on your device.\n\nThe HTML source is then processed locally on your device, which means that your device will handle converting the HTML source to the data you will be shown in the app by itself, without needing to send any data anywhere.\n\nHowever, some data – which has nothing to do with your Stud.IP data – may still be sent outside of your device. This app uses \"Crashlytics\" by Google, which is a tool that sends crash reports to Google servers if something breaks. These are used to fix problems that occur in the app.\n\nThis, in compliance with the European General Data Protection Regulation, is of course opt-in, which means that you need to accept this before any data is sent outside of your device. You have been prompted for this when you first started the app, and you can always change your mind in the app settings by clicking the corresponding switch. Should you choose to not share crash data with Google (and me), no data will be sent outside of your device.\n\nShould you want to reassure yourself that no data is sent to any servers (outside of the crash reports from Google), feel free to explore the project, since it is open-source and documented on my GitHub profile:\nhttps://github.com/denizk0461/studip-timetable/\n\nYou\'re also welcome to send me an email:\ndenizk0461@gmail.com</string>
+    <string name="settings_data_sheet_header">TL;DR: no.</string>
+    <string name="settings_data_sheet_content">This app works standalone, which is to say, it doesn\'t ever connect to a server I own. Instead, it is a web scraper, which means that it opens a website and then downloads and analyses all the data from that website by itself. In this case, those websites are the canteen websites of the Studierendenwerk Bremen (stw-bremen.de) and the Stud.IP page (elearning.uni-bremen.de).\n\nThis works fairly easily for the canteen offers, since the plans are public and anyone can access them. However, to access your personal Stud.IP schedule, the app needs access to that website, with your account logged in. This is done by letting you log into the website by yourself (which happens when you click the button to refresh the schedule and the app opens the login page) and then clicking a button to download the content, the HTML source code, of the website. The HTML source code contains information about which elements are shown on the website and how they look, but it can never contain your personal details such as passwords, or any other sensitive data you may store on your device.\n\nThe HTML source is then processed locally on your device, which means that your device will handle converting the HTML source to the data you will be shown in the app by itself, without needing to send any data anywhere.\n\nShould you want to reassure yourself that no data is sent to any servers, feel free to explore the project, since it is open-source and documented on my GitHub profile:\nhttps://github.com/denizk0461/studip-timetable/\n\nYou\'re also welcome to send me an email:\ndenizk0461@gmail.com\ndeniz7@uni-bremen.de</string>
+    <!-- unused - use for possible future implementation of Crashlytics -->
+    <string name="settings_data_sheet_header_crashlytics">TL;DR: no, but Google may let me know if the app crashes on your device.</string>
+    <string name="settings_data_sheet_content_crashlytics">This app works standalone, which is to say, it doesn\'t ever connect to a server I own. Instead, it is a web scraper, which means that it opens a website and then downloads and analyses all the data from that website by itself. In this case, those websites are the canteen websites of the Studierendenwerk Bremen (stw-bremen.de) and the Stud.IP page (elearning.uni-bremen.de).\n\nThis works fairly easily for the canteen offers, since the plans are public and anyone can access them. However, to access your personal Stud.IP schedule, the app needs access to that website, with your account logged in. This is done by letting you log into the website by yourself (which happens when you click the button to refresh the schedule and the app opens the login page) and then clicking a button to download the content, the HTML source code, of the website. The HTML source code contains information about which elements are shown on the website and how they look, but it can never contain your personal details such as passwords, or any other sensitive data you may store on your device.\n\nThe HTML source is then processed locally on your device, which means that your device will handle converting the HTML source to the data you will be shown in the app by itself, without needing to send any data anywhere.\n\nHowever, some data – which has nothing to do with your Stud.IP data – may still be sent outside of your device. This app uses \"Crashlytics\" by Google, which is a tool that sends crash reports to Google servers if something breaks. These are used to fix problems that occur in the app.\n\nThis, in compliance with the European General Data Protection Regulation, is of course opt-in, which means that you need to accept this before any data is sent outside of your device. You have been prompted for this when you first started the app, and you can always change your mind in the app settings by clicking the corresponding switch. Should you choose to not share crash data with Google (and me), no data will be sent outside of your device.\n\nShould you want to reassure yourself that no data is sent to any servers (outside of the crash reports from Google), feel free to explore the project, since it is open-source and documented on my GitHub profile:\nhttps://github.com/denizk0461/studip-timetable/\n\nYou\'re also welcome to send me an email:\ndenizk0461@gmail.com\ndeniz7@uni-bremen.de</string>
 
     <string name="settings_licences_title">View licences</string>
     <string name="settings_licences_subtitle">Resources that made this app possible</string>
@@ -202,8 +208,6 @@
     <string name="settings_app_version_121">Shouldn\'t you study for your exams?</string>
     <string name="settings_app_version_165" translatable="false">◢◤</string>
     <string name="settings_app_version_200" translatable="false">\\__*</string>
-
-    <string name="with_love">with ♡️ from Bremen-Osterholz\nmade by denizk0461 \\__*</string>
 
     <string-array name="cheesy_wisdoms" translatable="false">
         <item>it\'s only real when it hurts</item>

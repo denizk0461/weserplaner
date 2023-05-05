@@ -9,6 +9,11 @@ package com.denizk0461.studip.model
 enum class SettingsPreferences(val key: String) {
 
     /**
+     * Whether the user is launching this app for the first time.
+     */
+    FIRST_LAUNCH("check_first_launch"),
+
+    /**
      * Which allergens the user wants displayed or hidden.
      */
     ALLERGEN_CONFIG("setting_allergen_config"),

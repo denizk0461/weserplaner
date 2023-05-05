@@ -16,6 +16,13 @@ class EventViewModel(app: Application) : AppViewModel(app) {
     val preferenceCurrentDay: Boolean
         get() = repo.getBooleanPreference(
             SettingsPreferences.CURRENT_DAY,
-            defaultValue = true
+            defaultValue = true,
         )
+
+    var preferenceFirstLaunch: Boolean
+        get() = repo.getBooleanPreference(
+            SettingsPreferences.FIRST_LAUNCH,
+            defaultValue = true,
+        )
+        set(value) { repo.setPreference(SettingsPreferences.FIRST_LAUNCH, value) }
 }

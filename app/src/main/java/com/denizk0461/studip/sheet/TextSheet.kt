@@ -23,16 +23,26 @@ class TextSheet : AppSheet(R.layout.sheet_text) {
         // Retrieve content for the window
         val content = arguments?.getString("content") ?: ""
 
+        // Set whether the sheet should be cancellable by actions such as swiping
+        val isSheetCancellable = arguments?.getBoolean("isCancellable") == true
+
         // Set text values
         binding.apply {
             textHeader.text = header
             textContent.text = content
         }
 
-        // Set up close button
-        binding.buttonCancel.setOnClickListener {
-            // Do nothing and dismiss the sheet
-            dismiss()
+        // Set up an appropriate close button depending on whether the sheet is cancellable
+        if (isSheetCancellable) {
+            // Set up a simple X button to be able to close the sheet
+            binding.buttonCancel.visibility = View.VISIBLE
+            binding.buttonCancel.setOnClickListener {
+                // Do nothing and dismiss the sheet
+                dismiss()
+            }
+        } else {
+            // Show a more prominent button to close the sheet
+            binding.buttonCancel.visibility = View.GONE
         }
     }
 }

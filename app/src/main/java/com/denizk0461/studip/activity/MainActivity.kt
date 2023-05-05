@@ -39,6 +39,7 @@ class MainActivity : FragmentActivity() {
             binding.navHostFragmentContentMain.getFragment<NavHostFragment>().findNavController()
         )
 
+        // Set up navigation component
         setNavigationGraph()
     }
 

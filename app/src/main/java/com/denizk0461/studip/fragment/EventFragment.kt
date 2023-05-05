@@ -65,12 +65,8 @@ class EventFragment : AppFragment() {
         // Set the view pager's current page to the current day, if the user chose this option
         if (viewModel.preferenceCurrentDay) {
 
-            /*
-             * Determine the current day and go to the respective page.
-             * BUG: this selects the correct tab and changes the page, but it doesn't highlight
-             * the tab that has been selected. binding.viewPager.currentPage encounters the same bug
-             */
-            binding.dayTabLayout.getTabAt(
+            // Determine the current day and go to the respective page.
+            binding.viewPager.setCurrentItem(
                 when (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
                     Calendar.TUESDAY -> 1
                     Calendar.WEDNESDAY -> 2
@@ -79,11 +75,16 @@ class EventFragment : AppFragment() {
                     Calendar.SATURDAY -> 5
                     Calendar.SUNDAY -> 6
                     else -> 0 // assume Monday
-                }
-            )?.select()
+                }, false
+            )
         }
 
+        // Set up button for adding a new event
         binding.fabAddEvent.setOnClickListener {
+            /*
+             * Open the bottom sheet used for editing an event, but tell the sheet that it will be
+             * used for creating a new event instead.
+             */
             openBottomSheet(
                 ScheduleUpdateSheet().also { sheet ->
                     val bundle = Bundle()
@@ -92,29 +93,17 @@ class EventFragment : AppFragment() {
                 }
             )
         }
-    }
 
-    /**
-     * Called when the layout changes (e.g. device rotation) but NOT when the fragment is selected
-     * from the bottom navigation view.
-     */
-//    override fun onSaveInstanceState(outState: Bundle) {
-//        super.onSaveInstanceState(outState)
-//
-//        outState.putInt(
-//            "viewPagerCurrentPage",
-//            binding.viewPager.currentItem
-//        )
-//    }
-//
-//    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-//        super.onViewStateRestored(savedInstanceState)
-//
-//        // Retrieve
-//        val restoredPage = savedInstanceState?.getInt("viewPagerCurrentPage") ?: 0
-//
-////        binding.viewPager.currentItem = restoredPage
-//    }
+        // Show the user a little message if they're opening the app for the first time
+        if (viewModel.preferenceFirstLaunch) {
+
+            // Show toast
+//            showToast(context, getString(R.string.toast_first_launch))
+
+            // Remember that the app has been launched before
+            viewModel.preferenceFirstLaunch = false
+        }
+    }
 
     // Invalidate the view binding
     override fun onDestroyView() {

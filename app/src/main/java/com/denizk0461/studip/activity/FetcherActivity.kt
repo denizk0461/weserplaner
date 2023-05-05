@@ -2,6 +2,7 @@ package com.denizk0461.studip.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.View
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -28,6 +29,9 @@ class FetcherActivity : FragmentActivity() {
     // View model
     private lateinit var viewModel: FetcherViewModel
 
+    // URL of the schedule
+    private val scheduleUrl: String = "https://elearning.uni-bremen.de/dispatch.php/calendar/schedule"
+
     /**
      * Enabling JavaScript is necessary to get the HTML source in this context. As the HTML can only
      * be accessed once the user has logged in, a simple HTML request would not suffice here.
@@ -44,10 +48,14 @@ class FetcherActivity : FragmentActivity() {
         binding = ActivityFetcherBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Remind the user of the help button
+        showToast(this, getString(R.string.toast_info_reminder))
+
         // Enabling JavaScript. See comment above lint suppression for reason why this is done.
         binding.webview.settings.apply {
             javaScriptEnabled = true
         }
+
         binding.webview.webViewClient = object : WebViewClient() {
             // Disallow redirecting to prevent the app from launching Chrome after the user logs in
             override fun shouldOverrideUrlLoading(
@@ -55,6 +63,18 @@ class FetcherActivity : FragmentActivity() {
                 request: WebResourceRequest
             ): Boolean {
                 return false
+            }
+
+            override fun doUpdateVisitedHistory(view: WebView?, url: String?, isReload: Boolean) {
+                // Check whether the button to save the timetable should be shown
+                if (url?.contains(scheduleUrl) == true) {
+                    binding.fab.visibility = View.VISIBLE
+                } else {
+                    binding.fab.visibility = View.GONE
+                }
+
+                // Super call
+                super.doUpdateVisitedHistory(view, url, isReload)
             }
         }
 
@@ -77,6 +97,7 @@ class FetcherActivity : FragmentActivity() {
                         val bundle = Bundle()
                         bundle.putString("header", getString(R.string.fetch_bar_help_sheet_title))
                         bundle.putString("content", getString(R.string.fetch_bar_help_sheet_content))
+                        bundle.putBoolean("isCancellable", true)
                         sheet.arguments = bundle
                     }.show(supportFragmentManager, TextSheet::class.java.simpleName)
                     true
@@ -96,7 +117,7 @@ class FetcherActivity : FragmentActivity() {
         binding.fab.setOnClickListener {
 
             if (binding.webview.url?.contains(
-                    "https://elearning.uni-bremen.de/dispatch.php/calendar/schedule"
+                    scheduleUrl
                 ) == true) {
                 /*
                  * Retrieve encoded HTML via JavaScript function. Encoding is done as otherwise not all

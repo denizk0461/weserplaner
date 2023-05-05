@@ -66,7 +66,7 @@ fun Resources.Theme.showErrorSnackBar(view: CoordinatorLayout, text: String, anc
 }
 
 /**
- * Retrieve a [TextSheet] with text content added as arguments bundle.
+ * Retrieve a cancellable [TextSheet] with text content added as arguments bundle.
  *
  * @param header    header of the sheet
  * @param content   text content of the sheet
@@ -76,6 +76,7 @@ fun getTextSheet(header: String, content: String): TextSheet = TextSheet().also 
     val bundle = Bundle()
     bundle.putString("header", header)
     bundle.putString("content", content)
+    bundle.putBoolean("isCancellable", true)
     sheet.arguments = bundle
 }
 

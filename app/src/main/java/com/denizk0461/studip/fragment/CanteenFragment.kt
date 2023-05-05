@@ -37,8 +37,15 @@ class CanteenFragment : AppFragment() {
     // View model reference for providing access to the database
     private val viewModel: CanteenViewModel by viewModels()
 
+    /**
+     * Locally saved opening hours to quickly access them without querying the database on every
+     * opening of the bottom sheet.
+     */
     private var openingHours = ""
 
+    /**
+     * Locally stored dates to populate the TabLayout with.
+     */
     private var dates: List<String> = listOf()
 
     // Instantiate the view binding
