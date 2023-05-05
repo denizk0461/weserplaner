@@ -92,7 +92,7 @@
     <string name="event_update_sheet_error">An error occurred while trying to retrieve this event.</string>
 
     <!-- dietary preferences -->
-    <string name="pref_fair">Animal Welfare</string> <!-- TODO is this really the best name? what about 'animal welfare'? -->
+    <string name="pref_fair">Animal Welfare</string>
     <string name="pref_fish">Fish</string>
     <string name="pref_poultry">Poultry</string>
     <string name="pref_lamb">Lamb</string>
