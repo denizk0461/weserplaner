@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.denizk0461.studip'
+    namespace 'com.denizk0461.weserplaner'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.denizk0461.studip"
+        applicationId "com.denizk0461.weserplaner"
         minSdk 24
         targetSdk 33
         versionCode 1
@@ -26,6 +26,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
         }
     }
     compileOptions {
@@ -51,9 +52,6 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
     implementation 'androidx.core:core-ktx:1.10.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     implementation "androidx.room:room-runtime:2.5.1"
     kapt "androidx.room:room-compiler:2.5.1"
