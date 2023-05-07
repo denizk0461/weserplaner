@@ -12,7 +12,7 @@ android {
         applicationId "com.denizk0461.weserplaner"
         minSdk 24
         targetSdk 33
-        versionCode 1
+        versionCode 3
         versionName "1.0.0"
 
         resourceConfigurations += ["en", "de"]
@@ -24,9 +24,13 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.debug
+
+            ndk {
+                debugSymbolLevel 'FULL'
+            }
         }
     }
     compileOptions {

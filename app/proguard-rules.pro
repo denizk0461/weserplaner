@@ -12,6 +12,13 @@
 #   public *;
 #}
 
+-keep class org.jsoup.**
+-dontwarn javax.annotation.Nonnull
+-dontwarn javax.annotation.Nullable
+-dontwarn javax.annotation.ParametersAreNonnullByDefault
+-dontwarn javax.annotation.WillClose
+-dontwarn javax.annotation.meta.TypeQualifierDefault
+
 # Uncomment this to preserve the line number information for
 # debugging stack traces.
 #-keepattributes SourceFile,LineNumberTable
