@@ -9,6 +9,7 @@ import androidx.room.PrimaryKey
  * @param id            primary key that uniquely identifies the item
  * @param canteen       name of the canteen
  * @param openingHours  opening hours of the canteen
+ * @param news          news about the canteen
  */
 @Entity(
     tableName = "offer_canteen",
@@ -17,4 +18,5 @@ data class OfferCanteen(
     @PrimaryKey val id: Int,
     val canteen: String,
     val openingHours: String,
+    val news: String,
 )

@@ -212,8 +212,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="bottom|end"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="@dimen/fab_margin"
         app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -246,6 +244,8 @@
             app:srcCompat="@drawable/refresh"
             android:contentDescription="@string/canteen_fab_refresh_content_desc"
             android:tooltipText="@string/canteen_fab_refresh_content_desc"
+            android:layout_marginHorizontal="@dimen/fab_margin"
+            android:layout_marginBottom="@dimen/fab_margin"
             tools:ignore="UnusedAttribute"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>

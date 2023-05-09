@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.denizk0461.weserplaner.model.*
 
 /**
@@ -17,7 +19,7 @@ import com.denizk0461.weserplaner.model.*
         OfferCategory::class,
         OfferItem::class,
     ],
-    version = 19,
+    version = 20,
 )
 abstract class AppDatabase : RoomDatabase() {
 
@@ -43,15 +45,29 @@ abstract class AppDatabase : RoomDatabase() {
              */
             if (instance == null) {
                 synchronized(AppDatabase::class) {
-                    instance = Room.databaseBuilder(
-                        context.applicationContext,
-                        AppDatabase::class.java,
-                        "event_db"
-                    ).fallbackToDestructiveMigration().build()
+                    instance = Room
+                        .databaseBuilder(
+                            context.applicationContext,
+                            AppDatabase::class.java,
+                            "event_db",
+                        ).addMigrations(migrationAddNewsToOfferCanteen_19_20)
+                        .fallbackToDestructiveMigration()
+                        .build()
                 }
             }
             // Instance can never be null at this point
             return instance!!
+        }
+
+        // - migrations - //
+
+        /**
+         * Adds the column 'news' to the data object [OfferCanteen].
+         */
+        private val migrationAddNewsToOfferCanteen_19_20 = object : Migration(19, 20) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE offer_canteen ADD COLUMN news TEXT NOT NULL DEFAULT ''")
+            }
         }
     }
 }

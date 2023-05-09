@@ -8,6 +8,7 @@ import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
+import java.io.IOException
 import kotlin.jvm.Throws
 
 /**
@@ -156,12 +157,22 @@ class StwParser(application: Application) {
         // Trim off excess line breaks
         openingHours = openingHours.trim()
 
+        // Fetch news displayed at the top of the page, if any are available
+        val news = try {
+            doc.getElementsByClass("field__items")[0]
+                .getElementsByTag("p")[0]
+                .text()
+        } catch (e: IOException) {
+            ""
+        }
+
         // Save the canteen to its list
         canteens.add(
             OfferCanteen(
                 canteenId,
                 doc.getElementsByClass("pane-title")[1].text(),
                 openingHours,
+                news,
             )
         )
 
