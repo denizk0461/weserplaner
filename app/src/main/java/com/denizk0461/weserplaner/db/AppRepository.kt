@@ -79,6 +79,20 @@ class AppRepository(app: Application) {
     fun getCanteenInfo(): CanteenOfferTuple = dao.getCanteenInfo()
 
     /**
+     * Retrieve opening hours for the fetched canteen.
+     *
+     * @return opening hours for the canteen
+     */
+    fun getCanteenOpeningHours(): LiveData<String> = dao.getCanteenOpeningHours()
+
+    /**
+     * Retrieve news for the fetched canteen.
+     *
+     * @return news for the canteen
+     */
+    fun getCanteenNews(): LiveData<String> = dao.getCanteenNews()
+
+    /**
      * Retrieves all canteen offers that match given day.
      *
      * @return all canteen offers matching the given day exposed through a LiveData object

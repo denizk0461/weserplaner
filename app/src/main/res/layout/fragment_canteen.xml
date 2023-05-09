@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/title_food"
                     android:textSize="28sp"
-                    android:fontFamily="@font/lato_bolditalic"
+                    android:fontFamily="@font/lato_blackitalic"
                     android:singleLine="true"
                     android:ellipsize="marquee"
                     android:marqueeRepeatLimit="marquee_forever"

@@ -1,7 +1,8 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name" translatable="false">WeserPlaner</string>
 
     <string name="toast_first_launch">Hey, thank you for trying out my app! ~Deniz</string>
+    <string name="error_generic">An error occurred.</string>
 
     <string name="monday">Monday</string>
     <string name="tuesday">Tuesday</string>
@@ -69,6 +70,10 @@
     <string name="canteen_fab_switch_canteen_content_desc">Switch canteen</string>
     <string name="canteen_fab_refresh_content_desc">Refresh offers</string>
 
+    <!-- TODO replace 'this canteen' with %s -->
+    <string name="text_sheet_empty_opening_hours">The opening hours for this canteen could not be downloaded.</string>
+    <string name="text_sheet_empty_news">No news are available.</string>
+
     <string name="sheet_licences_header">Licences</string>
     <string name="sheet_licences_content" translatable="false">Android developer resources by Google.\nhttps://developer.android.com/\nandroidx.appcompat:appcompat:1.6.1\nandroidx.constraintlayout:constraintlayout:2.1.4\nandroidx.core:core-ktx:1.10.0\nandroidx.fragment:fragment-ktx:1.6.0-beta01\nandroidx.navigation:navigation-fragment-ktx:2.5.3\nandroidx.navigation:navigation-ui-ktx:2.5.3\nandroidx.preference:preference-ktx:1.2.0\nandroidx.room:room-runtime:2.5.1\nandroidx.room:room-compiler:2.5.1\nandroidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01\n\nDesign guidelines, icons, and colour palette by Google.\nhttps://m3.material.io/\ncom.google.android.material:material:1.9.0\n\nAdditional icons by Flaticon.\nhttps://www.flaticon.com/\n\nWeb scraping functionality by Jonathan Hedley.\nhttps://jhy.io/\nhttps://jsoup.org/\norg.jsoup:jsoup:1.15.4\n\nApp developed by Deniz Düzgören.\ndenizk0461@gmail.com\ndeniz7@uni-bremen.de</string>
 
@@ -81,7 +86,7 @@
 
     <string name="mensa_uni">Uni-Mensa</string>
     <string name="cafe_central">Café Central</string>
-    <string name="mensa_nw1">Mensa NW1</string>
+    <string name="mensa_nw1" tools:ignore="Typos">Mensa NW1</string>
     <string name="cafeteria_gw2">Cafeteria GW2</string>
     <string name="mensa_neustadt">Mensa Neustadtswall</string>
     <string name="mensa_werder">Mensa Werderstraße</string>
