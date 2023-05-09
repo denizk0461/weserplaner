@@ -26,11 +26,11 @@ class CanteenViewModel(app: Application) : AppViewModel(app) {
     fun getDates(): LiveData<List<OfferDate>> = repo.getDates()
 
     /**
-     * Retrieves the opening hours of the canteen as a string.
+     * Retrieves the opening hours as well as notifications for the canteen as strings.
      *
-     * @return  opening hours
+     * @return  opening hours and notifications
      */
-    fun getCanteenOpeningHours(): String = returnBlocking { repo.getCanteenOpeningHours() }
+    fun getCanteenInfo(): CanteenOfferTuple = returnBlocking { repo.getCanteenInfo() }
 
     /**
      * Fetch the canteen offers asynchronously. Updates will be provided through a LiveData object.

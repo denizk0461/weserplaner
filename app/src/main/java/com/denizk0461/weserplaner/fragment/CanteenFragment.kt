@@ -41,7 +41,13 @@ class CanteenFragment : AppFragment() {
      * Locally saved opening hours to quickly access them without querying the database on every
      * opening of the bottom sheet.
      */
-    private var openingHours = ""
+    private var openingHours: String = ""
+
+    /**
+     * Locally saved news to quickly access them without querying the database on every opening of
+     * the corresponding bottom sheet.
+     */
+    private var news: String = ""
 
     /**
      * Locally stored dates to populate the TabLayout with.
@@ -67,6 +73,12 @@ class CanteenFragment : AppFragment() {
         )
         binding.appTitleBar.isSelected = true
 
+        binding.buttonNotifications.setOnClickListener {
+            openBottomSheet(getTextSheet(
+                getString(R.string.canteen_news_sheet_title),
+                news,
+            ))
+        }
 
         // Assign a preference value to every button to filter for dietary preferences
         val chipMap = mapOf(
@@ -167,7 +179,17 @@ class CanteenFragment : AppFragment() {
             // Let the adapter know of the new amount of dates (pages) to display
             viewPagerAdapter.itemCount = dates.size
 
-            openingHours = viewModel.getCanteenOpeningHours()
+            // Retrieve further information about this canteen from the database
+            viewModel.getCanteenInfo().also { info ->
+                openingHours = info.openingHours
+                news = info.news
+
+                binding.buttonNotifications.visibility = if (news.isBlank()) {
+                    View.GONE
+                } else {
+                    View.VISIBLE
+                }
+            }
         }
 
         // Assign the adapter to the view pager

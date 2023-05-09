@@ -192,6 +192,6 @@ interface AppDAO {
      *
      * @return  opening hours
      */
-    @Query("SELECT openingHours FROM offer_canteen LIMIT 1")
-    fun getCanteenOpeningHours(): String
+    @Query("SELECT openingHours, news FROM offer_canteen LIMIT 1")
+    fun getCanteenInfo(): CanteenOfferTuple
 }

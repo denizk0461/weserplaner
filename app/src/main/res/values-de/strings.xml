@@ -63,6 +63,7 @@
 
     <string name="canteen_no_offer_header">Kein Angebot</string>
     <string name="canteen_no_offer_desc">Für diesen Tag sind keine Angebote vorhanden</string>
+    <string name="canteen_news_sheet_title">Neuigkeiten für diese Mensa</string>
     <string name="canteen_fab_opening_hours_content_desc">Zeige Öffnungszeiten</string>
     <string name="canteen_fab_switch_canteen_content_desc">Wechsle Mensa</string>
     <string name="canteen_fab_refresh_content_desc">Aktualisiere Angebote</string>

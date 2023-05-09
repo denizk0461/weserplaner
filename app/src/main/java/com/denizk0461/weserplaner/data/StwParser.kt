@@ -8,7 +8,6 @@ import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
-import java.io.IOException
 import kotlin.jvm.Throws
 
 /**
@@ -162,7 +161,7 @@ class StwParser(application: Application) {
             doc.getElementsByClass("field__items")[0]
                 .getElementsByTag("p")[0]
                 .text()
-        } catch (e: IOException) {
+        } catch (e: IndexOutOfBoundsException) {
             ""
         }
 

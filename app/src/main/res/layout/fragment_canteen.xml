@@ -17,23 +17,48 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-            <TextView
-                android:id="@+id/app_title_bar"
+            
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/title_food"
-                android:textSize="28sp"
-                android:fontFamily="@font/lato_bolditalic"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
-                android:singleLine="true"
-                android:ellipsize="marquee"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:scrollHorizontally="true"/>
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/app_title_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_food"
+                    android:textSize="28sp"
+                    android:fontFamily="@font/lato_bolditalic"
+                    android:singleLine="true"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:scrollHorizontally="true"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/button_notifications"/>
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:id="@+id/button_notifications"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="0dp"
+                    android:layout_marginStart="8dp"
+                    app:icon="@drawable/notification"
+                    app:iconPadding="0dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:iconTint="?attr/colorOnSurfaceVariant"
+                    android:visibility="gone"/>
+                
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <HorizontalScrollView
                 android:id="@+id/scroll_view_chip"
@@ -249,11 +274,5 @@
             tools:ignore="UnusedAttribute"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
-
-<!--    <androidx.coordinatorlayout.widget.CoordinatorLayout-->
-<!--        android:id="@+id/snackbar_container"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="bottom"/>-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
