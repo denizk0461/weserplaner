@@ -20,7 +20,7 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
-            android:fontFamily="@font/lato_bolditalic"
+            android:fontFamily="@font/lato_blackitalic"
             android:text="@string/title_settings"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             android:textSize="28sp"/>

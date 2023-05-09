@@ -41,13 +41,13 @@ class CanteenFragment : AppFragment() {
      * Locally saved opening hours to quickly access them without querying the database on every
      * opening of the bottom sheet.
      */
-    private var openingHours: String = ""
+//    private var openingHours: String = ""
 
     /**
      * Locally saved news to quickly access them without querying the database on every opening of
      * the corresponding bottom sheet.
      */
-    private var news: String = ""
+//    private var news: String = ""
 
     /**
      * Locally stored dates to populate the TabLayout with.
@@ -76,7 +76,7 @@ class CanteenFragment : AppFragment() {
         binding.buttonNotifications.setOnClickListener {
             openBottomSheet(getTextSheet(
                 getString(R.string.canteen_news_sheet_title),
-                news,
+                contentId = TextSheetContentId.NEWS,
             ))
         }
 
@@ -114,7 +114,7 @@ class CanteenFragment : AppFragment() {
                         R.string.canteen_opening_hours,
                         getCurrentlySelectedCanteenName()
                     ),
-                    openingHours
+                    contentId = TextSheetContentId.OPENING_HOURS,
                 )
             )
         }
@@ -181,10 +181,11 @@ class CanteenFragment : AppFragment() {
 
             // Retrieve further information about this canteen from the database
             viewModel.getCanteenInfo().also { info ->
-                openingHours = info.openingHours
-                news = info.news
-
-                binding.buttonNotifications.visibility = if (news.isBlank()) {
+                /*
+                 * Set visibility of the notifications icon depending on whether news are available.
+                 * TODO change this to a BadgeDrawable later
+                 */
+                binding.buttonNotifications.visibility = if (info.news.isBlank()) {
                     View.GONE
                 } else {
                     View.VISIBLE

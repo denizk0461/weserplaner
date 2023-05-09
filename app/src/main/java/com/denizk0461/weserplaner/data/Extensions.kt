@@ -14,6 +14,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.exception.AcademicQuarterNotApplicableException
 import com.denizk0461.weserplaner.exception.ParcelNotFoundException
+import com.denizk0461.weserplaner.model.TextSheetContentId
 import com.denizk0461.weserplaner.sheet.TextSheet
 import com.google.android.material.snackbar.Snackbar
 import kotlin.jvm.Throws
@@ -72,10 +73,15 @@ fun Resources.Theme.showErrorSnackBar(view: CoordinatorLayout, text: String, anc
  * @param content   text content of the sheet
  * @return          sheet with text added
  */
-fun getTextSheet(header: String, content: String): TextSheet = TextSheet().also { sheet ->
+fun getTextSheet(
+    header: String,
+    content: String = "",
+    contentId: Int = TextSheetContentId.PASS_RAW_STRING
+): TextSheet = TextSheet().also { sheet ->
     val bundle = Bundle()
     bundle.putString("header", header)
     bundle.putString("content", content)
+    bundle.putInt("contentId", contentId)
     bundle.putBoolean("isCancellable", true)
     sheet.arguments = bundle
 }
