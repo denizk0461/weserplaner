@@ -360,20 +360,24 @@
                             app:selectionRequired="true">
 
                             <com.google.android.material.button.MaterialButton
+                                style="@style/Widget.Material3.Button.OutlinedButton"
                                 android:id="@+id/toggle_pricing_student"
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
                                 android:layout_height="wrap_content"
                                 android:text="@string/settings_pricing_student"
-                                style="?attr/materialButtonOutlinedStyle"/>
+                                android:textColor="@color/list_group_button"
+                                app:strokeColor="?attr/colorOutlineVariant"/>
 
                             <com.google.android.material.button.MaterialButton
+                                style="@style/Widget.Material3.Button.OutlinedButton"
                                 android:id="@+id/toggle_pricing_employee"
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
                                 android:layout_height="wrap_content"
                                 android:text="@string/settings_pricing_employee"
-                                style="?attr/materialButtonOutlinedStyle"/>
+                                android:textColor="@color/list_group_button"
+                                app:strokeColor="?attr/colorOutlineVariant"/>
 
                         </com.google.android.material.button.MaterialButtonToggleGroup>
 
@@ -438,20 +442,24 @@
                             app:selectionRequired="true">
 
                             <com.google.android.material.button.MaterialButton
+                                style="@style/Widget.Material3.Button.OutlinedButton"
                                 android:id="@+id/toggle_launch_fragment_schedule"
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
                                 android:layout_height="wrap_content"
                                 android:text="@string/title_schedule_short"
-                                style="?attr/materialButtonOutlinedStyle"/>
+                                android:textColor="@color/list_group_button"
+                                app:strokeColor="?attr/colorOutlineVariant"/>
 
                             <com.google.android.material.button.MaterialButton
+                                style="@style/Widget.Material3.Button.OutlinedButton"
                                 android:id="@+id/toggle_launch_fragment_canteen"
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
                                 android:layout_height="wrap_content"
                                 android:text="@string/title_canteen_short"
-                                style="?attr/materialButtonOutlinedStyle"/>
+                                android:textColor="@color/list_group_button"
+                                app:strokeColor="?attr/colorOutlineVariant"/>
 
                         </com.google.android.material.button.MaterialButtonToggleGroup>
 
