@@ -50,11 +50,20 @@ class SettingsViewModel(app: Application) : AppViewModel(app) {
         }
 
     /**
-     * This value determines whether the user wants the app to launch with the canteen view.
+     * This value determines which fragment the user wants the app to start with. Order is equal to
+     * the order that the items are arranged in in the bottom nav bar.
      */
-    var preferenceLaunchCanteen: Boolean
-        get() = repo.getBooleanPreference(SettingsPreferences.LAUNCH_CANTEEN_ON_START)
-        set(newValue) { repo.setPreference(SettingsPreferences.LAUNCH_CANTEEN_ON_START, newValue) }
+    var preferencePricing: Int
+        get() = repo.getIntPreference(SettingsPreferences.PRICING)
+        set(newValue) { repo.setPreference(SettingsPreferences.PRICING, newValue) }
+
+    /**
+     * This value determines which fragment the user wants the app to start with. Order is equal to
+     * the order that the items are arranged in in the bottom nav bar.
+     */
+    var preferenceLaunchFragment: Int
+        get() = repo.getIntPreference(SettingsPreferences.LAUNCH_FRAGMENT_ON_START)
+        set(newValue) { repo.setPreference(SettingsPreferences.LAUNCH_FRAGMENT_ON_START, newValue) }
 
     /**
      * This value determines which canteen the user has selected.

@@ -76,7 +76,9 @@
     <string name="sheet_licences_header">Lizenzen</string>
 
     <string name="title_schedule">Dein Stundenplan</string>
-    <string name="title_food">Mensenangebote</string>
+    <string name="title_schedule_short">Stundenplan</string>
+    <string name="title_canteen">Mensenangebote</string>
+    <string name="title_canteen_short">Mensa</string>
     <string name="title_canteen_template">%s – Angebote</string>
     <string name="title_settings">App-Einstellungen</string>
 
@@ -178,11 +180,15 @@
     <string name="allergens_config_content">Achtung: bitte verlasse Dich nicht vollständig auf diese Funktion. Stelle immer in der Mensa, die Du besuchst, sicher, dass die Stoffe, auf die Du allergisch reagierst, nicht in deren Angeboten vorhanden sind. Die Allergen-Hinweise einiger Mensen sind online leider unvollständig.</string>
     <string name="allergens_config_confirmation">Deine Allergene wurden gespeichert.</string>
 
+    <string name="settings_pricing_title">Siehe Preise für</string>
+    <string name="settings_pricing_subtitle">Wird nach einer Aktualisierung der Angebote wirksam</string>
+    <string name="settings_pricing_student">Studierende</string>
+    <string name="settings_pricing_employee">Bedienstete</string>
+
     <string name="settings_allergens_title">Markiere Angebote mit Allergenen mit einem Stern*</string>
     <string name="settings_allergens_subtitle">Wird auch für Zusatzstoffe genutzt</string>
 
-    <string name="settings_launch_canteen_title">Starte die App mit dem Mensaplan</string>
-    <string name="settings_launch_canteen_subtitle">Sonst wird Dein Stundenplan beim Start gezeigt</string>
+    <string name="settings_launch_canteen_title">Wähle, mit welchem Bildschirm die App startet</string>
 
     <string name="settings_pref_colour_title">Färbe Diätpreferenzen</string>
     <string name="settings_pref_colour_subtitle">Dies färbt die kleinen Symbole ähnlich wie auf der Webseite</string>

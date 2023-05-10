@@ -106,10 +106,62 @@ class SettingsFragment : AppFragment() {
         }
 
         // Set up switch for launching the app with a specific view
-        binding.switchLaunchCanteen.apply {
-            isChecked = viewModel.preferenceLaunchCanteen
-            setOnCheckedChangeListener { _, newValue ->
-                viewModel.preferenceLaunchCanteen = newValue
+//        binding.switchLaunchCanteen.apply {
+//            isChecked = viewModel.preferenceLaunchCanteen
+//            setOnCheckedChangeListener { _, newValue ->
+//                viewModel.preferenceLaunchCanteen = newValue
+//            }
+//        }
+
+        // Set up button toggle group for changing prices displayed for the canteen offers
+        binding.togglePricingGroup.apply {
+            // Check the pricing that is currently selected
+            check(when (viewModel.preferencePricing) {
+                1 -> R.id.toggle_pricing_employee
+                else -> R.id.toggle_pricing_student // 0
+            })
+
+            // Set up checked listener for toggle group
+            addOnButtonCheckedListener { _, checkedId, isChecked ->
+                /*
+                 * Check if the button that is changed is the checked button. If this is not checked
+                 * for, the listener will simply loop through this when-statement with all buttons
+                 * that had their state changed somehow, and save the ID of the last one that had
+                 * its state changed.
+                 */
+                if (isChecked) {
+                    // Save new preference
+                    viewModel.preferencePricing = when (checkedId) {
+                        R.id.toggle_pricing_employee -> 1
+                        else -> 0 // R.id.toggle_pricing_student
+                    }
+                }
+            }
+        }
+
+        // Set up button toggle group for changing default fragment
+        binding.toggleLaunchFragmentGroup.apply {
+            // Check the fragment that is currently selected
+            check(when (viewModel.preferenceLaunchFragment) {
+                1 -> R.id.toggle_launch_fragment_canteen
+                else -> R.id.toggle_launch_fragment_schedule // 0
+            })
+
+            // Set up checked listener for toggle group
+            addOnButtonCheckedListener { _, checkedId, isChecked ->
+                /*
+                 * Check if the button that is changed is the checked button. If this is not checked
+                 * for, the listener will simply loop through this when-statement with all buttons
+                 * that had their state changed somehow, and save the ID of the last one that had
+                 * its state changed.
+                 */
+                if (isChecked) {
+                    // Save new preference
+                    viewModel.preferenceLaunchFragment = when (checkedId) {
+                        R.id.toggle_launch_fragment_canteen -> 1
+                        else -> 0 // R.id.toggle_launch_fragment_schedule
+                    }
+                }
             }
         }
 

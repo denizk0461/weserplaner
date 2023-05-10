@@ -60,6 +60,10 @@ class DevCodeSheet : AppSheet(R.layout.sheet_dev_code) {
                 "TE9ORUxZ".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9uLURFNHNfc3d5Zw==".d64)
                 "QkVBVVRZ".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9vbVQ1ckttVTVfaw==".d64)
                 "Uk9NQ09N".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9HUW1nUG5uZjE4WQ==".d64)
+                "Tk9DQVNI".d64 -> launchLink(listOf(
+                    "aHR0cHM6Ly95b3V0dS5iZS9lRzh3bkx2NTlPbw==",
+                    "aHR0cHM6Ly95b3V0dS5iZS9RSzBZLUQ1bVpaaw==",
+                ).random().d64)
                 "Qk9KQUNL".d64 -> {
                     startActivity(Intent(context, ImageActivity::class.java).also { intent ->
                         val bundle = Bundle()

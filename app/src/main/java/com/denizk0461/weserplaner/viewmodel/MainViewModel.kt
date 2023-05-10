@@ -11,8 +11,9 @@ import com.denizk0461.weserplaner.model.SettingsPreferences
 class MainViewModel(application: Application) : AppViewModel(application) {
 
     /**
-     * This value determines whether the user wants the app to launch with the canteen view.
+     * This value determines which fragment the user wants the app to start with. Order is equal to
+     * the order that the items are arranged in in the bottom nav bar.
      */
-    val preferenceLaunchCanteen: Boolean
-        get() = repo.getBooleanPreference(SettingsPreferences.LAUNCH_CANTEEN_ON_START)
+    val preferenceLaunchFragment: Int
+        get() = repo.getIntPreference(SettingsPreferences.LAUNCH_FRAGMENT_ON_START)
 }

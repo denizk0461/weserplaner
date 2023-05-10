@@ -252,7 +252,18 @@ class StwParser(application: Application) {
                                 itemId,
                                 categoryId,
                                 title = filteredText.first,
-                                price = tableRows.getTextOrEmpty(2),
+                                price = tableRows.getTextOrEmpty(
+                                    /*
+                                     * ID stored for student: 0
+                                     * Index required to fetch student price: 2
+                                     *
+                                     * ID stored for employee: 1
+                                     * Index required to fetch employee price: 3
+                                     *
+                                     * Hence, getIntPreference() + 2
+                                     */
+                                    repo.getIntPreference(SettingsPreferences.PRICING) + 2
+                                ),
                                 dietaryPreferences = prefs.deconstruct(),
                                 allergens = filteredText.second,
                             )

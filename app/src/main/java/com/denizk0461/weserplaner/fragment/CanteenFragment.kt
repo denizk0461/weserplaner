@@ -14,8 +14,6 @@ import com.denizk0461.weserplaner.data.showErrorSnackBar
 import com.denizk0461.weserplaner.databinding.FragmentCanteenBinding
 import com.denizk0461.weserplaner.model.*
 import com.denizk0461.weserplaner.viewmodel.CanteenViewModel
-import com.google.android.material.badge.BadgeDrawable
-import com.google.android.material.badge.BadgeUtils
 import com.google.android.material.tabs.TabLayoutMediator
 
 /**
@@ -72,10 +70,12 @@ class CanteenFragment : AppFragment() {
         }
 
         // Create badge
-        val badge = BadgeDrawable.create(context)
-        badge.isVisible = true
-        // Attach badge to button
-        BadgeUtils.attachBadgeDrawable(badge, binding.buttonNotifications)
+//        val badge = BadgeDrawable.create(context)
+////        badge.isVisible = true
+//        badge.number = 1
+//        badge.badgeGravity = BadgeDrawable.TOP_END
+//        // Attach badge to button
+//        BadgeUtils.attachBadgeDrawable(badge, binding.buttonNotifications, binding.buttonNotificationsBadgeContainer)
 
         // Assign a preference value to every button to filter for dietary preferences
         val chipMap = mapOf(

@@ -3,6 +3,7 @@ package com.denizk0461.weserplaner.model
 /**
  * Enumeration class for user-set preferences that will be saved in persistent storage via
  * SharedPreferences.
+ * TODO mark which data types should be used for which preferences (boolean, string, int)
  *
  * @param key   key for the SharedPreferences transaction
  */
@@ -34,9 +35,14 @@ enum class SettingsPreferences(val key: String) {
     COURSE_HIGHLIGHTING("setting_highlight"),
 
     /**
-     * Whether the user wants the app to launch with the canteen fragment.
+     * Which prices the user wants to have displayed for the canteen offers.
      */
-    LAUNCH_CANTEEN_ON_START("settings_launch_canteen"),
+    PRICING("settings_pricing"),
+
+    /**
+     * Which fragment the user wants the app to start with.
+     */
+    LAUNCH_FRAGMENT_ON_START("settings_launch_fragment"),
 
     /**
      * Whether the user wants dietary preferences to be coloured.

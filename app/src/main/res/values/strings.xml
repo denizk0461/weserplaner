@@ -78,7 +78,9 @@
     <string name="sheet_licences_content" translatable="false">Android developer resources by Google.\nhttps://developer.android.com/\nandroidx.appcompat:appcompat:1.6.1\nandroidx.constraintlayout:constraintlayout:2.1.4\nandroidx.core:core-ktx:1.10.0\nandroidx.fragment:fragment-ktx:1.6.0-beta01\nandroidx.navigation:navigation-fragment-ktx:2.5.3\nandroidx.navigation:navigation-ui-ktx:2.5.3\nandroidx.preference:preference-ktx:1.2.0\nandroidx.room:room-runtime:2.5.1\nandroidx.room:room-compiler:2.5.1\nandroidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01\n\nDesign guidelines, icons, and colour palette by Google.\nhttps://m3.material.io/\ncom.google.android.material:material:1.9.0\n\nAdditional icons by Flaticon.\nhttps://www.flaticon.com/\n\nWeb scraping functionality by Jonathan Hedley.\nhttps://jhy.io/\nhttps://jsoup.org/\norg.jsoup:jsoup:1.15.4\n\nApp developed by Deniz Düzgören.\ndenizk0461@gmail.com\ndeniz7@uni-bremen.de</string>
 
     <string name="title_schedule">Your Schedule</string>
-    <string name="title_food">Canteen Offers</string>
+    <string name="title_schedule_short">Schedule</string>
+    <string name="title_canteen">Canteen Offers</string>
+    <string name="title_canteen_short">Canteen</string>
     <string name="title_canteen_template">%s – Offers</string>
     <string name="title_settings">App Settings</string>
 
@@ -182,14 +184,18 @@
     <string name="allergens_config_content">Note: please don\'t entirely rely on this. Always check the notices displayed at the canteen you\'re visiting to confirm substances you may be allergic against are not present in their offerings. Some canteens unfortunately don\'t provide full allergen information online.</string>
     <string name="allergens_config_confirmation">Your allergen settings have been saved.</string>
 
+    <string name="settings_pricing_title">View prices for</string>
+    <string name="settings_pricing_subtitle">Takes effect after refreshing the offers</string>
+    <string name="settings_pricing_student">Students</string>
+    <string name="settings_pricing_employee">Employees</string>
+
     <string name="settings_allergens_title">Mark offers with allergens with a star*</string>
     <string name="settings_allergens_subtitle">Also applies to additives</string>
 
     <string name="settings_pref_colour_title">Colour dietary preferences</string>
     <string name="settings_pref_colour_subtitle">Icons will be coloured similarly to how they look the website</string> <!-- TODO this text sucks, DE too -->
 
-    <string name="settings_launch_canteen_title">Show canteen plan on app launch</string>
-    <string name="settings_launch_canteen_subtitle">Otherwise your schedule will be shown at launch</string>
+    <string name="settings_launch_canteen_title">Select which screen to start the app with</string>
 
     <!-- unused - use for possible future implementation of Crashlytics -->
     <string name="settings_crashlytics_title">Opt-in to sharing crash data</string>

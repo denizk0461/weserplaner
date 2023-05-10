@@ -47,17 +47,21 @@ class MainActivity : FragmentActivity() {
      * Sets the navigation graph for the fragments. Also sets the start destination.
      */
     private fun setNavigationGraph() {
+        // Get nav host
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
-        val navController = navHostFragment.navController
 
-        val navGraph = navController.navInflater.inflate(R.navigation.main_nav_graph)
-        navGraph.setStartDestination(if (viewModel.preferenceLaunchCanteen) {
-            R.id.canteen
-        } else {
-            R.id.schedule
+        // Inflate new nav graph
+        val navGraph = navHostFragment
+            .navController.navInflater.inflate(R.navigation.main_nav_graph)
+
+        // Set the starting fragment for the app
+        navGraph.setStartDestination(when (viewModel.preferenceLaunchFragment) {
+            1 -> R.id.canteen
+            else -> R.id.schedule // 0
         })
 
-        navController.graph = navGraph
+        // Set the newly defined nav graph
+        navHostFragment.navController.graph = navGraph
     }
 }
