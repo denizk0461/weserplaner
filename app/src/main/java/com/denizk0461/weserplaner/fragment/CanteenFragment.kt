@@ -14,6 +14,8 @@ import com.denizk0461.weserplaner.data.showErrorSnackBar
 import com.denizk0461.weserplaner.databinding.FragmentCanteenBinding
 import com.denizk0461.weserplaner.model.*
 import com.denizk0461.weserplaner.viewmodel.CanteenViewModel
+import com.google.android.material.badge.BadgeDrawable
+import com.google.android.material.badge.BadgeUtils
 import com.google.android.material.tabs.TabLayoutMediator
 
 /**
@@ -38,18 +40,6 @@ class CanteenFragment : AppFragment() {
     private val viewModel: CanteenViewModel by viewModels()
 
     /**
-     * Locally saved opening hours to quickly access them without querying the database on every
-     * opening of the bottom sheet.
-     */
-//    private var openingHours: String = ""
-
-    /**
-     * Locally saved news to quickly access them without querying the database on every opening of
-     * the corresponding bottom sheet.
-     */
-//    private var news: String = ""
-
-    /**
      * Locally stored dates to populate the TabLayout with.
      */
     private var dates: List<String> = listOf()
@@ -60,6 +50,7 @@ class CanteenFragment : AppFragment() {
         return binding.root
     }
 
+    @androidx.annotation.OptIn(com.google.android.material.badge.ExperimentalBadgeUtils::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -79,6 +70,12 @@ class CanteenFragment : AppFragment() {
                 contentId = TextSheetContentId.NEWS,
             ))
         }
+
+        // Create badge
+        val badge = BadgeDrawable.create(context)
+        badge.isVisible = true
+        // Attach badge to button
+        BadgeUtils.attachBadgeDrawable(badge, binding.buttonNotifications)
 
         // Assign a preference value to every button to filter for dietary preferences
         val chipMap = mapOf(
@@ -170,7 +167,7 @@ class CanteenFragment : AppFragment() {
             lifecycle,
         )
 
-        // Date count is observed to correctly set the amount of pages and the corresponding tabs
+        // Date count is observed to correctly set multiple elements that depend on up-to-date data
         viewModel.getDates().observe(viewLifecycleOwner) { newDates ->
 
             // Retrieve the dates individually and store them for the tab mediator to use
@@ -180,17 +177,10 @@ class CanteenFragment : AppFragment() {
             viewPagerAdapter.itemCount = dates.size
 
             // Retrieve further information about this canteen from the database
-            viewModel.getCanteenInfo().also { info ->
-                /*
-                 * Set visibility of the notifications icon depending on whether news are available.
-                 * TODO change this to a BadgeDrawable later
-                 */
-                binding.buttonNotifications.visibility = if (info.news.isBlank()) {
-                    View.GONE
-                } else {
-                    View.VISIBLE
-                }
-            }
+//            viewModel.getCanteen().also { canteen ->
+                // Set visibility of the notifications icon depending on whether news are available
+//                badge.isVisible = info.news.isNotBlank()
+//            }
         }
 
         // Assign the adapter to the view pager

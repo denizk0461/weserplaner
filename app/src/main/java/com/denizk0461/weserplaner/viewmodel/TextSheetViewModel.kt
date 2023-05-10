@@ -2,8 +2,16 @@ package com.denizk0461.weserplaner.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import com.denizk0461.weserplaner.model.OfferCanteen
 
 class TextSheetViewModel(application: Application) : AppViewModel(application) {
+
+    /**
+     * Retrieves the canteen stored in the database.
+     *
+     * @return canteen
+     */
+    fun getCanteen(): LiveData<OfferCanteen> = repo.getCanteen()
 
     /**
      * Retrieve opening hours for the fetched canteen.

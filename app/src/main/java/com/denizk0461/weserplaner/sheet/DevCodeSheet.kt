@@ -52,7 +52,7 @@ class DevCodeSheet : AppSheet(R.layout.sheet_dev_code) {
                 "QkJVT0s/".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS90Rm1PMm1TY0tHNA==".d64)
                 "SUhUU0Mq".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS85bXZ4SVdhWHZuWQ==".d64)
                 "SU5TQU5F".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS90NE9kYTlUZFYwbw==".d64)
-                "X0RSV05f".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9SUVpUUy1CWjhtcw==".d64)
+                "SE9SSVpO".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9SUVpUUy1CWjhtcw==".d64)
                 "TUFSR0Uh".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS8tbHFxRHZXRjQ1dw==".d64)
                 "UE9XRUxM".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9XUGMtVkVxQlBISQ==".d64)
                 "Q0FMTE1F".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS8xbTV1WnJNMnktMA==".d64)
@@ -63,14 +63,14 @@ class DevCodeSheet : AppSheet(R.layout.sheet_dev_code) {
                 "Qk9KQUNL".d64 -> {
                     startActivity(Intent(context, ImageActivity::class.java).also { intent ->
                         val bundle = Bundle()
-                        bundle.putString("img", "bojack")
+                        bundle.putString("img", "Qk9KQUNL".d64.lowercase())
                         intent.putExtras(bundle)
                     })
                 }
                 "QkNFTExT".d64 -> {
                     startActivity(Intent(context, ImageActivity::class.java).also { intent ->
                         val bundle = Bundle()
-                        bundle.putString("img", "bcells")
+                        bundle.putString("img", "QkNFTExT".d64.lowercase())
                         intent.putExtras(bundle)
                     })
                 }

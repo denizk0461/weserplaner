@@ -6,7 +6,6 @@ import androidx.fragment.app.viewModels
 import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.data.viewBinding
 import com.denizk0461.weserplaner.databinding.SheetTextBinding
-import com.denizk0461.weserplaner.exception.InvalidContentIdException
 import com.denizk0461.weserplaner.model.TextSheetContentId
 import com.denizk0461.weserplaner.viewmodel.TextSheetViewModel
 
@@ -42,25 +41,43 @@ class TextSheet : AppSheet(R.layout.sheet_text) {
         // Set whether the sheet should be cancellable by actions such as swiping
         val isSheetCancellable = arguments?.getBoolean("isCancellable") == true
 
-        /*
-         * Set text header.
-         * TODO update this when contentId is set and canteen could change while the sheet is open!
-         */
-        binding.textHeader.text = header
-
-        // Set content to raw string passed if ID says so
+        // Set text views to raw string passed if ID says so
         if (contentId == -1) {
+            binding.textHeader.text = header
             binding.textContent.text = content
-        } else (when (contentId) {
-            // Observe LiveData if corresponding ID has been passed
-            TextSheetContentId.OPENING_HOURS -> viewModel.getCanteenOpeningHours()
-            TextSheetContentId.NEWS -> viewModel.getCanteenNews()
-            else -> throw InvalidContentIdException()
-        }).observe(viewLifecycleOwner) { observedContent ->
-            // Show the content
-            binding.textContent.text = (observedContent ?: "")
-                // If the content is empty, tell the user
-                .ifBlank { emptyContentStringFor(contentId) }
+//        } else (when (contentId) {
+//            // Observe LiveData if corresponding ID has been passed
+//            TextSheetContentId.OPENING_HOURS -> viewModel.getCanteen()
+//            TextSheetContentId.NEWS -> viewModel.getCanteen()
+//            else -> throw InvalidContentIdException()
+//        }).observe(viewLifecycleOwner) { observedContent ->
+//            // Show the content
+//            binding.textContent.text = (observedContent ?: "")
+//                // If the content is empty, tell the user
+//                .ifBlank { emptyContentStringFor(contentId) }
+//        }
+        } else {
+            viewModel.getCanteen().observe(viewLifecycleOwner) { canteen ->
+                when (contentId) {
+                    TextSheetContentId.OPENING_HOURS -> {
+                        binding.textHeader.text = getString(
+                            R.string.text_sheet_opening_hours_title, canteen.canteen
+                        )
+                        binding.textContent.text = canteen.openingHours.ifBlank {
+                            getString(R.string.text_sheet_opening_hours_empty)
+                        }
+                    }
+                    TextSheetContentId.NEWS -> {
+                        binding.textHeader.text = getString(
+                            R.string.text_sheet_news_title, canteen.canteen
+                        )
+                        binding.textContent.text = canteen.news.ifBlank {
+                            getString(R.string.text_sheet_news_empty)
+                        }
+                    }
+                    else -> {} // should not occur
+                }
+            }
         }
 
         // Set up an appropriate close button depending on whether the sheet is cancellable
@@ -84,8 +101,8 @@ class TextSheet : AppSheet(R.layout.sheet_text) {
      * @return          localised string to show the user
      */
     private fun emptyContentStringFor(contentId: Int) = getString(when (contentId) {
-        TextSheetContentId.OPENING_HOURS -> R.string.text_sheet_empty_opening_hours
-        TextSheetContentId.NEWS -> R.string.text_sheet_empty_news
+        TextSheetContentId.OPENING_HOURS -> R.string.text_sheet_opening_hours_empty
+        TextSheetContentId.NEWS -> R.string.text_sheet_news_empty
         else -> R.string.error_generic
     })
 }

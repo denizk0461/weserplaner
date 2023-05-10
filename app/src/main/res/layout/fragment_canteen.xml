@@ -55,8 +55,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:iconTint="?attr/colorOnSurfaceVariant"
-                    android:visibility="gone"/>
+                    app:iconTint="?attr/colorOnSurfaceVariant"/>
                 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -225,10 +224,22 @@
         android:layout_gravity="fill_vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/view_pager"
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TEST TEST TEST TEST ABC 123 !!!"/>
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

@@ -1,7 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-<!--    <string name="app_name">sixminutes</string>-->
 
-    <string name="toast_first_launch">Hey, danke, dass Du meine App ausprobierst! ~Deniz</string>
     <string name="error_generic">Ein Fehler ist aufgetreten.</string>
 
     <string name="monday">Montag</string>
@@ -70,8 +68,10 @@
     <string name="canteen_fab_refresh_content_desc">Aktualisiere Angebote</string>
 
     <!-- TODO replace 'this canteen' with %s -->
-    <string name="text_sheet_empty_opening_hours">The Öffnungszeiten für diese Mensa können nicht angezeigt werden.</string>
-    <string name="text_sheet_empty_news">Es sind keine Neuigkeiten verfügbar.</string>
+    <string name="text_sheet_opening_hours_title">%s – Öffnungszeiten</string>
+    <string name="text_sheet_opening_hours_empty">The Öffnungszeiten können nicht angezeigt werden.</string>
+    <string name="text_sheet_news_title">%s – Neuigkeiten</string>
+    <string name="text_sheet_news_empty">Es sind keine Neuigkeiten verfügbar.</string>
 
     <string name="sheet_licences_header">Lizenzen</string>
 
@@ -173,7 +173,7 @@
     <string name="settings_highlight_subtitle">Funktioniert nur, wenn Kurse sich nicht überschneiden!</string>
 
     <string name="allergens_config_title">Verstecke Angebote mit bestimmten Allergenen</string>
-    <string name="allergens_config_subtitle">Angebote mit ausgeschlossenen Allergenen werden Dir nicht angezeigt</string>
+    <string name="allergens_config_subtitle">Allergene, die Du ausgeschlossen hast: %d</string>
     <string name="allergens_config_header">Wähle, welche Allergene Du vermeiden möchtest</string>
     <string name="allergens_config_content">Achtung: bitte verlasse Dich nicht vollständig auf diese Funktion. Stelle immer in der Mensa, die Du besuchst, sicher, dass die Stoffe, auf die Du allergisch reagierst, nicht in deren Angeboten vorhanden sind. Die Allergen-Hinweise einiger Mensen sind online leider unvollständig.</string>
     <string name="allergens_config_confirmation">Deine Allergene wurden gespeichert.</string>
@@ -187,6 +187,7 @@
     <string name="settings_pref_colour_title">Färbe Diätpreferenzen</string>
     <string name="settings_pref_colour_subtitle">Dies färbt die kleinen Symbole ähnlich wie auf der Webseite</string>
 
+    <!-- unused - use for possible future implementation of Crashlytics -->
     <string name="settings_crashlytics_title">Stimme Sammlung von Absturzreporten zu</string>
     <string name="settings_crashlytics_subtitle">Daten werden anonymisiert übertragen</string> <!-- TODO is this true? -->
 
@@ -204,5 +205,4 @@
     <string name="settings_app_version">App-Version</string>
 
     <string name="settings_app_version_15">klick weiter</string>
-    <string name="settings_app_version_121">Solltest du nicht für deine Klausuren lernen?</string>
 </resources>

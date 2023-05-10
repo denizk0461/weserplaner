@@ -188,12 +188,12 @@ interface AppDAO {
     @Insert fun insertItems(items: List<OfferItem>)
 
     /**
-     * Retrieves the opening hours of the canteen as a string.
+     * Retrieves the canteen stored in the database. Should always be 0 or 1.
      *
-     * @return  opening hours
+     * @return canteen
      */
-    @Query("SELECT openingHours, news FROM offer_canteen LIMIT 1")
-    fun getCanteenInfo(): CanteenOfferTuple
+    @Query("SELECT * FROM offer_canteen LIMIT 1")
+    fun getCanteen(): LiveData<OfferCanteen>
 
     /**
      * Retrieve opening hours for the fetched canteen.

@@ -1,6 +1,7 @@
 package com.denizk0461.weserplaner.viewmodel
 
 import android.app.Application
+import com.denizk0461.weserplaner.model.AllergenPreferences
 import com.denizk0461.weserplaner.model.SettingsPreferences
 
 /**
@@ -37,6 +38,16 @@ class SettingsViewModel(app: Application) : AppViewModel(app) {
     var preferenceAllergen: Boolean
         get() = repo.getBooleanPreference(SettingsPreferences.ALLERGEN, defaultValue = true)
         set(newValue) { repo.setPreference(SettingsPreferences.ALLERGEN, newValue) }
+
+    /**
+     * This value determines how many allergens the user wants to have displayed or hidden.
+     */
+    val preferenceAllergenConfigCount: Int
+        get() = repo.getStringPreference(
+            SettingsPreferences.ALLERGEN_CONFIG, defaultValue = AllergenPreferences.TEMPLATE
+        ).run {
+            if (isBlank()) 0 else split(",").count()
+        }
 
     /**
      * This value determines whether the user wants the app to launch with the canteen view.

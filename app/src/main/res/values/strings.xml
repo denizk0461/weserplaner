@@ -1,7 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name" translatable="false">WeserPlaner</string>
 
-    <string name="toast_first_launch">Hey, thank you for trying out my app! ~Deniz</string>
     <string name="error_generic">An error occurred.</string>
 
     <string name="monday">Monday</string>
@@ -70,9 +69,10 @@
     <string name="canteen_fab_switch_canteen_content_desc">Switch canteen</string>
     <string name="canteen_fab_refresh_content_desc">Refresh offers</string>
 
-    <!-- TODO replace 'this canteen' with %s -->
-    <string name="text_sheet_empty_opening_hours">The opening hours for this canteen could not be downloaded.</string>
-    <string name="text_sheet_empty_news">No news are available.</string>
+    <string name="text_sheet_opening_hours_title">%s – opening hours</string>
+    <string name="text_sheet_opening_hours_empty">The opening hours could not be downloaded.</string>
+    <string name="text_sheet_news_title">%s – news</string>
+    <string name="text_sheet_news_empty">No news are available.</string>
 
     <string name="sheet_licences_header">Licences</string>
     <string name="sheet_licences_content" translatable="false">Android developer resources by Google.\nhttps://developer.android.com/\nandroidx.appcompat:appcompat:1.6.1\nandroidx.constraintlayout:constraintlayout:2.1.4\nandroidx.core:core-ktx:1.10.0\nandroidx.fragment:fragment-ktx:1.6.0-beta01\nandroidx.navigation:navigation-fragment-ktx:2.5.3\nandroidx.navigation:navigation-ui-ktx:2.5.3\nandroidx.preference:preference-ktx:1.2.0\nandroidx.room:room-runtime:2.5.1\nandroidx.room:room-compiler:2.5.1\nandroidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01\n\nDesign guidelines, icons, and colour palette by Google.\nhttps://m3.material.io/\ncom.google.android.material:material:1.9.0\n\nAdditional icons by Flaticon.\nhttps://www.flaticon.com/\n\nWeb scraping functionality by Jonathan Hedley.\nhttps://jhy.io/\nhttps://jsoup.org/\norg.jsoup:jsoup:1.15.4\n\nApp developed by Deniz Düzgören.\ndenizk0461@gmail.com\ndeniz7@uni-bremen.de</string>
@@ -177,7 +177,7 @@
     <string name="settings_highlight_subtitle">Only works properly if courses don\'t overlap!</string>
 
     <string name="allergens_config_title">Hide offers containing certain allergens</string>
-    <string name="allergens_config_subtitle">Offers with excluded allergens won\'t be shown to you</string>
+    <string name="allergens_config_subtitle">Allergens you\'ve excluded: %d</string>
     <string name="allergens_config_header">Select which allergens you\'d like to avoid</string>
     <string name="allergens_config_content">Note: please don\'t entirely rely on this. Always check the notices displayed at the canteen you\'re visiting to confirm substances you may be allergic against are not present in their offerings. Some canteens unfortunately don\'t provide full allergen information online.</string>
     <string name="allergens_config_confirmation">Your allergen settings have been saved.</string>
@@ -191,6 +191,7 @@
     <string name="settings_launch_canteen_title">Show canteen plan on app launch</string>
     <string name="settings_launch_canteen_subtitle">Otherwise your schedule will be shown at launch</string>
 
+    <!-- unused - use for possible future implementation of Crashlytics -->
     <string name="settings_crashlytics_title">Opt-in to sharing crash data</string>
     <string name="settings_crashlytics_subtitle">Data will be anonymised</string> <!-- TODO is this true? -->
 
@@ -212,10 +213,6 @@
     <string name="settings_app_version_15">keep clicking</string>
     <string name="settings_app_version_20" translatable="false">^_^</string>
     <string name="settings_app_version_30" translatable="false">^_____^</string>
-    <string name="settings_app_version_90" translatable="false">(⎌ℕ⎌)</string>
-    <string name="settings_app_version_121">Shouldn\'t you study for your exams?</string>
-    <string name="settings_app_version_165" translatable="false">◢◤</string>
-    <string name="settings_app_version_200" translatable="false">\\__*</string>
 
     <string-array name="cheesy_wisdoms" translatable="false">
         <item>can\'t go back in time, every second is a new one</item>
@@ -224,7 +221,5 @@
         <item>trans rights are human rights 🏳️‍⚧️</item>
         <item>i wouldn\'t risk any more than six minutes</item>
         <item>do you remember yesterday?</item>
-        <item>look at the sky, i\'m still here</item>
-        <item>sample text</item>
     </string-array>
 </resources>

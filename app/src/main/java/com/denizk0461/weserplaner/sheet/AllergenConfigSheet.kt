@@ -2,6 +2,7 @@ package com.denizk0461.weserplaner.sheet
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.data.showToast
@@ -62,7 +63,20 @@ class AllergenConfigSheet : AppSheet(R.layout.sheet_allergen_config) {
 
         // Set save button
         binding.buttonSave.setOnClickListener {
+            // Save newly set preferences
             saveAllergenPrefs()
+
+            /*
+             * Send an empty bundle to tell the parent fragment that it should update its view
+             * according to the changes made here.
+             */
+            parentFragment?.setFragmentResult("allergenConfig", Bundle())
+
+            // Tell the user that saving was successful
+            showToast(context, getString(R.string.allergens_config_confirmation))
+
+            // Close the sheet
+            dismiss()
         }
 
         // Set up close button
@@ -73,7 +87,7 @@ class AllergenConfigSheet : AppSheet(R.layout.sheet_allergen_config) {
     }
 
     /**
-     * Saves the newly set preferences and closes the sheet.
+     * Saves the newly set preferences.
      */
     private fun saveAllergenPrefs() {
 
@@ -108,11 +122,5 @@ class AllergenConfigSheet : AppSheet(R.layout.sheet_allergen_config) {
                 hasMolluscs = checkMolluscs.isChecked,
             ).deconstruct()
         }
-
-        // Tell the user that saving was successful
-        showToast(context, getString(R.string.allergens_config_confirmation))
-
-        // Close the sheet
-        dismiss()
     }
 }

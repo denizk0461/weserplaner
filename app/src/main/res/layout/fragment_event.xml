@@ -43,11 +43,13 @@
         android:id="@+id/fab_add_event"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/plus"
+        android:src="@drawable/plus"
         android:contentDescription="@string/sheet_schedule_update_header_add"
+        android:tooltipText="@string/sheet_schedule_update_header_add"
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="@dimen/fab_margin"
+        tools:ignore="UnusedAttribute"
         app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

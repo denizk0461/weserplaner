@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import com.denizk0461.weserplaner.BuildConfig
 import com.denizk0461.weserplaner.R
@@ -80,9 +81,21 @@ class SettingsFragment : AppFragment() {
         // Set up button to set allergens
         binding.buttonAllergensConfig.setOnClickListener {
             openBottomSheet(
-                AllergenConfigSheet()
+                AllergenConfigSheet().also {
+                    /*
+                     * Receive fragment result to update the text view.
+                     * TODO doesn't work after configuration change (change into or out of multi
+                     *  window)
+                     */
+                    setFragmentResultListener("allergenConfig") { _, _ ->
+                        // Update how many allergens the user set
+                        binding.allergensConfigSubtitle.text = getAllergensConfigCountText()
+                    }
+                }
             )
         }
+
+        binding.allergensConfigSubtitle.text = getAllergensConfigCountText()
 
         // Set up switch for displaying allergens
         binding.switchAllergens.apply {
@@ -108,7 +121,10 @@ class SettingsFragment : AppFragment() {
             }
         }
 
-        // Set up switch for crash report opt-in
+        /*
+         * Set up switch for crash report opt-in, NOTE: currently not shown as Crashlytics is not
+         * implemented!
+         */
         binding.switchCrashlytics.apply {
             isChecked = viewModel.preferenceDataHandling
             setOnCheckedChangeListener { _, newValue ->
@@ -140,7 +156,6 @@ class SettingsFragment : AppFragment() {
         binding.buttonLicences.setOnLongClickListener {
             if (licencesLongClick > 3) {
                 openBottomSheet(DevCodeSheet())
-                licencesLongClick = 1
             } else {
                 licencesLongClick += 1
             }
@@ -166,14 +181,10 @@ class SettingsFragment : AppFragment() {
                 20 -> showToast(context, getString(R.string.settings_app_version_15))
                 35 -> showToast(context, getString(R.string.settings_app_version_20))
                 50 -> showToast(context, getString(R.string.settings_app_version_30))
-                90 -> showToast(context, getString(R.string.settings_app_version_90))
-//                121 -> showToast(context, getString(R.string.settings_app_version_121))
-                165 -> showToast(context, getString(R.string.settings_app_version_165))
-                200 -> showToast(context, getString(R.string.settings_app_version_200))
                 222 -> {
                     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(mysteryLink)))
                 }
-                238 -> { // after 222 has been reached, this loops every 16 clicks
+                254 -> { // after 222 has been reached, this loops every 32 clicks
                     // Show the next cheesy wisdom
                     showToast(context, cheesyWisdoms[0])
 
@@ -228,4 +239,15 @@ class SettingsFragment : AppFragment() {
     private fun launchWebView() {
         startActivity(Intent(context, FetcherActivity::class.java))
     }
+
+    /**
+     * Retrieves the text displayed in the allergen config setting to show the user how many
+     * allergens they have checked.
+     *
+     * @return localised string with the count of checked allergens inserted
+     */
+    private fun getAllergensConfigCountText(): String = getString(
+        R.string.allergens_config_subtitle,
+        viewModel.preferenceAllergenConfigCount
+    )
 }

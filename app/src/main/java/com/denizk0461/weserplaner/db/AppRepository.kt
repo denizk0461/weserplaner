@@ -72,11 +72,11 @@ class AppRepository(app: Application) {
     fun nukeEvents() { dao.nukeEvents() }
 
     /**
-     * Retrieves the opening hours as well as notifications for the canteen as strings.
+     * Retrieves the canteen stored in the database. Should always be 0 or 1.
      *
-     * @return  opening hours and notifications
+     * @return canteen
      */
-    fun getCanteenInfo(): CanteenOfferTuple = dao.getCanteenInfo()
+    fun getCanteen(): LiveData<OfferCanteen> = dao.getCanteen()
 
     /**
      * Retrieve opening hours for the fetched canteen.
