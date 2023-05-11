@@ -24,7 +24,7 @@
     <string name="fetch_error_webpage_snack">Du musst deinen Stundenplan öffnen!</string>
     <string name="canteen_fetch_error">Mensaplan konnte nicht heruntergeladen werden!</string>
 
-    <string name="event_empty_fetch_button">Lade Deinen Stundenplan von Stud.IP herunter</string>
+    <string name="event_empty_fetch_button">Lade deinen Stundenplan von Stud.IP herunter</string>
 
     <!-- plurals string resource cannot be used here because Android doesn't treat 0 differently from 2 -->
     <string name="toast_fetch_finished_zero">Dein Stundenplan wurde aktualisiert!</string>
@@ -38,7 +38,7 @@
     <string name="fetch_bar_refresh_desc">Aktualisiere die Webseite</string>
     <string name="fetch_bar_help_title">Hilfe</string>
     <string name="fetch_bar_help_desc">Zeige Hilfe</string>
-    <string name="fetch_bar_help_sheet_title">Wie Du Deinen Stundenplan in der App speichern kannst</string>
+    <string name="fetch_bar_help_sheet_title">Wie du deinen Stundenplan in der App speichern kannst</string>
     <string name="fetch_bar_help_sheet_content"> • Logge dich mit deinem Stud.IP-Login ein\n • Öffne deinen Stundenplan (falls er sich nicht automatisch öffnet)\n • Klicke auf den \'Speichern\'-Knopf, der unten in der rechten Ecke auftauchen sollte\n • Fertig!</string>
     <string name="fetch_bar_save_desc">Speichere den Stundenplan in der App ab</string>
 
@@ -56,7 +56,7 @@
     <string name="sheet_schedule_update_hint_quarter_error">Sorry, ein Fehler ist aufgetreten!</string>
     <string name="sheet_schedule_update_timestamp_error_mixed">Der Kurs kann nicht enden bevor er aufhört.</string>
     <string name="sheet_schedule_update_timestamp_error_equal">Der Kurs kann nicht zur gleichen Zeit anfangen und aufhören.</string>
-    <string name="sheet_schedule_update_timestamp_error_start">Der Kurs kann nicht anfangen nachdem er aufhört!</string>
+    <string name="sheet_schedule_update_timestamp_error_start">Der Kurs kann nicht anfangen nachdem er aufhört.</string>
     <string name="sheet_schedule_update_timestamp_error_end">Der Kurs kann nicht enden bevor er anfängt!</string>
     <string name="sheet_schedule_update_text_field_empty_error">Dieses Feld darf nicht leer sein</string>
     <string name="sheet_schedule_update_time_dialog_start_hint">Startzeit der Veranstaltung</string>
@@ -71,7 +71,7 @@
 
     <!-- TODO replace 'this canteen' with %s -->
     <string name="text_sheet_opening_hours_title">%s – Öffnungszeiten</string>
-    <string name="text_sheet_opening_hours_empty">The Öffnungszeiten können nicht angezeigt werden.</string>
+    <string name="text_sheet_opening_hours_empty">Die Öffnungszeiten können nicht angezeigt werden.</string>
     <string name="text_sheet_news_title">%s – Neuigkeiten</string>
     <string name="text_sheet_news_empty">Es sind keine Neuigkeiten verfügbar.</string>
 
@@ -167,7 +167,7 @@
     <string name="settings_canteen">Mensenangebote</string>
     <string name="settings_misc">Sonstiges</string>
 
-    <string name="refresh_schedule_title">Aktualisiere Deinen Stud.IP-Stundenplan</string>
+    <string name="refresh_schedule_title">Aktualisiere deinen Stud.IP-Stundenplan</string>
     <string name="refresh_schedule_subtitle">Dies wird alle Anpassungen löschen!</string>
 
     <string name="settings_current_day_title">Starte Stundenplan am heutigen Tag</string>
@@ -181,7 +181,7 @@
     <string name="allergens_config_subtitle_one">Du hast ein Allergen ausgeschlossen</string>
     <string name="allergens_config_subtitle_more">Du hast %d Allergene ausgeschlossen</string>
     <string name="allergens_config_header">Wähle, welche Allergene Du vermeiden möchtest</string>
-    <string name="allergens_config_content">Achtung: bitte verlasse Dich nicht vollständig auf diese Funktion. Stelle immer in der Mensa, die Du besuchst, sicher, dass die Stoffe, auf die Du allergisch reagierst, nicht in deren Angeboten vorhanden sind. Die Allergen-Hinweise einiger Mensen sind online leider unvollständig.</string>
+    <string name="allergens_config_content">Achtung: bitte verlasse dich nicht vollständig auf diese Funktion. Stelle immer in der Mensa, die du besuchst, sicher, dass die Stoffe, auf die du allergisch reagierst, nicht in deren Angeboten vorhanden sind. Die Allergen-Hinweise einiger Mensen sind online leider unvollständig.</string>
     <string name="allergens_config_confirmation">Deine Allergene wurden gespeichert.</string>
 
     <string name="settings_pricing_title">Siehe Preise für</string>
@@ -204,10 +204,7 @@
     <string name="settings_data_title">Was passiert mit meinen Daten?</string>
     <string name="settings_data_subtitle">Stiehlst du meinen Stud.IP-Login?</string>
     <string name="settings_data_sheet_header">TL;DR: nein.</string>
-    <string name="settings_data_sheet_content">Die App funktioniert standalone, was bedeutet, dass sie sich niemals mit einem Server verbindet, der mir gehört. Sie ist ein Web-Scraper, also ein Programm, welches eine Internetseite öffnet und dann all die Informationen dieser Webseite herunterlädt und analysiert. In diesem Fall sind es die Webseiten der Mensen und Cafeterien des Studierendenwerks Bremen (stw-bremen.de) sowie die Stud.IP-Seite (elearning.uni-bremen.de).\n\nDies funktioniert relativ einfach für die Essenspläne, da diese Pläne öffentlich zugänglich sind. Um jedoch Deinen persönlichen Stud.IP-Stundenplan herunterzuladen, braucht die App Zugriff auf diese Webseite während Dein Account eingeloggt ist. Dies erfolgt, indem die App Dich mit deinem Account einloggen lässt - dies geschieht, wenn Du den Knopf zum Aktualisieren des Plans drückst und die App Dir die Login-Seite zeigt - und Du dann den Knopf klickst, um den Inhalt, den HTML-Quellcode, herunterzuladen. Der HTML-Quellcode beinhält Informationen darüber, was auf einer Webseite angezeigt wird und wie es aussehen soll, aber er kann niemals persönliche Details beinhalten, wie zum Beispiel Passwörter oder andere Daten, die auf Deinem Gerät vorhanden sind.\n\nDer Quellcode wird dann lokal, also auf Deinem Gerät, zu den Daten verarbeitet, die Du dann in der App sehen kannst, ohne, dass jegliche Daten irgendwohin geschickt werden müssten.\n\nSolltest du dich versichern wollen, dass wirklich keine Daten an irgendwelche Server verschickt wird, kannst Du jederzeit das Projekt erkunden, da es Open-Source und auf meinen GitHub-Profil öffentlich zugänglich ist:\nhttps://github.com/denizk0461/weserplaner/\n\nSchreib mir ansonsten gerne eine E-Mail:\ndenizk0461@gmail.com\ndeniz7@uni-bremen.de</string>
-    <!-- unused - use for possible future implementation of Crashlytics -->
-    <string name="settings_data_sheet_header_crashlytics">TL;DR: nein, aber Google könnte mir Bescheid geben, falls die App mal abstürzt.</string>
-    <string name="settings_data_sheet_content_crashlytics">Die App funktioniert standalone, was bedeutet, dass sie sich niemals mit einem Server verbindet, der mir gehört. Sie ist ein Web-Scraper, also ein Programm, welches eine Internetseite öffnet und dann all die Informationen dieser Webseite herunterlädt und analysiert. In diesem Fall sind es die Webseiten der Mensen und Cafeterien des Studierendenwerks Bremen (stw-bremen.de) sowie die Stud.IP-Seite (elearning.uni-bremen.de).\n\nDies funktioniert relativ einfach für die Essenspläne, da diese Pläne öffentlich zugänglich sind. Um jedoch Deinen persönlichen Stud.IP-Stundenplan herunterzuladen, braucht die App Zugriff auf diese Webseite während Dein Account eingeloggt ist. Dies erfolgt, indem die App Dich mit deinem Account einloggen lässt - dies geschieht, wenn Du den Knopf zum Aktualisieren des Plans drückst und die App Dir die Login-Seite zeigt - und Du dann den Knopf klickst, um den Inhalt, den HTML-Quellcode, herunterzuladen. Der HTML-Quellcode beinhält Informationen darüber, was auf einer Webseite angezeigt wird und wie es aussehen soll, aber er kann niemals persönliche Details beinhalten, wie zum Beispiel Passwörter oder andere Daten, die auf Deinem Gerät vorhanden sind.\n\nDer Quellcode wird dann lokal, also auf Deinem Gerät, zu den Daten verarbeitet, die Du dann in der App sehen kannst, ohne, dass jegliche Daten irgendwohin geschickt werden müssten.\n\nEinige Daten – welche nichts mit Deinen Stud.IP-Daten zu tun haben – könnten jedoch dennoch nach außen geschickt werden. Diese App nutzt \"Crashlytics\" von Google. Dies ist ein Tool, welches Absturzreporte an Google-Server schickt, wenn in der App etwas schief läuft. Diese werden genutzt, um Probleme in der App zu lösen.\n\nDies ist jedoch gemäß europäischer Datenschutz-Grundverordnung Opt-In, was bedeutet, dass Du zustimmen musst, bevor Daten nach außen geschickt werden. Du wurdest danach gefragt, als Du die App zum ersten Mal gestartet hast, und du kannst jederzeit deine Meinung ändern, indem Du den Schalter hierfür in den Einstellungen umstellst. Solltest Du dich entscheiden, keine Daten verschicken zu lassen, wird auch nichts mit Google (und mir) geteilt.\n\nSolltest du dich versichern wollen, dass wirklich keine Daten an irgendwelche Server verschickt wird (abgesehen von den Absturzreports an Google), kannst Du jederzeit das Projekt erkunden, da es Open-Source und auf meinen GitHub-Profil öffentlich zugänglich ist:\nhttps://github.com/denizk0461/weserplaner/\n\nSchreib mir ansonsten gerne eine E-Mail:\ndenizk0461@gmail.com\ndeniz7@uni-bremen.de</string>
+    <string name="settings_data_sheet_content">Die App funktioniert standalone, was bedeutet, dass sie sich niemals mit einem Server verbindet, der mir gehört. Sie ist ein Web-Scraper, also ein Programm, welches eine Internetseite öffnet und dann all die Informationen dieser Webseite herunterlädt und analysiert. In diesem Fall sind es die Webseiten der Mensen und Cafeterien des Studierendenwerks Bremen (stw-bremen.de) sowie die Stud.IP-Seite (elearning.uni-bremen.de).\n\nDies funktioniert relativ einfach für die Mensenpläne, da diese Pläne öffentlich zugänglich sind. Um jedoch deinen persönlichen Stud.IP-Stundenplan herunterzuladen, braucht die App Zugriff auf diese Webseite während dein Account eingeloggt ist. Dies erfolgt, indem die App dich mit deinem Account einloggen lässt - dies geschieht, wenn du den Knopf zum Aktualisieren des Plans drückst und die App dir die Login-Seite zeigt - und du dann den Knopf klickst, um den Inhalt, den HTML-Quellcode, herunterzuladen. Der HTML-Quellcode beinhält Informationen darüber, was auf einer Webseite angezeigt wird und wie es aussehen soll, aber er kann niemals persönliche Details beinhalten, wie zum Beispiel Passwörter oder andere Daten, die auf deinem Gerät vorhanden sind.\n\nDer Quellcode wird dann lokal, also auf deinem Gerät, zu den Daten verarbeitet, die du dann in der App sehen kannst, ohne, dass jegliche Daten irgendwohin geschickt werden müssten.\n\nSolltest du dich versichern wollen, dass wirklich keine Daten an irgendwelche Server verschickt wird, kannst du jederzeit das Projekt erkunden, da es Open-Source und auf meinen GitHub-Profil öffentlich zugänglich ist:\nhttps://github.com/denizk0461/weserplaner/\n\nSchreib mir ansonsten gerne eine E-Mail:\ndenizk0461@gmail.com\ndeniz7@uni-bremen.de</string>
 
     <string name="settings_licences_title">Siehe Lizenzen</string>
     <string name="settings_licences_subtitle">Ressourcen, die diese App möglich gemacht haben</string>
