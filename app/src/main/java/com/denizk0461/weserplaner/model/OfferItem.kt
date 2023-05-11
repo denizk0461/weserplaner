@@ -29,7 +29,7 @@ import androidx.room.PrimaryKey
 )
 data class OfferItem(
     @PrimaryKey val itemId: Int,
-    val categoryId: Int,
+    /*@ColumnInfo(index = true)*/ val categoryId: Int,
     val title: String,
     val price: String,
     @ColumnInfo(name = "dietary_preferences") val dietaryPreferences: String,

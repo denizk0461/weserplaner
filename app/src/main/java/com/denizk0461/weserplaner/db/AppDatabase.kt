@@ -51,7 +51,7 @@ abstract class AppDatabase : RoomDatabase() {
                             AppDatabase::class.java,
                             "event_db",
                         ).addMigrations(migrationAddNewsToOfferCanteen_19_20)
-                        .fallbackToDestructiveMigration()
+//                        .fallbackToDestructiveMigration()
                         .build()
                 }
             }

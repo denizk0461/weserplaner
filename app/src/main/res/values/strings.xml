@@ -75,7 +75,7 @@
     <string name="text_sheet_news_empty">No news are available.</string>
 
     <string name="sheet_licences_header">Licences</string>
-    <string name="sheet_licences_content" translatable="false">Android developer resources by Google.\nhttps://developer.android.com/\nandroidx.appcompat:appcompat:1.6.1\nandroidx.constraintlayout:constraintlayout:2.1.4\nandroidx.core:core-ktx:1.10.0\nandroidx.fragment:fragment-ktx:1.6.0-beta01\nandroidx.navigation:navigation-fragment-ktx:2.5.3\nandroidx.navigation:navigation-ui-ktx:2.5.3\nandroidx.preference:preference-ktx:1.2.0\nandroidx.room:room-runtime:2.5.1\nandroidx.room:room-compiler:2.5.1\nandroidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01\n\nDesign guidelines, icons, and colour palette by Google.\nhttps://m3.material.io/\ncom.google.android.material:material:1.9.0\n\nAdditional icons by Flaticon.\nhttps://www.flaticon.com/\n\nWeb scraping functionality by Jonathan Hedley.\nhttps://jhy.io/\nhttps://jsoup.org/\norg.jsoup:jsoup:1.15.4\n\nApp developed by Deniz Düzgören.\ndenizk0461@gmail.com\ndeniz7@uni-bremen.de</string>
+    <string name="sheet_licences_content" translatable="false">Android, Material Design Resources © 2014 – %1$s Google, licenced under the Apache 2.0 License.\nhttps://developer.android.com\nhttps://material.io\n\nSeveral icons © 2013 – %1$s Flaticon, licenced under the Flaticon Basic Free License.\nhttps://www.flaticon.com\n\nLato © 2010 – %1$s Łukasz Dziedzic, licenced under the SIL Open Font License.\nhttps://fonts.google.com/specimen/Lato\n\njsoup HTML parser © 2009 – %1$s Jonathan Hedley, licenced under the MIT License.\nhttps://jsoup.org\n\nApp developed by Deniz Düzgören.\ndenizk0461@gmail.com\ndeniz7@uni-bremen.de</string>
 
     <string name="title_schedule">Your Schedule</string>
     <string name="title_schedule_short">Schedule</string>
@@ -179,7 +179,9 @@
     <string name="settings_highlight_subtitle">Only works properly if courses don\'t overlap!</string>
 
     <string name="allergens_config_title">Hide offers containing certain allergens</string>
-    <string name="allergens_config_subtitle">Allergens you\'ve excluded: %d</string>
+    <string name="allergens_config_subtitle_zero">You have not excluded any allergens</string>
+    <string name="allergens_config_subtitle_one">You have excluded one allergen</string>
+    <string name="allergens_config_subtitle_more">You have excluded %d allergens</string>
     <string name="allergens_config_header">Select which allergens you\'d like to avoid</string>
     <string name="allergens_config_content">Note: please don\'t entirely rely on this. Always check the notices displayed at the canteen you\'re visiting to confirm substances you may be allergic against are not present in their offerings. Some canteens unfortunately don\'t provide full allergen information online.</string>
     <string name="allergens_config_confirmation">Your allergen settings have been saved.</string>

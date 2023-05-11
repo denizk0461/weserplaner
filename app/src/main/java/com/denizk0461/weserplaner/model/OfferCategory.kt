@@ -32,7 +32,7 @@ import androidx.room.PrimaryKey
 )
 data class OfferCategory(
     @PrimaryKey val id: Int,
-    val dateId: Int,
-    val canteenId: Int,
+    /*@ColumnInfo(index = true)*/ val dateId: Int,
+    /*@ColumnInfo(index = true)*/ val canteenId: Int,
     val category: String,
 )

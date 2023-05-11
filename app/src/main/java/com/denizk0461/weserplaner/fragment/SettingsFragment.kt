@@ -199,7 +199,10 @@ class SettingsFragment : AppFragment() {
             openBottomSheet(
                 getTextSheet(
                     getString(R.string.sheet_licences_header),
-                    getString(R.string.sheet_licences_content),
+                    getString(
+                        R.string.sheet_licences_content,
+                        Calendar.getInstance().get(Calendar.YEAR).toString(),
+                    ),
                 )
             )
         }
@@ -273,7 +276,7 @@ class SettingsFragment : AppFragment() {
             "${BuildConfig.VERSION_NAME}-${
                 if (BuildConfig.DEBUG) 
                     "dev-[${SimpleDateFormat("yyyy-MM-dd, HH:mm:ss.SSS", Locale.GERMANY)
-                        .format(Date(BuildConfig.TIMESTAMP))}]" 
+                        .format(Date(BuildConfig.BUILD_TIME_MILLIS))}]" 
                 else 
                     "release"
             }"
@@ -293,13 +296,14 @@ class SettingsFragment : AppFragment() {
     }
 
     /**
-     * Retrieves the text displayed in the allergen config setting to show the user how many
-     * allergens they have checked.
+     * Retrieves the appropriate text to display in the allergen config setting to show the user how
+     * many allergens they have checked. Text depends on how many allergens have been checked.
      *
      * @return localised string with the count of checked allergens inserted
      */
-    private fun getAllergensConfigCountText(): String = getString(
-        R.string.allergens_config_subtitle,
-        viewModel.preferenceAllergenConfigCount
-    )
+    private fun getAllergensConfigCountText(): String = when (viewModel.preferenceAllergenConfigCount) {
+        0 -> getString(R.string.allergens_config_subtitle_zero)
+        1 -> getString(R.string.allergens_config_subtitle_one)
+        else -> getString(R.string.allergens_config_subtitle_more, viewModel.preferenceAllergenConfigCount)
+    }
 }

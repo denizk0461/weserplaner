@@ -17,7 +17,7 @@ android {
 
         resourceConfigurations += ["en", "de"]
 
-        buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"
+        buildConfigField "long", "BUILD_TIME_MILLIS", "${System.currentTimeMillis()}L"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
