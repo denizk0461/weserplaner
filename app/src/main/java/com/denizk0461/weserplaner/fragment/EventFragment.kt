@@ -1,11 +1,14 @@
 package com.denizk0461.weserplaner.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import com.denizk0461.weserplaner.R
+import com.denizk0461.weserplaner.activity.FetcherActivity
 import com.denizk0461.weserplaner.adapter.StudIPEventPageAdapter
 import com.denizk0461.weserplaner.databinding.FragmentEventBinding
 import com.denizk0461.weserplaner.sheet.ScheduleUpdateSheet
@@ -79,6 +82,19 @@ class EventFragment : AppFragment() {
             )
         }
 
+        // Launch the Stud.IP fetcher on click of the fetch button
+        binding.buttonFetchSchedule.setOnClickListener {
+            startActivity(Intent(context, FetcherActivity::class.java))
+        }
+
+        /*
+         * Set the fetch button to be visible if the user has not previously modified their schedule
+         * in any way (added an event manually or used the Stud.IP fetcher).
+         */
+        if (!viewModel.preferenceHasModifiedSchedule) {
+            binding.buttonFetchSchedule.visibility = View.VISIBLE
+        }
+
         // Set up button for adding a new event
         binding.fabAddEvent.setOnClickListener {
             /*
@@ -90,6 +106,16 @@ class EventFragment : AppFragment() {
                     val bundle = Bundle()
                     bundle.putBoolean("isEditing", false)
                     sheet.arguments = bundle
+
+                    /*
+                     * Receive fragment result to update the button visibility.
+                     * TODO doesn't work after configuration change (change into or out of multi
+                     *  window)
+                     */
+                    setFragmentResultListener("eventAdded") { _, _ ->
+                        // Hide the fetch button
+                        binding.buttonFetchSchedule.visibility = View.GONE
+                    }
                 }
             )
         }

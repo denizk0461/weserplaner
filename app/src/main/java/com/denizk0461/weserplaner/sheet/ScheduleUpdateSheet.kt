@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.transition.TransitionManager
 import com.denizk0461.weserplaner.R
@@ -93,7 +94,8 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update) {
                         dismiss()
                     } else {
                         // Update the text to show the user that they clicked the button once
-                        TransitionManager.beginDelayedTransition(binding.buttonContainer as ViewGroup)
+                        TransitionManager
+                            .beginDelayedTransition(binding.buttonContainer as ViewGroup)
                         binding.buttonDelete.text =
                             getString(R.string.sheet_schedule_update_delete_confirm)
                         hasClickedDelete = true
@@ -186,6 +188,13 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update) {
                                 colour = colour,
                             )
                         )
+
+                        /*
+                         * Send an empty bundle to tell the parent fragment that it should update its view
+                         * according to the changes made here.
+                         */
+                        parentFragment?.setFragmentResult("eventAdded", Bundle())
+
                         // Dismiss the sheet upon update
                         dismiss()
                     }

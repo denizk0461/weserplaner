@@ -24,6 +24,8 @@
     <string name="fetch_error_webpage_snack">Du musst deinen Stundenplan öffnen!</string>
     <string name="canteen_fetch_error">Mensaplan konnte nicht heruntergeladen werden!</string>
 
+    <string name="event_empty_fetch_button">Lade Deinen Stundenplan von Stud.IP herunter</string>
+
     <!-- plurals string resource cannot be used here because Android doesn't treat 0 differently from 2 -->
     <string name="toast_fetch_finished_zero">Dein Stundenplan wurde aktualisiert!</string>
     <string name="toast_fetch_finished_one">Dein Stundenplan wurde aktualisiert, doch eine Veranstaltung konnte nicht heruntergeladen werden.</string>

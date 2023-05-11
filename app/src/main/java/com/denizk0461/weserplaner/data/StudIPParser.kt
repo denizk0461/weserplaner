@@ -2,6 +2,7 @@ package com.denizk0461.weserplaner.data
 
 import android.app.Application
 import com.denizk0461.weserplaner.db.AppRepository
+import com.denizk0461.weserplaner.model.SettingsPreferences
 import com.denizk0461.weserplaner.model.StudIPEvent
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
@@ -108,6 +109,9 @@ class StudIPParser(application: Application) {
 
         // After fetching has finished, save the list of new items into persistent storage
         repo.insertEvents(newEvents)
+
+        // Set that the user has modified their schedule
+        repo.setPreference(SettingsPreferences.HAS_MODIFIED_SCHEDULE, true)
 
         // Return the count of elements that were not able to be fetched
         return elementsNotFetched

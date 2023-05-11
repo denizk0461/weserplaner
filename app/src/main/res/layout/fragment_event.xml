@@ -39,6 +39,16 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Material3.Button.ElevatedButton"
+        android:id="@+id/button_fetch_schedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:icon="@drawable/cloud_download"
+        android:text="@string/event_empty_fetch_button"
+        android:visibility="gone"/>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_event"
         android:layout_width="wrap_content"

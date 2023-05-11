@@ -25,6 +25,8 @@
     <string name="fetch_error_webpage_snack">You must navigate to your schedule!</string>
     <string name="canteen_fetch_error">Couldn\'t retrieve the canteen plan!</string>
 
+    <string name="event_empty_fetch_button">Download your schedule from Stud.IP</string>
+
     <!-- plurals resource cannot be used here; view German translation for details -->
     <string name="toast_fetch_finished_zero">Your schedule has been refreshed!</string>
     <string name="toast_fetch_finished_one">Your schedule has been refreshed, but one item could not be saved.</string>

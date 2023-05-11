@@ -12,6 +12,7 @@ import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.data.showErrorSnackBar
 import com.denizk0461.weserplaner.data.showToast
 import com.denizk0461.weserplaner.databinding.ActivityFetcherBinding
+import com.denizk0461.weserplaner.model.TextSheetContentId
 import com.denizk0461.weserplaner.sheet.TextSheet
 import com.denizk0461.weserplaner.viewmodel.FetcherViewModel
 import java.io.IOException
@@ -98,6 +99,7 @@ class FetcherActivity : FragmentActivity() {
                         bundle.putString("header", getString(R.string.fetch_bar_help_sheet_title))
                         bundle.putString("content", getString(R.string.fetch_bar_help_sheet_content))
                         bundle.putBoolean("isCancellable", true)
+                        bundle.putInt("contentId", TextSheetContentId.PASS_RAW_STRING)
                         sheet.arguments = bundle
                     }.show(supportFragmentManager, TextSheet::class.java.simpleName)
                     true
@@ -111,8 +113,6 @@ class FetcherActivity : FragmentActivity() {
          * not logged in.
          */
         binding.webview.loadUrl("https://elearning.uni-bremen.de/index.php?again=yes")
-
-        binding.webview
 
         binding.fab.setOnClickListener {
 

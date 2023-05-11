@@ -63,5 +63,10 @@ enum class SettingsPreferences(val key: String) {
      * Whether the user has opened the canteen fragment before.
      */
     HAS_OPENED_CANTEEN("has_opened_canteen"),
+
+    /**
+     * Whether the user has done something to modify their schedule.
+     */
+    HAS_MODIFIED_SCHEDULE("has_modified_schedule"),
     ;
 }

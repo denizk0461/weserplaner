@@ -19,10 +19,19 @@ class EventViewModel(app: Application) : AppViewModel(app) {
             defaultValue = true,
         )
 
+    /**
+     * Determines whether the user is launching the app for the first time.
+     */
     var preferenceFirstLaunch: Boolean
         get() = repo.getBooleanPreference(
             SettingsPreferences.FIRST_LAUNCH,
             defaultValue = true,
         )
         set(value) { repo.setPreference(SettingsPreferences.FIRST_LAUNCH, value) }
+
+    /**
+     * Determines whether the user has done something to modify their schedule.
+     */
+    val preferenceHasModifiedSchedule: Boolean
+        get() = repo.getBooleanPreference(SettingsPreferences.HAS_MODIFIED_SCHEDULE)
 }
