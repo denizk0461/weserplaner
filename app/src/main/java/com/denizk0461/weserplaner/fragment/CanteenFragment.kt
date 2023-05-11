@@ -69,14 +69,6 @@ class CanteenFragment : AppFragment() {
             ))
         }
 
-        // Create badge
-//        val badge = BadgeDrawable.create(context)
-////        badge.isVisible = true
-//        badge.number = 1
-//        badge.badgeGravity = BadgeDrawable.TOP_END
-//        // Attach badge to button
-//        BadgeUtils.attachBadgeDrawable(badge, binding.buttonNotifications, binding.buttonNotificationsBadgeContainer)
-
         // Assign a preference value to every button to filter for dietary preferences
         val chipMap = mapOf(
             binding.chipPrefFair to DietaryPreferences.WELFARE,
@@ -194,6 +186,18 @@ class CanteenFragment : AppFragment() {
         // Set up functions for when the user swipes to refresh the view
         binding.swipeRefreshLayout.setOnRefreshListener {
             refresh()
+        }
+
+        // Check if the user is opening the canteen fragment for the first time
+        if (!viewModel.preferenceHasOpenedCanteen) {
+            // Show that a refresh is in progress
+            binding.swipeRefreshLayout.isRefreshing = true
+
+            // Refresh to fetch the first items and avoid showing an empty list
+            refresh()
+
+            // Save that the canteen has been opened before
+            viewModel.preferenceHasOpenedCanteen = true
         }
     }
 

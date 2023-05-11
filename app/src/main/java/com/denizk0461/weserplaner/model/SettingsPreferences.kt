@@ -58,5 +58,10 @@ enum class SettingsPreferences(val key: String) {
      * The canteen the user has picked.
      */
     CANTEEN("setting_canteen"),
+
+    /**
+     * Whether the user has opened the canteen fragment before.
+     */
+    HAS_OPENED_CANTEEN("has_opened_canteen"),
     ;
 }

@@ -70,4 +70,11 @@ class CanteenViewModel(app: Application) : AppViewModel(app) {
     var preferenceCanteen: Int
         get() = repo.getIntPreference(SettingsPreferences.CANTEEN)
         set(newValue) { repo.setPreference(SettingsPreferences.CANTEEN, newValue) }
+
+    /**
+     * This value determines whether the user has opened the canteen fragment before.
+     */
+    var preferenceHasOpenedCanteen: Boolean
+        get() = repo.getBooleanPreference(SettingsPreferences.HAS_OPENED_CANTEEN)
+        set(newValue) { repo.setPreference(SettingsPreferences.HAS_OPENED_CANTEEN, newValue) }
 }
