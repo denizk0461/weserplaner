@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.activity.FetcherActivity
@@ -87,12 +86,13 @@ class EventFragment : AppFragment() {
             startActivity(Intent(context, FetcherActivity::class.java))
         }
 
-        /*
-         * Set the fetch button to be visible if the user has not previously modified their schedule
-         * in any way (added an event manually or used the Stud.IP fetcher).
-         */
-        if (!viewModel.preferenceHasModifiedSchedule) {
-            binding.buttonFetchSchedule.visibility = View.VISIBLE
+        // Set visibility of the fetch button depending on whether any events have been stored
+        viewModel.getEventCount().observe(viewLifecycleOwner) { eventCount ->
+            binding.buttonFetchSchedule.visibility = if (eventCount == 0) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
         }
 
         // Set up button for adding a new event
@@ -106,26 +106,12 @@ class EventFragment : AppFragment() {
                     val bundle = Bundle()
                     bundle.putBoolean("isEditing", false)
                     sheet.arguments = bundle
-
-                    /*
-                     * Receive fragment result to update the button visibility.
-                     * TODO doesn't work after configuration change (change into or out of multi
-                     *  window)
-                     */
-                    setFragmentResultListener("eventAdded") { _, _ ->
-                        // Hide the fetch button
-                        binding.buttonFetchSchedule.visibility = View.GONE
-                    }
                 }
             )
         }
 
         // Show the user a little message if they're opening the app for the first time
         if (viewModel.preferenceFirstLaunch) {
-
-            // Show toast
-//            showToast(context, getString(R.string.toast_first_launch))
-
             // Remember that the app has been launched before
             viewModel.preferenceFirstLaunch = false
         }

@@ -53,6 +53,13 @@ class AppRepository(app: Application) {
     }
 
     /**
+     * Retrieves the number of Stud.IP events available in the database.
+     *
+     * @return number of Stud.IP events
+     */
+    fun getEventCount(): LiveData<Int> = dao.getEventCount()
+
+    /**
      * Retrieves Stud.IP events for a specific day, ordered by their timeslots, then their IDs.
      *
      * @return  Stud.IP events for a certain day exposed through a LiveData object

@@ -14,12 +14,12 @@ interface AppDAO {
     /* --- Stud.IP schedule events --- */
 
     /**
-     * Retrieves all Stud.IP events, ordered by their timeslots, then their IDs.
+     * Retrieves the number of Stud.IP events available in the database.
      *
-     * @return all Stud.IP events exposed through a LiveData object
+     * @return number of Stud.IP events
      */
-    @get:Query("SELECT * FROM studip_events ORDER BY timeslotId, eventId")
-    val allEvents: LiveData<List<StudIPEvent>>
+    @Query("SELECT COUNT(*) FROM studip_events ORDER BY timeslotId, eventId")
+    fun getEventCount(): LiveData<Int>
 
     /**
      * Retrieves Stud.IP events for a specific day, ordered by their timeslots, then their IDs.

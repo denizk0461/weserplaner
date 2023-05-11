@@ -1,7 +1,6 @@
 package com.denizk0461.weserplaner.viewmodel
 
 import android.app.Application
-import com.denizk0461.weserplaner.model.SettingsPreferences
 import com.denizk0461.weserplaner.model.StudIPEvent
 
 class ScheduleUpdateViewModel(application: Application) : AppViewModel(application) {
@@ -11,13 +10,7 @@ class ScheduleUpdateViewModel(application: Application) : AppViewModel(applicati
      *
      * @param event the event to save
      */
-    fun insert(event: StudIPEvent) {
-        // Inser the event
-        doAsync { repo.insert(event) }
-
-        // Set that the user has modified their schedule
-        repo.setPreference(SettingsPreferences.HAS_MODIFIED_SCHEDULE, true)
-    }
+    fun insert(event: StudIPEvent) { doAsync { repo.insert(event) } }
 
     /**
      * Updates a schedule element.
