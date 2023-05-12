@@ -14,7 +14,7 @@ import com.denizk0461.weserplaner.data.getTextSheet
 import com.denizk0461.weserplaner.data.getThemedColor
 import com.denizk0461.weserplaner.data.setRainbowProgressCircle
 import com.denizk0461.weserplaner.data.showErrorSnackBar
-import com.denizk0461.weserplaner.data.showToast
+import com.denizk0461.weserplaner.data.showSnackBar
 import com.denizk0461.weserplaner.databinding.FragmentCanteenBinding
 import com.denizk0461.weserplaner.model.*
 import com.denizk0461.weserplaner.viewmodel.CanteenViewModel
@@ -86,7 +86,8 @@ class CanteenFragment : AppFragment() {
 
                 // Set up click listener to tell the user that no news are available
                 binding.buttonNotifications.setOnClickListener {
-                    showToast(context, getString(R.string.text_sheet_news_empty))
+//                    showToast(context, getString(R.string.text_sheet_news_empty))
+                    context.theme.showSnackBar(binding.snackbarContainer, getString(R.string.text_sheet_news_empty))
                 }
 
             } else {

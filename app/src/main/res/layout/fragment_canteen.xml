@@ -247,6 +247,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="bottom|end"
+        app:layout_dodgeInsetEdges="bottom"
         app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -256,8 +257,8 @@
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/clock"
             android:contentDescription="@string/canteen_fab_opening_hours_content_desc"
-            android:layout_gravity="center_horizontal"
             android:tooltipText="@string/canteen_fab_opening_hours_content_desc"
+            android:layout_gravity="center_horizontal"
             tools:ignore="UnusedAttribute"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -267,9 +268,9 @@
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/switch_arrows"
             android:contentDescription="@string/canteen_fab_switch_canteen_content_desc"
-            android:layout_marginBottom="8dp"
-            android:layout_gravity="center_horizontal"
             android:tooltipText="@string/canteen_fab_switch_canteen_content_desc"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="4dp"
             tools:ignore="UnusedAttribute"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

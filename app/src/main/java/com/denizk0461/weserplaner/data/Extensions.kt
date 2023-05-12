@@ -55,6 +55,33 @@ fun showToast(context: Context, text: String) {
     Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
 }
 
+/**
+ * Show a snack bar. Colours will be applied according to the theme given.
+ *
+ * @receiver        theme to apply colours of
+ * @param view      view where the snack bar will be shown in
+ * @param text      text to present in the snack bar
+ * @param anchor    view to anchor the snack bar to
+ */
+fun Resources.Theme.showSnackBar(view: CoordinatorLayout, text: String, anchor: View? = null) {
+    val s = Snackbar.make(view, text, Snackbar.LENGTH_SHORT)
+        // Set colours
+        .setTextColor(getThemedColor(com.google.android.material.R.attr.colorOnSurfaceInverse))
+        .setBackgroundTint(getThemedColor(com.google.android.material.R.attr.colorSurfaceInverse))
+
+    // Set anchor view, if one has been passed
+    anchor?.let { a -> s.setAnchorView(a) }
+    s.show()
+}
+
+/**
+ * Show an error snack bar. Error colours will be applied according to the theme given.
+ *
+ * @receiver        theme to apply colours of
+ * @param view      view where the snack bar will be shown in
+ * @param text      text to present in the snack bar
+ * @param anchor    view to anchor the snack bar to
+ */
 fun Resources.Theme.showErrorSnackBar(view: CoordinatorLayout, text: String, anchor: View? = null) {
     val s = Snackbar
         .make(view, text, Snackbar.LENGTH_SHORT)
@@ -62,6 +89,7 @@ fun Resources.Theme.showErrorSnackBar(view: CoordinatorLayout, text: String, anc
         .setBackgroundTint(getThemedColor(R.attr.colorErrorContainer))
         .setTextColor(getThemedColor(R.attr.colorOnErrorContainer))
 
+    // Set anchor view, if one has been passed
     anchor?.let { a -> s.setAnchorView(a) }
     s.show()
 }

@@ -145,12 +145,20 @@ class FetcherActivity : FragmentActivity() {
 
                     } catch (e: IOException) {
                         // Let the user know that an error occurred
-                        theme.showErrorSnackBar(binding.rootView, getString(R.string.fetch_error_snack), binding.bottomAppBar)
+                        theme.showErrorSnackBar(
+                            binding.rootView,
+                            getString(R.string.fetch_error_snack),
+                            binding.bottomAppBar
+                        )
                     }
                 }
             } else {
                 // Tell the user that they must navigate to their timetable
-                theme.showErrorSnackBar(binding.rootView, getString(R.string.fetch_error_webpage_snack), binding.bottomAppBar)
+                theme.showErrorSnackBar(
+                    binding.rootView,
+                    getString(R.string.fetch_error_webpage_snack),
+                    binding.bottomAppBar
+                )
             }
         }
     }
