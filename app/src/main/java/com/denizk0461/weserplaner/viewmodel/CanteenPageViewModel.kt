@@ -17,6 +17,9 @@ class CanteenPageViewModel(app: Application) : AppViewModel(app) {
     fun getOffersByDay(day: Int): LiveData<List<CanteenOffer>> =
         repo.getOffersByDay(day)
 
+    /**
+     * Used to observe whenever updates are made to the dietary preferences.
+     */
     val dietaryPreferencesUpdate: LiveData<Int> = repo.dietaryPreferencesUpdate
 
     /**

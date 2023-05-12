@@ -27,7 +27,7 @@ class AppRepository(app: Application) {
     private val blankDietaryPrefs: String = DietaryPreferences.TEMPLATE_EMPTY
 
     /**
-     * Used to observe just to register an update of the user-set dietary preferences.
+     * Used to observe whenever updates are made to the dietary preferences.
      */
     val dietaryPreferencesUpdate: MutableLiveData<Int> = MutableLiveData(0)
 

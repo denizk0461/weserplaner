@@ -1,16 +1,20 @@
 package com.denizk0461.weserplaner.fragment
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.viewModels
 import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.adapter.CanteenOfferPageAdapter
 import com.denizk0461.weserplaner.data.getTextSheet
+import com.denizk0461.weserplaner.data.getThemedColor
 import com.denizk0461.weserplaner.data.setRainbowProgressCircle
 import com.denizk0461.weserplaner.data.showErrorSnackBar
+import com.denizk0461.weserplaner.data.showToast
 import com.denizk0461.weserplaner.databinding.FragmentCanteenBinding
 import com.denizk0461.weserplaner.model.*
 import com.denizk0461.weserplaner.viewmodel.CanteenViewModel
@@ -60,13 +64,53 @@ class CanteenFragment : AppFragment() {
             R.string.title_canteen_template,
             getCurrentlySelectedCanteenName(),
         )
+
+        // Set the title to be selected so it scrolls (marquee)
         binding.appTitleBar.isSelected = true
 
-        binding.buttonNotifications.setOnClickListener {
-            openBottomSheet(getTextSheet(
-                getString(R.string.canteen_news_sheet_title),
-                contentId = TextSheetContentId.NEWS,
-            ))
+        // Set up observer for the selected canteen
+        viewModel.getCanteen().observe(viewLifecycleOwner) { canteen ->
+            if (canteen == null || canteen.news.isBlank()) {
+                // Set icon to show that no news are available
+                binding.buttonNotifications.icon = AppCompatResources.getDrawable(
+                    context,
+                    R.drawable.notifications_none,
+                )
+
+                // Apply default colour
+                binding.buttonNotifications.iconTint = ColorStateList.valueOf(
+                    context.theme.getThemedColor(
+                        R.attr.colorOnSurfaceVariant
+                    )
+                )
+
+                // Set up click listener to tell the user that no news are available
+                binding.buttonNotifications.setOnClickListener {
+                    showToast(context, getString(R.string.text_sheet_news_empty))
+                }
+
+            } else {
+                // Set icon to show that news are available
+                binding.buttonNotifications.icon = AppCompatResources.getDrawable(
+                    context,
+                    R.drawable.notifications_active,
+                )
+
+                // Apply highlight colour
+                binding.buttonNotifications.iconTint = ColorStateList.valueOf(
+                    context.theme.getThemedColor(
+                        com.google.android.material.R.attr.colorPrimary
+                    )
+                )
+
+                // Set up click listener to show news sheet
+                binding.buttonNotifications.setOnClickListener {
+                    openBottomSheet(getTextSheet(
+                        getString(R.string.canteen_news_sheet_title),
+                        contentId = TextSheetContentId.NEWS,
+                    ))
+                }
+            }
         }
 
         // Assign a preference value to every button to filter for dietary preferences

@@ -42,6 +42,16 @@ class CanteenViewModel(app: Application) : AppViewModel(app) {
         }
     }
 
+    /**
+     * Retrieves the canteen stored in the database. Should always be 0 or 1.
+     *
+     * @return canteen
+     */
+    fun getCanteen(): LiveData<OfferCanteen> = repo.getCanteen()
+
+    /**
+     * Register that the user has made an update to their dietary preferences.
+     */
     fun registerDietaryPreferencesUpdate() {
         repo.dietaryPreferencesUpdate.postValue(repo.dietaryPreferencesUpdate.value?.plus(1))
     }
