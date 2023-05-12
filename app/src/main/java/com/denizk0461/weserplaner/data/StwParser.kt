@@ -6,6 +6,7 @@ import com.denizk0461.weserplaner.model.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
 import kotlin.jvm.Throws
@@ -78,7 +79,9 @@ class StwParser(application: Application) {
         try {
 
             // Fetch offers from the chosen canteen
-            val (dates, canteens, categories, items) = parseFromPage(link)
+            val (dates, canteens, categories, items) = parseFromPage(
+                "https://www.stw-bremen.de/de/$link"
+            )
 
             // Delete all previous entries and start afresh
             repo.nukeOffers()
@@ -129,41 +132,10 @@ class StwParser(application: Application) {
         val doc = Jsoup.connect(url).get()
 
         // Retrieve the opening hours for the canteen
-        var openingHours = ""
+        val openingHours = doc.retrieveOpeningHours()
 
-        // Iterate through all wrappers that could contain opening hours
-        doc.getElementsByClass("details-wrapper").forEach {
-            // Element is not for providing contact details
-            if (it.getElementsByClass("contact-person-name").size == 0) {
-
-                // Retrieve all opening hours.
-                it.children().forEach { element ->
-                    if (element.tag().toString() == "p") {
-                        // Uni-Mensa is not parsed properly
-                        openingHours += element.textWithBreaks().trim() + "\n"
-                    } else {
-                        element.children().forEach { subElement ->
-                            openingHours += subElement.textWithBreaks() + '\n'
-                        }
-                    }
-                }
-            }
-
-            // Add an extra line break to separate elements
-            openingHours += "\n"
-        }
-
-        // Trim off excess line breaks
-        openingHours = openingHours.trim()
-
-        // Fetch news displayed at the top of the page, if any are available
-        val news = try {
-            doc.getElementsByClass("field__items")[0]
-                .getElementsByTag("p")[0]
-                .text()
-        } catch (e: IndexOutOfBoundsException) {
-            ""
-        }
+        // Fetch news displayed at the top of the page
+        val news = doc.retrieveNews()
 
         // Save the canteen to its list
         canteens.add(
@@ -226,16 +198,16 @@ class StwParser(application: Application) {
                                 .getElementsByClass("field field-name-field-food-types")[0]
                             ) {
                                 DietaryPreferences.Object(
-                                    isFair = isDietaryPreferenceMet(imageLinkPrefFair),
-                                    isFish = isDietaryPreferenceMet(imageLinkPrefFish),
-                                    isPoultry = isDietaryPreferenceMet(imageLinkPrefPoultry),
-                                    isLamb = isDietaryPreferenceMet(imageLinkPrefLamb),
-                                    isVital = isDietaryPreferenceMet(imageLinkPrefVital),
-                                    isBeef = isDietaryPreferenceMet(imageLinkPrefBeef),
-                                    isPork = isDietaryPreferenceMet(imageLinkPrefPork),
-                                    isVegan = isDietaryPreferenceMet(imageLinkPrefVegan),
-                                    isVegetarian = isDietaryPreferenceMet(imageLinkPrefVegetarian),
-                                    isGame = isDietaryPreferenceMet(imageLinkPrefGame),
+                                    isFair = isDietaryPreferenceMet(preferenceFairFileName),
+                                    isFish = isDietaryPreferenceMet(preferenceFishFileName),
+                                    isPoultry = isDietaryPreferenceMet(preferencePoultryFileName),
+                                    isLamb = isDietaryPreferenceMet(preferenceLambFileName),
+                                    isVital = isDietaryPreferenceMet(preferenceVitalFileName),
+                                    isBeef = isDietaryPreferenceMet(preferenceBeefFileName),
+                                    isPork = isDietaryPreferenceMet(preferencePorkFileName),
+                                    isVegan = isDietaryPreferenceMet(preferenceVeganFileName),
+                                    isVegetarian = isDietaryPreferenceMet(preferenceVegetarianFileName),
+                                    isGame = isDietaryPreferenceMet(preferenceGameFileName),
                                 )
                             }
                         } catch (e: IndexOutOfBoundsException) {
@@ -310,11 +282,15 @@ class StwParser(application: Application) {
      * Evaluates whether a dietary preference is met by checking if the link to an image can be
      * found in the HTML.
      *
+     * @receiver            element to check the image source of
      * @param preference    constraint that needs to be met
      * @return              whether it is met
      */
     private fun Element.isDietaryPreferenceMet(preference: String): Boolean =
-        getElementsByAttributeValue("src", preference).isNotEmpty()
+        getElementsByAttributeValue(
+            "src",
+            "https://www.stw-bremen.de/sites/default/files/images/pictograms/$preference.png"
+        ).isNotEmpty()
 
     /**
      * Processes certain character references into human-readable characters. Since the fetched HTML
@@ -323,7 +299,8 @@ class StwParser(application: Application) {
      * the website of the Studierendenwerk, but they are invisible, rendering them pointless to the
      * website user.
      *
-     * @return  the filtered string and a string describing allergens and additives
+     * @receiver    element to parse the text content of
+     * @return      the filtered string and a string describing allergens and additives
      */
     private fun Element.getFilteredText(): Pair<String, String> {
         // Retrieve the element's inner HTML and replace faulty characters
@@ -382,6 +359,7 @@ class StwParser(application: Application) {
      * Retrieve the text of an element in a certain position if the element can be found. Else,
      * return an empty string.
      *
+     * @receiver    list of elements where a specific element should be retrieved from
      * @param index position at which a child
      * @return      text content or, if no element is found, an empty string
      */
@@ -396,7 +374,8 @@ class StwParser(application: Application) {
      * Input: Apr
      * Output: 04
      *
-     * @return  the numeric value of the month
+     * @receiver    month as 3-character string
+     * @return      the numeric value of the month
      */
     private fun String.monthToNumber(): String = when (this) {
         "Jan" -> "01"
@@ -420,7 +399,7 @@ class StwParser(application: Application) {
      *
      * @param   orElse  return value if action throws
      * @param   action  action to try to retrieve value T
-     * @return          a value T without throwing an exception
+     * @return          a value T guaranteed to be returned without throwing an exception
      */
     private fun <T> getOrElse(orElse: T, action: () -> T): T = try {
         action()
@@ -429,19 +408,98 @@ class StwParser(application: Application) {
     }
 
     /**
-     * Retrieves a text and adds <br> tags with line breaks.
+     * Cleans up a HTML source by doing the following:
+     * - replace non-breaking spaces '&nbsp;' with a regular space character ' ',
+     * - replace closing paragraph tags '</p>' with a line break '\n', and
+     * - remove any other tag.
+     * This is used to format the opening hours of the canteens.
      *
-     * @return  formatted element text
+     * @receiver    Element to parse the text of
+     * @return      beautified text
      */
-    private fun Element.textWithBreaks(): String =
-        this.text()//html()
-//            .replace("<br>", "\n")
-//            .replace("&nbsp;", " ")
-//            .replace("<strong>", "")
-//            .replace("</strong>", "")
-//            .replace("<p>", "")
-//            .replace("</p>", "")
+    private fun Element.cleanHtml(): String {
+        // Replace non-breaking spaces with a regular space character
+        var result: String = outerHtml().replace("&nbsp;", " ")
 
+        // Replace paragraph closing tags with a newline character
+        result = result.replace("</p>", "\n")
+
+        // Remove all other characters
+        return result.replace(Regex("</?[a-zA-Z0-9]+>"), "")
+    }
+
+    /**
+     * Retrieves the opening hours of a canteen from a given document.
+     *
+     * @receiver    document to parse
+     * @return      opening hours parsed as a string
+     */
+    private fun Document.retrieveOpeningHours(): String {
+        // Retrieve the opening hours for the canteen
+        var openingHours = ""
+
+        // Iterate through all containers that may contain opening hours
+        getElementsByClass("nm").forEach { container ->
+            // Attempt to fetch a header, if any is available
+            try {
+                // Check for a header in the parent element of the container
+                val header = container.parent()?.getElementsByClass("strong")?.get(0)?.text()
+
+                // Check if the header has content for the opening hours
+                if (!header.isNullOrBlank()
+                    && !header.contains("Frau")
+                    && !header.contains("Herr")
+                ) {
+                    // Add the header to the opening hours
+                    openingHours += "${header}\n"
+                }
+            } catch (e: IndexOutOfBoundsException) {
+                // Ignore the exception; no header is available, and thus, nothing needs to be done
+            }
+
+            // Iterate through all items in the container
+            container.children().forEach { element ->
+                // Clean up HTML
+                val line = element.cleanHtml()
+
+                // Confirm that this line only contains information for the opening hours
+                if (!line.contains("Catering")) {
+                    // Add the line to the opening hours
+                    openingHours += "${line}\n"
+                }
+            }
+        }
+
+        // Trim off excess line breaks
+        openingHours = openingHours.trim()
+
+        // Return the result
+        return openingHours
+    }
+
+    /**
+     * Retrieves news available at the top of the page in a special header. If none are available,
+     * return a blank string.
+     *
+     * @receiver    document to parse
+     * @return      news parsed as a string
+     */
+    private fun Document.retrieveNews(): String = try {
+        getElementsByClass("field__items")[0]
+            .getElementsByTag("p")[0]
+            .text()
+    } catch (e: IndexOutOfBoundsException) {
+        ""
+    }
+
+    /**
+     * Wrapper tuple class to transfer all fetched elements in one go.
+     *
+     * @param dates         fetched date elements
+     * @param canteens      fetched canteen elements
+     * @param categories    fetched category elements
+     * @param items         fetched items
+     */
     private data class StwResults(
         val dates: List<OfferDate>,
         val canteens: List<OfferCanteen>,
@@ -449,28 +507,34 @@ class StwParser(application: Application) {
         val items: List<OfferItem>,
     )
 
-    // Image links to all dietary preferences used for checking whether a preference is met
-    private val imageLinkPrefFair = "https://www.stw-bremen.de/sites/default/files/images/pictograms/at_small.png"
-    private val imageLinkPrefFish = "https://www.stw-bremen.de/sites/default/files/images/pictograms/fisch.png"
-    private val imageLinkPrefPoultry = "https://www.stw-bremen.de/sites/default/files/images/pictograms/geflugel.png"
-    private val imageLinkPrefLamb = "https://www.stw-bremen.de/sites/default/files/images/pictograms/lamm.png"
-    private val imageLinkPrefVital = "https://www.stw-bremen.de/sites/default/files/images/pictograms/mensa_vital.png"
-    private val imageLinkPrefBeef = "https://www.stw-bremen.de/sites/default/files/images/pictograms/rindfleisch.png"
-    private val imageLinkPrefPork = "https://www.stw-bremen.de/sites/default/files/images/pictograms/schwein.png"
-    private val imageLinkPrefVegan = "https://www.stw-bremen.de/sites/default/files/images/pictograms/mensa_vegan.png"
-    private val imageLinkPrefVegetarian = "https://www.stw-bremen.de/sites/default/files/images/pictograms/vegetarisch.png"
-    private val imageLinkPrefGame = "https://www.stw-bremen.de/sites/default/files/images/pictograms/wild.png"
+    /*
+     * File names for all dietary preferences on the Stw website used for checking whether a
+     * preference is met.
+     */
+    private val preferenceFairFileName = "at_small"
+    private val preferenceFishFileName = "fisch"
+    private val preferencePoultryFileName = "geflugel"
+    private val preferenceLambFileName = "lamm"
+    private val preferenceVitalFileName = "mensa_vital"
+    private val preferenceBeefFileName = "rindfleisch"
+    private val preferencePorkFileName = "schwein"
+    private val preferenceVeganFileName = "mensa_vegan"
+    private val preferenceVegetarianFileName = "vegetarisch"
+    private val preferenceGameFileName = "wild"
 
-    // URLs to all canteens in Bremen and Bremerhaven managed by the Studierendenwerk Bremen
-    private val urlUniMensa = "https://www.stw-bremen.de/de/mensa/uni-mensa"
-    private val urlCafeCentral = "https://www.stw-bremen.de/de/mensa/cafe-central"
-    private val urlNW1 = "https://www.stw-bremen.de/de/mensa/nw-1"
-    private val urlGW2 = "https://www.stw-bremen.de/de/cafeteria/gw2"
+    /*
+     * URL artifacts linking to all canteens in Bremen and Bremerhaven managed by the
+     * Studierendenwerk Bremen.
+     */
+    private val urlUniMensa = "mensa/uni-mensa"
+    private val urlCafeCentral = "mensa/cafe-central"
+    private val urlNW1 = "mensa/nw-1"
+    private val urlGW2 = "cafeteria/gw2"
+    private val urlHSBNeustadt = "mensa/neustadtswall"
+    private val urlHSBWerder = "mensa/werderstraße"
+    private val urlHSBAirport = "mensa/airport"
+    private val urlHfK = "mensa/interimsmensa-hfk"
+    private val urlMensaBHV = "mensa/bremerhaven"
+    private val urlCafeBHV = "cafeteria/bremerhaven"
 //    private val urlGraz = "" // No link since there are only snacks on offer that are not listed online
-    private val urlHSBNeustadt = "https://www.stw-bremen.de/de/mensa/neustadtswall"
-    private val urlHSBWerder = "https://www.stw-bremen.de/de/mensa/werderstraße"
-    private val urlHSBAirport = "https://www.stw-bremen.de/de/mensa/airport"
-    private val urlHfK = "https://www.stw-bremen.de/de/mensa/interimsmensa-hfk"
-    private val urlMensaBHV = "https://www.stw-bremen.de/de/mensa/bremerhaven"
-    private val urlCafeBHV = "https://www.stw-bremen.de/de/cafeteria/bremerhaven"
 }
