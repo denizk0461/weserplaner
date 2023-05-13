@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/snackbar_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -41,7 +40,21 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/button_notifications"/>
+                    app:layout_constraintEnd_toStartOf="@id/button_opening_hours"/>
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.Material3.Button.IconButton.Outlined"
+                    android:id="@+id/button_opening_hours"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="0dp"
+                    app:icon="@drawable/clock"
+                    app:iconPadding="0dp"
+                    app:strokeColor="?attr/colorOutlineVariant"
+                    app:layout_constraintTop_toTopOf="@id/app_title_bar"
+                    app:layout_constraintBottom_toBottomOf="@id/app_title_bar"
+                    app:layout_constraintEnd_toStartOf="@id/button_notifications"
+                    app:iconTint="?attr/colorOnSurfaceVariant"/>
 
                 <com.google.android.material.button.MaterialButton
                     style="@style/Widget.Material3.Button.IconButton.Outlined"
@@ -244,47 +257,14 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_switch_canteen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        app:icon="@drawable/switch_arrows"
+        android:text="@string/canteen_fab_switch_canteen"
         android:layout_gravity="bottom|end"
-        app:layout_dodgeInsetEdges="bottom">
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            style="?attr/floatingActionButtonSmallStyle"
-            android:id="@+id/fab_opening_hours"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/clock"
-            android:contentDescription="@string/canteen_fab_opening_hours_content_desc"
-            android:tooltipText="@string/canteen_fab_opening_hours_content_desc"
-            android:layout_gravity="end"
-            android:layout_marginHorizontal="24dp"
-            tools:ignore="UnusedAttribute"/>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            style="?attr/floatingActionButtonSmallStyle"
-            android:id="@+id/fab_switch_canteen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/switch_arrows"
-            android:contentDescription="@string/canteen_fab_switch_canteen_content_desc"
-            android:tooltipText="@string/canteen_fab_switch_canteen_content_desc"
-            android:layout_marginBottom="4dp"
-            android:layout_gravity="end"
-            android:layout_marginHorizontal="24dp"
-            tools:ignore="UnusedAttribute"/>
-
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/fab_refresh_offers"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:icon="@drawable/refresh"
-            android:text="@string/canteen_fab_refresh_text"
-            android:layout_marginHorizontal="@dimen/fab_margin"
-            android:layout_marginBottom="@dimen/fab_margin"/>
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
+        android:layout_marginHorizontal="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

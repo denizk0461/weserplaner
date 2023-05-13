@@ -70,7 +70,7 @@
     <string name="canteen_no_offer_desc">There are no offers available for this day</string>
     <string name="canteen_news_sheet_title">News for this canteen</string>
     <string name="canteen_fab_opening_hours_content_desc">Show opening hours</string>
-    <string name="canteen_fab_switch_canteen_content_desc">Switch canteen</string>
+    <string name="canteen_fab_switch_canteen">Switch canteen</string>
     <string name="canteen_fab_refresh_content_desc">Refresh offers</string>
     <string name="canteen_fab_refresh_text">Refresh</string>
 

@@ -69,6 +69,19 @@ class CanteenFragment : AppFragment() {
         // Set the title to be selected so it scrolls (marquee)
         binding.appTitleBar.isSelected = true
 
+        // Set up button for viewing the opening hours
+        binding.buttonOpeningHours.setOnClickListener {
+            openBottomSheet(
+                getTextSheet(
+                    getString(
+                        R.string.canteen_opening_hours,
+                        getCurrentlySelectedCanteenName()
+                    ),
+                    contentId = TextSheetContentId.OPENING_HOURS,
+                )
+            )
+        }
+
         // Set up observer for the selected canteen
         viewModel.getCanteen().observe(viewLifecycleOwner) { canteen ->
             if (canteen == null || canteen.news.isBlank()) {
@@ -140,19 +153,6 @@ class CanteenFragment : AppFragment() {
             }
         }
 
-        // Set up floating action button for viewing the opening hours
-        binding.fabOpeningHours.setOnClickListener {
-            openBottomSheet(
-                getTextSheet(
-                    getString(
-                        R.string.canteen_opening_hours,
-                        getCurrentlySelectedCanteenName()
-                    ),
-                    contentId = TextSheetContentId.OPENING_HOURS,
-                )
-            )
-        }
-
         // Set up floating action button for switching the canteen
         binding.fabSwitchCanteen.setOnClickListener {
             PopupMenu(binding.root.context, binding.fabSwitchCanteen).apply {
@@ -188,15 +188,6 @@ class CanteenFragment : AppFragment() {
             }
         }
 
-        // Set up floating action button for refreshing the canteen offers
-        binding.fabRefreshOffers.setOnClickListener {
-            // Display to the user that a refresh is in progress
-            binding.swipeRefreshLayout.isRefreshing = true
-
-            // Refresh the offers
-            refresh()
-        }
-
         // Set up the view pager's adapter
         viewPagerAdapter = CanteenOfferPageAdapter(
             childFragmentManager,
@@ -229,7 +220,7 @@ class CanteenFragment : AppFragment() {
                 positionOffsetPixels: Int
             ) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-                binding.fabRefreshOffers.extend()
+                binding.fabSwitchCanteen.extend()
             }
         })
 
@@ -261,14 +252,14 @@ class CanteenFragment : AppFragment() {
      * Shrinks the FAB.
      */
     fun shrinkFab() {
-        binding.fabRefreshOffers.shrink()
+        binding.fabSwitchCanteen.shrink()
     }
 
     /**
      * Extends the FAB.
      */
     fun extendFab() {
-        binding.fabRefreshOffers.extend()
+        binding.fabSwitchCanteen.extend()
     }
 
     /**
