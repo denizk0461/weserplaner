@@ -173,6 +173,7 @@
     <string name="settings_schedule">Stud.IP Schedule</string>
     <string name="settings_canteen">Canteen Offers</string>
     <string name="settings_misc">Miscellaneous</string>
+    <string name="settings_experimental">Experimental</string>
 
     <string name="refresh_schedule_title">Refresh your Stud.IP schedule</string>
     <string name="refresh_schedule_subtitle">This will clear any customisations!</string>
@@ -198,6 +199,8 @@
 
     <string name="settings_allergens_title">Mark offers with allergens with a star*</string>
     <string name="settings_allergens_subtitle">Also applies to additives</string>
+    <string name="settings_allergens_title_alt">App developed by denizk0461</string>
+    <string name="settings_allergens_subtitle_alt">Thank you for using my app ☺︎♡</string>
 
     <string name="settings_pref_colour_title">Colour dietary preferences</string>
     <string name="settings_pref_colour_subtitle">Icons will be coloured similarly to how they look the website</string> <!-- TODO this text sucks, DE too -->
@@ -215,10 +218,22 @@
 
     <string name="settings_licences_title">View licences</string>
     <string name="settings_licences_subtitle">Resources that made this app possible</string>
+    <string name="settings_unlocked_experiments" translatable="false">Experimental settings have been unlocked.</string>
+    <string name="settings_hide_experiments" translatable="false">Experimental settings have been hidden.</string>
 
     <string name="sheet_cheat_header" translatable="false">Cheat Codes</string>
 
     <string name="settings_app_version">App Version</string>
+
+    <string name="settings_hide_experiments_title" translatable="false">Hide experimental settings</string>
+    <string name="settings_hide_experiments_subtitle" translatable="false">Show them again via licences button</string>
+
+    <string name="settings_build_time" translatable="false">Gradle build code &amp; time</string>
+
+    <string name="settings_dev_codes_title" translatable="false">Development codes</string>
+    <string name="settings_dev_codes_hint" translatable="false">6 chars</string>
+    <string name="settings_dev_codes_button" translatable="false">→</string>
+    <string name="settings_dev_codes_invalid" translatable="false">This code could not be found.</string>
 
     <string name="settings_app_version_15">keep clicking</string>
     <string name="settings_app_version_20" translatable="false">^_^</string>

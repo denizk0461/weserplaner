@@ -63,5 +63,10 @@ enum class SettingsPreferences(val key: String) {
      * Whether the user has opened the canteen fragment before.
      */
     HAS_OPENED_CANTEEN("has_opened_canteen"),
+
+    /**
+     * Whether the user has enabled experimental settings.
+     */
+    EXPERIMENTAL_ENABLED("experimental_enabled"),
     ;
 }

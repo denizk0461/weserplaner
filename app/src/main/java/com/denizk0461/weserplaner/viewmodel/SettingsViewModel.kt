@@ -78,4 +78,49 @@ class SettingsViewModel(app: Application) : AppViewModel(app) {
     var preferenceDataHandling: Boolean
         get() = repo.getBooleanPreference(SettingsPreferences.DATA_HANDLING)
         set(newValue) { repo.setPreference(SettingsPreferences.DATA_HANDLING, newValue) }
+
+    /**
+     * This value determines whether the user has enabled experimental settings.
+     */
+    var preferenceExperimentalSettingsEnabled: Boolean
+        get() = repo.getBooleanPreference(SettingsPreferences.EXPERIMENTAL_ENABLED)
+        set(newValue) { repo.setPreference(SettingsPreferences.EXPERIMENTAL_ENABLED, newValue) }
+
+    // --- functions for dev codes --- //
+
+    /**
+     * Deletes everything from the database.
+     */
+    fun nukeEverything() {
+        nukeEvents()
+        nukeOfferItems()
+        nukeOfferCategories()
+        nukeOfferCanteens()
+        nukeOfferDates()
+    }
+
+    /**
+     * Deletes all Stud.IP events from the database.
+     */
+    fun nukeEvents() { doAsync { repo.nukeEvents() } }
+
+    /**
+     * Deletes all canteen items from the database.
+     */
+    fun nukeOfferItems() { doAsync { repo.nukeOfferItems() } }
+
+    /**
+     * Deletes all canteen categories from the database.
+     */
+    fun nukeOfferCategories() { doAsync { repo.nukeOfferCategories() } }
+
+    /**
+     * Deletes all canteens from the database.
+     */
+    fun nukeOfferCanteens() { doAsync { repo.nukeOfferCanteens() } }
+
+    /**
+     * Deletes all canteen dates from the database.
+     */
+    fun nukeOfferDates() { doAsync { repo.nukeOfferDates() } }
 }

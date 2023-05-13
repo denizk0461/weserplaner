@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".fragment.SettingsFragment"
+    android:id="@+id/coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -37,7 +38,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="8dp">
+            android:paddingBottom="8dp"
+            android:animateLayoutChanges="true">
 
             <!-- Stud.IP schedule settings -->
             <com.google.android.material.card.MaterialCardView
@@ -262,6 +264,7 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <TextView
+                                android:id="@+id/settings_allergens_title_view"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/lato_bolditalic"
@@ -269,6 +272,7 @@
                                 android:textSize="16sp" />
 
                             <TextView
+                                android:id="@+id/settings_allergens_subtitle_view"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/settings_allergens_subtitle"
@@ -588,6 +592,154 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="16sp" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- development settings -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_experimental_settings"
+                style="@style/Widget.Material3.CardView.Outlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginVertical="4dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/lato_bolditalic"
+                        android:text="@string/settings_experimental"
+                        android:textSize="22sp" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        style="@style/DividerTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"/>
+
+                    <!-- Hide experiments -->
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/button_hide_experiments"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/selectable_item_background"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/lato_bolditalic"
+                            android:text="@string/settings_hide_experiments_title"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/settings_hide_experiments_subtitle"
+                            android:textSize="16sp" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <!-- Build time -->
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/button_build_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/selectable_item_background"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/lato_bolditalic"
+                            android:text="@string/settings_build_time"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/build_time_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <!-- Dev codes -->
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/selectable_item_background"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/lato_bolditalic"
+                            android:text="@string/settings_dev_codes_title"
+                            android:textSize="16sp" />
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="4"
+                                android:layout_marginEnd="8dp"
+                                android:hint="@string/settings_dev_codes_hint">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                                    android:maxLines="1"
+                                    android:maxLength="6"
+                                    android:id="@+id/input_dev_code"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:fontFamily="@font/ibm_regular"
+                                    android:inputType="textNoSuggestions"/>
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.button.MaterialButton
+                                style="@style/Widget.Material3.Button.IconButton.Outlined"
+                                android:id="@+id/button_dev_codes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:minWidth="0dp"
+                                app:icon="@drawable/double_arrow_right"
+                                app:iconPadding="0dp"
+                                app:strokeColor="?attr/colorOutlineVariant"
+                                app:iconTint="?attr/colorOnSurfaceVariant"/>
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 

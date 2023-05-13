@@ -1,12 +1,15 @@
 package com.denizk0461.weserplaner.fragment
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import com.denizk0461.weserplaner.BuildConfig
@@ -14,11 +17,12 @@ import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.activity.FetcherActivity
 import com.denizk0461.weserplaner.activity.ImageActivity
 import com.denizk0461.weserplaner.data.getTextSheet
+import com.denizk0461.weserplaner.data.showSnackBar
 import com.denizk0461.weserplaner.data.showToast
 import com.denizk0461.weserplaner.databinding.FragmentSettingsBinding
 import com.denizk0461.weserplaner.sheet.AllergenConfigSheet
-import com.denizk0461.weserplaner.sheet.DevCodeSheet
 import com.denizk0461.weserplaner.viewmodel.SettingsViewModel
+import java.nio.charset.StandardCharsets
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -45,6 +49,9 @@ class SettingsFragment : AppFragment() {
     // Click counter on the app version button
     private var appVersionClick = 1
 
+    // Whether the user has set the text of the allergen setting to its alt text
+    private var hasSetAllergensAltText = false
+
     // 222
     private val mysteryLink = "https://www.youtube.com/watch?v=nhIQMCXJzLI"
 
@@ -56,6 +63,8 @@ class SettingsFragment : AppFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // --- schedule settings --- //
 
         // Launch the Stud.IP schedule fetcher activity
         binding.buttonRefreshSchedule.setOnClickListener {
@@ -78,6 +87,8 @@ class SettingsFragment : AppFragment() {
             }
         }
 
+        // --- canteen offer settings --- //
+
         // Set up button to set allergens
         binding.buttonAllergensConfig.setOnClickListener {
             openBottomSheet(
@@ -95,6 +106,7 @@ class SettingsFragment : AppFragment() {
             )
         }
 
+        // Set text according to how many allergens the user has set
         binding.allergensConfigSubtitle.text = getAllergensConfigCountText()
 
         // Set up switch for displaying allergens
@@ -105,13 +117,19 @@ class SettingsFragment : AppFragment() {
             }
         }
 
-        // Set up switch for launching the app with a specific view
-//        binding.switchLaunchCanteen.apply {
-//            isChecked = viewModel.preferenceLaunchCanteen
-//            setOnCheckedChangeListener { _, newValue ->
-//                viewModel.preferenceLaunchCanteen = newValue
-//            }
-//        }
+        // Change text on allergens setting
+        binding.settingsAllergensSubtitleView.setOnLongClickListener {
+            if (hasSetAllergensAltText) {
+                binding.settingsAllergensTitleView.text = getString(R.string.settings_allergens_title)
+                binding.settingsAllergensSubtitleView.text = getString(R.string.settings_allergens_subtitle)
+                hasSetAllergensAltText = false
+            } else {
+                binding.settingsAllergensTitleView.text = getString(R.string.settings_allergens_title_alt)
+                binding.settingsAllergensSubtitleView.text = getString(R.string.settings_allergens_subtitle_alt)
+                hasSetAllergensAltText = true
+            }
+            true
+        }
 
         // Set up button toggle group for changing prices displayed for the canteen offers
         binding.togglePricingGroup.apply {
@@ -138,6 +156,8 @@ class SettingsFragment : AppFragment() {
                 }
             }
         }
+
+        // --- miscellaneous settings --- //
 
         // Set up button toggle group for changing default fragment
         binding.toggleLaunchFragmentGroup.apply {
@@ -207,10 +227,21 @@ class SettingsFragment : AppFragment() {
             )
         }
 
-        // Set long click listener for licences button to open dev code sheet
+        // Set long click listener for licences button to unlock experimental settings
         binding.buttonLicences.setOnLongClickListener {
+            // Return false if the experimental settings are already enabled
+            if (viewModel.preferenceExperimentalSettingsEnabled) return@setOnLongClickListener false
+
+            // Unlock experimental settings after 3 long presses
             if (licencesLongClick > 3) {
-                openBottomSheet(DevCodeSheet())
+//                openBottomSheet(DevCodeSheet())
+                licencesLongClick = 0
+                viewModel.preferenceExperimentalSettingsEnabled = true
+                binding.cardExperimentalSettings.visibility = View.VISIBLE
+                context.theme.showSnackBar(
+                    binding.coordinatorLayout,
+                    getString(R.string.settings_unlocked_experiments),
+                )
             } else {
                 licencesLongClick += 1
             }
@@ -273,14 +304,129 @@ class SettingsFragment : AppFragment() {
          */
         @SuppressLint("SetTextI18n")
         binding.appVersionText.text =
-            "${BuildConfig.VERSION_NAME}-${
-                if (BuildConfig.DEBUG) 
-                    "dev-[${SimpleDateFormat("yyyy-MM-dd, HH:mm:ss.SSS", Locale.GERMANY)
-                        .format(Date(BuildConfig.BUILD_TIME_MILLIS))}]" 
-                else 
-                    "release"
-            }"
+            "${BuildConfig.VERSION_NAME}-${if (BuildConfig.DEBUG) "dev" else "release"}"
+
+        // --- experimental settings --- //
+
+        // Set visibility of experimental settings depending on whether they have been unlocked
+        binding.cardExperimentalSettings.visibility = if (
+            viewModel.preferenceExperimentalSettingsEnabled
+        ) {
+            View.VISIBLE
+        } else {
+            View.GONE
+        }
+
+        binding.buttonHideExperiments.setOnClickListener {
+            viewModel.preferenceExperimentalSettingsEnabled = false
+            binding.cardExperimentalSettings.visibility = View.GONE
+            context.theme.showSnackBar(
+                binding.coordinatorLayout,
+                getString(R.string.settings_hide_experiments),
+            )
+        }
+
+        // Set build version code and time text
+        @SuppressLint("SetTextI18n")
+        binding.buildTimeText.text = "v${BuildConfig.VERSION_CODE} | ${
+            SimpleDateFormat("yyyy-MM-dd, HH:mm:ss.SSS", Locale.GERMANY)
+                .format(Date(BuildConfig.BUILD_TIME_MILLIS))
+        }"
+
+        binding.buttonDevCodes.setOnClickListener {
+            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+
+            when (binding.inputDevCode.text.toString().uppercase()) {
+                "U1RST0JF".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS90S2k5Wi1mNnFYNA==".d64)
+                "U1BJUklU".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9XN25lMzlEU05TZw==".d64)
+                "Q0xPVURT".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9rbUJ6YTRhNTB2dw==".d64)
+                "NjQxODJL".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9EbTFyZ285UHBUcw==".d64)
+                "U0FJTE9S".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9QUHlDYXZ6OG5NWQ==".d64)
+                "SE9ORVNU".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9DSEg0OE5LUEFraw==".d64)
+                "QkJVT0s/".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS90Rm1PMm1TY0tHNA==".d64)
+                "SUhUU0Mq".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS85bXZ4SVdhWHZuWQ==".d64)
+                "SU5TQU5F".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS90NE9kYTlUZFYwbw==".d64)
+                "SE9SSVpO".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9SUVpUUy1CWjhtcw==".d64)
+                "TUFSR0Uh".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS8tbHFxRHZXRjQ1dw==".d64)
+                "UE9XRUxM".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9XUGMtVkVxQlBISQ==".d64)
+                "Q0FMTE1F".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS8xbTV1WnJNMnktMA==".d64)
+                "SkFNSVJP".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9fMVZoT2c0N3ozNA==".d64)
+                "TE9ORUxZ".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9uLURFNHNfc3d5Zw==".d64)
+                "QkVBVVRZ".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9vbVQ1ckttVTVfaw==".d64)
+                "Uk9NQ09N".d64 -> launchLink("aHR0cHM6Ly95b3V0dS5iZS9HUW1nUG5uZjE4WQ==".d64)
+                "Tk9DQVNI".d64 -> launchLink(listOf(
+                    "aHR0cHM6Ly95b3V0dS5iZS9lRzh3bkx2NTlPbw==",
+                    "aHR0cHM6Ly95b3V0dS5iZS9RSzBZLUQ1bVpaaw==",
+                ).random().d64)
+                "Qk9KQUNL".d64 -> {
+                    startActivity(Intent(context, ImageActivity::class.java).also { intent ->
+                        val bundle = Bundle()
+                        bundle.putString("img", "Qk9KQUNL".d64.lowercase())
+                        intent.putExtras(bundle)
+                    })
+                }
+                "QkNFTExT".d64 -> {
+                    startActivity(Intent(context, ImageActivity::class.java).also { intent ->
+                        val bundle = Bundle()
+                        bundle.putString("img", "QkNFTExT".d64.lowercase())
+                        intent.putExtras(bundle)
+                    })
+                }
+                "NEVENT" -> { // nuke events
+                    viewModel.nukeEvents()
+                    showToast(context, "Nuked all events")
+                }
+                "NCANTE" -> { // nuke canteens
+                    viewModel.nukeOfferCanteens()
+                    showToast(context, "Nuked all canteens")
+                }
+                "NDATES" -> { // nuke dates
+                    viewModel.nukeOfferDates()
+                    showToast(context, "Nuked all dates")
+                }
+                "NCATEG" -> { // nuke categories
+                    viewModel.nukeOfferCategories()
+                    showToast(context, "Nuked all categories")
+                }
+                "NITEMS" -> { // nuke items
+                    viewModel.nukeOfferItems()
+                    showToast(context, "Nuked all items")
+                }
+                "NEVERY" -> { // nuke everything
+                    viewModel.nukeEverything()
+                    showToast(context, "Nuked everything")
+                }
+                else -> context.theme.showSnackBar(
+                    binding.coordinatorLayout,
+                    getString(R.string.settings_dev_codes_invalid)
+                )
+            }
+        }
     }
+
+    /**
+     * Launches a web link.
+     *
+     * @param link  link to open
+     */
+    private fun launchLink(link: String) {
+        // Let the user know they accomplished something with their life
+        showToast(context, "✨")
+
+        // Give the user a slight dopamine boost
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(link)))
+    }
+
+    /**
+     * Decodes Base64 to a regular string.
+     *
+     * @return the decoded string
+     */
+    private val String.d64: String get() = String(
+        Base64.decode(this, Base64.DEFAULT),
+        StandardCharsets.UTF_8
+    )
 
     // Invalidate the view binding
     override fun onDestroyView() {

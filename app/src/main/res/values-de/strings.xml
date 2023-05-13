@@ -169,6 +169,7 @@
     <string name="settings_schedule">Stud.IP-Stundenplan</string>
     <string name="settings_canteen">Mensenangebote</string>
     <string name="settings_misc">Sonstiges</string>
+    <string name="settings_experimental">Experimentelles</string>
 
     <string name="refresh_schedule_title">Aktualisiere deinen Stud.IP-Stundenplan</string>
     <string name="refresh_schedule_subtitle">Dies wird alle Anpassungen löschen!</string>
@@ -194,6 +195,8 @@
 
     <string name="settings_allergens_title">Markiere Angebote mit Allergenen mit einem Stern*</string>
     <string name="settings_allergens_subtitle">Wird auch für Zusatzstoffe genutzt</string>
+    <string name="settings_allergens_title_alt">App entwickelt von denizk0461</string>
+    <string name="settings_allergens_subtitle_alt">Danke, dass du meine App nutzt ☺︎♡</string>
 
     <string name="settings_launch_canteen_title">Wähle, mit welchem Bildschirm die App startet</string>
 
