@@ -18,8 +18,15 @@ Currently, nothing is outright broken, but a few things may be bodged together.
 
 ## Why Android-only?
 Because:
-a) I know Android development and it's a lot easier for me to work on an app using a framework I already know than to learn a new one while still trying to keep up with my responsibilities at university, and
-b) because Apple is a greedy company that charges thousands for laptops, phones, as well as $99 a year for a developer account, which are all requirements (sans the phone, if I was to use their simulator, which isn't ideal) and I, as a student, simply do not have the money for that.
+- I know Android development and it's a lot easier for me to work on an app using a framework I already know than to learn a new one while still trying to keep up with my responsibilities at university, and
+- because Apple is a greedy company that charges thousands for laptops, phones, as well as $99 a year for a developer account, which are all requirements (sans the phone, if I was to use their simulator, which isn't ideal) and I, as a student, simply do not have the money for that.
+
 I may reconsider once Apple finally opens up iOS for third-party apps.
+
+## Why this logo? Why this evil red colour scheme?
+
+The colour scheme is inspired by the University of Bremen's colour scheme, as well as the city of Bremen's colour scheme. The logo represents both the University of Bremen as well as (kind of) the Weserstadion, our local sports stadium.
+
+I admit the Weserstadion idea came to me after I had created the logo.
 
 ![WeserPlaner app icon](https://denizk0461.github.io/weserplaner_app_icon.png)

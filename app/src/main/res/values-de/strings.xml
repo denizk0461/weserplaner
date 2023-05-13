@@ -42,6 +42,8 @@
     <string name="fetch_bar_help_sheet_content"> • Logge dich mit deinem Stud.IP-Login ein\n • Öffne deinen Stundenplan (falls er sich nicht automatisch öffnet)\n • Klicke auf den \'Speichern\'-Knopf, der unten in der rechten Ecke auftauchen sollte\n • Fertig!</string>
     <string name="fetch_bar_save_desc">Speichere den Stundenplan in der App ab</string>
 
+    <string name="schedule_fab_add_text">Neue Veranstaltung</string>
+
     <string name="save">Speichern</string>
     <string name="delete">Löschen</string>
     <string name="sheet_schedule_update_delete_confirm">Sicher?</string>
@@ -68,6 +70,7 @@
     <string name="canteen_fab_opening_hours_content_desc">Zeige Öffnungszeiten</string>
     <string name="canteen_fab_switch_canteen_content_desc">Wechsle Mensa</string>
     <string name="canteen_fab_refresh_content_desc">Aktualisiere Angebote</string>
+    <string name="canteen_fab_refresh_text">Aktualisieren</string>
 
     <!-- TODO replace 'this canteen' with %s -->
     <string name="text_sheet_opening_hours_title">%s – Öffnungszeiten</string>

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.viewModels
+import androidx.viewpager2.widget.ViewPager2
 import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.adapter.CanteenOfferPageAdapter
 import com.denizk0461.weserplaner.data.getTextSheet
@@ -86,7 +87,6 @@ class CanteenFragment : AppFragment() {
 
                 // Set up click listener to tell the user that no news are available
                 binding.buttonNotifications.setOnClickListener {
-//                    showToast(context, getString(R.string.text_sheet_news_empty))
                     context.theme.showSnackBar(binding.snackbarContainer, getString(R.string.text_sheet_news_empty))
                 }
 
@@ -171,7 +171,6 @@ class CanteenFragment : AppFragment() {
                         else -> 0
                     }
                     // Set newly selected canteen to the button
-//                    binding.buttonCanteenPicker.text = getCurrentlySelectedCanteenName()
                     binding.appTitleBar.text = getString(
                         R.string.title_canteen_template,
                         getCurrentlySelectedCanteenName(),
@@ -212,12 +211,6 @@ class CanteenFragment : AppFragment() {
 
             // Let the adapter know of the new amount of dates (pages) to display
             viewPagerAdapter.itemCount = dates.size
-
-            // Retrieve further information about this canteen from the database
-//            viewModel.getCanteen().also { canteen ->
-                // Set visibility of the notifications icon depending on whether news are available
-//                badge.isVisible = info.news.isNotBlank()
-//            }
         }
 
         // Assign the adapter to the view pager
@@ -227,6 +220,18 @@ class CanteenFragment : AppFragment() {
         TabLayoutMediator(binding.dayTabLayout, binding.viewPager) { tab, position ->
             tab.text = dates[position]
         }.attach()
+
+        // Set extended FAB to extend when the page is changed
+        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+                binding.fabRefreshOffers.extend()
+            }
+        })
 
         // Set up functions for when the user swipes to refresh the view
         binding.swipeRefreshLayout.setOnRefreshListener {
@@ -250,6 +255,20 @@ class CanteenFragment : AppFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    /**
+     * Shrinks the FAB.
+     */
+    fun shrinkFab() {
+        binding.fabRefreshOffers.shrink()
+    }
+
+    /**
+     * Extends the FAB.
+     */
+    fun extendFab() {
+        binding.fabRefreshOffers.extend()
     }
 
     /**

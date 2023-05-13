@@ -22,7 +22,7 @@
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/lato_blackitalic"
             android:text="@string/title_settings"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:layout_scrollFlags="scroll"
             android:textSize="28sp"/>
 
     </com.google.android.material.appbar.AppBarLayout>

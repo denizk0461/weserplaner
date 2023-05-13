@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.viewpager2.widget.ViewPager2
 import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.activity.FetcherActivity
 import com.denizk0461.weserplaner.adapter.StudIPEventPageAdapter
@@ -64,6 +65,18 @@ class EventFragment : AppFragment() {
             tab.text = weekdays[position]
         }.attach()
 
+        // Set extended FAB to extend when the page is changed
+        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+                binding.fabAddEvent.extend()
+            }
+        })
+
         // Set the view pager's current page to the current day, if the user chose this option
         if (viewModel.preferenceCurrentDay) {
 
@@ -115,6 +128,20 @@ class EventFragment : AppFragment() {
             // Remember that the app has been launched before
             viewModel.preferenceFirstLaunch = false
         }
+    }
+
+    /**
+     * Shrinks the FAB.
+     */
+    fun shrinkFab() {
+        binding.fabAddEvent.shrink()
+    }
+
+    /**
+     * Extends the FAB.
+     */
+    fun extendFab() {
+        binding.fabAddEvent.extend()
     }
 
     // Invalidate the view binding

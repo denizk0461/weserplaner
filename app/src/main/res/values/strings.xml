@@ -43,6 +43,8 @@
     <string name="fetch_bar_help_sheet_content"> • Log in with your Stud.IP login\n • Open your timetable view (in case it doesn\'t open automatically)\n • Click the \'save\' button that should appear in the bottom right corner\n • Done!</string>
     <string name="fetch_bar_save_desc">Save the timetable in the app</string>
 
+    <string name="schedule_fab_add_text">New event</string>
+
     <string name="save">Save</string>
     <string name="delete">Delete</string>
     <string name="sheet_schedule_update_delete_confirm">Sure?</string>
@@ -70,6 +72,7 @@
     <string name="canteen_fab_opening_hours_content_desc">Show opening hours</string>
     <string name="canteen_fab_switch_canteen_content_desc">Switch canteen</string>
     <string name="canteen_fab_refresh_content_desc">Refresh offers</string>
+    <string name="canteen_fab_refresh_text">Refresh</string>
 
     <string name="text_sheet_opening_hours_title">%s – opening hours</string>
     <string name="text_sheet_opening_hours_empty">The opening hours could not be downloaded.</string>

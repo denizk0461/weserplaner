@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.denizk0461.weserplaner.adapter.CanteenOfferItemAdapter
 import com.denizk0461.weserplaner.adapter.StudIPEventPageAdapter
@@ -86,6 +87,23 @@ class CanteenPageFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListen
                 offerList.clear()
                 offerList.addAll(offers)
                 recyclerViewAdapter.setNewData(offers.filterElements().groupElements().distinct())
+            }
+        }
+
+        // Retrieve parent fragment to access its functions
+        val navHostFragment = activity?.supportFragmentManager?.fragments?.get(0) as? NavHostFragment
+        val parent = navHostFragment?.childFragmentManager?.primaryNavigationFragment as? CanteenFragment
+
+        // Set up scroll change listener to shrink and extend FAB accordingly
+        binding.recyclerView.setOnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
+            // Calculate the vertical scroll difference
+            val dy = scrollY - oldScrollY
+            if (dy > 0) {
+                // If scrolling down, shrink the FAB
+                parent?.shrinkFab()
+            } else if (dy < 0) {
+                // If scrolling up, extend the FAB
+                parent?.extendFab()
             }
         }
 
