@@ -2,10 +2,8 @@ package com.denizk0461.weserplaner.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.LiveData
-import com.denizk0461.weserplaner.model.AllergenPreferences
 import com.denizk0461.weserplaner.model.CanteenOffer
 import com.denizk0461.weserplaner.model.DietaryPreferences
-import com.denizk0461.weserplaner.model.SettingsPreferences
 
 class CanteenPageViewModel(app: Application) : AppViewModel(app) {
 
@@ -33,19 +31,17 @@ class CanteenPageViewModel(app: Application) : AppViewModel(app) {
      * This value determines which allergens the user wants to have displayed or hidden.
      */
     val preferenceAllergenConfig: String
-        get() = repo.getStringPreference(
-            SettingsPreferences.ALLERGEN_CONFIG, defaultValue = AllergenPreferences.TEMPLATE
-        )
+        get() = repo.getPreferenceAllergenConfig()
 
     /**
      * This value determines whether the user wants to have allergens marked.
      */
     val preferenceAllergen: Boolean
-        get() = repo.getBooleanPreference(SettingsPreferences.ALLERGEN, defaultValue = true)
+        get() = repo.getPreferenceAllergen()
 
     /**
      * This value determines which canteen the user has selected.
      */
     val preferenceColour: Boolean
-        get() = repo.getBooleanPreference(SettingsPreferences.COLOUR_PREFS, defaultValue = true)
+        get() = repo.getPreferenceColour()
 }

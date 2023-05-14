@@ -46,7 +46,9 @@ class AppRepository(app: Application) {
          */
         fun getRepositoryInstance(app: Application): AppRepository {
             if (!::repo.isInitialized) {
-                repo = AppRepository(app)
+                synchronized(Object::class.java) {
+                    repo = AppRepository(app)
+                }
             }
             return repo
         }
@@ -251,7 +253,144 @@ class AppRepository(app: Application) {
      */
     fun insertItems(items: List<OfferItem>) { dao.insertItems(items) }
 
-    // --- settings preferences --- //
+    // --- user-set preferences --- //
+
+    /**
+     * This value determines which allergens the user wants to have displayed or hidden.
+     */
+    fun getPreferenceAllergenConfig(): String = getStringPreference(
+        SettingsPreferences.ALLERGEN_CONFIG,
+        defaultValue = AllergenPreferences.TEMPLATE,
+    )
+    /**
+     * This value determines how many allergens the user wants to have displayed or hidden.
+     */
+    fun getPreferenceAllergenConfigCount(): Int = getPreferenceAllergenConfig().run {
+        if (isBlank()) 0 else split(",").count()
+    }
+    fun setPreferenceAllergenConfig(newValue: String) {
+        setPreference(SettingsPreferences.ALLERGEN_CONFIG, newValue)
+    }
+
+    /**
+     * This value determines whether the user wants to have allergens marked.
+     */
+    fun getPreferenceAllergen(): Boolean = getBooleanPreference(
+        SettingsPreferences.ALLERGEN,
+        defaultValue = true,
+    )
+    fun setPreferenceAllergen(newValue: Boolean) {
+        setPreference(SettingsPreferences.ALLERGEN, newValue)
+    }
+
+    /**
+     * This value determines which canteen the user has selected.
+     */
+    fun getPreferenceColour(): Boolean = getBooleanPreference(
+        SettingsPreferences.COLOUR_PREFS,
+        defaultValue = true,
+    )
+    fun setPreferenceColour(newValue: Boolean) {
+        setPreference(SettingsPreferences.COLOUR_PREFS, newValue)
+    }
+
+    /**
+     * This value determines which canteen the user has selected.
+     */
+    fun getPreferenceCanteen(): Int = getIntPreference(
+        SettingsPreferences.CANTEEN,
+    )
+    fun setPreferenceCanteen(newValue: Int) {
+        setPreference(SettingsPreferences.CANTEEN, newValue)
+    }
+
+    /**
+     * This value determines whether the user has opened the canteen fragment before.
+     */
+    fun getPreferenceHasOpenedCanteen(): Boolean = getBooleanPreference(
+        SettingsPreferences.HAS_OPENED_CANTEEN,
+    )
+    fun setPreferenceHasOpenedCanteen(newValue: Boolean) {
+        setPreference(SettingsPreferences.HAS_OPENED_CANTEEN, newValue)
+    }
+
+    /**
+     * This value determines whether the user wants to have the next course in their schedule
+     * highlighted.
+     */
+    fun getPreferenceCourseHighlighting(): Boolean = getBooleanPreference(
+            SettingsPreferences.COURSE_HIGHLIGHTING,
+            defaultValue = true,
+        )
+    fun setPreferenceCourseHighlighting(newValue: Boolean) {
+        setPreference(SettingsPreferences.COURSE_HIGHLIGHTING, newValue)
+    }
+
+    /**
+     * This value determines whether the user wants their timetable to launch with the current day.
+     */
+    fun getPreferenceCurrentDay(): Boolean = getBooleanPreference(
+            SettingsPreferences.CURRENT_DAY,
+            defaultValue = true,
+        )
+    fun setPreferenceCurrentDay(newValue: Boolean) {
+        setPreference(SettingsPreferences.CURRENT_DAY, newValue)
+    }
+
+    /**
+     * Determines whether the user is launching the app for the first time.
+     */
+    fun getPreferenceFirstLaunch(): Boolean = getBooleanPreference(
+            SettingsPreferences.FIRST_LAUNCH,
+            defaultValue = true,
+        )
+    fun setPreferenceFirstLaunch(newValue: Boolean) {
+        setPreference(SettingsPreferences.FIRST_LAUNCH, newValue)
+    }
+
+    /**
+     * This value determines which fragment the user wants the app to start with. Order is equal to
+     * the order that the items are arranged in in the bottom nav bar.
+     */
+    fun getPreferenceLaunchFragment(): Int = getIntPreference(
+            SettingsPreferences.LAUNCH_FRAGMENT_ON_START,
+        )
+    fun setPreferenceLaunchFragment(newValue: Int) {
+        setPreference(SettingsPreferences.LAUNCH_FRAGMENT_ON_START, newValue)
+    }
+
+    /**
+     * This value determines which fragment the user wants the app to start with. Order is equal to
+     * the order that the items are arranged in in the bottom nav bar.
+     */
+    fun getPreferencePricing(): Int = getIntPreference(
+        SettingsPreferences.PRICING,
+    )
+    fun setPreferencePricing(newValue: Int) {
+        setPreference(SettingsPreferences.PRICING, newValue)
+    }
+
+    /**
+     * This value determines whether the user opts into submitting crash reports.
+     */
+    fun getPreferenceDataHandling(): Boolean = getBooleanPreference(
+        SettingsPreferences.DATA_HANDLING,
+    )
+    fun setPreferenceDataHandling(newValue: Boolean) {
+        setPreference(SettingsPreferences.DATA_HANDLING, newValue)
+    }
+
+    /**
+     * This value determines whether the user has enabled experimental settings.
+     */
+    fun getPreferenceExperimentalSettingsEnabled(): Boolean = getBooleanPreference(
+        SettingsPreferences.EXPERIMENTAL_ENABLED,
+    )
+    fun setPreferenceExperimentalSettingsEnabled(newValue: Boolean) {
+        setPreference(SettingsPreferences.EXPERIMENTAL_ENABLED, newValue)
+    }
+
+    // --- private preference handlers preferences --- //
 
     /**
      * Retrieves a user-set boolean preference.
@@ -259,25 +398,8 @@ class AppRepository(app: Application) {
      * @param pref  preference to retrieve
      * @return      whether the user set this preference
      */
-    fun getBooleanPreference(pref: SettingsPreferences, defaultValue: Boolean = false): Boolean =
+    private fun getBooleanPreference(pref: SettingsPreferences, defaultValue: Boolean = false): Boolean =
         prefs.getBoolean(pref.key, defaultValue)
-
-    /**
-     * Retrieves a user-set string preference.
-     *
-     * @param pref  preference to retrieve
-     * @return      string that was set
-     */
-    fun getStringPreference(pref: SettingsPreferences, defaultValue: String = ""): String =
-        prefs.getString(pref.key, defaultValue) ?: ""
-
-    /**
-     * Retrieves a user-set integer preference.
-     *
-     * @param pref  preference to retrieve
-     * @return      whether the user set this preference
-     */
-    fun getIntPreference(pref: SettingsPreferences): Int = prefs.getInt(pref.key, 0)
 
     /**
      * Updates a user-set boolean preference.
@@ -285,9 +407,18 @@ class AppRepository(app: Application) {
      * @param pref      preference to set
      * @param newValue  new value to set the preference to
      */
-    fun setPreference(pref: SettingsPreferences, newValue: Boolean) {
+    private fun setPreference(pref: SettingsPreferences, newValue: Boolean) {
         prefs.edit().putBoolean(pref.key, newValue).apply()
     }
+
+    /**
+     * Retrieves a user-set string preference.
+     *
+     * @param pref  preference to retrieve
+     * @return      string that was set
+     */
+    private fun getStringPreference(pref: SettingsPreferences, defaultValue: String = ""): String =
+        prefs.getString(pref.key, defaultValue) ?: ""
 
     /**
      * Updates a user-set string preference.
@@ -295,9 +426,17 @@ class AppRepository(app: Application) {
      * @param pref      preference to set
      * @param newValue  new value to set the preference to
      */
-    fun setPreference(pref: SettingsPreferences, newValue: String) {
+    private fun setPreference(pref: SettingsPreferences, newValue: String) {
         prefs.edit().putString(pref.key, newValue).apply()
     }
+
+    /**
+     * Retrieves a user-set integer preference.
+     *
+     * @param pref  preference to retrieve
+     * @return      whether the user set this preference
+     */
+    private fun getIntPreference(pref: SettingsPreferences): Int = prefs.getInt(pref.key, 0)
 
     /**
      * Updates a user-set integer preference.
@@ -305,7 +444,7 @@ class AppRepository(app: Application) {
      * @param pref      preference to set
      * @param newValue  new value to set the preference to
      */
-    fun setPreference(pref: SettingsPreferences, newValue: Int) {
+    private fun setPreference(pref: SettingsPreferences, newValue: Int) {
         prefs.edit().putInt(pref.key, newValue).apply()
     }
 }

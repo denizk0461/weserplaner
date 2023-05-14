@@ -198,7 +198,7 @@ class StwParser(application: Application) {
                              *
                              * Hence, getIntPreference() + 2
                              */
-                            repo.getIntPreference(SettingsPreferences.PRICING) + 2
+                            repo.getPreferencePricing() + 2
                         ),
                         dietaryPreferences = prefs.deconstruct(),
                         allergens = filteredText.second,

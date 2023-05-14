@@ -1,8 +1,6 @@
 package com.denizk0461.weserplaner.viewmodel
 
 import android.app.Application
-import com.denizk0461.weserplaner.model.AllergenPreferences
-import com.denizk0461.weserplaner.model.SettingsPreferences
 
 /**
  * View model for [com.denizk0461.weserplaner.fragment.SettingsFragment]
@@ -15,76 +13,66 @@ class SettingsViewModel(app: Application) : AppViewModel(app) {
      * This value determines whether the user wants their timetable to launch with the current day.
      */
     var preferenceCurrentDay: Boolean
-        get() = repo.getBooleanPreference(
-            SettingsPreferences.CURRENT_DAY,
-            defaultValue = true,
-        )
-        set(newValue) { repo.setPreference(SettingsPreferences.CURRENT_DAY, newValue) }
+        get() = repo.getPreferenceCurrentDay()
+        set(newValue) { repo.setPreferenceCurrentDay(newValue) }
 
     /**
      * This value determines whether the user wants to have the next course in their schedule
      * highlighted.
      */
     var preferenceCourseHighlighting: Boolean
-        get() = repo.getBooleanPreference(
-            SettingsPreferences.COURSE_HIGHLIGHTING,
-            defaultValue = true
-        )
-        set(newValue) { repo.setPreference(SettingsPreferences.COURSE_HIGHLIGHTING, newValue) }
+        get() = repo.getPreferenceCourseHighlighting()
+        set(newValue) { repo.setPreferenceCourseHighlighting(newValue) }
 
     /**
      * This value determines whether the user wants to have allergens marked.
      */
     var preferenceAllergen: Boolean
-        get() = repo.getBooleanPreference(SettingsPreferences.ALLERGEN, defaultValue = true)
-        set(newValue) { repo.setPreference(SettingsPreferences.ALLERGEN, newValue) }
+        get() = repo.getPreferenceAllergen()
+        set(newValue) { repo.setPreferenceAllergen(newValue) }
 
     /**
      * This value determines how many allergens the user wants to have displayed or hidden.
      */
     val preferenceAllergenConfigCount: Int
-        get() = repo.getStringPreference(
-            SettingsPreferences.ALLERGEN_CONFIG, defaultValue = AllergenPreferences.TEMPLATE
-        ).run {
-            if (isBlank()) 0 else split(",").count()
-        }
+        get() = repo.getPreferenceAllergenConfigCount()
 
     /**
      * This value determines which fragment the user wants the app to start with. Order is equal to
      * the order that the items are arranged in in the bottom nav bar.
      */
     var preferencePricing: Int
-        get() = repo.getIntPreference(SettingsPreferences.PRICING)
-        set(newValue) { repo.setPreference(SettingsPreferences.PRICING, newValue) }
+        get() = repo.getPreferencePricing()
+        set(newValue) { repo.setPreferencePricing(newValue) }
 
     /**
      * This value determines which fragment the user wants the app to start with. Order is equal to
      * the order that the items are arranged in in the bottom nav bar.
      */
     var preferenceLaunchFragment: Int
-        get() = repo.getIntPreference(SettingsPreferences.LAUNCH_FRAGMENT_ON_START)
-        set(newValue) { repo.setPreference(SettingsPreferences.LAUNCH_FRAGMENT_ON_START, newValue) }
+        get() = repo.getPreferenceLaunchFragment()
+        set(newValue) { repo.setPreferenceLaunchFragment(newValue) }
 
     /**
      * This value determines which canteen the user has selected.
      */
     var preferenceColour: Boolean
-        get() = repo.getBooleanPreference(SettingsPreferences.COLOUR_PREFS, defaultValue = true)
-        set(newValue) { repo.setPreference(SettingsPreferences.COLOUR_PREFS, newValue) }
+        get() = repo.getPreferenceColour()
+        set(newValue) { repo.setPreferenceColour(newValue) }
 
     /**
      * This value determines whether the user opts into submitting crash reports.
      */
     var preferenceDataHandling: Boolean
-        get() = repo.getBooleanPreference(SettingsPreferences.DATA_HANDLING)
-        set(newValue) { repo.setPreference(SettingsPreferences.DATA_HANDLING, newValue) }
+        get() = repo.getPreferenceDataHandling()
+        set(newValue) { repo.setPreferenceDataHandling(newValue) }
 
     /**
      * This value determines whether the user has enabled experimental settings.
      */
     var preferenceExperimentalSettingsEnabled: Boolean
-        get() = repo.getBooleanPreference(SettingsPreferences.EXPERIMENTAL_ENABLED)
-        set(newValue) { repo.setPreference(SettingsPreferences.EXPERIMENTAL_ENABLED, newValue) }
+        get() = repo.getPreferenceExperimentalSettingsEnabled()
+        set(newValue) { repo.setPreferenceExperimentalSettingsEnabled(newValue) }
 
     // --- functions for dev codes --- //
 

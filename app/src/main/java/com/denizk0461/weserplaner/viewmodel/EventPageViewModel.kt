@@ -2,7 +2,6 @@ package com.denizk0461.weserplaner.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.LiveData
-import com.denizk0461.weserplaner.model.SettingsPreferences
 import com.denizk0461.weserplaner.model.StudIPEvent
 
 /**
@@ -24,8 +23,5 @@ class EventPageViewModel(app: Application) : AppViewModel(app) {
      * highlighted.
      */
     val preferenceCourseHighlighting: Boolean
-        get() = repo.getBooleanPreference(
-            SettingsPreferences.COURSE_HIGHLIGHTING,
-            defaultValue = true
-        )
+        get() = repo.getPreferenceCourseHighlighting()
 }

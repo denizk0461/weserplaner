@@ -1,7 +1,6 @@
 package com.denizk0461.weserplaner.viewmodel
 
 import android.app.Application
-import com.denizk0461.weserplaner.model.SettingsPreferences
 
 /**
  * View model for [com.denizk0461.weserplaner.activity.MainActivity]
@@ -15,5 +14,5 @@ class MainViewModel(application: Application) : AppViewModel(application) {
      * the order that the items are arranged in in the bottom nav bar.
      */
     val preferenceLaunchFragment: Int
-        get() = repo.getIntPreference(SettingsPreferences.LAUNCH_FRAGMENT_ON_START)
+        get() = repo.getPreferenceLaunchFragment()
 }
