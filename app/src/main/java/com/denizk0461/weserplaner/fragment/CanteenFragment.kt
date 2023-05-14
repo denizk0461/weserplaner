@@ -153,8 +153,22 @@ class CanteenFragment : AppFragment() {
             }
         }
 
-        // Set up floating action button for switching the canteen
+        // Set up floating action button for switching canteens
         binding.fabSwitchCanteen.setOnClickListener {
+
+            /*
+             * Show an error message is the user is trying to switch canteens while another one is
+             * being downloaded.
+             */
+            if (binding.swipeRefreshLayout.isRefreshing) {
+                context.theme.showErrorSnackBar(
+                    binding.snackbarContainer,
+                    getString(R.string.canteen_fab_switch_canteen_error),
+                )
+                return@setOnClickListener
+            }
+
+            // Create menu for selecting a new canteen
             PopupMenu(binding.root.context, binding.fabSwitchCanteen).apply {
                 setOnMenuItemClickListener { item ->
                     viewModel.preferenceCanteen = when (item?.itemId) {

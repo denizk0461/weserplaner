@@ -52,7 +52,7 @@
     <string name="sheet_schedule_update_header_edit">Bestehende Veranstaltung bearbeiten</string>
     <string name="sheet_schedule_update_header_add">Neue Veranstaltung hinzufügen</string>
     <string name="sheet_schedule_update_title_hint">Veranstaltungstitel</string>
-    <string name="sheet_schedule_update_lecturers_hint">Dozierende(r)</string>
+    <string name="sheet_schedule_update_lecturers_hint">Dozierende*r</string>
     <string name="sheet_schedule_update_room_hint">Raum</string>
     <string name="sheet_schedule_update_hint_quarter">Auf akademisches Viertel umstellen</string>
     <string name="sheet_schedule_update_hint_quarter_error">Sorry, ein Fehler ist aufgetreten!</string>
@@ -68,7 +68,8 @@
     <string name="canteen_no_offer_desc">Für diesen Tag sind keine Angebote vorhanden</string>
     <string name="canteen_news_sheet_title">Neuigkeiten für diese Mensa</string>
     <string name="canteen_fab_opening_hours_content_desc">Zeige Öffnungszeiten</string>
-    <string name="canteen_fab_switch_canteen">Wechsle Mensa</string>
+    <string name="canteen_fab_switch_canteen">Mensa wechseln</string>
+    <string name="canteen_fab_switch_canteen_error">Ein Plan wird gerade heruntergeladen.</string>
     <string name="canteen_fab_refresh_content_desc">Aktualisiere Angebote</string>
     <string name="canteen_fab_refresh_text">Aktualisieren</string>
 
@@ -145,7 +146,7 @@
     <string name="allergen_almonds">Mandeln</string>
     <string name="allergen_hazelnuts">Haselnüsse</string>
     <string name="allergen_walnuts">Walnüsse</string>
-    <string name="allergen_cashew_nuts">Cashew-Kerne</string>
+    <string name="allergen_cashew_nuts">Cashewkerne</string>
     <string name="allergen_pecans">Pecannüsse</string>
     <string name="allergen_brazil_nuts">Paranüsse</string>
     <string name="allergen_pistachios">Pistazien</string>

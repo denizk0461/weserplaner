@@ -98,6 +98,7 @@ class StwParser(application: Application) {
             onFinish()
 
         } catch (e: RuntimeException) {
+//            e.printStackTrace()
             /*
              * Call action to let the user know an error occurred. Do this on the main thread to
              * access UI.
@@ -121,9 +122,6 @@ class StwParser(application: Application) {
         val canteens = mutableListOf<OfferCanteen>()
         val categories = mutableListOf<OfferCategory>()
         val items = mutableListOf<OfferItem>()
-
-        // Used to store a parsed date string without creating a new variable on every loop
-        var date: String
 
         // Reset the primary key value for the date objects
         dateId = 0
@@ -150,30 +148,16 @@ class StwParser(application: Application) {
         // Iterate through each day for which offers are available
         doc.getElementsByClass("food-plan").forEach { dayPlan ->
 
-            /*
-             * Fetch the date for a given day. It will be in the following format:
-             * 24. Apr
-             * This value will be split between the day (24.) and the month (Apr)
-             */
-            val rawDate = doc.getElementsByClass("tabs")[0]
-                .getElementsByClass("tab-date")[dateId].text().split(" ")
+            // Get and add the date of this food plan
+            dates.add(doc.getDateByIndex(dateId))
 
-            /*
-             * Parse the two elements into a single date. The month will be converted to a numeric
-             * value. Example:
-             * Input: 24. Apr
-             * Output: 24.04.
-             */
-            date = "${rawDate[0]}${rawDate[1].monthToNumber()}."
-
-            // Save the date to its list
-            dates.add(OfferDate(dateId, date))
-
+            // Set that the newly created date has no items as of yet
             dateHasItems = false
 
             // Iterate through all categories offered on a given day
             dayPlan.getElementsByClass("food-category").forEach { category ->
 
+                // Set that items for the newly created date have been found
                 dateHasItems = true
 
                 // Retrieve the category text
@@ -183,67 +167,46 @@ class StwParser(application: Application) {
                 categories.add(OfferCategory(categoryId, dateId, canteenId, categoryTitle))
 
                 // Iterate through all items in a category
-                category
-                    .getElementsByTag("tbody")[0]
-                    .getElementsByTag("tr").forEach { element ->
-                        // Retrieve the parent element holding the item's title and price
-                        val tableRows = element.getElementsByTag("td")
+                category.getAllFoodItems().forEach { element ->
+                    // Retrieve the parent element holding the item's title and price
+                    val tableRows = element.getElementsByTag("td")
 
-                        /*
-                         * Retrieve the dietary preferences the item meets and parse them into a
-                         * string that can be inserted into the database.
-                         */
-                        val prefs = try {
-                            with(element
-                                .getElementsByClass("field field-name-field-food-types")[0]
-                            ) {
-                                DietaryPreferences.Object(
-                                    isFair = isDietaryPreferenceMet(preferenceFairFileName),
-                                    isFish = isDietaryPreferenceMet(preferenceFishFileName),
-                                    isPoultry = isDietaryPreferenceMet(preferencePoultryFileName),
-                                    isLamb = isDietaryPreferenceMet(preferenceLambFileName),
-                                    isVital = isDietaryPreferenceMet(preferenceVitalFileName),
-                                    isBeef = isDietaryPreferenceMet(preferenceBeefFileName),
-                                    isPork = isDietaryPreferenceMet(preferencePorkFileName),
-                                    isVegan = isDietaryPreferenceMet(preferenceVeganFileName),
-                                    isVegetarian = isDietaryPreferenceMet(preferenceVegetarianFileName),
-                                    isGame = isDietaryPreferenceMet(preferenceGameFileName),
-                                )
-                            }
-                        } catch (e: IndexOutOfBoundsException) {
-                            DietaryPreferences.NONE_MET
-                        }
-
-                        val filteredText = getOrElse(orElse = Pair("", "")) {
-                            tableRows[1].getFilteredText()
-                        }
-
-                        // Save the item to its list
-                        items.add(
-                            OfferItem(
-                                itemId,
-                                categoryId,
-                                title = filteredText.first,
-                                price = tableRows.getTextOrEmpty(
-                                    /*
-                                     * ID stored for student: 0
-                                     * Index required to fetch student price: 2
-                                     *
-                                     * ID stored for employee: 1
-                                     * Index required to fetch employee price: 3
-                                     *
-                                     * Hence, getIntPreference() + 2
-                                     */
-                                    repo.getIntPreference(SettingsPreferences.PRICING) + 2
-                                ),
-                                dietaryPreferences = prefs.deconstruct(),
-                                allergens = filteredText.second,
-                            )
-                        )
-
-                        // Increment the item ID to avoid conflict
-                        itemId += 1
+                    // Retrieve the dietary preferences the item meets
+                    val prefs = getOrElse(DietaryPreferences.NONE_MET) {
+                        element
+                            .getElementsByClass("field field-name-field-food-types")[0]
+                            .getDietaryPreferencesObject()
                     }
+
+                    // Retrieve title and embedded allergens individually
+                    val filteredText = getOrElse(orElse = Pair("", "")) {
+                        tableRows[1].splitTitleAndAllergens()
+                    }
+
+                    // Save the item to its list
+                    items.add(OfferItem(
+                        itemId,
+                        categoryId,
+                        title = filteredText.first,
+                        price = tableRows.getTextOrEmpty(
+                            /*
+                             * ID stored for student: 0
+                             * Index required to fetch student price: 2
+                             *
+                             * ID stored for employee: 1
+                             * Index required to fetch employee price: 3
+                             *
+                             * Hence, getIntPreference() + 2
+                             */
+                            repo.getIntPreference(SettingsPreferences.PRICING) + 2
+                        ),
+                        dietaryPreferences = prefs.deconstruct(),
+                        allergens = filteredText.second,
+                    ))
+
+                    // Increment the item ID to avoid conflict
+                    itemId += 1
+                }
                 // Increment the category ID to avoid conflict
                 categoryId += 1
             }
@@ -279,6 +242,44 @@ class StwParser(application: Application) {
     }
 
     /**
+     * Retrieves a date object from the canteen website by its index.
+     *
+     * @receiver    document to parse
+     * @param index position to retrieve date from
+     * @return      date object
+     */
+    private fun Document.getDateByIndex(index: Int): OfferDate {
+        /*
+         * Fetch the date for a given day. It will be in the following format:
+         * 24. Apr
+         * This value will be split between the day (24.) and the month (Apr)
+         */
+        val rawDate = getElementsByClass("tabs")[0]
+            .getElementsByClass("tab-date")[index].text().split(" ")
+
+
+        /*
+         * Parse the two elements into a single date. The month will be converted to a numeric
+         * value. Example:
+         * Input: 24. Apr
+         * Output: 24.04.
+         */
+        val date = "${rawDate[0]}${rawDate[1].monthToNumber()}."
+
+        // Save the date to its list
+        return OfferDate(dateId, date)
+    }
+
+    /**
+     * Retrieves all food items from a given element for a given day.
+     *
+     * @receiver    element to retrieve food item elements from
+     * @return      list of food elements
+     */
+    private fun Element.getAllFoodItems(): Elements =
+        getElementsByTag("tbody")[0].getElementsByTag("tr")
+
+    /**
      * Evaluates whether a dietary preference is met by checking if the link to an image can be
      * found in the HTML.
      *
@@ -293,6 +294,27 @@ class StwParser(application: Application) {
         ).isNotEmpty()
 
     /**
+     * Retrieves a dietary preferences object from a given Element.
+     *
+     * @receiver    element to retrieve preferences from
+     * @return      [DietaryPreferences.Object]
+     */
+    private fun Element.getDietaryPreferencesObject(): DietaryPreferences.Object =
+        DietaryPreferences.Object(
+            isFair = isDietaryPreferenceMet(preferenceFairFileName),
+            isFish = isDietaryPreferenceMet(preferenceFishFileName),
+            isPoultry = isDietaryPreferenceMet(preferencePoultryFileName),
+            isLamb = isDietaryPreferenceMet(preferenceLambFileName),
+            isVital = isDietaryPreferenceMet(preferenceVitalFileName),
+            isBeef = isDietaryPreferenceMet(preferenceBeefFileName),
+            isPork = isDietaryPreferenceMet(preferencePorkFileName),
+            isVegan = isDietaryPreferenceMet(preferenceVeganFileName),
+            isVegetarian = isDietaryPreferenceMet(preferenceVegetarianFileName),
+            isGame = isDietaryPreferenceMet(preferenceGameFileName),
+        )
+
+    /**
+     * Retrieves the item's title and its dietary preferences that are embedded in its title.
      * Processes certain character references into human-readable characters. Since the fetched HTML
      * contains unresolved symbols such as &amp;, they need to be replaced with their counterpart
      * (in this case, &). This method also parses allergens and additives, since they are listed on
@@ -300,9 +322,9 @@ class StwParser(application: Application) {
      * website user.
      *
      * @receiver    element to parse the text content of
-     * @return      the filtered string and a string describing allergens and additives
+     * @return      the filtered title and a string describing allergens and additives
      */
-    private fun Element.getFilteredText(): Pair<String, String> {
+    private fun Element.splitTitleAndAllergens(): Pair<String, String> {
         // Retrieve the element's inner HTML and replace faulty characters
         var text = html()
             .replace("&amp;", "&")
