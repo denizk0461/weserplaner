@@ -84,34 +84,73 @@ class CanteenPageFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListen
 
             // Observe offers and re-set them if they change
             viewModel.getOffersByDay(currentDay).observe(viewLifecycleOwner) { offers ->
+                // Refresh temporarily stored offer list
                 offerList.clear()
                 offerList.addAll(offers)
-                recyclerViewAdapter.setNewData(offers.filterElements().groupElements().distinct())
+
+                // Set new data
+                recyclerViewAdapter.setData(offers)
             }
         }
 
-        // Retrieve parent fragment to access its functions
-        val navHostFragment = activity?.supportFragmentManager?.fragments?.get(0) as? NavHostFragment
-        val parent = navHostFragment?.childFragmentManager?.primaryNavigationFragment as? CanteenFragment
+        // Set up FAB behaviour for parent fragment's FAB if activity is not null
+        activity?.let { activity ->
+            // Retrieve parent fragment to access its functions
+            val navHostFragment = activity
+                .supportFragmentManager
+                .fragments[0] as NavHostFragment
+            val parentFragment = navHostFragment
+                .childFragmentManager
+                .primaryNavigationFragment as CanteenFragment
 
-        // Set up scroll change listener to shrink and extend FAB accordingly
-        binding.recyclerView.setOnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
-            // Calculate the vertical scroll difference
-            val dy = scrollY - oldScrollY
-            if (dy > 0) {
-                // If scrolling down, shrink the FAB
-                parent?.shrinkFab()
-            } else if (dy < 0) {
-                // If scrolling up, extend the FAB
-                parent?.extendFab()
+            // Set up scroll change listener to shrink and extend FAB accordingly
+            binding.recyclerView.setOnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
+                // Calculate the vertical scroll difference
+                val dy = scrollY - oldScrollY
+                if (dy > 0) {
+                    // If scrolling down, shrink the FAB
+                    parentFragment.shrinkFab()
+                } else if (dy < 0) {
+                    // If scrolling up, extend the FAB
+                    parentFragment.extendFab()
+                }
             }
         }
 
-        // Observe dietary preference updates and re-set the items if a change is detected
+        /*
+         * Observe dietary preference updates and re-set the items if a change is detected to force
+         * an update.
+         */
         viewModel.dietaryPreferencesUpdate.observe(viewLifecycleOwner) {
-            // Re-set the list of items to the recycler view, forcing an update
-            recyclerViewAdapter.setNewData(offerList.filterElements().groupElements().distinct())
+            // Re-set data
+            recyclerViewAdapter.setData(offerList)
         }
+    }
+
+    private fun CanteenOfferItemAdapter.setData(offers: List<CanteenOffer>) {
+        /*
+         * Filter items that contain user-selected allergens or user-excluded dietary
+         * preferences.
+         */
+        val filteredOffers = offers.filterElements()
+
+        // Put elements into groups
+        val groupedOffers = filteredOffers.groupElements().distinct()
+
+        val difference = offers.size - filteredOffers.size
+
+        val newOffers = if (groupedOffers.isEmpty() && difference > 0) {
+            listOf(CanteenOfferGroup(
+                "ALL\$HIDDEN", 0, "", "", listOf(),
+            ))
+        } else groupedOffers
+
+        // Set new items into the adapter
+        setNewData(
+            newOffers,
+            // Difference is calculated from the unfiltered and filtered data sets
+            difference,
+        )
     }
 
     /**
@@ -130,7 +169,7 @@ class CanteenPageFragment : AppFragment(), CanteenOfferItemAdapter.OnClickListen
                 category,
                 canteen,
                 filter {
-                    it.category == category && it.date == date && it.canteen == canteen
+                    it.category == category && it.canteen == canteen
                 }.map {
                     // Map the individual items to their respective groups
                     CanteenOfferGroupElement(

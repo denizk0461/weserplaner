@@ -2,6 +2,7 @@ package com.denizk0461.weserplaner.adapter
 
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.DiffUtil
@@ -29,7 +30,15 @@ class CanteenOfferItemAdapter(
     private val displayColours: Boolean,
 ) : RecyclerView.Adapter<CanteenOfferItemAdapter.OfferViewHolder>() {
 
+    /**
+     * Offers to display.
+     */
     private val offers: MutableList<CanteenOfferGroup> = mutableListOf()
+
+    /**
+     * Difference between filtered list and the list fetched from the website.
+     */
+    private var difference: Int = 0
 
     /**
      * View holder class for parent class
@@ -43,7 +52,7 @@ class CanteenOfferItemAdapter(
             ItemCanteenBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
-                false
+                false,
             )
         )
     }
@@ -52,8 +61,35 @@ class CanteenOfferItemAdapter(
     override fun getItemCount(): Int = offers.size
 
     override fun onBindViewHolder(holder: OfferViewHolder, position: Int) {
+
         // Retrieve item for current position
         val currentItem = offers[position]
+
+        // Context for easier reference
+        val context = holder.binding.root.context
+
+        holder.binding.canteenCard.visibility = if (currentItem.date == "ALL\$HIDDEN") {
+            View.GONE
+        } else {
+            View.VISIBLE
+        }
+
+        // Display
+        if (position == (offers.size - 1) && difference > 0) {
+            holder.binding.textDifference.apply {
+                visibility = View.VISIBLE
+                text = if (difference == 1) {
+                    context.getString(R.string.canteen_item_difference_text_one)
+                } else {
+                    context.getString(R.string.canteen_item_difference_text_other, difference)
+                }
+            }
+        } else {
+            holder.binding.textDifference.apply {
+                visibility = View.GONE
+                text = ""
+            }
+        }
 
         /*
          * Children of the line container MUST be removed before any are added, as otherwise, during
@@ -69,34 +105,36 @@ class CanteenOfferItemAdapter(
 
             // Set the text to "No offers" (localised)
             holder.binding.textCategory.text =
-                holder.binding.root.context.getString(R.string.canteen_no_offer_header)
+                context.getString(R.string.canteen_no_offer_header)
 
             // Inflate a single line without binding it to the line container
             val line = ItemCanteenLineBinding.inflate(
-                LayoutInflater.from(holder.binding.root.context),
+                LayoutInflater.from(context),
             )
 
             // Set content to tell the user that no offers are available (localised)
             line.textContent.text =
-                holder.binding.root.context.getString(R.string.canteen_no_offer_desc)
+                context.getString(R.string.canteen_no_offer_desc)
 
             // Inflate a new icon holder
-            val img = ItemIconBinding.inflate(LayoutInflater.from(holder.binding.root.context))
+            val img = ItemIconBinding.inflate(LayoutInflater.from(context))
 
             // Retrieve data for the dietary preference
-            val (_, drawableId, colourId) = DietaryPreferences.getData(DietaryPreferences.ERROR.ordinal)
+            val (_, drawableId, colourId) = DietaryPreferences.getData(
+                DietaryPreferences.ERROR.ordinal,
+            )
 
             // Set a cross icon
             img.imageView.setImageDrawable(
                 AppCompatResources.getDrawable(
-                    holder.binding.root.context,
+                    context,
                     drawableId,
                 )
             )
 
             // Set tint of the icon; themed to the preference, if the user has the option enabled
             img.imageView.imageTintList = ColorStateList.valueOf(
-                holder.binding.root.context.theme.getThemedColor(
+                context.theme.getThemedColor(
                     if (displayColours) {
                         colourId
                     } else {
@@ -119,7 +157,7 @@ class CanteenOfferItemAdapter(
             currentItem.offers.forEach { offer ->
                 // Inflate the new line without binding it to the line container
                 val line = ItemCanteenLineBinding.inflate(
-                    LayoutInflater.from(holder.binding.root.context),
+                    LayoutInflater.from(context),
                 )
 
                 // Set text values
@@ -144,7 +182,7 @@ class CanteenOfferItemAdapter(
                 // Iterate through all icons that need to be displayed
                 indices.forEach { index ->
                     // Inflate a new icon holder
-                    val img = ItemIconBinding.inflate(LayoutInflater.from(holder.binding.root.context))
+                    val img = ItemIconBinding.inflate(LayoutInflater.from(context))
 
                     // Retrieve data for the dietary preference
                     val (_, drawableId, colourId) = DietaryPreferences.getData(index)
@@ -152,14 +190,14 @@ class CanteenOfferItemAdapter(
                     // Set the appropriate icon
                     img.imageView.setImageDrawable(
                         AppCompatResources.getDrawable(
-                            holder.binding.root.context,
+                            context,
                             drawableId,
                         )
                     )
 
                     // Set tint of the icon
                     img.imageView.imageTintList = ColorStateList.valueOf(
-                        holder.binding.root.context.theme.getThemedColor(
+                        context.theme.getThemedColor(
                             if (displayColours) {
                                 colourId
                             } else {
@@ -193,7 +231,9 @@ class CanteenOfferItemAdapter(
      *
      * @param newData   new dataset to be displayed
      */
-    fun setNewData(newData: List<CanteenOfferGroup>) {
+    fun setNewData(newData: List<CanteenOfferGroup>, difference: Int) {
+        this.difference = difference
+
         // Calculate the difference between the old list and the new list
         val diffResult = DiffUtil.calculateDiff(AppDiffUtilCallback(offers, newData))
 
@@ -205,6 +245,9 @@ class CanteenOfferItemAdapter(
 
         // Tell the DiffUtil which items have changed between the two lists
         diffResult.dispatchUpdatesTo(this)
+
+        // Force an update on the last item to display how many items have been hidden
+        notifyItemChanged(offers.size - 1)
     }
 
     /**

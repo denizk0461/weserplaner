@@ -263,7 +263,7 @@ class AppRepository(app: Application) {
         defaultValue = AllergenPreferences.TEMPLATE,
     )
     /**
-     * This value determines how many allergens the user wants to have displayed or hidden.
+     * This value determines how many allergens the user wants to have hidden.
      */
     fun getPreferenceAllergenConfigCount(): Int = getPreferenceAllergenConfig().run {
         if (isBlank()) 0 else split(",").count()

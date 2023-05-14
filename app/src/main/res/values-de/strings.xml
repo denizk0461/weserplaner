@@ -24,6 +24,9 @@
     <string name="fetch_error_webpage_snack">Du musst deinen Stundenplan öffnen!</string>
     <string name="canteen_fetch_error">Mensaplan konnte nicht heruntergeladen werden!</string>
 
+    <string name="canteen_item_difference_text_one">Ein Angebot aufgrund deiner Präferenzen versteckt.</string>
+    <string name="canteen_item_difference_text_other">%d Angebote aufgrund deiner Präferenzen versteckt.</string>
+
     <string name="event_empty_fetch_button">Lade deinen Stundenplan von Stud.IP herunter</string>
 
     <!-- plurals string resource cannot be used here because Android doesn't treat 0 differently from 2 -->

@@ -25,6 +25,9 @@
     <string name="fetch_error_webpage_snack">You must navigate to your schedule!</string>
     <string name="canteen_fetch_error">Couldn\'t retrieve the canteen plan!</string>
 
+    <string name="canteen_item_difference_text_one">One offer hidden due to your preferences.</string>
+    <string name="canteen_item_difference_text_other">%d offers hidden due to your preferences.</string>
+
     <string name="event_empty_fetch_button">Download your schedule from Stud.IP</string>
 
     <!-- plurals resource cannot be used here; view German translation for details -->
