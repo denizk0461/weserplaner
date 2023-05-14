@@ -156,13 +156,16 @@
     <string name="allergen_macadamia">Macadamianüsse</string>
     <string name="allergen_celery">Sellerie</string>
     <string name="allergen_mustard">Senf</string>
-    <string name="allergen_sulphides">Schwefeldioxide &amp; Sulfide von mehr als 10mg/kg or 10mg/l</string>
+    <string name="allergen_sulphides">Schwefeldioxide &amp; Sulfide von mehr als 10mg/kg bzw. 10mg/l</string>
     <string name="allergen_lupins">Lupinen</string>
     <string name="allergen_sesame">Sesam</string>
     <string name="allergen_molluscs">Weichtiere</string>
 
     <string name="allergens_none">Enthält weder Allergene noch Zusatzstoffe.</string>
-    <string name="allergens_contains">Enthält: %s.</string>
+    <string name="allergens_single_none">keine</string>
+    <string name="allergens_allergens_title">"Allergene: "</string>
+    <string name="allergens_additives_title">"Zusatzstoffe: "</string>
+    <string name="allergens_content_template">%s.</string>
     <string name="canteen_page_allergen_sheet_error">Beim Laden dieses Angebots ist ein Fehler aufgetreten.</string>
 
     <string name="nav_schedule">Stundenplan</string>

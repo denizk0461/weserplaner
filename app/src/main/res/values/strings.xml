@@ -166,7 +166,10 @@
     <string name="allergen_molluscs">molluscs</string>
 
     <string name="allergens_none">Contains no allergens or additives.</string>
-    <string name="allergens_contains">Contains: %s.</string>
+    <string name="allergens_single_none">none</string>
+    <string name="allergens_allergens_title">"Allergens: "</string>
+    <string name="allergens_additives_title">"Additives: "</string>
+    <string name="allergens_content_template" translatable="false">%s.</string>
     <string name="canteen_page_allergen_sheet_error">An error occurred while trying to retrieve this offer.</string>
 
     <string name="nav_schedule">Schedule</string>

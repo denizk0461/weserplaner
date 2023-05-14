@@ -85,7 +85,20 @@ class AllergenSheet : AppSheet(R.layout.sheet_allergen) {
                 }
 
                 // Allergen and additive notice
-                textContent.text = offer.allergens.compileAllergenString()
+//                textContent.text = offer.allergens.compileAllergenString()
+                val (a, b) = offer.allergens.compileStrings()
+
+                if (a.isBlank() && b.isBlank()) {
+                    textAllergensTitle.text = getString(R.string.allergens_none)
+                    textAllergensContent.visibility = View.GONE
+                    textAdditivesTitle.visibility = View.GONE
+                    textAdditivesContent.visibility = View.GONE
+                } else {
+                    textAllergensTitle.text = getString(R.string.allergens_allergens_title)
+                    textAllergensContent.text = getString(R.string.allergens_content_template, a)
+                    textAdditivesTitle.text = getString(R.string.allergens_additives_title)
+                    textAdditivesContent.text = getString(R.string.allergens_content_template, b)
+                }
 
                 // Show a price, if one is available
                 if (offer.price.isBlank()) {
@@ -116,33 +129,50 @@ class AllergenSheet : AppSheet(R.layout.sheet_allergen) {
      *
      * @return  a string of all allergens
      */
-    private fun String.compileAllergenString(): String {
+    private fun String.compileStrings(): Pair<String, String> {
 
         // Let the user know if no allergens are present
-        if (this.isBlank()) return getString(R.string.allergens_none)
+        if (this.isBlank()) return Pair("", "")
+
+        // Stores all localised additives
+        val additiveList = mutableListOf<String>()
 
         // Stores all localised allergens
-        var allergenString = ""
-
-        // Used to insert a delimiter if more than one allergen is found
-        var isFirst = true
+        val allergenList = mutableListOf<String>()
 
         // Split all allergens to iterate through them
         val allergens = this.replace(" ", "").split(",")
 
-        // Iterate through all allergens
+        // Iterate through all items
         allergens.forEach { allergen ->
-            // Insert a delimiter if more than one allergen is found
-            if (!isFirst) allergenString += ", "
 
-            // Add a localised string for the allergen
-            allergenString += getString(Allergens.getStringRes(allergen))
-
-            // Set when the first allergen has been processed
-            isFirst = false
+            // Check if the item is an allergen or an additive
+            if (allergen.toIntOrNull() == null) {
+                // If the item is not numeric, it is an allergen. Add this to the allergens.
+                allergenList.add(getString(Allergens.getStringRes(allergen)))
+            } else {
+                // If the item is numeric, it is an additive. Add this to the additives.
+                additiveList.add(getString(Allergens.getStringRes(allergen)))
+            }
         }
 
-        // Insert the allergens into a template string
-        return getString(R.string.allergens_contains, allergenString)
+        // Insert the items into a template string
+//        return getString(
+//            R.string.allergens_contains,
+//            allergenList.joinToString(", ").ifBlank {
+//                getString(R.string.allergens_single_none)
+//            },
+//            additiveList.joinToString(", ").ifBlank {
+//                getString(R.string.allergens_single_none)
+//            },
+//        )
+        return Pair(
+            allergenList.joinToString(", ").ifBlank {
+                getString(R.string.allergens_single_none)
+            },
+            additiveList.joinToString(", ").ifBlank {
+                getString(R.string.allergens_single_none)
+            },
+        )
     }
 }

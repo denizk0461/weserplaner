@@ -70,12 +70,53 @@
                 android:orientation="vertical"
                 android:layout_marginBottom="8dp"/>
 
-            <TextView
-                android:id="@+id/text_content"
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"/>
-        <!--    android:textSize="16sp"-->
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical">
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:rowCount="2"
+                    android:columnCount="2">
+
+                    <TextView
+                        android:id="@+id/text_allergens_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"/>
+
+                    <TextView
+                        android:id="@+id/text_allergens_content"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="fill_horizontal"/>
+
+                    <TextView
+                        android:id="@+id/text_additives_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:layout_gravity="top"/>
+
+                    <TextView
+                        android:id="@+id/text_additives_content"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:layout_gravity="fill_horizontal"/>
+
+                </GridLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+<!--            <TextView-->
+<!--                android:id="@+id/text_content"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginBottom="8dp"/>-->
 
             <TextView
                 android:id="@+id/text_price"
