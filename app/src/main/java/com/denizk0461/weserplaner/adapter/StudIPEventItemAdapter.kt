@@ -2,12 +2,13 @@ package com.denizk0461.weserplaner.adapter
 
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.denizk0461.weserplaner.data.AppDiffUtilCallback
-import com.google.android.material.R
+import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.data.getThemedColor
 import com.denizk0461.weserplaner.data.parseToMinutes
 import com.denizk0461.weserplaner.model.StudIPEvent
@@ -19,7 +20,7 @@ import java.util.*
  *
 
  * @param currentDay        current day that is used to show only a given day's events (0 = Monday,
- *                          4 = Friday)
+ *                          4 = Friday, 6 = Sunday)
  * @param onClickListener   used for listening to clicks and long presses
  */
 class StudIPEventItemAdapter(
@@ -65,8 +66,27 @@ class StudIPEventItemAdapter(
     override fun getItemCount(): Int = events.size
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
+
         // Retrieve item for current position
         val currentItem = events[position]
+
+        // Context for easier reference
+        val context = holder.binding.root.context
+
+        // Display a notice to the user saying they have no events scheduled for the day
+        if (currentItem.eventId == -1) {
+            holder.binding.cardBackground.visibility = View.GONE
+            holder.binding.noEventsContainer.visibility = View.VISIBLE
+            holder.binding.textNoEvents.text = context.getString(
+                R.string.schedule_no_events,
+                context.resources.getStringArray(R.array.weekdays)[currentDay]
+            )
+            return
+        }
+
+        // Set visibility of the elements accordingly if there are events scheduled
+        holder.binding.cardBackground.visibility = View.VISIBLE
+        holder.binding.noEventsContainer.visibility = View.GONE
 
         // Set up text fields with corresponding values
         holder.binding.textTitle.text = currentItem.title
@@ -77,14 +97,17 @@ class StudIPEventItemAdapter(
         holder.binding.textTimeslot.text = currentItem.timeslot()
 
         // Get current theme
-        val theme = holder.binding.root.context.theme
+        val theme = context.theme
 
         /*
          * Highlight the next upcoming course of the day if the user selected the option, if the day
          * of the adapter matches the current day, and if no other course has been highlighted, to
          * avoid double highlighting.
          */
-        if (highlightNextCourse && !isAnyCourseHighlighted && currentItem.isCurrentCourse(currentCalendar)) {
+        if (highlightNextCourse &&
+            !isAnyCourseHighlighted &&
+            currentItem.isCurrentCourse(currentCalendar)
+        ) {
             // Ensure that no other course will be highlighted
             isAnyCourseHighlighted = true
 
@@ -98,12 +121,12 @@ class StudIPEventItemAdapter(
             }
             // Set the divider colour to the text colour
             holder.binding.divider.dividerColor =
-                theme.getThemedColor(com.denizk0461.weserplaner.R.attr.colorText)
+                theme.getThemedColor(R.attr.colorText)
 
             // Set ripple colour
             holder.binding.linearLayout.background = getDrawable(
                 holder.binding.root.context,
-                com.denizk0461.weserplaner.R.drawable.selectable_item_background_highlighted,
+                R.drawable.selectable_item_background_highlighted,
             )
 
         // Otherwise, apply colours to ensure that the item will not be highlighted
@@ -111,7 +134,9 @@ class StudIPEventItemAdapter(
             holder.binding.cardBackground.apply {
                 // Set the card's background colour to its default value
                 backgroundTintList =
-                    ColorStateList.valueOf(theme.getThemedColor(R.attr.colorSurface))
+                    ColorStateList.valueOf(theme.getThemedColor(
+                        com.google.android.material.R.attr.colorSurface
+                    ))
 
                 // Set the card's stroke to its default colour
                 strokeColor = theme.getThemedColor(R.attr.colorOutlineVariant)
@@ -122,7 +147,7 @@ class StudIPEventItemAdapter(
             // Set ripple colour
             holder.binding.linearLayout.background = getDrawable(
                 holder.binding.root.context,
-                com.denizk0461.weserplaner.R.drawable.selectable_item_background,
+                R.drawable.selectable_item_background,
             )
         }
 

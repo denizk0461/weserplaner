@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
 import androidx.transition.TransitionManager
 import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.data.getParcelableCompat
@@ -18,6 +19,7 @@ import com.denizk0461.weserplaner.data.viewBinding
 import com.denizk0461.weserplaner.databinding.SheetScheduleUpdateBinding
 import com.denizk0461.weserplaner.exception.AcademicQuarterNotApplicableException
 import com.denizk0461.weserplaner.exception.ParcelNotFoundException
+import com.denizk0461.weserplaner.fragment.EventFragment
 import com.denizk0461.weserplaner.model.StudIPEvent
 import com.denizk0461.weserplaner.viewmodel.ScheduleUpdateViewModel
 import com.google.android.material.timepicker.MaterialTimePicker
@@ -50,6 +52,17 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Set up FAB behaviour for parent fragment's FAB if activity is not null
+        val parentFragment = activity?.let { activity ->
+            // Retrieve parent fragment to access its functions
+            val navHostFragment = activity
+                .supportFragmentManager
+                .fragments[0] as NavHostFragment
+            navHostFragment
+                .childFragmentManager
+                .primaryNavigationFragment as EventFragment
+        }
 
         if (arguments?.getBoolean("isEditing") == true) {
 
@@ -88,7 +101,15 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update) {
                      * accidentally deleting an event.
                      */
                     if (hasClickedDelete) {
+
+                        // Delete the event
                         viewModel.delete(event)
+
+                        // Tell the user that the event has been deleted
+                        parentFragment?.showSnackBar(
+                            getString(R.string.sheet_schedule_snack_delete)
+                        )
+
                         // Dismiss the sheet upon deletion
                         dismiss()
                     } else {
@@ -133,6 +154,12 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update) {
                                     colour = colour,
                                 )
                             )
+
+                            // Tell the user that the event has been updated
+                            parentFragment?.showSnackBar(
+                                getString(R.string.sheet_schedule_snack_update)
+                            )
+
                             // Dismiss the sheet upon update
                             dismiss()
                         }
@@ -186,6 +213,11 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update) {
                                 timeslotId = timeslotStart.parseToMinutes(),
                                 colour = colour,
                             )
+                        )
+
+                        // Tell the user that the event has been updated
+                        parentFragment?.showSnackBar(
+                            getString(R.string.sheet_schedule_snack_add)
                         )
 
                         // Dismiss the sheet upon update

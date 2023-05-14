@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.data.showErrorSnackBar
+import com.denizk0461.weserplaner.data.showSnackBar
 import com.denizk0461.weserplaner.data.showToast
 import com.denizk0461.weserplaner.databinding.ActivityFetcherBinding
 import com.denizk0461.weserplaner.model.TextSheetContentId
@@ -50,7 +51,11 @@ class FetcherActivity : FragmentActivity() {
         setContentView(binding.root)
 
         // Remind the user of the help button
-        showToast(this, getString(R.string.toast_info_reminder))
+        theme.showSnackBar(
+            binding.coordinatorLayout,
+            getString(R.string.fetch_snack_info_reminder),
+            binding.bottomAppBar,
+        )
 
         // Enabling JavaScript. See comment above lint suppression for reason why this is done.
         binding.webview.settings.apply {
@@ -104,15 +109,19 @@ class FetcherActivity : FragmentActivity() {
                     }.show(supportFragmentManager, TextSheet::class.java.simpleName)
                     true
                 }
+                R.id.schedule -> {
+                    binding.webview.loadUrl(scheduleUrl)
+                    true
+                }
                 else -> false
             }
         }
 
         /*
-         * Attempt to load the user-set Stud.IP front page. Redirects to login page if user is
+         * Attempt to load the user's Stud.IP schedule page. Redirects to login page if user is
          * not logged in.
          */
-        binding.webview.loadUrl("https://elearning.uni-bremen.de/index.php?again=yes")
+        binding.webview.loadUrl(scheduleUrl)
 
         binding.fab.setOnClickListener {
 
@@ -146,18 +155,18 @@ class FetcherActivity : FragmentActivity() {
                     } catch (e: IOException) {
                         // Let the user know that an error occurred
                         theme.showErrorSnackBar(
-                            binding.rootView,
+                            binding.coordinatorLayout,
                             getString(R.string.fetch_error_snack),
-                            binding.bottomAppBar
+                            binding.bottomAppBar,
                         )
                     }
                 }
             } else {
                 // Tell the user that they must navigate to their timetable
                 theme.showErrorSnackBar(
-                    binding.rootView,
+                    binding.coordinatorLayout,
                     getString(R.string.fetch_error_webpage_snack),
-                    binding.bottomAppBar
+                    binding.bottomAppBar,
                 )
             }
         }

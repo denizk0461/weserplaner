@@ -96,7 +96,20 @@ class EventPageFragment : AppFragment(), StudIPEventItemAdapter.OnClickListener 
 
         // Set up LiveData observer to refresh the view on update
         viewModel.getEventsForDay(currentDay).observe(viewLifecycleOwner) { events ->
-            eventAdapter.setNewData(events)
+            eventAdapter.setNewData(events.ifEmpty { listOf(
+                // Use an event with eventId = -1 to denote that there are no events for this day
+                StudIPEvent(
+                    -1,
+                    "",
+                    "",
+                    "",
+                    0,
+                    "",
+                    "",
+                    0,
+                    0,
+                )
+            ) })
         }
     }
 

@@ -35,24 +35,30 @@
     <string name="toast_fetch_finished_one">Your schedule has been refreshed, but one item could not be saved.</string>
     <string name="toast_fetch_finished_other">Your schedule has been refreshed, but %d items could not be saved.</string>
 
-    <string name="toast_info_reminder">Click the info icon at the bottom if you need any help here.</string>
+    <string name="fetch_snack_info_reminder">Click the info icon at the bottom if you need any help here.</string>
     <string name="fetch_bar_close_title">Close</string>
     <string name="fetch_bar_close_desc">Close the website without saving anything</string>
     <string name="fetch_bar_refresh_title">Refresh</string>
     <string name="fetch_bar_refresh_desc">Refresh the page</string>
     <string name="fetch_bar_help_title">Help</string>
     <string name="fetch_bar_help_desc">Show help</string>
+    <string name="fetch_bar_schedule_title">Schedule</string>
+    <string name="fetch_bar_schedule_desc">Go to your schedule</string>
     <string name="fetch_bar_help_sheet_title">How to save your timetable in the app</string>
-    <string name="fetch_bar_help_sheet_content"> • Log in with your Stud.IP login\n • Open your timetable view (in case it doesn\'t open automatically)\n • Click the \'save\' button that should appear in the bottom right corner\n • Done!</string>
+    <string name="fetch_bar_help_sheet_content"> • Log in with your Stud.IP login\n • Open your timetable view, in case it doesn\'t open automatically, by clicking the rightmost icon in the bottom bar that looks like a pencil and a ruler\n • Click the \'save\' button that appears in the bottom right corner\n • Done!</string>
     <string name="fetch_bar_save_desc">Save the timetable in the app</string>
 
     <string name="schedule_fab_add_text">New event</string>
+    <string name="schedule_no_events">You don\'t have any events for %s.</string>
 
     <string name="save">Save</string>
     <string name="delete">Delete</string>
     <string name="sheet_schedule_update_delete_confirm">Sure?</string>
     <string name="cancel">Cancel</string>
     <string name="confirm">Confirm</string>
+    <string name="sheet_schedule_snack_delete">Event has been deleted.</string>
+    <string name="sheet_schedule_snack_add">Event has been added.</string>
+    <string name="sheet_schedule_snack_update">Event has been updated.</string>
     <string name="sheet_schedule_update_header_edit">Edit existing event</string>
     <string name="sheet_schedule_update_header_add">Add new event</string>
     <string name="sheet_schedule_update_title_hint">Event title</string>

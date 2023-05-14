@@ -4,17 +4,17 @@ WeserPlaner is a work-in-progress Android app for students at the University of 
 ![Screenshots of the WeserPlaner app](https://denizk0461.github.io/weserplaner_showcase.png)
 
 ## Progress
-- Downloading and creating events, as well as displaying them is fully functional.
-- Downloading canteen offers, filtering them, and viewing details is fully functional.
-- Viewing additional information on the canteen (opening hours, news) works.
+- Downloading and creating events, as well as displaying them.
+- Downloading canteen offers, filtering them, and viewing details.
+- Viewing additional information on the canteen (opening hours, news).
 
 ## What's broken
-Currently, nothing is outright broken, but a few things may be bodged together.
+Currently, nothing is outright broken, but a few things may be bodged together badly.
 
 ## TODO
 - Adding exams, homework, etc.: users will be able to add any tasks they need to do as reminders. Those can be associated with events that either have been downloaded from the user's Stud.IP schedule, or ones the user has created manually. An overview will be provided that allows the user to have, well, an overview of everything they need to do.
 - Optimisations to data handling will be made. The app currently only supports storing a single timetable, which will be changed in future releases. A planned implementation will see the user being able to download schedules as well as create ones from scratch, with the schedules able to be selected via a dropdown menu. 
-- Some UI restructuring to declutter certain screens and improve the UX.
+- Some improvements to the Play Store screenshots are sorely needed...
 
 ## Why Android-only?
 Because:
@@ -27,6 +27,6 @@ I may reconsider once Apple finally opens up iOS for third-party apps.
 
 The colour scheme is inspired by the University of Bremen's colour scheme, as well as the city of Bremen's colour scheme. The logo represents both the University of Bremen as well as (kind of) the Weserstadion, our local sports stadium.
 
-I admit the Weserstadion idea came to me after I had created the logo.
+I admit the Weserstadion idea only came to me after I had created the logo.
 
 ![WeserPlaner app icon](https://denizk0461.github.io/weserplaner_app_icon.png)

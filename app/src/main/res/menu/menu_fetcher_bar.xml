@@ -4,19 +4,25 @@
     <item
         android:id="@+id/close"
         android:icon="@drawable/cross"
-        android:title="@string/fetch_bar_close_title"
+        android:title="@string/fetch_bar_close_desc"
         android:contentDescription="@string/fetch_bar_close_desc"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always"/>
     <item
         android:id="@+id/refresh"
         android:icon="@drawable/refresh"
-        android:title="@string/fetch_bar_refresh_title"
+        android:title="@string/fetch_bar_refresh_desc"
         android:contentDescription="@string/fetch_bar_refresh_desc"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always"/>
     <item
         android:id="@+id/help"
         android:icon="@drawable/info"
-        android:title="@string/fetch_bar_help_title"
+        android:title="@string/fetch_bar_help_desc"
         android:contentDescription="@string/fetch_bar_help_desc"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/schedule"
+        android:icon="@drawable/design"
+        android:title="@string/fetch_bar_schedule_desc"
+        android:contentDescription="@string/fetch_bar_schedule_desc"
+        app:showAsAction="always"/>
 </menu>

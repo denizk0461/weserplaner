@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
 import com.denizk0461.weserplaner.R
-import com.denizk0461.weserplaner.data.showToast
 import com.denizk0461.weserplaner.data.viewBinding
 import com.denizk0461.weserplaner.databinding.SheetAllergenConfigBinding
+import com.denizk0461.weserplaner.fragment.SettingsFragment
 import com.denizk0461.weserplaner.model.AllergenPreferences
 import com.denizk0461.weserplaner.viewmodel.AllergenConfigViewModel
 
@@ -25,6 +26,17 @@ class AllergenConfigSheet : AppSheet(R.layout.sheet_allergen_config) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Set up FAB behaviour for parent fragment's FAB if activity is not null
+        val parentFragment = activity?.let { activity ->
+            // Retrieve parent fragment to access its functions
+            val navHostFragment = activity
+                .supportFragmentManager
+                .fragments[0] as NavHostFragment
+            navHostFragment
+                .childFragmentManager
+                .primaryNavigationFragment as SettingsFragment
+        }
 
         // Retrieve allergens as currently set by the user from view model
         val currentAllergenConfig = AllergenPreferences.construct(
@@ -73,7 +85,7 @@ class AllergenConfigSheet : AppSheet(R.layout.sheet_allergen_config) {
             parentFragment?.setFragmentResult("allergenConfig", Bundle())
 
             // Tell the user that saving was successful
-            showToast(context, getString(R.string.allergens_config_confirmation))
+            parentFragment?.showSnackBar(getString(R.string.allergens_config_confirmation))
 
             // Close the sheet
             dismiss()

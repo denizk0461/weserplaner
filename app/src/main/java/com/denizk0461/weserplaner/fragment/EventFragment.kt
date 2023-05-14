@@ -10,6 +10,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.activity.FetcherActivity
 import com.denizk0461.weserplaner.adapter.StudIPEventPageAdapter
+import com.denizk0461.weserplaner.data.showSnackBar
 import com.denizk0461.weserplaner.databinding.FragmentEventBinding
 import com.denizk0461.weserplaner.sheet.ScheduleUpdateSheet
 import com.denizk0461.weserplaner.viewmodel.EventViewModel
@@ -142,6 +143,15 @@ class EventFragment : AppFragment() {
      */
     fun extendFab() {
         binding.fabAddEvent.extend()
+    }
+
+    /**
+     * Creates and shows a snack bar.
+     *
+     * @param text  content to display in the snack bar
+     */
+    fun showSnackBar(text: String) {
+        context.theme.showSnackBar(binding.coordinatorLayout, text)
     }
 
     // Invalidate the view binding

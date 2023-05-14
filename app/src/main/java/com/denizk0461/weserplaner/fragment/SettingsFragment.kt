@@ -238,8 +238,7 @@ class SettingsFragment : AppFragment() {
                 licencesLongClick = 0
                 viewModel.preferenceExperimentalSettingsEnabled = true
                 binding.cardExperimentalSettings.visibility = View.VISIBLE
-                context.theme.showSnackBar(
-                    binding.coordinatorLayout,
+                showSnackBar(
                     getString(R.string.settings_unlocked_experiments),
                 )
             } else {
@@ -320,8 +319,7 @@ class SettingsFragment : AppFragment() {
         binding.buttonHideExperiments.setOnClickListener {
             viewModel.preferenceExperimentalSettingsEnabled = false
             binding.cardExperimentalSettings.visibility = View.GONE
-            context.theme.showSnackBar(
-                binding.coordinatorLayout,
+            showSnackBar(
                 getString(R.string.settings_hide_experiments),
             )
         }
@@ -397,8 +395,7 @@ class SettingsFragment : AppFragment() {
                     viewModel.nukeEverything()
                     showToast(context, "Nuked everything")
                 }
-                else -> context.theme.showSnackBar(
-                    binding.coordinatorLayout,
+                else -> showSnackBar(
                     getString(R.string.settings_dev_codes_invalid)
                 )
             }
@@ -416,6 +413,15 @@ class SettingsFragment : AppFragment() {
 
         // Give the user a slight dopamine boost
         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(link)))
+    }
+
+    /**
+     * Creates and shows a snack bar.
+     *
+     * @param text  content to display in the snack bar
+     */
+    fun showSnackBar(text: String) {
+        context.theme.showSnackBar(binding.coordinatorLayout, text)
     }
 
     /**

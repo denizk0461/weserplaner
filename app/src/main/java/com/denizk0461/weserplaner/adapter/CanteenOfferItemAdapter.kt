@@ -76,19 +76,15 @@ class CanteenOfferItemAdapter(
 
         // Display
         if (position == (offers.size - 1) && difference > 0) {
-            holder.binding.textDifference.apply {
-                visibility = View.VISIBLE
-                text = if (difference == 1) {
-                    context.getString(R.string.canteen_item_difference_text_one)
-                } else {
-                    context.getString(R.string.canteen_item_difference_text_other, difference)
-                }
+            holder.binding.differenceContainer.visibility = View.VISIBLE
+            holder.binding.textDifference.text = if (difference == 1) {
+                context.getString(R.string.canteen_item_difference_text_one)
+            } else {
+                context.getString(R.string.canteen_item_difference_text_other, difference)
             }
         } else {
-            holder.binding.textDifference.apply {
-                visibility = View.GONE
-                text = ""
-            }
+            holder.binding.differenceContainer.visibility = View.GONE
+            holder.binding.textDifference.text = ""
         }
 
         /*

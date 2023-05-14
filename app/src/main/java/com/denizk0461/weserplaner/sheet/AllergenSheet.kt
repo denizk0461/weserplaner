@@ -84,20 +84,28 @@ class AllergenSheet : AppSheet(R.layout.sheet_allergen) {
                     }
                 }
 
-                // Allergen and additive notice
-//                textContent.text = offer.allergens.compileAllergenString()
-                val (a, b) = offer.allergens.compileStrings()
+                // Retrieve allergen and additive strings
+                val (allergens, additives) = offer.allergens.compileStrings()
 
-                if (a.isBlank() && b.isBlank()) {
+                // Display notices for allergens and additives, if necessary
+                if (allergens.isBlank() && additives.isBlank()) {
+                    // Tell the user that no allergens and no additives are present in the offer
                     textAllergensTitle.text = getString(R.string.allergens_none)
                     textAllergensContent.visibility = View.GONE
                     textAdditivesTitle.visibility = View.GONE
                     textAdditivesContent.visibility = View.GONE
                 } else {
+                    // Set allergen and additives accordingly if any are present
                     textAllergensTitle.text = getString(R.string.allergens_allergens_title)
-                    textAllergensContent.text = getString(R.string.allergens_content_template, a)
+                    textAllergensContent.text = getString(
+                        R.string.allergens_content_template,
+                        allergens,
+                    )
                     textAdditivesTitle.text = getString(R.string.allergens_additives_title)
-                    textAdditivesContent.text = getString(R.string.allergens_content_template, b)
+                    textAdditivesContent.text = getString(
+                        R.string.allergens_content_template,
+                        additives,
+                    )
                 }
 
                 // Show a price, if one is available
@@ -124,21 +132,22 @@ class AllergenSheet : AppSheet(R.layout.sheet_allergen) {
     }
 
     /**
-     * Retrieves localised strings for all allergens present in a given offer and compiles them into
-     * a human-readable string, if any allergens are present.
+     * Retrieves localised strings for all allergens and additives present in a given offer and
+     * compiles them into human-readable strings, if any are present.
      *
-     * @return  a string of all allergens
+     * @receiver    string to parse allergens and additives from
+     * @return      allergens and additives formatted as strings
      */
     private fun String.compileStrings(): Pair<String, String> {
 
-        // Let the user know if no allergens are present
+        // Return empty values if the received string is blank
         if (this.isBlank()) return Pair("", "")
-
-        // Stores all localised additives
-        val additiveList = mutableListOf<String>()
 
         // Stores all localised allergens
         val allergenList = mutableListOf<String>()
+
+        // Stores all localised additives
+        val additiveList = mutableListOf<String>()
 
         // Split all allergens to iterate through them
         val allergens = this.replace(" ", "").split(",")
@@ -156,16 +165,10 @@ class AllergenSheet : AppSheet(R.layout.sheet_allergen) {
             }
         }
 
-        // Insert the items into a template string
-//        return getString(
-//            R.string.allergens_contains,
-//            allergenList.joinToString(", ").ifBlank {
-//                getString(R.string.allergens_single_none)
-//            },
-//            additiveList.joinToString(", ").ifBlank {
-//                getString(R.string.allergens_single_none)
-//            },
-//        )
+        /*
+         * Join the lists to formatted strings, separated by commas. Put a localised "none" if
+         * either no allergens or additives could be found respectively.
+         */
         return Pair(
             allergenList.joinToString(", ").ifBlank {
                 getString(R.string.allergens_single_none)
