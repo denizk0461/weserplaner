@@ -54,13 +54,14 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="4dp">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginHorizontal="4dp"
             android:scaleType="centerInside"
-            app:tint="?attr/colorText"
-            android:src="@drawable/visibility_off"/>
+            android:tint="?attr/colorText"
+            android:src="@drawable/visibility_off"
+            android:importantForAccessibility="no"/>
 
         <TextView
             android:id="@+id/text_difference"

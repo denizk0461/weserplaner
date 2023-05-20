@@ -73,6 +73,9 @@
     <string name="sheet_schedule_update_time_dialog_start_hint">Startzeit der Veranstaltung</string>
     <string name="sheet_schedule_update_time_dialog_end_hint">Schlusszeit der Veranstaltung</string>
 
+    <string name="canteen_button_opening_hours_hint">Siehe Öffnungszeiten der Mensa</string>
+    <string name="canteen_button_notifications_hint">Siehe Neuigkeiten der Mensa</string>
+
     <string name="canteen_no_offer_header">Kein Angebot</string>
     <string name="canteen_no_offer_desc">Für diesen Tag sind keine Angebote vorhanden</string>
     <string name="canteen_news_sheet_title">Neuigkeiten für diese Mensa</string>

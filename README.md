@@ -1,7 +1,7 @@
 ## WeserPlaner – University of Bremen Companion App
 WeserPlaner is a work-in-progress Android app for students at the University of Bremen that allows the user to download their schedule from their Stud.IP account, as well as viewing the offers available in all of the canteens operated by the Studierendenwerk Bremen. Handy features are available, such as adding new events and editing existing events, filtering canteen offers only for such that conform to the user's dietary and ethical preferences (e.g. only displaying vegetarian foods), and filtering out any offers including substances the user is allergic against.
 
-![Screenshots of the WeserPlaner app](https://denizk0461.github.io/weserplaner_showcase.png)
+![Screenshots of the WeserPlaner app](https://denizk0461.github.io/resources/weserplaner/weserplaner_showcase_2.png)
 
 ## Progress
 - Downloading and creating events, as well as displaying them.
@@ -29,4 +29,4 @@ The colour scheme is inspired by the University of Bremen's colour scheme, as we
 
 I admit the Weserstadion idea only came to me after I had created the logo.
 
-![WeserPlaner app icon](https://denizk0461.github.io/weserplaner_app_icon.png)
+![WeserPlaner app icon](https://denizk0461.github.io/resources/weserplaner/weserplaner_app_icon.png)

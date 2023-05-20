@@ -2,7 +2,6 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingHorizontal="8dp"
     android:paddingVertical="4dp"
     android:orientation="vertical">
@@ -62,13 +61,14 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="4dp">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginHorizontal="4dp"
             android:scaleType="centerInside"
-            app:tint="?attr/colorText"
-            android:src="@drawable/edit_off"/>
+            android:tint="?attr/colorText"
+            android:src="@drawable/edit_off"
+            android:importantForAccessibility="no"/>
 
         <TextView
             android:id="@+id/text_no_events"

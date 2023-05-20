@@ -75,6 +75,9 @@
     <string name="sheet_schedule_update_time_dialog_start_hint">Event start time</string>
     <string name="sheet_schedule_update_time_dialog_end_hint">Event end time</string>
 
+    <string name="canteen_button_opening_hours_hint">View canteen opening hours</string>
+    <string name="canteen_button_notifications_hint">View canteen notifications</string>
+
     <string name="canteen_no_offer_header">No offers</string>
     <string name="canteen_no_offer_desc">There are no offers available for this day</string>
     <string name="canteen_news_sheet_title">News for this canteen</string>

@@ -116,7 +116,7 @@ class CanteenOfferItemAdapter(
             val img = ItemIconBinding.inflate(LayoutInflater.from(context))
 
             // Retrieve data for the dietary preference
-            val (_, drawableId, colourId) = DietaryPreferences.getData(
+            val (drawableTextDesc, drawableId, colourId) = DietaryPreferences.getData(
                 DietaryPreferences.ERROR.ordinal,
             )
 
@@ -127,6 +127,9 @@ class CanteenOfferItemAdapter(
                     drawableId,
                 )
             )
+
+            // Set content description for the icon
+            img.imageView.contentDescription = context.getString(drawableTextDesc)
 
             // Set tint of the icon; themed to the preference, if the user has the option enabled
             img.imageView.imageTintList = ColorStateList.valueOf(
@@ -181,7 +184,7 @@ class CanteenOfferItemAdapter(
                     val img = ItemIconBinding.inflate(LayoutInflater.from(context))
 
                     // Retrieve data for the dietary preference
-                    val (_, drawableId, colourId) = DietaryPreferences.getData(index)
+                    val (drawableTextDesc, drawableId, colourId) = DietaryPreferences.getData(index)
 
                     // Set the appropriate icon
                     img.imageView.setImageDrawable(
@@ -190,6 +193,9 @@ class CanteenOfferItemAdapter(
                             drawableId,
                         )
                     )
+
+                    // Set content description for the icon
+                    img.imageView.contentDescription = context.getString(drawableTextDesc)
 
                     // Set tint of the icon
                     img.imageView.imageTintList = ColorStateList.valueOf(
