@@ -68,5 +68,10 @@ enum class SettingsPreferences(val key: String) {
      * Whether the user has enabled experimental settings.
      */
     EXPERIMENTAL_ENABLED("experimental_enabled"),
+
+    /**
+     * Whether beta screens should be shown.
+     */
+    BETA_SCREENS_ENABLED("beta_screens"),
     ;
 }

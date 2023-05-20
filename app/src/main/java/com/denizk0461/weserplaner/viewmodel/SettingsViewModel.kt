@@ -74,6 +74,13 @@ class SettingsViewModel(app: Application) : AppViewModel(app) {
         get() = repo.getPreferenceExperimentalSettingsEnabled()
         set(newValue) { repo.setPreferenceExperimentalSettingsEnabled(newValue) }
 
+    /**
+     * This value determines whether beta screens should be shown.
+     */
+    var preferenceBetaScreensEnabled: Boolean
+        get() = repo.getPreferenceBetaScreensEnabled()
+        set(newValue) { repo.setPreferenceBetaScreensEnabled(newValue) }
+
     // --- functions for dev codes --- //
 
     /**

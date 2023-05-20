@@ -39,6 +39,13 @@ class MainActivity : FragmentActivity() {
             binding.navHostFragmentContentMain.getFragment<NavHostFragment>().findNavController()
         )
 
+        // Check whether the user has enabled beta screens
+        val showBetaScreens = viewModel.preferenceBetaScreensEnabled
+
+        // Set the visibility for the navigation bar items for beta screens accordingly
+        binding.navView.menu.findItem(R.id.exam_overview).isVisible = showBetaScreens
+        binding.navView.menu.findItem(R.id.room_finder).isVisible = showBetaScreens
+
         // Set up navigation component
         setNavigationGraph()
     }

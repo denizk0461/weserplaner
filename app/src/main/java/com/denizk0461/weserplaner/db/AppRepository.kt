@@ -390,6 +390,16 @@ class AppRepository(app: Application) {
         setPreference(SettingsPreferences.EXPERIMENTAL_ENABLED, newValue)
     }
 
+    /**
+     * This value determines whether beta screens should be shown.
+     */
+    fun getPreferenceBetaScreensEnabled(): Boolean = getBooleanPreference(
+        SettingsPreferences.BETA_SCREENS_ENABLED,
+    )
+    fun setPreferenceBetaScreensEnabled(newValue: Boolean) {
+        setPreference(SettingsPreferences.BETA_SCREENS_ENABLED, newValue)
+    }
+
     // --- private preference handlers preferences --- //
 
     /**

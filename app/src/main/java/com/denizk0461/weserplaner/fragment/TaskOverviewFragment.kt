@@ -7,20 +7,20 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.data.showSnackBar
-import com.denizk0461.weserplaner.databinding.FragmentRoomFinderBinding
-import com.denizk0461.weserplaner.viewmodel.RoomFinderViewModel
+import com.denizk0461.weserplaner.databinding.FragmentTaskOverviewBinding
+import com.denizk0461.weserplaner.viewmodel.TaskOverviewViewModel
 
 /**
- * Fragment view that the user can use to find specific rooms on the university campus.
+ * Fragment that shows the user an overview of their tasks and exams.
  */
-class RoomFinderFragment : AppFragment<FragmentRoomFinderBinding>() {
+class TaskOverviewFragment : AppFragment<FragmentTaskOverviewBinding>() {
 
     // View model reference for providing access to the database
-    private val viewModel: RoomFinderViewModel by viewModels()
+    private val viewModel: TaskOverviewViewModel by viewModels()
 
     // Instantiate the view binding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentRoomFinderBinding.inflate(inflater, container, false)
+        _binding = FragmentTaskOverviewBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -30,7 +30,7 @@ class RoomFinderFragment : AppFragment<FragmentRoomFinderBinding>() {
         // Tell the user that this fragment's functionality is not yet implemented
         context.theme.showSnackBar(
             binding.coordinatorLayout,
-            getString(R.string.room_finder_snack_unimplemented),
+            getString(R.string.task_overview_snack_unimplemented),
         )
     }
 }

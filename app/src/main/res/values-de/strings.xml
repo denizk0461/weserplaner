@@ -73,6 +73,8 @@
     <string name="sheet_schedule_update_time_dialog_start_hint">Startzeit der Veranstaltung</string>
     <string name="sheet_schedule_update_time_dialog_end_hint">Schlusszeit der Veranstaltung</string>
 
+    <string name="task_overview_snack_unimplemented">Aufgaben sind noch nicht implementiert!</string>
+
     <string name="canteen_button_opening_hours_hint">Siehe Öffnungszeiten der Mensa</string>
     <string name="canteen_button_notifications_hint">Siehe Neuigkeiten der Mensa</string>
 
@@ -85,18 +87,23 @@
     <string name="canteen_fab_refresh_content_desc">Aktualisiere Angebote</string>
     <string name="canteen_fab_refresh_text">Aktualisieren</string>
 
-    <!-- TODO replace 'this canteen' with %s -->
     <string name="text_sheet_opening_hours_title">%s – Öffnungszeiten</string>
     <string name="text_sheet_opening_hours_empty">Die Öffnungszeiten können nicht angezeigt werden.</string>
     <string name="text_sheet_news_title">%s – Neuigkeiten</string>
     <string name="text_sheet_news_empty">Es sind keine Neuigkeiten verfügbar.</string>
 
+    <string name="room_finder_snack_unimplemented">Der Raumfinder ist noch nicht implementiert!</string>
+
     <string name="sheet_licences_header">Lizenzen</string>
 
     <string name="title_schedule">Dein Stundenplan</string>
     <string name="title_schedule_short">Stundenplan</string>
+    <string name="title_exam_overview">Aufgaben &amp; Prüfungen</string>
+    <string name="title_exam_overview_short">Aufgaben</string>
     <string name="title_canteen">Mensenangebote</string>
     <string name="title_canteen_short">Mensa</string>
+    <string name="title_room_finder">Raumfinder</string>
+    <string name="title_room_finder_short">Räume</string>
     <string name="title_canteen_template">%s – Angebote</string>
     <string name="title_settings">App-Einstellungen</string>
 
@@ -178,7 +185,9 @@
     <string name="canteen_page_allergen_sheet_error">Beim Laden dieses Angebots ist ein Fehler aufgetreten.</string>
 
     <string name="nav_schedule">Stundenplan</string>
-    <string name="nav_food">Mensa</string>
+    <string name="nav_exam_overview">Aufgaben</string>
+    <string name="nav_canteen">Mensa</string>
+    <string name="nav_room_finder">Raumfinder</string>
     <string name="nav_settings">Einstellungen</string>
 
     <string name="settings_general">Allgemein</string>
@@ -232,6 +241,18 @@
     <string name="settings_licences_subtitle">Ressourcen, die diese App möglich gemacht haben</string>
 
     <string name="settings_app_version">App-Version</string>
+
+    <string name="settings_hide_experiments_title">Verstecke experimentelle Einstellungen</string>
+    <string name="settings_hide_experiments_subtitle">Rufe sie wieder über den Lizenzen-Knopf auf</string>
+
+    <string name="settings_build_time">Gradle Build-Code &amp; Zeit</string>
+
+    <string name="settings_beta_nav_title">Zeige Beta-Bildschirme</string>
+    <string name="settings_beta_nav_subtitle">Erfordert einen App-Neustart</string>
+
+    <string name="settings_dev_codes_title">Entwicklercodes</string>
+    <string name="settings_dev_codes_hint">6 Zeichen</string>
+    <string name="settings_dev_codes_invalid">Dieser Code konnte nicht gefunden werden.</string>
 
     <string name="settings_app_version_15">klick weiter</string>
 </resources>

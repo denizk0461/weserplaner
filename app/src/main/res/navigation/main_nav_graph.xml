@@ -11,9 +11,20 @@
         android:label="EventFragment"
         tools:layout="@layout/fragment_event"/>
     <fragment
+        android:id="@+id/exam_overview"
+        android:name="com.denizk0461.weserplaner.fragment.TaskOverviewFragment"
+        android:label="ExamOverviewFragment"
+        tools:layout="@layout/fragment_task_overview"/>
+    <fragment
         android:id="@+id/canteen"
         android:name="com.denizk0461.weserplaner.fragment.CanteenFragment"
-        android:label="CanteenFragment"/>
+        android:label="CanteenFragment"
+        tools:layout="@layout/fragment_canteen"/>
+    <fragment
+        android:id="@+id/room_finder"
+        android:name="com.denizk0461.weserplaner.fragment.RoomFinderFragment"
+        android:label="RoomFinderFragment"
+        tools:layout="@layout/fragment_room_finder"/>
     <fragment
         android:id="@+id/settings"
         android:name="com.denizk0461.weserplaner.fragment.SettingsFragment"

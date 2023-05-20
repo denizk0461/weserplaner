@@ -6,9 +6,19 @@
         android:title="@string/nav_schedule"
         android:enabled="true"/>
     <item
+        android:id="@+id/exam_overview"
+        android:icon="@drawable/task"
+        android:title="@string/nav_exam_overview"
+        android:enabled="true"/>
+    <item
         android:id="@+id/canteen"
         android:icon="@drawable/restaurant"
-        android:title="@string/nav_food"
+        android:title="@string/nav_canteen"
+        android:enabled="true"/>
+    <item
+        android:id="@+id/room_finder"
+        android:icon="@drawable/location"
+        android:title="@string/nav_room_finder"
         android:enabled="true"/>
     <item
         android:id="@+id/settings"

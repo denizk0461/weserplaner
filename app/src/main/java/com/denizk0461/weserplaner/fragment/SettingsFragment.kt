@@ -322,6 +322,14 @@ class SettingsFragment : AppFragment<FragmentSettingsBinding>() {
                 .format(Date(BuildConfig.BUILD_TIME_MILLIS))
         }"
 
+        // Set up switch for showing beta screens
+        binding.switchBetaNav.apply {
+            isChecked = viewModel.preferenceBetaScreensEnabled
+            setOnCheckedChangeListener { _, newValue ->
+                viewModel.preferenceBetaScreensEnabled = newValue
+            }
+        }
+
         binding.buttonDevCodes.setOnClickListener {
             val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
@@ -418,7 +426,8 @@ class SettingsFragment : AppFragment<FragmentSettingsBinding>() {
     /**
      * Decodes Base64 to a regular string.
      *
-     * @return the decoded string
+     * @receiver    encoded string to decode
+     * @return      decoded string
      */
     private val String.d64: String get() = String(
         Base64.decode(this, Base64.DEFAULT),

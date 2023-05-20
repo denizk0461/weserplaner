@@ -15,4 +15,10 @@ class MainViewModel(application: Application) : AppViewModel(application) {
      */
     val preferenceLaunchFragment: Int
         get() = repo.getPreferenceLaunchFragment()
+
+    /**
+     * This value determines whether the user has enabled experimental settings.
+     */
+    val preferenceBetaScreensEnabled: Boolean
+        get() = repo.getPreferenceBetaScreensEnabled()
 }
