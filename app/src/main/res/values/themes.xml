@@ -102,4 +102,11 @@
     <style name="TimePickerButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:textColor">@color/md_theme_light_primary</item>
     </style>
+
+    <style name="SheetCloseButton" parent="Widget.Material3.Button.IconButton.Filled.Tonal">
+        <item name="icon">@drawable/cross</item>
+        <item name="iconPadding">0dp</item>
+        <item name="iconTint">?attr/colorOnSurfaceVariant</item>
+        <item name="minWidth">0dp</item>
+    </style>
 </resources>

@@ -29,16 +29,7 @@ import java.util.*
 /**
  * User-facing fragment view that is used to change app settings.
  */
-class SettingsFragment : AppFragment() {
-
-    // Nullable view binding reference
-    private var _binding: FragmentSettingsBinding? = null
-
-    /*
-     * Non-null reference to the view binding. This property is only valid between onCreateView and
-     * onDestroyView.
-     */
-    private val binding get() = _binding!!
+class SettingsFragment : AppFragment<FragmentSettingsBinding>() {
 
     // View model reference for providing access to the database
     private val viewModel: SettingsViewModel by viewModels()

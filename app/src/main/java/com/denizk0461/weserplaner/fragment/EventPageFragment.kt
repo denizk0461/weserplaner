@@ -18,16 +18,7 @@ import com.denizk0461.weserplaner.viewmodel.EventPageViewModel
  * Fragment that is instantiated by [StudIPEventPageAdapter] to display individual days' pages and
  * their events.
  */
-class EventPageFragment : AppFragment(), StudIPEventItemAdapter.OnClickListener {
-
-    // Nullable view binding reference
-    private var _binding: RecyclerViewBinding? = null
-
-    /*
-     * Non-null reference to the view binding. This property is only valid between onCreateView and
-     * onDestroyView.
-     */
-    private val binding get() = _binding!!
+class EventPageFragment : AppFragment<RecyclerViewBinding>(), StudIPEventItemAdapter.OnClickListener {
 
     // View model reference for providing access to the database
     private val viewModel: EventPageViewModel by viewModels()

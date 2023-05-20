@@ -20,16 +20,7 @@ import java.util.*
 /**
  * User-facing fragment view that displays the user's Stud.IP schedule.
  */
-class EventFragment : AppFragment() {
-
-    // Nullable view binding reference
-    private var _binding: FragmentEventBinding? = null
-
-    /*
-     * Non-null reference to the view binding. This property is only valid between onCreateView and
-     * onDestroyView.
-     */
-    private val binding get() = _binding!!
+class EventFragment : AppFragment<FragmentEventBinding>() {
 
     // Adapter for the view pager displaying all events
     private lateinit var viewPagerAdapter: StudIPEventPageAdapter

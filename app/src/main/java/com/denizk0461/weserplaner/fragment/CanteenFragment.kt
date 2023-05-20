@@ -25,16 +25,7 @@ import com.google.android.material.tabs.TabLayoutMediator
  * User-facing fragment view that displays the canteen offers from the website of the
  * Studierendenwerk Bremen.
  */
-class CanteenFragment : AppFragment() {
-
-    // Nullable view binding reference
-    private var _binding: FragmentCanteenBinding? = null
-
-    /*
-     * Non-null reference to the view binding. This property is only valid between onCreateView and
-     * onDestroyView.
-     */
-    private val binding get() = _binding!!
+class CanteenFragment : AppFragment<FragmentCanteenBinding>() {
 
     // Adapter for the view pager displaying all offers
     private lateinit var viewPagerAdapter: CanteenOfferPageAdapter
