@@ -52,6 +52,16 @@
     <string name="schedule_fab_add_text">New event</string>
     <string name="schedule_no_events">You don\'t have any events for %s.</string>
 
+    <string name="sheet_event_action_edit_event_title">Edit this event</string>
+    <string name="sheet_event_action_add_task_title">Add a task or exam</string>
+    <string name="sheet_event_action_view_tasks_title">View tasks and exams for this event</string>
+    <string name="sheet_event_action_find_room_title">Find this event\'s room</string>
+    <string name="sheet_event_action_delete_event_title">Delete this event</string>
+
+    <string name="sheet_event_confirm_deletion_header">Confirm delete action</string>
+    <string name="sheet_event_confirm_deletion_content">Are you sure that you want to delete the event \'%s\'?</string>
+    <string name="sheet_event_confirm_deletion_snack">The event has been deleted.</string>
+
     <string name="save">Save</string>
     <string name="delete">Delete</string>
     <string name="sheet_schedule_update_delete_confirm">Sure?</string>

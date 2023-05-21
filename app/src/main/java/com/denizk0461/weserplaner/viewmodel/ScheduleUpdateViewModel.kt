@@ -18,11 +18,4 @@ class ScheduleUpdateViewModel(application: Application) : AppViewModel(applicati
      * @param event the event to update
      */
     fun update(event: StudIPEvent) { doAsync { repo.update(event) } }
-
-    /**
-     * Deletes a schedule element.
-     *
-     * @param event the event to delete
-     */
-    fun delete(event: StudIPEvent) { doAsync { repo.delete(event) } }
 }

@@ -11,6 +11,7 @@ import com.denizk0461.weserplaner.adapter.StudIPEventPageAdapter
 import com.denizk0461.weserplaner.adapter.StudIPEventItemAdapter
 import com.denizk0461.weserplaner.databinding.RecyclerViewBinding
 import com.denizk0461.weserplaner.model.StudIPEvent
+import com.denizk0461.weserplaner.sheet.EventActionSheet
 import com.denizk0461.weserplaner.sheet.ScheduleUpdateSheet
 import com.denizk0461.weserplaner.viewmodel.EventPageViewModel
 
@@ -105,8 +106,36 @@ class EventPageFragment : AppFragment<RecyclerViewBinding>(), StudIPEventItemAda
         }
     }
 
+    /**
+     * Creates and shows a snack bar.
+     *
+     * @param text  content to display in the snack bar
+     */
+    fun showSnackBar(text: String) {
+        // Retrieve parent fragment
+        val parentFragment = activity?.let { activity ->
+            // Retrieve parent fragment to access its functions
+            val navHostFragment = activity
+                .supportFragmentManager
+                .fragments[0] as NavHostFragment
+            navHostFragment
+                .childFragmentManager
+                .primaryNavigationFragment as EventFragment
+        }
+
+        // Show a snack bar in the parent fragment
+        parentFragment?.showSnackBar(text)
+    }
+
     override fun onClick(event: StudIPEvent) {
-        // TODO implement functionality or delete
+        // Open a bottom sheet to view options for the event
+        openBottomSheet(
+            EventActionSheet().also { sheet ->
+                val bundle = Bundle()
+                bundle.putParcelable("event", event)
+                sheet.arguments = bundle
+            }
+        )
     }
 
     override fun onLongClick(event: StudIPEvent): Boolean {

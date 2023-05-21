@@ -51,6 +51,16 @@
     <string name="schedule_fab_add_text">Neue Veranstaltung</string>
     <string name="schedule_no_events">%ss hast du keine Veranstaltungen.</string>
 
+    <string name="sheet_event_action_edit_event_title">Veranstaltung bearbeiten</string>
+    <string name="sheet_event_action_add_task_title">Aufgabe oder Prüfung hinzufügen</string>
+    <string name="sheet_event_action_view_tasks_title">Siehe Aufgaben und Prüfungen für diese Veranstaltung</string>
+    <string name="sheet_event_action_find_room_title">Raum für diese Veranstaltung finden</string>
+    <string name="sheet_event_action_delete_event_title">Veranstaltung löschen</string>
+
+    <string name="sheet_event_confirm_deletion_header">Bestätige Löschvorgang</string>
+    <string name="sheet_event_confirm_deletion_content">Bist du dir sicher, dass du diese Veranstaltung \'%s\' löschen möchtest?</string>
+    <string name="sheet_event_confirm_deletion_snack">Die Veranstaltung wurde gelöscht.</string>
+
     <string name="save">Speichern</string>
     <string name="delete">Löschen</string>
     <string name="sheet_schedule_update_delete_confirm">Sicher?</string>

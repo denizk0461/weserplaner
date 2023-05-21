@@ -41,9 +41,6 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update) {
     // View model
     private val viewModel: ScheduleUpdateViewModel by viewModels()
 
-    // Whether the user has once clicked the delete button; used to prevent an accidental click
-    private var hasClickedDelete: Boolean = false
-
     // Determines whether the user is editing an existing event or creating a new one
     private var isEditing: Boolean = false
 
@@ -93,34 +90,6 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update) {
                 binding.editTextTitle.setText(event.title)
                 binding.editTextLecturers.setText(event.lecturer)
                 binding.editTextRoom.setText(event.room)
-
-                // Prepare delete button
-                binding.buttonDelete.setOnClickListener {
-                    /*
-                     * Check if the user has already clicked the button before; this is done to prevent
-                     * accidentally deleting an event.
-                     */
-                    if (hasClickedDelete) {
-
-                        // Delete the event
-                        viewModel.delete(event)
-
-                        // Tell the user that the event has been deleted
-                        parentFragment?.showSnackBar(
-                            getString(R.string.sheet_schedule_snack_delete)
-                        )
-
-                        // Dismiss the sheet upon deletion
-                        dismiss()
-                    } else {
-                        // Update the text to show the user that they clicked the button once
-                        TransitionManager
-                            .beginDelayedTransition(binding.buttonContainer as ViewGroup)
-                        binding.buttonDelete.text =
-                            getString(R.string.sheet_schedule_update_delete_confirm)
-                        hasClickedDelete = true
-                    }
-                }
 
                 // Prepare update button
                 binding.buttonSave.setOnClickListener {
@@ -180,9 +149,6 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update) {
 
             // Set the title to reflect that an event is being added
             binding.sheetTitle.text = getString(R.string.sheet_schedule_update_header_add)
-
-            // Hide delete button, since there is nothing to delete
-            binding.buttonDelete.visibility = View.GONE
 
             // Prepare save button
             binding.buttonSave.setOnClickListener {

@@ -31,4 +31,15 @@ open class AppSheet(@LayoutRes private val layoutId: Int) : BottomSheetDialogFra
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         LayoutInflater.from(context).inflate(layoutId, container, false)
+
+    /**
+     * Opens a bottom sheet. Sheet will be attached to the fragment manager of the parent of the
+     * sheet that's calling this function. Sheet must be a subclass of
+     * [com.denizk0461.weserplaner.sheet.AppSheet].
+     *
+     * @param sheet element that will be displayed
+     */
+    protected fun openBottomSheet(sheet: AppSheet) {
+        sheet.show(parentFragmentManager, sheet.javaClass.simpleName)
+    }
 }
