@@ -75,6 +75,7 @@
     <string name="sheet_schedule_update_time_dialog_end_hint">Schlusszeit der Veranstaltung</string>
 
     <string name="task_overview_snack_unimplemented">Aufgaben sind noch nicht implementiert!</string>
+    <string name="task_overview_fab_add_task">Aufgabe hinzufügen</string>
 
     <string name="canteen_button_opening_hours_hint">Siehe Öffnungszeiten der Mensa</string>
     <string name="canteen_button_notifications_hint">Siehe Neuigkeiten der Mensa</string>

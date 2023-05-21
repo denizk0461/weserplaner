@@ -32,5 +32,18 @@ class TaskOverviewFragment : AppFragment<FragmentTaskOverviewBinding>() {
             binding.coordinatorLayout,
             getString(R.string.task_overview_snack_unimplemented),
         )
+
+        // Set up scroll change listener to shrink and extend FAB accordingly
+        binding.recyclerViewLayout.recyclerView.setOnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
+            // Calculate the vertical scroll difference
+            val dy = scrollY - oldScrollY
+            if (dy > 0) {
+                // If scrolling down, shrink the FAB
+                binding.fabAddTask.shrink()
+            } else if (dy < 0) {
+                // If scrolling up, extend the FAB
+                binding.fabAddTask.extend()
+            }
+        }
     }
 }

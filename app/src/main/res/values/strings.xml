@@ -77,6 +77,7 @@
     <string name="sheet_schedule_update_time_dialog_end_hint">Event end time</string>
 
     <string name="task_overview_snack_unimplemented">Tasks are not yet implemented!</string>
+    <string name="task_overview_fab_add_task">Add task</string>
 
     <string name="canteen_button_opening_hours_hint">View canteen opening hours</string>
     <string name="canteen_button_notifications_hint">View canteen notifications</string>
