@@ -2,6 +2,7 @@ package com.denizk0461.weserplaner.data
 
 import android.app.Application
 import com.denizk0461.weserplaner.db.AppRepository
+import com.denizk0461.weserplaner.exception.NotLoggedInException
 import com.denizk0461.weserplaner.model.StudIPEvent
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
@@ -20,16 +21,22 @@ class StudIPParser(application: Application) {
      * Parse a given HTML string. HTML must be of a Stud.IP timetable. May skip elements that don't
      * provide full information on an event (title, timeslot, lecturers, room).
      *
-     * @param html          website content of the Stud.IP timetable
-     * @throws IOException  when an error in fetching or the database transaction occurs
+     * @param html                  website content of the Stud.IP timetable
+     * @throws NotLoggedInException if the user has not logged in before starting the fetch
+     * @throws IOException          when an error in fetching or the database transaction occurs
      */
-    @Throws(IOException::class)
+    @Throws(NotLoggedInException::class, IOException::class)
     fun parse(html: String): Int {
         // Counts how many elements could not be successfully fetched
         var elementsNotFetched = 0
 
         // Parse the HTML using Jsoup to traverse the document
         val doc = Jsoup.parse(html)
+
+        // Check if the user has logged in by checking the ID of the body tag
+        if (doc.body().id() != "calendar-schedule-index") {
+            throw NotLoggedInException()
+        }
 
         /*
          * Create the list that all events will be added to temporarily before saving them to

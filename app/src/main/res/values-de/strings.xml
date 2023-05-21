@@ -22,6 +22,7 @@
 
     <string name="fetch_error_snack">Ein Fehler ist aufgetreten!</string>
     <string name="fetch_error_webpage_snack">Du musst deinen Stundenplan öffnen!</string>
+    <string name="fetch_error_login_snack">Du musst dich zuerst einloggen!</string>
     <string name="canteen_fetch_error">Mensaplan konnte nicht heruntergeladen werden!</string>
 
     <string name="canteen_item_difference_text_one">Ein Angebot aufgrund deiner Präferenzen versteckt.</string>

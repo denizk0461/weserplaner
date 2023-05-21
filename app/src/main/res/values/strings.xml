@@ -23,6 +23,7 @@
 
     <string name="fetch_error_snack">Something went wrong!</string>
     <string name="fetch_error_webpage_snack">You must navigate to your schedule!</string>
+    <string name="fetch_error_login_snack">You must log in first!</string>
     <string name="canteen_fetch_error">Couldn\'t retrieve the canteen plan!</string>
 
     <string name="canteen_item_difference_text_one">One offer hidden due to your preferences.</string>

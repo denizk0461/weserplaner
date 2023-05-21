@@ -13,6 +13,7 @@ import com.denizk0461.weserplaner.data.showErrorSnackBar
 import com.denizk0461.weserplaner.data.showSnackBar
 import com.denizk0461.weserplaner.data.showToast
 import com.denizk0461.weserplaner.databinding.ActivityFetcherBinding
+import com.denizk0461.weserplaner.exception.NotLoggedInException
 import com.denizk0461.weserplaner.model.TextSheetContentId
 import com.denizk0461.weserplaner.sheet.TextSheet
 import com.denizk0461.weserplaner.viewmodel.FetcherViewModel
@@ -58,9 +59,7 @@ class FetcherActivity : FragmentActivity() {
         )
 
         // Enabling JavaScript. See comment above lint suppression for reason why this is done.
-        binding.webview.settings.apply {
-            javaScriptEnabled = true
-        }
+        binding.webview.settings.javaScriptEnabled = true
 
         binding.webview.webViewClient = object : WebViewClient() {
             // Disallow redirecting to prevent the app from launching Chrome after the user logs in
@@ -125,9 +124,7 @@ class FetcherActivity : FragmentActivity() {
 
         binding.fab.setOnClickListener {
 
-            if (binding.webview.url?.contains(
-                    scheduleUrl
-                ) == true) {
+            if (binding.webview.url?.contains(scheduleUrl) == true) {
                 /*
                  * Retrieve encoded HTML via JavaScript function. Encoding is done as otherwise not all
                  * symbols will be accurately fetched.
@@ -143,15 +140,27 @@ class FetcherActivity : FragmentActivity() {
                          * Notify the user that the fetch was successful, and tell the user how many
                          * items could not be fetched.
                          */
-                        showToast(this, when (elementsNotFetched) {
-                            0 -> getString(R.string.toast_fetch_finished_zero)
-                            1 -> getString(R.string.toast_fetch_finished_one)
-                            else -> getString(R.string.toast_fetch_finished_other, elementsNotFetched)
-                        })
+                        showToast(
+                            this, when (elementsNotFetched) {
+                                0 -> getString(R.string.toast_fetch_finished_zero)
+                                1 -> getString(R.string.toast_fetch_finished_one)
+                                else -> getString(
+                                    R.string.toast_fetch_finished_other,
+                                    elementsNotFetched
+                                )
+                            }
+                        )
 
                         // Close the activity
                         finish()
 
+                    } catch (e: NotLoggedInException) {
+                        // Let the user know that they need to log in
+                        theme.showErrorSnackBar(
+                            binding.coordinatorLayout,
+                            getString(R.string.fetch_error_login_snack),
+                            binding.bottomAppBar,
+                        )
                     } catch (e: IOException) {
                         // Let the user know that an error occurred
                         theme.showErrorSnackBar(
