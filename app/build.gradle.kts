@@ -20,6 +20,10 @@ android {
         buildConfigField("long", "BUILD_TIME_MILLIS", "${System.currentTimeMillis()}L")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions.annotationProcessorOptions {
+            arguments += mapOf("room.schemaLocation" to "${projectDir}/schemas")
+        }
     }
 
     buildTypes {

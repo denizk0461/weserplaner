@@ -2,6 +2,7 @@ package com.denizk0461.weserplaner.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -9,6 +10,7 @@ import androidx.room.PrimaryKey
  * Entity for storing entries of the user's Stud.IP schedule. Registered in the app database.
  *
  * @param eventId       primary key that uniquely identifies the entry
+ * @param timetableId   identifier to assign the event to a timetable
  * @param title         title of the event
  * @param lecturer      lecturer(s) organising the event
  * @param room          room the event takes place in
@@ -21,6 +23,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "studip_events")
 data class StudIPEvent(
     @PrimaryKey(autoGenerate = true) val eventId: Int = 0,
+    @ColumnInfo(defaultValue = "0") val timetableId: Int,
     val title: String,
     val lecturer: String,
     val room: String,
@@ -30,6 +33,7 @@ data class StudIPEvent(
     val timeslotId: Int,
     val colour: Int = 0,
 ) : Parcelable {
+
     /**
      * Parse timeslotStart and timeslotEnd into an easily readable string in the following format:
      * 12:15 – 13:45
@@ -45,6 +49,7 @@ data class StudIPEvent(
         other as StudIPEvent
 
         if (eventId != other.eventId) return false
+        if (timetableId != other.timetableId) return false
         if (title != other.title) return false
         if (lecturer != other.lecturer) return false
         if (room != other.room) return false
@@ -59,6 +64,7 @@ data class StudIPEvent(
 
     override fun hashCode(): Int {
         var result = eventId
+        result = 31 * result + timetableId
         result = 31 * result + title.hashCode()
         result = 31 * result + lecturer.hashCode()
         result = 31 * result + room.hashCode()
@@ -71,6 +77,7 @@ data class StudIPEvent(
     }
 
     constructor(source: Parcel) : this(
+        source.readInt(),
         source.readInt(),
         source.readString() ?: "",
         source.readString() ?: "",
@@ -86,6 +93,7 @@ data class StudIPEvent(
 
     override fun writeToParcel(dest: Parcel, flags: Int): Unit = with(dest) {
         writeInt(eventId)
+        writeInt(timetableId)
         writeString(title)
         writeString(lecturer)
         writeString(room)

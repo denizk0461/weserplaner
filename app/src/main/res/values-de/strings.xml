@@ -240,6 +240,10 @@
 
     <string name="settings_licences_title">Siehe Lizenzen</string>
     <string name="settings_licences_subtitle">Ressourcen, die diese App möglich gemacht haben</string>
+    <string name="settings_unlocked_experiments">Experimentelle Einstellungen werden angezeigt.</string>
+    <string name="settings_hide_experiments">Experimentelle Einstellungen wurden ausgeblendet.</string>
+
+    <string name="sheet_cheat_header">Cheatcodes</string>
 
     <string name="settings_app_version">App-Version</string>
 

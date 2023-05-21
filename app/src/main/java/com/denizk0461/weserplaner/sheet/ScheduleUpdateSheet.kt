@@ -144,6 +144,7 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update) {
                                 // construct new StudIPEvent from the data the user may have edited
                                 StudIPEvent(
                                     eventId = event.eventId,
+                                    timetableId = event.timetableId,
                                     title = binding.editTextTitle.text.toString().trim(),
                                     lecturer = binding.editTextLecturers.text.toString().trim(),
                                     room = binding.editTextRoom.text.toString().trim(),
@@ -204,6 +205,7 @@ class ScheduleUpdateSheet : AppSheet(R.layout.sheet_schedule_update) {
                         viewModel.insert(
                             // construct new StudIPEvent from the data the user may have edited
                             StudIPEvent(
+                                timetableId = 0, // TODO current timetable
                                 title = binding.editTextTitle.text.toString().trim(),
                                 lecturer = binding.editTextLecturers.text.toString().trim(),
                                 room = binding.editTextRoom.text.toString().trim(),

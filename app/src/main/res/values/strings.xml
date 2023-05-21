@@ -245,10 +245,10 @@
 
     <string name="settings_licences_title">View licences</string>
     <string name="settings_licences_subtitle">Resources that made this app possible</string>
-    <string name="settings_unlocked_experiments" translatable="false">Experimental settings have been unlocked.</string>
-    <string name="settings_hide_experiments" translatable="false">Experimental settings have been hidden.</string>
+    <string name="settings_unlocked_experiments">Experimental settings have been unlocked.</string>
+    <string name="settings_hide_experiments">Experimental settings have been hidden.</string>
 
-    <string name="sheet_cheat_header" translatable="false">Cheat Codes</string>
+    <string name="sheet_cheat_header">Cheat Codes</string>
 
     <string name="settings_app_version">App Version</string>
 

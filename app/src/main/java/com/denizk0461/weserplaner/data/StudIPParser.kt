@@ -96,6 +96,7 @@ class StudIPParser(application: Application) {
 
                 // Construct the newly scraped Stud.IP event
                 val event = StudIPEvent(
+                    timetableId = 0, // TODO
                     title = parsedTitle,
                     lecturer = parsedLecturers,
                     room = entryInfo.getOrQuestionMark(1),

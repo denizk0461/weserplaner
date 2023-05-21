@@ -91,6 +91,7 @@ class EventPageFragment : AppFragment<RecyclerViewBinding>(), StudIPEventItemAda
                 // Use an event with eventId = -1 to denote that there are no events for this day
                 StudIPEvent(
                     -1,
+                    -1,
                     "",
                     "",
                     "",

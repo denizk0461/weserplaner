@@ -1,6 +1,7 @@
 package com.denizk0461.weserplaner.db
 
 import android.content.Context
+import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -18,8 +19,13 @@ import com.denizk0461.weserplaner.model.*
         OfferCanteen::class,
         OfferCategory::class,
         OfferItem::class,
+        EventTask::class,
     ],
-    version = 20,
+    version = 21,
+    exportSchema = true,
+    autoMigrations = [
+        AutoMigration(from = 20, to = 21),
+    ],
 )
 abstract class AppDatabase : RoomDatabase() {
 
@@ -50,7 +56,11 @@ abstract class AppDatabase : RoomDatabase() {
                             context.applicationContext,
                             AppDatabase::class.java,
                             "event_db",
-                        ).addMigrations(migrationAddNewsToOfferCanteen_19_20)
+                        ).addMigrations(
+                            migrationAddNewsToOfferCanteen_19_20,
+//                            migrationAddTimetableId_20_21,
+//                            migrationAddEventTask_20_21,
+                        )
 //                        .fallbackToDestructiveMigration()
                         .build()
                 }
