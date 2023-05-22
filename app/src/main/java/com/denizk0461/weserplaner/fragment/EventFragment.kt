@@ -71,7 +71,6 @@ class EventFragment : AppFragment<FragmentEventBinding>() {
 
         // Set the view pager's current page to the current day, if the user chose this option
         if (viewModel.preferenceCurrentDay) {
-
             // Determine the current day and go to the respective page.
             binding.viewPager.setCurrentItem(
                 when (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {

@@ -84,6 +84,12 @@
     <string name="sheet_schedule_update_time_dialog_start_hint">Startzeit der Veranstaltung</string>
     <string name="sheet_schedule_update_time_dialog_end_hint">Schlusszeit der Veranstaltung</string>
 
+    <string name="task_overview_button_order_hint">Aufgaben sortieren</string>
+    <!-- these are TODO -->
+    <string name="task_order_menu_title_alphabetically">Alphabetisch</string>
+    <string name="task_order_menu_date_created">Erstellungszeit</string>
+    <string name="task_order_menu_date_due">Abgabezeit</string>
+
     <string name="task_overview_snack_unimplemented">Aufgaben sind noch nicht implementiert!</string>
     <string name="task_overview_fab_add_task">Aufgabe hinzufügen</string>
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/title_alphabetically"
+        android:title="@string/task_order_menu_title_alphabetically"
+        android:enabled="true"/>
+    <item
+        android:id="@+id/date_created"
+        android:title="@string/task_order_menu_date_created"
+        android:enabled="true"/>
+    <item
+        android:id="@+id/date_due"
+        android:title="@string/task_order_menu_date_due"
+        android:enabled="true"/>
+</menu>

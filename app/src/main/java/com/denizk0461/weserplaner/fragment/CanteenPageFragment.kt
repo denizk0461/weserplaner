@@ -97,11 +97,11 @@ class CanteenPageFragment : AppFragment<RecyclerViewBinding>(), CanteenOfferItem
             // Set up scroll change listener to shrink and extend FAB accordingly
             binding.recyclerView.setOnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
                 // Calculate the vertical scroll difference
-                val dy = scrollY - oldScrollY
-                if (dy > 0) {
+                val differenceY = scrollY - oldScrollY
+                if (differenceY > 0) {
                     // If scrolling down, shrink the FAB
                     parentFragment.shrinkFab()
-                } else if (dy < 0) {
+                } else if (differenceY < 0) {
                     // If scrolling up, extend the FAB
                     parentFragment.extendFab()
                 }

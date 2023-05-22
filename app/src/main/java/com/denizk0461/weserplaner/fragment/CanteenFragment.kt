@@ -146,7 +146,6 @@ class CanteenFragment : AppFragment<FragmentCanteenBinding>() {
 
         // Set up floating action button for switching canteens
         binding.fabSwitchCanteen.setOnClickListener {
-
             /*
              * Show an error message is the user is trying to switch canteens while another one is
              * being downloaded.

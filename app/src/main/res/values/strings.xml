@@ -86,6 +86,11 @@
     <string name="sheet_schedule_update_time_dialog_start_hint">Event start time</string>
     <string name="sheet_schedule_update_time_dialog_end_hint">Event end time</string>
 
+    <string name="task_overview_button_order_hint">Order tasks</string>
+    <string name="task_order_menu_title_alphabetically">Alphabetically</string>
+    <string name="task_order_menu_date_created">Date created</string>
+    <string name="task_order_menu_date_due">Date due</string>
+
     <string name="task_overview_snack_unimplemented">Tasks are not yet implemented!</string>
     <string name="task_overview_fab_add_task">Add task</string>
 

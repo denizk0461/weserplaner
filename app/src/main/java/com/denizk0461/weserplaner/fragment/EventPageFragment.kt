@@ -12,7 +12,6 @@ import com.denizk0461.weserplaner.adapter.StudIPEventItemAdapter
 import com.denizk0461.weserplaner.databinding.RecyclerViewBinding
 import com.denizk0461.weserplaner.model.StudIPEvent
 import com.denizk0461.weserplaner.sheet.EventActionSheet
-import com.denizk0461.weserplaner.sheet.ScheduleUpdateSheet
 import com.denizk0461.weserplaner.viewmodel.EventPageViewModel
 
 /**
@@ -76,11 +75,11 @@ class EventPageFragment : AppFragment<RecyclerViewBinding>(), StudIPEventItemAda
         // Set up scroll change listener to shrink and extend FAB accordingly
         binding.recyclerView.setOnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
             // Calculate the vertical scroll difference
-            val dy = scrollY - oldScrollY
-            if (dy > 0) {
+            val differenceY = scrollY - oldScrollY
+            if (differenceY > 0) {
                 // If scrolling down, shrink the FAB
                 parent?.shrinkFab()
-            } else if (dy < 0) {
+            } else if (differenceY < 0) {
                 // If scrolling up, extend the FAB
                 parent?.extendFab()
             }
@@ -128,22 +127,23 @@ class EventPageFragment : AppFragment<RecyclerViewBinding>(), StudIPEventItemAda
     }
 
     override fun onClick(event: StudIPEvent) {
-        // Open a bottom sheet to view options for the event
-        openBottomSheet(
-            EventActionSheet().also { sheet ->
-                val bundle = Bundle()
-                bundle.putParcelable("event", event)
-                sheet.arguments = bundle
-            }
-        )
+        // TODO implement something or delete
     }
 
     override fun onLongClick(event: StudIPEvent): Boolean {
         // Open a bottom sheet to edit the event
+//        openBottomSheet(
+//            ScheduleUpdateSheet().also { sheet ->
+//                val bundle = Bundle()
+//                bundle.putBoolean("isEditing", true)
+//                bundle.putParcelable("event", event)
+//                sheet.arguments = bundle
+//            }
+//        )
+        // Open a bottom sheet to view options for the event
         openBottomSheet(
-            ScheduleUpdateSheet().also { sheet ->
+            EventActionSheet().also { sheet ->
                 val bundle = Bundle()
-                bundle.putBoolean("isEditing", true)
                 bundle.putParcelable("event", event)
                 sheet.arguments = bundle
             }
