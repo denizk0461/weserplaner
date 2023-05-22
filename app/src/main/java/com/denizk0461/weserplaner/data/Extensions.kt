@@ -17,6 +17,9 @@ import com.denizk0461.weserplaner.exception.ParcelNotFoundException
 import com.denizk0461.weserplaner.model.TextSheetContentId
 import com.denizk0461.weserplaner.sheet.TextSheet
 import com.google.android.material.snackbar.Snackbar
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import kotlin.jvm.Throws
 
 /*
@@ -147,6 +150,19 @@ fun SwipeRefreshLayout.setRainbowProgressCircle() {
         context.getColor(R.color.poultry_dark_primary),
     )
 }
+
+/**
+ * Formats a date object to a string in the ISO 8601 format. Example:
+ * 2023-05-21, 14:32:59.067
+ *
+ * @receiver                date object to convert to string
+ * @param useHighPrecision  determines whether seconds and milliseconds are shown
+ * @return                  date formatted as ISO 8601 string
+ */
+fun Date.formatToIso8601String(useHighPrecision: Boolean = false): String = SimpleDateFormat(
+    "yyyy-MM-dd, HH:mm${if (useHighPrecision) ":ss.SSS" else ""}",
+    Locale.GERMANY,
+).format(this)
 
 /**
  * Timeslots for which a conversion to an academic quarter is applicable.

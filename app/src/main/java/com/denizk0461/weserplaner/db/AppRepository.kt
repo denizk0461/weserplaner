@@ -81,6 +81,18 @@ class AppRepository(app: Application) {
     fun nukeEvents() { dao.nukeEvents() }
 
     /**
+     * Retrieves tasks for all events ordered as specified.
+     *
+     * @param order order in which the tasks are returned
+     * @return      tasks wrapped in a LiveData object
+     */
+    fun getTasks(order: TaskOrder): LiveData<List<EventTaskExtended>> = when (order) {
+        TaskOrder.DATE_CREATED -> dao.getAllTasksOrderDateCreated()
+        TaskOrder.ALPHABETICALLY -> dao.getAllTasksOrderAlphabetically()
+        else -> dao.getAllTasksOrderDateDue() // TaskOrder.DATE_DUE
+    }
+
+    /**
      * Retrieves the canteen stored in the database. Should always be 0 or 1.
      *
      * @return canteen

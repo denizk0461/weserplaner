@@ -65,6 +65,66 @@ interface AppDAO {
     @Query("DELETE FROM studip_events")
     fun nukeEvents()
 
+    /* --- event tasks --- */
+
+    /**
+     * Retrieve all event tasks ordered by their ID (order: date created).
+     *
+     * @return  tasks ordered by date created
+     */
+    @Query(
+        "SELECT event_tasks.taskId, " +
+                "event_tasks.eventId, " +
+                "event_tasks.dueDate, " +
+                "event_tasks.title AS taskTitle, " +
+                "studip_events.title AS eventTitle, " +
+                "studip_events.lecturer, " +
+                "event_tasks.notes, " +
+                "studip_events.room " +
+                "FROM event_tasks " +
+                "JOIN studip_events ON event_tasks.eventId = studip_events.eventId " +
+                "ORDER BY taskId"
+    )
+    fun getAllTasksOrderDateCreated(): LiveData<List<EventTaskExtended>>
+
+    /**
+     * Retrieve all event tasks ordered alphabetically by their title.
+     *
+     * @return  tasks ordered by title
+     */
+    @Query(
+        "SELECT event_tasks.taskId, " +
+                "event_tasks.eventId, " +
+                "event_tasks.dueDate, " +
+                "event_tasks.title AS taskTitle, " +
+                "studip_events.title AS eventTitle, " +
+                "studip_events.lecturer, " +
+                "event_tasks.notes, " +
+                "studip_events.room " +
+                "FROM event_tasks " +
+                "JOIN studip_events ON event_tasks.eventId = studip_events.eventId " +
+            "ORDER BY taskTitle")
+    fun getAllTasksOrderAlphabetically(): LiveData<List<EventTaskExtended>>
+
+    /**
+     * Retrieve all event tasks ordered by their due date.
+     *
+     * @return  tasks ordered by date due
+     */
+    @Query(
+        "SELECT event_tasks.taskId, " +
+                "event_tasks.eventId, " +
+                "event_tasks.dueDate, " +
+                "event_tasks.title AS taskTitle, " +
+                "studip_events.title AS eventTitle, " +
+                "studip_events.lecturer, " +
+                "event_tasks.notes, " +
+                "studip_events.room " +
+                "FROM event_tasks " +
+                "JOIN studip_events ON event_tasks.eventId = studip_events.eventId " +
+            "ORDER BY dueDate")
+    fun getAllTasksOrderDateDue(): LiveData<List<EventTaskExtended>>
+
     /* --- canteen offers --- */
 
     /**

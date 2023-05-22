@@ -16,6 +16,7 @@ import com.denizk0461.weserplaner.BuildConfig
 import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.activity.FetcherActivity
 import com.denizk0461.weserplaner.activity.ImageActivity
+import com.denizk0461.weserplaner.data.formatToIso8601String
 import com.denizk0461.weserplaner.data.getTextSheet
 import com.denizk0461.weserplaner.data.showSnackBar
 import com.denizk0461.weserplaner.data.showToast
@@ -23,7 +24,6 @@ import com.denizk0461.weserplaner.databinding.FragmentSettingsBinding
 import com.denizk0461.weserplaner.sheet.AllergenConfigSheet
 import com.denizk0461.weserplaner.viewmodel.SettingsViewModel
 import java.nio.charset.StandardCharsets
-import java.text.SimpleDateFormat
 import java.util.*
 
 /**
@@ -318,8 +318,7 @@ class SettingsFragment : AppFragment<FragmentSettingsBinding>() {
         // Set build version code and time text
         @SuppressLint("SetTextI18n")
         binding.buildTimeText.text = "v${BuildConfig.VERSION_CODE} | ${
-            SimpleDateFormat("yyyy-MM-dd, HH:mm:ss.SSS", Locale.GERMANY)
-                .format(Date(BuildConfig.BUILD_TIME_MILLIS))
+            Date(BuildConfig.BUILD_TIME_MILLIS).formatToIso8601String(useHighPrecision = true)
         }"
 
         // Set up switch for showing beta screens

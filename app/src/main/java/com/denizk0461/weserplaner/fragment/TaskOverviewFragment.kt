@@ -6,18 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.denizk0461.weserplaner.R
+import com.denizk0461.weserplaner.adapter.TaskOverviewAdapter
 import com.denizk0461.weserplaner.data.showSnackBar
 import com.denizk0461.weserplaner.databinding.FragmentTaskOverviewBinding
+import com.denizk0461.weserplaner.model.EventTask
+import com.denizk0461.weserplaner.model.TaskOrder
 import com.denizk0461.weserplaner.viewmodel.TaskOverviewViewModel
 
 /**
  * Fragment that shows the user an overview of their tasks and exams.
  */
-class TaskOverviewFragment : AppFragment<FragmentTaskOverviewBinding>() {
+class TaskOverviewFragment : AppFragment<FragmentTaskOverviewBinding>(),
+    TaskOverviewAdapter.OnClickListener {
 
     // View model reference for providing access to the database
     private val viewModel: TaskOverviewViewModel by viewModels()
+
+    // Task adapter for the recycler view
+    private val taskAdapter: TaskOverviewAdapter = TaskOverviewAdapter(this)
 
     // Instantiate the view binding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -38,8 +46,6 @@ class TaskOverviewFragment : AppFragment<FragmentTaskOverviewBinding>() {
         )
 
         binding.buttonOrder.setOnClickListener {
-
-
             // Create menu for selecting a new canteen
             PopupMenu(binding.root.context, binding.buttonOrder).apply {
                 setOnMenuItemClickListener { item ->
@@ -60,6 +66,17 @@ class TaskOverviewFragment : AppFragment<FragmentTaskOverviewBinding>() {
             }
         }
 
+        binding.recyclerViewLayout.recyclerView.apply {
+            // Set page to scroll vertically
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
+            // Assign adapter to this recycler view
+            adapter = taskAdapter
+        }
+
+        // insert sample data TODO change to db
+        taskAdapter.setNewData(viewModel.getTasks(TaskOrder.DATE_DUE))
+
         // Set up scroll change listener to shrink and extend FAB accordingly
         binding.recyclerViewLayout.recyclerView.setOnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
             // Calculate the vertical scroll difference
@@ -72,5 +89,14 @@ class TaskOverviewFragment : AppFragment<FragmentTaskOverviewBinding>() {
                 binding.fabAddTask.extend()
             }
         }
+    }
+
+    override fun onClick(task: EventTask) {
+        // TODO
+    }
+
+    override fun onLongClick(task: EventTask): Boolean {
+        // TODO
+        return false
     }
 }
