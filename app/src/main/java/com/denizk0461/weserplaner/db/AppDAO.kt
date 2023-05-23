@@ -76,6 +76,7 @@ interface AppDAO {
         "SELECT event_tasks.taskId, " +
                 "event_tasks.eventId, " +
                 "event_tasks.dueDate, " +
+                "event_tasks.notifyDate, " +
                 "event_tasks.title AS taskTitle, " +
                 "studip_events.title AS eventTitle, " +
                 "studip_events.lecturer, " +
@@ -96,6 +97,7 @@ interface AppDAO {
         "SELECT event_tasks.taskId, " +
                 "event_tasks.eventId, " +
                 "event_tasks.dueDate, " +
+                "event_tasks.notifyDate, " +
                 "event_tasks.title AS taskTitle, " +
                 "studip_events.title AS eventTitle, " +
                 "studip_events.lecturer, " +
@@ -115,6 +117,7 @@ interface AppDAO {
         "SELECT event_tasks.taskId, " +
                 "event_tasks.eventId, " +
                 "event_tasks.dueDate, " +
+                "event_tasks.notifyDate, " +
                 "event_tasks.title AS taskTitle, " +
                 "studip_events.title AS eventTitle, " +
                 "studip_events.lecturer, " +

@@ -90,6 +90,12 @@
     <string name="task_order_menu_date_created">Erstellungszeit</string>
     <string name="task_order_menu_date_due">Abgabezeit</string>
 
+    <string name="formatted_date_string_localised">%s um %s</string>
+
+    <string name="task_item_notification_none">Du wirst nicht benachrichtigt.</string>
+    <string name="task_item_notification_active_future">Du wirst am %s um %s benachrichtigt.</string>
+    <string name="task_item_notification_active_past">Du wurdest am %s um %s benachrichtigt.</string>
+
     <string name="task_overview_snack_unimplemented">Aufgaben sind noch nicht implementiert!</string>
     <string name="task_overview_fab_add_task">Aufgabe hinzufügen</string>
 

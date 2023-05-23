@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 21,
-    "identityHash": "4ac175b58eab4b387bd1ceb98f39a913",
+    "identityHash": "202a385ce4f79f957d41c8e4a2b8ab22",
     "entities": [
       {
         "tableName": "studip_events",
@@ -268,7 +268,7 @@
       },
       {
         "tableName": "event_tasks",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`taskId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `eventId` INTEGER NOT NULL, `dueDate` INTEGER NOT NULL, `title` TEXT NOT NULL, `notes` TEXT NOT NULL, `room` TEXT NOT NULL, FOREIGN KEY(`eventId`) REFERENCES `studip_events`(`eventId`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`taskId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `eventId` INTEGER NOT NULL, `dueDate` INTEGER NOT NULL, `notifyDate` INTEGER NOT NULL, `title` TEXT NOT NULL, `notes` TEXT NOT NULL, `room` TEXT NOT NULL, FOREIGN KEY(`eventId`) REFERENCES `studip_events`(`eventId`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "taskId",
@@ -285,6 +285,12 @@
           {
             "fieldPath": "dueDate",
             "columnName": "dueDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "notifyDate",
+            "columnName": "notifyDate",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -332,7 +338,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4ac175b58eab4b387bd1ceb98f39a913')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '202a385ce4f79f957d41c8e4a2b8ab22')"
     ]
   }
 }

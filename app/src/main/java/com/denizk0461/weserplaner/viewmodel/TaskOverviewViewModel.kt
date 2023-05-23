@@ -18,8 +18,8 @@ class TaskOverviewViewModel(application: Application) : AppViewModel(application
 //    fun getTasks(order: TaskOrder): LiveData<List<EventTask>> = repo.getTasks(order)
 
     fun getTasks(order: TaskOrder) = listOf( // dummy data
-        EventTask(0, 0, 1684758756, "title1", "user notes", "GW2 B-idk"),
-        EventTask(1, 0, 1684798756, "title2", "user notes", "GW3 C-idk"),
-        EventTask(2, 0, 1689758756, "title3", "user notes", "GW4 D-idk"),
+        EventTask(0, 0, 1684758756L, -1L, "title1", "user notes", "GW2 B-idk"),
+        EventTask(1, 0, 1684798756L, -1L, "title2", "user notes", "GW3 C-idk"),
+        EventTask(2, 0, 1689758756L, 1689958756L, "title3", "user notes", "GW4 D-idk"),
     )
 }

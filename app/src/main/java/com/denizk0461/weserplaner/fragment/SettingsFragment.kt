@@ -16,11 +16,11 @@ import com.denizk0461.weserplaner.BuildConfig
 import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.activity.FetcherActivity
 import com.denizk0461.weserplaner.activity.ImageActivity
-import com.denizk0461.weserplaner.data.formatToIso8601String
 import com.denizk0461.weserplaner.data.getTextSheet
 import com.denizk0461.weserplaner.data.showSnackBar
 import com.denizk0461.weserplaner.data.showToast
 import com.denizk0461.weserplaner.databinding.FragmentSettingsBinding
+import com.denizk0461.weserplaner.model.FormattedDate
 import com.denizk0461.weserplaner.sheet.AllergenConfigSheet
 import com.denizk0461.weserplaner.viewmodel.SettingsViewModel
 import java.nio.charset.StandardCharsets
@@ -318,7 +318,7 @@ class SettingsFragment : AppFragment<FragmentSettingsBinding>() {
         // Set build version code and time text
         @SuppressLint("SetTextI18n")
         binding.buildTimeText.text = "v${BuildConfig.VERSION_CODE} | ${
-            Date(BuildConfig.BUILD_TIME_MILLIS).formatToIso8601String(useHighPrecision = true)
+            FormattedDate(BuildConfig.BUILD_TIME_MILLIS).commaSeparatedString(context)
         }"
 
         // Set up switch for showing beta screens

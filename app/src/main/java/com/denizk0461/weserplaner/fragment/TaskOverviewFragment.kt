@@ -91,10 +91,6 @@ class TaskOverviewFragment : AppFragment<FragmentTaskOverviewBinding>(),
         }
     }
 
-    override fun onClick(task: EventTask) {
-        // TODO
-    }
-
     override fun onLongClick(task: EventTask): Boolean {
         // TODO
         return false

@@ -7,12 +7,14 @@ import androidx.room.PrimaryKey
 /**
  * Database entity used to store tasks assigned to specific [StudIPEvent] elements.
  *
- * @param taskId    primary key for the entity
- * @param eventId   foreign key referencing the event this task is assigned to
- * @param dueDate   time and date at which the task is due
- * @param title     title of the task
- * @param notes     user-added notes for the task
- * @param room      room the task may take place in
+ * @param taskId        primary key for the entity
+ * @param eventId       foreign key referencing the event this task is assigned to
+ * @param dueDate       time and date at which the task is due
+ * @param notifyDate    time and date at which the user wants to be notified about this task; -1 if
+ *                      the user doesn't want to be notified
+ * @param title         title of the task
+ * @param notes         user-added notes for the task
+ * @param room          room the task may take place in
  */
 @Entity(
     tableName = "event_tasks",
@@ -28,7 +30,8 @@ import androidx.room.PrimaryKey
 data class EventTask(
     @PrimaryKey(autoGenerate = true) val taskId: Int = 0,
     val eventId: Int,
-    val dueDate: Int,
+    val dueDate: Long,
+    val notifyDate: Long,
     val title: String,
     val notes: String,
     val room: String,

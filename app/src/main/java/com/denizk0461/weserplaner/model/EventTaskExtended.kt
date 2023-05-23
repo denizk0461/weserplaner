@@ -7,6 +7,8 @@ package com.denizk0461.weserplaner.model
  * @param taskId        primary key for the entity
  * @param eventId       foreign key referencing the event this task is assigned to
  * @param dueDate       time and date at which the task is due
+ * @param notifyDate    time and date at which the user wants to be notified about this task; -1 if
+ *                      the user doesn't want to be notified
  * @param eventTitle    title of the event
  * @param taskTitle     title of the task
  * @param lecturer      lecturer(s) organising the event
@@ -17,6 +19,7 @@ data class EventTaskExtended(
     val taskId: Int,
     val eventId: Int,
     val dueDate: Int,
+    val notifyDate: Int,
     val eventTitle: String,
     val taskTitle: String,
     val lecturer: String,

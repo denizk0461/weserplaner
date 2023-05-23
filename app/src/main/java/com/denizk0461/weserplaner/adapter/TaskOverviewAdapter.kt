@@ -1,16 +1,18 @@
 package com.denizk0461.weserplaner.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.denizk0461.weserplaner.BuildConfig
+import androidx.transition.TransitionManager
+import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.data.AppDiffUtilCallback
+import com.denizk0461.weserplaner.data.isInThePast
 import com.denizk0461.weserplaner.databinding.ItemTaskBinding
 import com.denizk0461.weserplaner.model.EventTask
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import com.denizk0461.weserplaner.model.FormattedDate
 
 class TaskOverviewAdapter(
     private val onClickListener: OnClickListener,
@@ -46,16 +48,65 @@ class TaskOverviewAdapter(
         // Retrieve item for current position
         val currentItem = tasks[position]
 
+        // Determine whether this item's view is expanded
+        var isExpanded = false
+
+        holder.binding.layoutExpandedContainer.visibility = View.GONE
+
         // Context for easier reference
         val context = holder.binding.root.context
 
         // view set-up
-        SimpleDateFormat("yyyy-MM-dd, HH:mm:ss.SSS", Locale.GERMANY)
-            .format(Date(BuildConfig.BUILD_TIME_MILLIS))
+
+        // Set title text
+        holder.binding.textTitle.text = currentItem.title
+
+        // Set due date text to formatted date, TODO let user pick the date format
+        val dueDate = FormattedDate(currentItem.dueDate)
+
+        holder.binding.textDueDate.text = dueDate.localisedString(context)
+
+        if (currentItem.notifyDate == -1L) {
+
+            holder.binding.layoutDueDate.visibility = View.GONE
+
+            holder.binding.iconNotifyHeader.setImageResource(0)
+        } else {
+            val notificationDrawable = AppCompatResources.getDrawable(
+                context,
+                R.drawable.notifications,
+            )
+
+            holder.binding.layoutDueDate.visibility = View.VISIBLE
+
+            holder.binding.iconNotifyHeader.setImageDrawable(notificationDrawable)
+
+            holder.binding.iconNotifyDate.setImageDrawable(notificationDrawable)
+
+            // TODO let user pick date format
+            val notifyDate = FormattedDate(currentItem.notifyDate)
+
+            holder.binding.textNotifyDate.text = context.getString(if (notifyDate.date.isInThePast()) {
+                R.string.task_item_notification_active_past
+            } else {
+                R.string.task_item_notification_active_future
+            }, notifyDate.dateString, notifyDate.timeString)
+        }
 
         // Set up single click listener
         holder.binding.linearLayout.setOnClickListener {
-            onClickListener.onClick(currentItem)
+            // Prepare layout animation
+            TransitionManager.beginDelayedTransition(holder.binding.root.parent as ViewGroup)
+
+            // Set visibility of further items
+            holder.binding.layoutExpandedContainer.visibility = if (isExpanded) {
+                View.GONE
+            } else {
+                View.VISIBLE
+            }
+
+            // Set value of isExpanded depending on whether the view is expanded
+            isExpanded = !isExpanded
         }
 
         // Set up long press listener
@@ -88,14 +139,6 @@ class TaskOverviewAdapter(
      * Interface used to evaluate clicks and long presses on a given item.
      */
     interface OnClickListener {
-
-        /**
-         * Executed when an item has been clicked.
-         *
-         * @param task  item that has been clicked
-         */
-        fun onClick(task: EventTask)
-
 
         /**
          * Executed when an item has been long-pressed.
