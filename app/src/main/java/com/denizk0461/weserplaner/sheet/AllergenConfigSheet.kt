@@ -9,7 +9,7 @@ import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.data.viewBinding
 import com.denizk0461.weserplaner.databinding.SheetAllergenConfigBinding
 import com.denizk0461.weserplaner.fragment.SettingsFragment
-import com.denizk0461.weserplaner.model.AllergenPreferences
+import com.denizk0461.weserplaner.values.AllergenPreferences
 import com.denizk0461.weserplaner.viewmodel.AllergenConfigViewModel
 
 /**

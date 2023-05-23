@@ -3,7 +3,7 @@ package com.denizk0461.weserplaner.viewmodel
 import android.app.Application
 import androidx.lifecycle.LiveData
 import com.denizk0461.weserplaner.model.CanteenOffer
-import com.denizk0461.weserplaner.model.DietaryPreferences
+import com.denizk0461.weserplaner.values.DietaryPreferences
 
 class CanteenPageViewModel(app: Application) : AppViewModel(app) {
 

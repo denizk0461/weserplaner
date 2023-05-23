@@ -2,6 +2,7 @@ package com.denizk0461.weserplaner.data
 
 import android.app.Application
 import com.denizk0461.weserplaner.db.AppRepository
+import com.denizk0461.weserplaner.values.DietaryPreferences
 import com.denizk0461.weserplaner.model.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

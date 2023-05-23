@@ -29,12 +29,12 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/text_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="22sp"
-        android:fontFamily="@font/lato_bolditalic"
+        app:fontFamily="@font/lato_bolditalic"
         android:paddingHorizontal="24dp"
         android:layout_marginBottom="8dp"
         android:text="@string/allergens_config_header"/>
@@ -51,7 +51,7 @@
             android:paddingHorizontal="24dp"
             android:paddingBottom="24dp">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"

@@ -1,4 +1,4 @@
-package com.denizk0461.weserplaner.model
+package com.denizk0461.weserplaner.values
 
 import com.denizk0461.weserplaner.R
 
@@ -111,16 +111,16 @@ enum class DietaryPreferences(val value: String) {
          */
         fun deconstruct(): String = String(
             charArrayOf(
-                if (this.isFair) DietaryPreferences.C_TRUE else DietaryPreferences.C_FALSE,
-                if (this.isFish) DietaryPreferences.C_TRUE else DietaryPreferences.C_FALSE,
-                if (this.isPoultry) DietaryPreferences.C_TRUE else DietaryPreferences.C_FALSE,
-                if (this.isLamb) DietaryPreferences.C_TRUE else DietaryPreferences.C_FALSE,
-                if (this.isVital) DietaryPreferences.C_TRUE else DietaryPreferences.C_FALSE,
-                if (this.isBeef) DietaryPreferences.C_TRUE else DietaryPreferences.C_FALSE,
-                if (this.isPork) DietaryPreferences.C_TRUE else DietaryPreferences.C_FALSE,
-                if (this.isVegan) DietaryPreferences.C_TRUE else DietaryPreferences.C_FALSE,
-                if (this.isVegetarian) DietaryPreferences.C_TRUE else DietaryPreferences.C_FALSE,
-                if (this.isGame) DietaryPreferences.C_TRUE else DietaryPreferences.C_FALSE,
+                if (this.isFair) C_TRUE else C_FALSE,
+                if (this.isFish) C_TRUE else C_FALSE,
+                if (this.isPoultry) C_TRUE else C_FALSE,
+                if (this.isLamb) C_TRUE else C_FALSE,
+                if (this.isVital) C_TRUE else C_FALSE,
+                if (this.isBeef) C_TRUE else C_FALSE,
+                if (this.isPork) C_TRUE else C_FALSE,
+                if (this.isVegan) C_TRUE else C_FALSE,
+                if (this.isVegetarian) C_TRUE else C_FALSE,
+                if (this.isGame) C_TRUE else C_FALSE,
             )
         )
     }
@@ -156,16 +156,16 @@ enum class DietaryPreferences(val value: String) {
          * @return an instance of DietaryPrefObject
          */
         fun construct(values: String): Object = Object(
-            isFair = values[0] == DietaryPreferences.C_TRUE,
-            isFish = values[1] == DietaryPreferences.C_TRUE,
-            isPoultry = values[2] == DietaryPreferences.C_TRUE,
-            isLamb = values[3] == DietaryPreferences.C_TRUE,
-            isVital = values[4] == DietaryPreferences.C_TRUE,
-            isBeef = values[5] == DietaryPreferences.C_TRUE,
-            isPork = values[6] == DietaryPreferences.C_TRUE,
-            isVegan = values[7] == DietaryPreferences.C_TRUE,
-            isVegetarian = values[8] == DietaryPreferences.C_TRUE,
-            isGame = values[9] == DietaryPreferences.C_TRUE,
+            isFair = values[0] == C_TRUE,
+            isFish = values[1] == C_TRUE,
+            isPoultry = values[2] == C_TRUE,
+            isLamb = values[3] == C_TRUE,
+            isVital = values[4] == C_TRUE,
+            isBeef = values[5] == C_TRUE,
+            isPork = values[6] == C_TRUE,
+            isVegan = values[7] == C_TRUE,
+            isVegetarian = values[8] == C_TRUE,
+            isGame = values[9] == C_TRUE,
         )
 
         /**

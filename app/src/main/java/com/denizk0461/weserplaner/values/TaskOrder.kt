@@ -1,4 +1,4 @@
-package com.denizk0461.weserplaner.model
+package com.denizk0461.weserplaner.values
 
 /**
  * Used to determine the order in which tasks should be shown.

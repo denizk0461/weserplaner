@@ -14,14 +14,14 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/app_title_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
-            android:fontFamily="@font/lato_blackitalic"
+            app:fontFamily="@font/lato_blackitalic"
             android:text="@string/title_settings"
             app:layout_scrollFlags="scroll"
             android:textSize="28sp"/>
@@ -58,13 +58,13 @@
                     android:orientation="vertical"
                     android:paddingBottom="8dp">
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="8dp"
-                        android:fontFamily="@font/lato_bolditalic"
+                        app:fontFamily="@font/lato_bolditalic"
                         android:text="@string/settings_schedule"
                         android:textSize="22sp" />
 
@@ -86,14 +86,14 @@
                         android:paddingHorizontal="16dp"
                         android:paddingVertical="8dp">
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/lato_bolditalic"
+                            app:fontFamily="@font/lato_bolditalic"
                             android:text="@string/refresh_schedule_title"
                             android:textSize="16sp" />
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/refresh_schedule_subtitle"
@@ -119,14 +119,14 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
-                            <TextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/lato_bolditalic"
+                                app:fontFamily="@font/lato_bolditalic"
                                 android:text="@string/settings_current_day_title"
                                 android:textSize="16sp" />
 
-                            <TextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/settings_current_day_subtitle"
@@ -162,14 +162,14 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
-                            <TextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/lato_bolditalic"
+                                app:fontFamily="@font/lato_bolditalic"
                                 android:text="@string/settings_highlight_title"
                                 android:textSize="16sp" />
 
-                            <TextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/settings_highlight_subtitle"
@@ -205,13 +205,13 @@
                     android:orientation="vertical"
                     android:paddingBottom="8dp">
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="8dp"
-                        android:fontFamily="@font/lato_bolditalic"
+                        app:fontFamily="@font/lato_bolditalic"
                         android:text="@string/settings_canteen"
                         android:textSize="22sp" />
 
@@ -233,14 +233,14 @@
                         android:paddingHorizontal="16dp"
                         android:paddingVertical="8dp">
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/lato_bolditalic"
+                            app:fontFamily="@font/lato_bolditalic"
                             android:text="@string/allergens_config_title"
                             android:textSize="16sp" />
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/allergens_config_subtitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -266,15 +266,15 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
-                            <TextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/settings_allergens_title_view"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/lato_bolditalic"
+                                app:fontFamily="@font/lato_bolditalic"
                                 android:text="@string/settings_allergens_title"
                                 android:textSize="16sp"/>
 
-                            <TextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/settings_allergens_subtitle_view"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -311,14 +311,14 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
-                            <TextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/lato_bolditalic"
+                                app:fontFamily="@font/lato_bolditalic"
                                 android:text="@string/settings_pref_colour_title"
                                 android:textSize="16sp" />
 
-                            <TextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/settings_pref_colour_subtitle"
@@ -345,14 +345,14 @@
                         android:paddingHorizontal="16dp"
                         android:paddingVertical="8dp">
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/lato_bolditalic"
+                            app:fontFamily="@font/lato_bolditalic"
                             android:text="@string/settings_pricing_title"
                             android:textSize="16sp" />
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/settings_pricing_subtitle"
@@ -408,13 +408,13 @@
                     android:orientation="vertical"
                     android:paddingBottom="8dp">
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="8dp"
-                        android:fontFamily="@font/lato_bolditalic"
+                        app:fontFamily="@font/lato_bolditalic"
                         android:text="@string/settings_misc"
                         android:textSize="22sp" />
 
@@ -433,10 +433,10 @@
                         android:paddingHorizontal="16dp"
                         android:paddingVertical="8dp">
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/lato_bolditalic"
+                            app:fontFamily="@font/lato_bolditalic"
                             android:text="@string/settings_launch_canteen_title"
                             android:textSize="16sp" />
 
@@ -491,14 +491,14 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
-                            <TextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/lato_bolditalic"
+                                app:fontFamily="@font/lato_bolditalic"
                                 android:text="@string/settings_crashlytics_title"
                                 android:textSize="16sp" />
 
-                            <TextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/settings_crashlytics_subtitle"
@@ -528,14 +528,14 @@
                         android:paddingHorizontal="16dp"
                         android:paddingVertical="8dp">
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/lato_bolditalic"
+                            app:fontFamily="@font/lato_bolditalic"
                             android:text="@string/settings_data_title"
                             android:textSize="16sp" />
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/settings_data_subtitle"
@@ -555,14 +555,14 @@
                         android:paddingHorizontal="16dp"
                         android:paddingVertical="8dp">
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/lato_bolditalic"
+                            app:fontFamily="@font/lato_bolditalic"
                             android:text="@string/settings_licences_title"
                             android:textSize="16sp" />
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/licences_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -583,14 +583,14 @@
                         android:paddingHorizontal="16dp"
                         android:paddingVertical="8dp">
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/lato_bolditalic"
+                            app:fontFamily="@font/lato_bolditalic"
                             android:text="@string/settings_app_version"
                             android:textSize="16sp" />
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/app_version_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -617,13 +617,13 @@
                     android:orientation="vertical"
                     android:paddingBottom="8dp">
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="8dp"
-                        android:fontFamily="@font/lato_bolditalic"
+                        app:fontFamily="@font/lato_bolditalic"
                         android:text="@string/settings_experimental"
                         android:textSize="22sp" />
 
@@ -645,14 +645,14 @@
                         android:paddingHorizontal="16dp"
                         android:paddingVertical="8dp">
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/lato_bolditalic"
+                            app:fontFamily="@font/lato_bolditalic"
                             android:text="@string/settings_hide_experiments_title"
                             android:textSize="16sp" />
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/settings_hide_experiments_subtitle"
@@ -672,14 +672,14 @@
                         android:paddingHorizontal="16dp"
                         android:paddingVertical="8dp">
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/lato_bolditalic"
+                            app:fontFamily="@font/lato_bolditalic"
                             android:text="@string/settings_build_time"
                             android:textSize="16sp" />
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/build_time_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -705,14 +705,14 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
-                            <TextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/lato_bolditalic"
+                                app:fontFamily="@font/lato_bolditalic"
                                 android:text="@string/settings_beta_nav_title"
                                 android:textSize="16sp" />
 
-                            <TextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/settings_beta_nav_subtitle"
@@ -741,10 +741,10 @@
                         android:paddingHorizontal="16dp"
                         android:paddingVertical="8dp">
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/lato_bolditalic"
+                            app:fontFamily="@font/lato_bolditalic"
                             android:text="@string/settings_dev_codes_title"
                             android:textSize="16sp" />
 
@@ -768,7 +768,7 @@
                                     android:id="@+id/input_dev_code"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/ibm_regular"
+                                    app:fontFamily="@font/ibm_regular"
                                     android:inputType="textNoSuggestions"/>
 
                             </com.google.android.material.textfield.TextInputLayout>

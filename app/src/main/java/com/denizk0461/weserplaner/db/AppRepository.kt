@@ -4,7 +4,11 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.preference.PreferenceManager
+import com.denizk0461.weserplaner.values.DietaryPreferences
+import com.denizk0461.weserplaner.values.SettingsPreferences
+import com.denizk0461.weserplaner.values.TaskOrder
 import com.denizk0461.weserplaner.model.*
+import com.denizk0461.weserplaner.values.AllergenPreferences
 
 /**
  * Repository objects that acts as a mediator between view models and the database to retrieve data

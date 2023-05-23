@@ -1,4 +1,4 @@
-package com.denizk0461.weserplaner.model
+package com.denizk0461.weserplaner.values
 
 /**
  * Class for managing allergen preferences. The user can tell the app which substances they are

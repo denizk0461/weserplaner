@@ -17,7 +17,9 @@ import com.denizk0461.weserplaner.data.setRainbowProgressCircle
 import com.denizk0461.weserplaner.data.showErrorSnackBar
 import com.denizk0461.weserplaner.data.showSnackBar
 import com.denizk0461.weserplaner.databinding.FragmentCanteenBinding
+import com.denizk0461.weserplaner.values.DietaryPreferences
 import com.denizk0461.weserplaner.model.*
+import com.denizk0461.weserplaner.values.TextSheetContentId
 import com.denizk0461.weserplaner.viewmodel.CanteenViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 

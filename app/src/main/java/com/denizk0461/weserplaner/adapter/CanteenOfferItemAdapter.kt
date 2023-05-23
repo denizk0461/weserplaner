@@ -15,7 +15,7 @@ import com.denizk0461.weserplaner.databinding.ItemCanteenLineBinding
 import com.denizk0461.weserplaner.databinding.ItemIconBinding
 import com.denizk0461.weserplaner.model.CanteenOfferGroup
 import com.denizk0461.weserplaner.model.CanteenOfferGroupElement
-import com.denizk0461.weserplaner.model.DietaryPreferences
+import com.denizk0461.weserplaner.values.DietaryPreferences
 
 /**
  * Custom RecyclerView adapter that lays out the offers of a given canteen on a given day.

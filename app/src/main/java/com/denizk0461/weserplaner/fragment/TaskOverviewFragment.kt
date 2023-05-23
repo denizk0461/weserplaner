@@ -12,7 +12,7 @@ import com.denizk0461.weserplaner.adapter.TaskOverviewAdapter
 import com.denizk0461.weserplaner.data.showSnackBar
 import com.denizk0461.weserplaner.databinding.FragmentTaskOverviewBinding
 import com.denizk0461.weserplaner.model.EventTask
-import com.denizk0461.weserplaner.model.TaskOrder
+import com.denizk0461.weserplaner.values.TaskOrder
 import com.denizk0461.weserplaner.viewmodel.TaskOverviewViewModel
 
 /**

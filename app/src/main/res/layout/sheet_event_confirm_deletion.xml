@@ -30,13 +30,13 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="22sp"
         android:paddingHorizontal="24dp"
         android:layout_marginBottom="8dp"
-        android:fontFamily="@font/lato_blackitalic"
+        app:fontFamily="@font/lato_blackitalic"
         android:text="@string/sheet_event_confirm_deletion_header"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -55,7 +55,7 @@
             android:paddingBottom="16dp"
             android:paddingHorizontal="24dp">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text_confirm_deletion_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -14,7 +14,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.exception.AcademicQuarterNotApplicableException
 import com.denizk0461.weserplaner.exception.ParcelNotFoundException
-import com.denizk0461.weserplaner.model.TextSheetContentId
+import com.denizk0461.weserplaner.values.TextSheetContentId
 import com.denizk0461.weserplaner.sheet.TextSheet
 import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat

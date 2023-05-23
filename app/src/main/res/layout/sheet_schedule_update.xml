@@ -30,14 +30,14 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/sheet_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="22sp"
         android:paddingHorizontal="24dp"
         android:layout_marginBottom="8dp"
-        android:fontFamily="@font/lato_blackitalic"
+        app:fontFamily="@font/lato_blackitalic"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -162,7 +162,7 @@
                     android:layout_weight="1"
                     app:strokeColor="?attr/colorOutlineVariant"/>
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/sheet_schedule_update_timeslot_middle"

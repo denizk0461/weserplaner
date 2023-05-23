@@ -1,9 +1,8 @@
 package com.denizk0461.weserplaner.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.LiveData
 import com.denizk0461.weserplaner.model.EventTask
-import com.denizk0461.weserplaner.model.TaskOrder
+import com.denizk0461.weserplaner.values.TaskOrder
 
 /**
  * View model class for [com.denizk0461.weserplaner.fragment.TaskOverviewFragment].

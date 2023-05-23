@@ -6,7 +6,7 @@ import androidx.fragment.app.viewModels
 import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.data.viewBinding
 import com.denizk0461.weserplaner.databinding.SheetTextBinding
-import com.denizk0461.weserplaner.model.TextSheetContentId
+import com.denizk0461.weserplaner.values.TextSheetContentId
 import com.denizk0461.weserplaner.viewmodel.TextSheetViewModel
 
 /**

@@ -30,21 +30,21 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/text_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="22sp"
-        android:fontFamily="@font/lato_blackitalic"
+        app:fontFamily="@font/lato_blackitalic"
         android:paddingHorizontal="24dp"
         android:layout_marginBottom="2dp"/>
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/text_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="22sp"
-        android:fontFamily="@font/lato_bolditalic"
+        app:fontFamily="@font/lato_bolditalic"
         android:layout_marginBottom="8dp"
         android:paddingHorizontal="24dp"/>
 
@@ -78,26 +78,26 @@
                     android:rowCount="2"
                     android:columnCount="2">
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/text_allergens_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="top"/>
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/text_allergens_content"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="fill_horizontal"/>
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/text_additives_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="1dp"
                         android:layout_gravity="top"/>
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/text_additives_content"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -108,18 +108,18 @@
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
-<!--            <TextView-->
+<!--            <androidx.appcompat.widget.AppCompatTextView-->
 <!--                android:id="@+id/text_content"-->
 <!--                android:layout_width="match_parent"-->
 <!--                android:layout_height="wrap_content"-->
 <!--                android:layout_marginBottom="8dp"/>-->
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:fontFamily="@font/lato_bolditalic"
+                app:fontFamily="@font/lato_bolditalic"
                 android:layout_marginTop="4dp"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>

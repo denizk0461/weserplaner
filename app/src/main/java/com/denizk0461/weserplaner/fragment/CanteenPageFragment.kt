@@ -13,7 +13,7 @@ import com.denizk0461.weserplaner.databinding.RecyclerViewBinding
 import com.denizk0461.weserplaner.model.CanteenOffer
 import com.denizk0461.weserplaner.model.CanteenOfferGroup
 import com.denizk0461.weserplaner.model.CanteenOfferGroupElement
-import com.denizk0461.weserplaner.model.DietaryPreferences
+import com.denizk0461.weserplaner.values.DietaryPreferences
 import com.denizk0461.weserplaner.sheet.AllergenSheet
 import com.denizk0461.weserplaner.viewmodel.CanteenPageViewModel
 

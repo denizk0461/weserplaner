@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.denizk0461.weserplaner.data.StwParser
+import com.denizk0461.weserplaner.values.DietaryPreferences
 import com.denizk0461.weserplaner.model.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

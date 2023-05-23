@@ -1,4 +1,4 @@
-package com.denizk0461.weserplaner.model
+package com.denizk0461.weserplaner.values
 
 /**
  * Enumeration class for user-set preferences that will be saved in persistent storage via

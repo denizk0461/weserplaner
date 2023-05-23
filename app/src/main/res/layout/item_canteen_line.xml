@@ -20,7 +20,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/text_content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -31,13 +31,13 @@
         app:layout_constraintStart_toEndOf="@+id/image_view_container"
         app:layout_constraintEnd_toStartOf="@+id/text_price"/>
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/text_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:fontFamily="@font/lato_bolditalic"/>
+        app:fontFamily="@font/lato_bolditalic"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

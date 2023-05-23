@@ -13,9 +13,9 @@ import com.denizk0461.weserplaner.data.viewBinding
 import com.denizk0461.weserplaner.databinding.ItemSheetPreferenceBinding
 import com.denizk0461.weserplaner.databinding.SheetAllergenBinding
 import com.denizk0461.weserplaner.exception.ParcelNotFoundException
-import com.denizk0461.weserplaner.model.Allergens
+import com.denizk0461.weserplaner.values.Allergens
 import com.denizk0461.weserplaner.model.CanteenOfferGroupElement
-import com.denizk0461.weserplaner.model.DietaryPreferences
+import com.denizk0461.weserplaner.values.DietaryPreferences
 
 /**
  * This class is used to display further information on a canteen offer to the user. Unlike the name
