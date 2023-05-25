@@ -14,6 +14,14 @@ interface AppDAO {
     /* --- Stud.IP schedule events --- */
 
     /**
+     * Retrieve all Stud.IP events from the database.
+     *
+     * @return  all events
+     */
+    @Query("SELECT * FROM studip_events ORDER BY timeslotId, eventId")
+    fun getAllEvents(): LiveData<List<StudIPEvent>>
+
+    /**
      * Retrieves the number of Stud.IP events available in the database.
      *
      * @return number of Stud.IP events
@@ -81,7 +89,8 @@ interface AppDAO {
                 "studip_events.title AS eventTitle, " +
                 "studip_events.lecturer, " +
                 "event_tasks.notes, " +
-                "studip_events.room " +
+                "studip_events.room, " +
+                "event_tasks.isFinished " +
                 "FROM event_tasks " +
                 "JOIN studip_events ON event_tasks.eventId = studip_events.eventId " +
                 "ORDER BY taskId"
@@ -102,7 +111,8 @@ interface AppDAO {
                 "studip_events.title AS eventTitle, " +
                 "studip_events.lecturer, " +
                 "event_tasks.notes, " +
-                "studip_events.room " +
+                "studip_events.room, " +
+                "event_tasks.isFinished " +
                 "FROM event_tasks " +
                 "JOIN studip_events ON event_tasks.eventId = studip_events.eventId " +
             "ORDER BY taskTitle")
@@ -122,7 +132,8 @@ interface AppDAO {
                 "studip_events.title AS eventTitle, " +
                 "studip_events.lecturer, " +
                 "event_tasks.notes, " +
-                "studip_events.room " +
+                "studip_events.room, " +
+                "event_tasks.isFinished " +
                 "FROM event_tasks " +
                 "JOIN studip_events ON event_tasks.eventId = studip_events.eventId " +
             "ORDER BY dueDate")

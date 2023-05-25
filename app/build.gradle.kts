@@ -12,8 +12,8 @@ android {
         applicationId = "com.denizk0461.weserplaner"
         minSdk = 24
         targetSdk = 33
-        versionCode = 7
-        versionName = "1.0.3"
+        versionCode = 8
+        versionName = "1.1.0"
 
         resourceConfigurations += arrayOf("en", "de")
 
@@ -64,6 +64,8 @@ dependencies {
     kapt("androidx.room:room-compiler:2.5.1")
 
     implementation("com.google.android.material:material:1.9.0")
+
+    implementation("com.github.alamkanak:android-week-view:1.2.6")
 
     implementation("org.jsoup:jsoup:1.15.4")
 }

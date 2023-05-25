@@ -14,15 +14,17 @@ package com.denizk0461.weserplaner.model
  * @param lecturer      lecturer(s) organising the event
  * @param notes         user-added notes for the task
  * @param room          room the task may take place in
+ * @param isFinished    whether this task has been marked as finished by the user
  */
 data class EventTaskExtended(
     val taskId: Int,
     val eventId: Int,
-    val dueDate: Int,
-    val notifyDate: Int,
+    val dueDate: Long,
+    val notifyDate: Long,
     val eventTitle: String,
     val taskTitle: String,
     val lecturer: String,
     val notes: String,
     val room: String,
+    val isFinished: Boolean,
 )

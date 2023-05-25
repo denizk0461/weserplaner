@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.activity.FetcherActivity
+import com.denizk0461.weserplaner.activity.TimetableOverviewActivity
 import com.denizk0461.weserplaner.adapter.StudIPEventPageAdapter
 import com.denizk0461.weserplaner.data.showSnackBar
 import com.denizk0461.weserplaner.databinding.FragmentEventBinding
@@ -42,6 +43,11 @@ class EventFragment : AppFragment<FragmentEventBinding>() {
 
         // Get localised weekday names
         weekdays = context.resources?.getStringArray(R.array.weekdays) ?: arrayOf()
+
+        // Set up button to view timetable overview
+        binding.buttonViewOverview.setOnClickListener {
+            startActivity(Intent(context, TimetableOverviewActivity::class.java))
+        }
 
         // Set up the view pager's adapter
         viewPagerAdapter = StudIPEventPageAdapter(

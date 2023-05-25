@@ -49,6 +49,7 @@
     <string name="fetch_bar_help_sheet_content"> • Log in with your Stud.IP login\n • Open your timetable view, in case it doesn\'t open automatically, by clicking the rightmost icon in the bottom bar that looks like a pencil and a ruler\n • Click the \'save\' button that appears in the bottom right corner\n • Done!</string>
     <string name="fetch_bar_save_desc">Save the timetable in the app</string>
 
+    <string name="schedule_button_overview_hint">View full schedule</string>
     <string name="schedule_fab_add_text">New event</string>
     <string name="schedule_no_events">You don\'t have any events for %s.</string>
 
@@ -256,6 +257,14 @@
     <string name="settings_pref_colour_subtitle">Icons will be coloured similarly to how they look the website</string> <!-- TODO this text sucks, DE too -->
 
     <string name="settings_launch_canteen_title">Select which screen to start the app with</string>
+
+    <string name="settings_date_format_title">Select which format to show dates in</string>
+    <string-array name="settings_date_format_items" translatable="false">
+        <item>24.05.2023, 8:45</item>
+        <item>2023–05–24, 08:45</item>
+        <item>2023–05–24, 08:45:11.518</item>
+        <item>05/24/23, 8:45 AM</item>
+    </string-array>
 
     <!-- unused - use for possible future implementation of Crashlytics -->
     <string name="settings_crashlytics_title">Opt-in to sharing crash data</string>

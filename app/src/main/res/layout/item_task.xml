@@ -29,11 +29,11 @@
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/text_title"
+                    android:id="@+id/text_event_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="22sp"
-                    app:fontFamily="@font/lato_bolditalic"
+                    android:textSize="16sp"
+                    app:fontFamily="@font/lato_italic"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/icon_notify_header"
@@ -46,16 +46,22 @@
                     android:scaleType="centerInside"
                     android:tint="?attr/colorText"
                     android:importantForAccessibility="no"
-                    app:layout_constraintTop_toTopOf="@id/text_title"
+                    app:layout_constraintTop_toTopOf="@id/text_event_title"
                     app:layout_constraintEnd_toEndOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/text_due_date"
-                android:layout_width="wrap_content"
+                android:id="@+id/text_title"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"/>
+                android:textSize="22sp"
+                app:fontFamily="@font/lato_bolditalic"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_due_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/layout_expanded_container"
@@ -64,7 +70,6 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.divider.MaterialDivider
-                    android:id="@+id/divider"
                     style="@style/DividerTheme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -87,6 +92,35 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/text_notify_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_lecturer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_room"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="4dp">
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="fill_parent"
+                        android:layout_marginHorizontal="8dp"
+                        android:background="?attr/colorText"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_notes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 

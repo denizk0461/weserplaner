@@ -59,6 +59,13 @@ class AppRepository(app: Application) {
     }
 
     /**
+     * Retrieve all Stud.IP events from the database.
+     *
+     * @return  all events
+     */
+    fun getAllEvents(): LiveData<List<StudIPEvent>> = dao.getAllEvents()
+
+    /**
      * Retrieves the number of Stud.IP events available in the database.
      *
      * @return number of Stud.IP events

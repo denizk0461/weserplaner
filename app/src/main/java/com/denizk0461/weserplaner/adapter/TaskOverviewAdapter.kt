@@ -11,7 +11,7 @@ import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.data.AppDiffUtilCallback
 import com.denizk0461.weserplaner.data.isInThePast
 import com.denizk0461.weserplaner.databinding.ItemTaskBinding
-import com.denizk0461.weserplaner.model.EventTask
+import com.denizk0461.weserplaner.model.EventTaskExtended
 import com.denizk0461.weserplaner.model.FormattedDate
 
 class TaskOverviewAdapter(
@@ -21,7 +21,7 @@ class TaskOverviewAdapter(
     /**
      * List of all events.
      */
-    private val tasks: MutableList<EventTask> = mutableListOf()
+    private val tasks: MutableList<EventTaskExtended> = mutableListOf()
 
     /**
      * View holder class for parent class
@@ -58,12 +58,15 @@ class TaskOverviewAdapter(
 
         // view set-up
 
-        // Set title text
-        holder.binding.textTitle.text = currentItem.title
+        // Set event title text
+        holder.binding.textEventTitle.text = currentItem.eventTitle
 
-        // Set due date text to formatted date, TODO let user pick the date format
+        // Set task title text
+        holder.binding.textTitle.text = currentItem.taskTitle
+
         val dueDate = FormattedDate(currentItem.dueDate)
 
+        // Set due date text to formatted date, TODO let user pick the date format
         holder.binding.textDueDate.text = dueDate.localisedString(context)
 
         if (currentItem.notifyDate == -1L) {
@@ -93,6 +96,10 @@ class TaskOverviewAdapter(
             }, notifyDate.dateString, notifyDate.timeString)
         }
 
+        holder.binding.textLecturer.text = currentItem.lecturer
+        holder.binding.textRoom.text = currentItem.room
+        holder.binding.textNotes.text = currentItem.notes
+
         // Set up single click listener
         holder.binding.linearLayout.setOnClickListener {
             // Prepare layout animation
@@ -121,7 +128,7 @@ class TaskOverviewAdapter(
      *
      * @param newData   new dataset to be displayed
      */
-    fun setNewData(newData: List<EventTask>) {
+    fun setNewData(newData: List<EventTaskExtended>) {
         // Calculate the difference between the old list and the new list
         val diffResult = DiffUtil.calculateDiff(AppDiffUtilCallback(tasks, newData))
 
@@ -146,6 +153,6 @@ class TaskOverviewAdapter(
          * @param task  item that has been long-pressed
          * @return      whether the long press was successful
          */
-        fun onLongClick(task: EventTask): Boolean
+        fun onLongClick(task: EventTaskExtended): Boolean
     }
 }

@@ -15,6 +15,7 @@ import androidx.room.PrimaryKey
  * @param title         title of the task
  * @param notes         user-added notes for the task
  * @param room          room the task may take place in
+ * @param isFinished    whether this task has been marked as finished by the user
  */
 @Entity(
     tableName = "event_tasks",
@@ -35,4 +36,5 @@ data class EventTask(
     val title: String,
     val notes: String,
     val room: String,
+    val isFinished: Boolean = false,
 )

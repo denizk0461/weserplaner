@@ -176,6 +176,23 @@ class SettingsFragment : AppFragment<FragmentSettingsBinding>() {
             }
         }
 
+        // TODO Set up dropdown menu for picking a date format
+//        val dateAdapter = DropdownAdapter(
+//            context,
+//            context.resources.getStringArray(R.array.settings_date_format_items).toList(),
+//        )
+//
+//        binding.autoCompleteFont.setAdapter(dateAdapter)
+//        binding.autoCompleteFont.setText(
+//            dateAdapter.getItem(storage.getTypefaceIndex()).toString(),
+//            false,
+//        )
+//
+//        binding.autoCompleteFont.setOnItemClickListener { _, _, position, _ ->
+//            storage.setTypefaceIndex(position)
+//            binding.autoCompleteFont.setText(dateAdapter.getItem(position), false)
+//        }
+
         // Set up switch for colouring dietary preferences
         binding.switchPrefColour.apply {
             isChecked = viewModel.preferenceColour

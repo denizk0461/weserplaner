@@ -11,7 +11,7 @@ import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.adapter.TaskOverviewAdapter
 import com.denizk0461.weserplaner.data.showSnackBar
 import com.denizk0461.weserplaner.databinding.FragmentTaskOverviewBinding
-import com.denizk0461.weserplaner.model.EventTask
+import com.denizk0461.weserplaner.model.EventTaskExtended
 import com.denizk0461.weserplaner.values.TaskOrder
 import com.denizk0461.weserplaner.viewmodel.TaskOverviewViewModel
 
@@ -91,7 +91,7 @@ class TaskOverviewFragment : AppFragment<FragmentTaskOverviewBinding>(),
         }
     }
 
-    override fun onLongClick(task: EventTask): Boolean {
+    override fun onLongClick(task: EventTaskExtended): Boolean {
         // TODO
         return false
     }

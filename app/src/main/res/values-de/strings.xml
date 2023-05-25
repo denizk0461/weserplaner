@@ -48,6 +48,7 @@
     <string name="fetch_bar_help_sheet_content"> • Logge dich mit deinem Stud.IP-Login ein\n • Öffne deinen Stundenplan, falls er sich nicht automatisch öffnet, indem du in der unteren Leiste auf das rechte Logo klickst, das wie ein Stift und ein Lineal aussieht\n • Klicke auf den \'Speichern\'-Knopf, der unten in der rechten Ecke auftaucht\n • Fertig!</string>
     <string name="fetch_bar_save_desc">Speichere den Stundenplan in der App ab</string>
 
+    <string name="schedule_button_overview_hint">Siehe gesamten Stundenplan</string>
     <string name="schedule_fab_add_text">Neue Veranstaltung</string>
     <string name="schedule_no_events">%ss hast du keine Veranstaltungen.</string>
 
@@ -248,6 +249,8 @@
     <string name="settings_allergens_subtitle_alt">Danke, dass du meine App nutzt ☺︎♡</string>
 
     <string name="settings_launch_canteen_title">Wähle, mit welchem Bildschirm die App startet</string>
+
+    <string name="settings_date_format_title">Wähle das Format für Datumsangaben</string>
 
     <string name="settings_pref_colour_title">Färbe Diätpreferenzen</string>
     <string name="settings_pref_colour_subtitle">Dies färbt die kleinen Symbole ähnlich wie auf der Webseite</string>
