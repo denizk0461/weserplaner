@@ -80,7 +80,11 @@ class CanteenPageFragment : AppFragment<RecyclerViewBinding>(), CanteenOfferItem
                 offerList.addAll(offers)
 
                 // Set new data
-                recyclerViewAdapter.setData(offers)
+                recyclerViewAdapter.setData(
+                    offers,
+                    viewModel.getDietaryPrefs().deconstruct(),
+                    viewModel.preferenceAllergenConfig,
+                )
             }
         }
 
@@ -114,165 +118,10 @@ class CanteenPageFragment : AppFragment<RecyclerViewBinding>(), CanteenOfferItem
          */
         viewModel.dietaryPreferencesUpdate.observe(viewLifecycleOwner) {
             // Re-set data
-            recyclerViewAdapter.setData(offerList)
-        }
-    }
-
-    private fun CanteenOfferItemAdapter.setData(offers: List<CanteenOffer>) {
-        /*
-         * Filter items that contain user-selected allergens or user-excluded dietary
-         * preferences.
-         */
-        val filteredOffers = offers.filterElements()
-
-        // Put elements into groups
-        val groupedOffers = filteredOffers.groupElements().distinct()
-
-        val difference = offers.size - filteredOffers.size
-
-        val newOffers = if (groupedOffers.isEmpty() && difference > 0) {
-            listOf(CanteenOfferGroup(
-                "ALL\$HIDDEN", 0, "", "", listOf(),
-            ))
-        } else groupedOffers
-
-        // Set new items into the adapter
-        setNewData(
-            newOffers,
-            // Difference is calculated from the unfiltered and filtered data sets
-            difference,
-        )
-    }
-
-    /**
-     * Groups [CanteenOffer] elements by their categories into [CanteenOfferGroup] elements and
-     * filters for the user's dietary preferences.
-     *
-     * @return  the grouped and filtered elements
-     */
-    private fun List<CanteenOffer>.groupElements(): List<CanteenOfferGroup> {
-
-        return map { (_, date, dateId, category, _, canteen, _, _, _, _, _) ->
-            // Create new group elements to group the already filtered elements by their categories
-            CanteenOfferGroup(
-                date,
-                dateId,
-                category,
-                canteen,
-                filter {
-                    it.category == category && it.canteen == canteen
-                }.map {
-                    // Map the individual items to their respective groups
-                    CanteenOfferGroupElement(
-                        it.title,
-                        it.price,
-                        it.dietaryPreferences,
-                        it.allergens
-                    )
-                }
+            recyclerViewAdapter.setData(offerList,
+                viewModel.getDietaryPrefs().deconstruct(),
+                viewModel.preferenceAllergenConfig,
             )
-        }
-    }
-
-    /**
-     * Filters the list of canteen offers by dietary and allergen preferences.
-     *
-     * @return  filtered list of offers
-     */
-    private fun List<CanteenOffer>.filterElements(): List<CanteenOffer> {
-
-        // Get dietary preference regex
-        val prefsRegex = getPrefRegex()
-        val allergenPrefs = viewModel.preferenceAllergenConfig
-        val allergenFilteredList = mutableListOf<CanteenOffer>()
-
-        // Filter offers not conforming to the dietary preferences set by the user
-        val newList = if (prefsRegex.toString() == DietaryPreferences.TEMPLATE_EMPTY) {
-            // Show all elements and skip filtering if no preference is set
-            this
-        } else {
-            // Filter for dietary preferences
-            this.filter {
-                prefsRegex.matches(it.dietaryPreferences)
-            }
-        }
-
-        // Filter offers containing allergens the user wishes to have hidden
-        return if (allergenPrefs.isBlank()) {
-            // If no preferences have been set by the user, skip the checks
-            newList
-        } else {
-            // If the user has set allergens, check each item individually
-            newList.forEach outer@{ item ->
-
-                // If the item in question doesn't contain any allergens, skip the check
-                if (item.allergens.isBlank()) {
-                    // Add the item to the new list directly
-                    allergenFilteredList.add(item)
-                } else {
-                    // Check each individual allergen in the offering
-                    item.allergens.split(",").forEach inner@{ allergen ->
-
-                        // If an allergen can be found in the user-excluded list, stop checking
-                        if (allergenPrefs.contains(allergen)) {
-                            return@outer
-                        }
-                    }
-                    // If no allergens in the offering are present in the exclusion list, add it
-                    allergenFilteredList.add(item)
-                }
-            }
-            // Return the allergen-filtered list
-            allergenFilteredList
-        }
-    }
-
-    /**
-     * Retrieves the user's dietary preferences and compiles them into a regular expression that can
-     * be used to filter out items that don't fulfil the preferences. Example:
-     * .......t..|........t.
-     * This will retrieve all items that marked as either vegetarian or vegan
-     * *
-     * @return  regular expression object reflecting the user's preferences
-     */
-    private fun getPrefRegex(): Regex {
-        // Retrieve the user's dietary preference as a string
-        val prefs = viewModel.getDietaryPrefs().deconstruct()
-
-        // Return the 'empty' template string if no preference has been set or found
-        return if (prefs == DietaryPreferences.TEMPLATE_EMPTY) {
-            Regex(DietaryPreferences.TEMPLATE_EMPTY)
-        } else {
-            // Create the variable to insert the regular expression into
-            var regexString = ""
-
-            // Create the object to store which preferences need to be met
-            val indices = mutableListOf<Int>()
-
-            // Find all preferences that need to be met
-            prefs.forEachIndexed { index, c ->
-                if (c == DietaryPreferences.C_TRUE) indices.add(index)
-            }
-
-            // Needs to be set to correctly assemble the regular expression
-            var isFirst = true
-
-            // Iterate through every preference that has been set
-            indices.forEach { index ->
-                // Set an OR if more than one preference needs to be met
-                if (!isFirst) regexString += '|'
-
-                // Add the expression looking for the single preference to the entire string
-                regexString += DietaryPreferences.TEMPLATE_EMPTY.substring(0 until index) +
-                        DietaryPreferences.C_TRUE +
-                        DietaryPreferences.TEMPLATE_EMPTY.substring(index+1)
-
-                // Ensure that OR statements will be placed between the individual expressions
-                isFirst = false
-            }
-
-            // Compile the string to a regular expression object
-            Regex(regexString)
         }
     }
 

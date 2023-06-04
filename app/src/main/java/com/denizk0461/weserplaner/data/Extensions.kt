@@ -103,7 +103,7 @@ fun Resources.Theme.showSnackBar(view: CoordinatorLayout, text: String, anchor: 
  * @param text      text to present in the snack bar
  * @param anchor    view to anchor the snack bar to
  */
-fun Resources.Theme.showErrorSnackBar(view: CoordinatorLayout, text: String, anchor: View? = null) {
+fun Resources.Theme.showErrorSnackBar(view: View, text: String, anchor: View? = null) {
     val s = Snackbar
         .make(view, text, Snackbar.LENGTH_SHORT)
         // Set colours to signify an error

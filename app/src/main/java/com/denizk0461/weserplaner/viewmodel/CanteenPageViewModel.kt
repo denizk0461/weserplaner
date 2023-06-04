@@ -8,7 +8,7 @@ import com.denizk0461.weserplaner.values.DietaryPreferences
 class CanteenPageViewModel(app: Application) : AppViewModel(app) {
 
     /**
-     * Retrieves all canteen offers that match given day.
+     * Retrieves all canteen offers that match a given day.
      *
      * @return all canteen offers matching the given day exposed through a LiveData object
      */

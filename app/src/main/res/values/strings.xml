@@ -26,12 +26,21 @@
     </string-array>
 
     <string name="introduction_welcome_header">Welcome to &app_name;!</string>
-    <string name="introduction_welcome_description">&app_name; is an unofficial companion app for students of the University of Bremen that allows you to keep your own schedule in close reach. Create your own weekly events and edit them as you wish, or download them straight from Stud.IP.\n\nYou can also view the offers for all of the canteens in Bremen and Bremerhaven. Filter by preferences using the buttons at the top of the canteen screen, or go into the settings to configure what substances you are allergic against, and the app will do its best to only show you offers that are relevant for you.\n\nClick the button below to download your schedule right away! If you skip this, you\'ll always have the option to download your schedule from the app\'s settings later.</string>
+    <string name="introduction_welcome_description">&app_name; is an unofficial companion app for students of the University of Bremen that allows you to keep your own schedule in close reach. Enter your own weekly events and edit them as you wish, or download them straight from Stud.IP.\n\nYou can also view the offers for all of the canteens in Bremen and Bremerhaven. Filter by preferences using the buttons at the top of the canteen screen, or go into the settings to configure what substances you are allergic against, and the app will do its best to only show you offers that are relevant for you.\n\nClick the button below to download your schedule right away! If you skip this, you\'ll always have the option to download your schedule from the app\'s settings later.</string>
     <string name="introduction_button_download">Download your Stud.IP schedule</string>
     <string name="introduction_or">– or –</string>
     <string name="introduction_button_continue">Continue to the app</string>
 
     <string name="compact_overview_button_settings_hint">App settings</string>
+    <string name="compact_overview_button_events_hint">Timetable</string>
+    <string name="compact_overview_button_refresh_offers_hint">Refresh offers</string>
+    <string name="compact_overview_button_offers_hint">All offers</string>
+    <string name="compact_overview_header_events">Today\'s events</string>
+    <string name="compact_overview_header_offers">On offer at the %s</string>
+    <string name="compact_overview_subheader_offers_empty">No information available</string>
+    <string name="compact_overview_subheader_offers_no_news">Offers from %s</string>
+    <string name="compact_overview_subheader_offers_news">Offers from %s; news available</string>
+
     <string name="fragment_button_back_to_overview_hint">Back to overview</string>
 
     <string name="fetch_error_snack">Something went wrong!</string>
