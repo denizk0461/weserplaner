@@ -84,6 +84,7 @@
 
             <!-- Add task -->
             <androidx.appcompat.widget.LinearLayoutCompat
+                android:visibility="gone"
                 android:id="@+id/button_add_task"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -113,6 +114,7 @@
 
             <!-- View tasks -->
             <androidx.appcompat.widget.LinearLayoutCompat
+                android:visibility="gone"
                 android:id="@+id/button_view_tasks"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -142,6 +144,7 @@
 
             <!-- Find room -->
             <androidx.appcompat.widget.LinearLayoutCompat
+                android:visibility="gone"
                 android:id="@+id/button_find_room"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -2,12 +2,14 @@ package com.denizk0461.weserplaner.sheet
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
 import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.data.getParcelableCompat
 import com.denizk0461.weserplaner.data.viewBinding
 import com.denizk0461.weserplaner.databinding.SheetEventActionBinding
 import com.denizk0461.weserplaner.fragment.EventPageFragment
 import com.denizk0461.weserplaner.model.StudIPEvent
+import com.denizk0461.weserplaner.viewmodel.EventActionViewModel
 
 /**
  * Sheet used to display actions available for a given event to the user.
@@ -16,6 +18,9 @@ class EventActionSheet : AppSheet(R.layout.sheet_event_action) {
 
     // View binding
     private val binding: SheetEventActionBinding by viewBinding(SheetEventActionBinding::bind)
+
+    // View model
+    private val viewModel: EventActionViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,6 +35,13 @@ class EventActionSheet : AppSheet(R.layout.sheet_event_action) {
         binding.buttonDismiss.setOnClickListener {
             // Do nothing and dismiss the sheet
             dismiss()
+        }
+
+        // Show in-development options if the user has enabled them
+        if (viewModel.preferenceBetaScreensEnabled) {
+            binding.buttonAddTask.visibility = View.VISIBLE
+            binding.buttonViewTasks.visibility = View.VISIBLE
+            binding.buttonFindRoom.visibility = View.VISIBLE
         }
 
         // Set up button to edit the event

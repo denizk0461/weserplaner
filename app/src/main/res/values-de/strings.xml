@@ -91,11 +91,11 @@
     <string name="task_order_menu_date_created">Erstellungszeit</string>
     <string name="task_order_menu_date_due">Abgabezeit</string>
 
-    <string name="formatted_date_string_localised">%s um %s</string>
+    <string name="formatted_date_string_localised">%1$s um %2$s</string>
 
     <string name="task_item_notification_none">Du wirst nicht benachrichtigt.</string>
-    <string name="task_item_notification_active_future">Du wirst am %s um %s benachrichtigt.</string>
-    <string name="task_item_notification_active_past">Du wurdest am %s um %s benachrichtigt.</string>
+    <string name="task_item_notification_active_future">Du wirst am %1$s um %2$s benachrichtigt.</string>
+    <string name="task_item_notification_active_past">Du wurdest am %1$s um %2$s benachrichtigt.</string>
 
     <string name="task_overview_snack_unimplemented">Aufgaben sind noch nicht implementiert!</string>
     <string name="task_overview_fab_add_task">Aufgabe hinzufügen</string>
@@ -278,7 +278,7 @@
 
     <string name="settings_build_time">Gradle Build-Code &amp; Zeit</string>
 
-    <string name="settings_beta_nav_title">Zeige Beta-Bildschirme</string>
+    <string name="settings_beta_nav_title">Zeige in-Entwicklung-Bildschirme</string>
     <string name="settings_beta_nav_subtitle">Erfordert einen App-Neustart</string>
 
     <string name="settings_dev_codes_title">Entwicklercodes</string>
