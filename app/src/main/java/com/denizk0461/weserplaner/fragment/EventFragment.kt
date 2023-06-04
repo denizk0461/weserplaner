@@ -119,12 +119,6 @@ class EventFragment : AppFragment<FragmentEventBinding>() {
                 }
             )
         }
-
-        // Show the user a little message if they're opening the app for the first time
-        if (viewModel.preferenceFirstLaunch) {
-            // Remember that the app has been launched before
-            viewModel.preferenceFirstLaunch = false
-        }
     }
 
     /**

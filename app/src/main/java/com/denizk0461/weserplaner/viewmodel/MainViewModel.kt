@@ -21,4 +21,10 @@ class MainViewModel(application: Application) : AppViewModel(application) {
      */
     val preferenceBetaScreensEnabled: Boolean
         get() = repo.getPreferenceBetaScreensEnabled()
+
+    /**
+     * Determines whether the user is launching the app for the first time.
+     */
+    val preferenceFirstLaunch: Boolean
+        get() = repo.getPreferenceFirstLaunch()
 }

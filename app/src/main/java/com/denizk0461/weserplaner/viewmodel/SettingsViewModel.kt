@@ -81,6 +81,13 @@ class SettingsViewModel(app: Application) : AppViewModel(app) {
         get() = repo.getPreferenceBetaScreensEnabled()
         set(newValue) { repo.setPreferenceBetaScreensEnabled(newValue) }
 
+    /**
+     * Determines whether the user is launching the app for the first time.
+     */
+    var preferenceFirstLaunch: Boolean
+        get() = repo.getPreferenceFirstLaunch()
+        set(value) { repo.setPreferenceFirstLaunch(value) }
+
     // --- functions for dev codes --- //
 
     /**

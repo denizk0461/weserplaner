@@ -410,6 +410,10 @@ class SettingsFragment : AppFragment<FragmentSettingsBinding>() {
                     viewModel.nukeEverything()
                     showToast(context, "Nuked everything")
                 }
+                "NFIRST" -> { // set first launch preference to true
+                    viewModel.preferenceFirstLaunch = true
+                    showToast(context, "First launch flag cleared")
+                }
                 else -> showSnackBar(
                     getString(R.string.settings_dev_codes_invalid)
                 )

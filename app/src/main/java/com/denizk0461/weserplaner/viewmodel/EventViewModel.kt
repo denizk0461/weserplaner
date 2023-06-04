@@ -22,11 +22,4 @@ class EventViewModel(app: Application) : AppViewModel(app) {
      */
     val preferenceCurrentDay: Boolean
         get() = repo.getPreferenceCurrentDay()
-
-    /**
-     * Determines whether the user is launching the app for the first time.
-     */
-    var preferenceFirstLaunch: Boolean
-        get() = repo.getPreferenceFirstLaunch()
-        set(value) { repo.setPreferenceFirstLaunch(value) }
 }

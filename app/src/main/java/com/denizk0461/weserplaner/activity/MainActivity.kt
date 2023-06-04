@@ -1,5 +1,6 @@
 package com.denizk0461.weserplaner.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.core.view.WindowCompat
 import androidx.fragment.app.FragmentActivity
@@ -33,6 +34,16 @@ class MainActivity : FragmentActivity() {
         // Inflate view binding and bind to this activity
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        /*
+         * Check whether the user is launching the app for the first time in order to show a
+         * tutorial. This value will be changed to 'false' upon completing the tutorial, thus not
+         * requiring any changes to the value here.
+         */
+        if (true/*viewModel.preferenceFirstLaunch*/) {
+            // Launch the tutorial activity
+            startActivity(Intent(this, IntroductionActivity::class.java))
+        }
 
         // Set up bottom navigation view to navigate between fragments
         binding.navView.setupWithNavController(
