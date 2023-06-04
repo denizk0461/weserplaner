@@ -77,7 +77,7 @@ class MainActivity : FragmentActivity() {
 
         // Inflate new nav graph
         val navGraph = navHostFragment
-            .navController.navInflater.inflate(R.navigation.main_nav_graph)
+            .navController.navInflater.inflate(R.navigation.nav_graph_detailed)
 
         // Set the starting fragment for the app
         navGraph.setStartDestination(when (viewModel.preferenceLaunchFragment) {

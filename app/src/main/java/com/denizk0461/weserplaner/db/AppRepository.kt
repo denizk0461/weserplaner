@@ -394,6 +394,16 @@ class AppRepository(app: Application) {
     }
 
     /**
+     * This value determines which navigation graph will be used for app navigation.
+     */
+    fun getAppLayout(): Int = getIntPreference(
+        SettingsPreferences.APP_LAYOUT,
+    )
+    fun setAppLayout(newValue: Int) {
+        setPreference(SettingsPreferences.APP_LAYOUT, newValue)
+    }
+
+    /**
      * This value determines whether the user opts into submitting crash reports.
      */
     fun getPreferenceDataHandling(): Boolean = getBooleanPreference(

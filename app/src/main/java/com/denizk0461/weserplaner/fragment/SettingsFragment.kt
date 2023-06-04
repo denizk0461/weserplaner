@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Base64
 import android.view.LayoutInflater
@@ -331,6 +332,10 @@ class SettingsFragment : AppFragment<FragmentSettingsBinding>() {
                 getString(R.string.settings_hide_experiments),
             )
         }
+
+        // Set text for Android version and API level
+        @SuppressLint("SetTextI18n")
+        binding.textAndroidVersion.text = "Android ${Build.VERSION.RELEASE} | API ${Build.VERSION.SDK_INT}"
 
         // Set build version code and time text
         @SuppressLint("SetTextI18n")

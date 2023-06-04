@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_compact"
+    app:startDestination="@id/schedule">
+
+    <fragment
+        android:id="@+id/compact_overview"
+        android:name="com.denizk0461.weserplaner.fragment.CompactOverviewFragment"
+        android:label="CompactOverviewFragment"
+        tools:layout="@layout/fragment_compact_overview">
+
+        <action
+            android:id="@+id/action_compact_overview_to_schedule"
+            app:destination="@id/schedule" />
+        <action
+            android:id="@+id/action_compact_overview_to_canteen"
+            app:destination="@id/canteen" />
+        <action
+            android:id="@+id/action_compact_overview_to_settings"
+            app:destination="@id/settings" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/schedule"
+        android:name="com.denizk0461.weserplaner.fragment.EventFragment"
+        android:label="EventFragment"
+        tools:layout="@layout/fragment_event"/>
+    <fragment
+        android:id="@+id/canteen"
+        android:name="com.denizk0461.weserplaner.fragment.CanteenFragment"
+        android:label="CanteenFragment"
+        tools:layout="@layout/fragment_canteen"/>
+    <fragment
+        android:id="@+id/settings"
+        android:name="com.denizk0461.weserplaner.fragment.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings"/>
+
+</navigation>

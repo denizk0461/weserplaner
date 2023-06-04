@@ -660,6 +660,33 @@
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
+                    <!-- Android version -->
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/button_android_version"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/selectable_item_background"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="8dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:fontFamily="@font/lato_bolditalic"
+                            android:text="@string/settings_api_level"
+                            android:textSize="16sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/text_android_version"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
                     <!-- Build time -->
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:id="@+id/button_build_time"

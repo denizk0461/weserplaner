@@ -73,5 +73,10 @@ enum class SettingsPreferences(val key: String) {
      * Whether beta screens should be shown.
      */
     BETA_SCREENS_ENABLED("beta_screens"),
+
+    /**
+     * The user's app layout preference.
+     */
+    APP_LAYOUT("app_layout"),
     ;
 }

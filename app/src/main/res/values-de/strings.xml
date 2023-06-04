@@ -286,6 +286,8 @@
     <string name="settings_hide_experiments_title">Verstecke experimentelle Einstellungen</string>
     <string name="settings_hide_experiments_subtitle">Rufe sie wieder über den Lizenzen-Knopf auf</string>
 
+    <string name="settings_api_level">Android-Version &amp; API-Level</string>
+
     <string name="settings_build_time">Gradle Build-Code &amp; Zeit</string>
 
     <string name="settings_beta_nav_title">Zeige in-Entwicklung-Bildschirme</string>
