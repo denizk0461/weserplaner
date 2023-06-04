@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.denizk0461.weserplaner.data.StwParser
 import com.denizk0461.weserplaner.values.DietaryPreferences
 import com.denizk0461.weserplaner.model.*
+import com.denizk0461.weserplaner.values.AppLayout
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -88,4 +89,10 @@ class CanteenViewModel(app: Application) : AppViewModel(app) {
     var preferenceHasOpenedCanteen: Boolean
         get() = repo.getPreferenceHasOpenedCanteen()
         set(newValue) { repo.setPreferenceHasOpenedCanteen(newValue) }
+
+    /**
+     * Determines which layout the user wants the app to use.
+     */
+    val preferenceAppLayout: AppLayout
+        get() = repo.getAppLayout()
 }

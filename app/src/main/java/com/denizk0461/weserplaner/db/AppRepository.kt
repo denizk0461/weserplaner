@@ -9,6 +9,7 @@ import com.denizk0461.weserplaner.values.SettingsPreferences
 import com.denizk0461.weserplaner.values.TaskOrder
 import com.denizk0461.weserplaner.model.*
 import com.denizk0461.weserplaner.values.AllergenPreferences
+import com.denizk0461.weserplaner.values.AppLayout
 
 /**
  * Repository objects that acts as a mediator between view models and the database to retrieve data
@@ -396,11 +397,14 @@ class AppRepository(app: Application) {
     /**
      * This value determines which navigation graph will be used for app navigation.
      */
-    fun getAppLayout(): Int = getIntPreference(
+    fun getAppLayout(): AppLayout = AppLayout.values()[getIntPreference(
         SettingsPreferences.APP_LAYOUT,
-    )
+    )]
     fun setAppLayout(newValue: Int) {
         setPreference(SettingsPreferences.APP_LAYOUT, newValue)
+    }
+    fun setAppLayout(newValue: AppLayout) {
+        setPreference(SettingsPreferences.APP_LAYOUT, newValue.ordinal)
     }
 
     /**

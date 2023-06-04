@@ -16,9 +16,24 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginHorizontal="8dp"
             app:layout_scrollFlags="scroll">
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.Material3.Button.IconButton"
+                android:id="@+id/button_navigate_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                app:icon="@drawable/arrow_back"
+                app:iconPadding="0dp"
+                app:strokeColor="?attr/colorOutlineVariant"
+                app:layout_constraintTop_toTopOf="@id/app_title_bar"
+                app:layout_constraintBottom_toBottomOf="@id/app_title_bar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:iconTint="?attr/colorOnSurfaceVariant"
+                tools:ignore="UnusedAttribute"
+                android:tooltipText="@string/fragment_button_back_to_overview_hint"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/app_title_bar"
@@ -29,6 +44,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="4dp"
+                app:layout_goneMarginStart="8dp"
                 app:fontFamily="@font/lato_blackitalic"
                 android:singleLine="true"
                 android:ellipsize="marquee"
@@ -38,7 +54,7 @@
                 android:scrollHorizontally="true"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/button_navigate_back"
                 app:layout_constraintEnd_toStartOf="@id/button_view_overview"/>
 
             <com.google.android.material.button.MaterialButton

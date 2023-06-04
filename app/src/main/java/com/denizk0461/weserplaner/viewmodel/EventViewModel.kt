@@ -2,6 +2,7 @@ package com.denizk0461.weserplaner.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import com.denizk0461.weserplaner.values.AppLayout
 
 /**
  * View model for [com.denizk0461.weserplaner.fragment.EventFragment]
@@ -22,4 +23,10 @@ class EventViewModel(app: Application) : AppViewModel(app) {
      */
     val preferenceCurrentDay: Boolean
         get() = repo.getPreferenceCurrentDay()
+
+    /**
+     * Determines which layout the user wants the app to use.
+     */
+    val preferenceAppLayout: AppLayout
+        get() = repo.getAppLayout()
 }

@@ -31,6 +31,9 @@
     <string name="introduction_or">– or –</string>
     <string name="introduction_button_continue">Continue to the app</string>
 
+    <string name="compact_overview_button_settings_hint">App settings</string>
+    <string name="fragment_button_back_to_overview_hint">Back to overview</string>
+
     <string name="fetch_error_snack">Something went wrong!</string>
     <string name="fetch_error_webpage_snack">You must navigate to your schedule!</string>
     <string name="fetch_error_login_snack">You must log in first!</string>

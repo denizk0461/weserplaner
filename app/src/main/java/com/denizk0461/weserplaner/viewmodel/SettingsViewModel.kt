@@ -1,6 +1,7 @@
 package com.denizk0461.weserplaner.viewmodel
 
 import android.app.Application
+import com.denizk0461.weserplaner.values.AppLayout
 
 /**
  * View model for [com.denizk0461.weserplaner.fragment.SettingsFragment]
@@ -86,7 +87,14 @@ class SettingsViewModel(app: Application) : AppViewModel(app) {
      */
     var preferenceFirstLaunch: Boolean
         get() = repo.getPreferenceFirstLaunch()
-        set(value) { repo.setPreferenceFirstLaunch(value) }
+        set(newValue) { repo.setPreferenceFirstLaunch(newValue) }
+
+    /**
+     * Determines which layout the user wants the app to use.
+     */
+    var preferenceAppLayout: AppLayout
+        get() = repo.getAppLayout()
+        set(newValue) { repo.setAppLayout(newValue) }
 
     // --- functions for dev codes --- //
 

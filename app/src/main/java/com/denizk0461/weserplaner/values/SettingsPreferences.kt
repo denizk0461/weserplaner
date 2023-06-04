@@ -75,7 +75,7 @@ enum class SettingsPreferences(val key: String) {
     BETA_SCREENS_ENABLED("beta_screens"),
 
     /**
-     * The user's app layout preference.
+     * The user's app layout preference. Also see [com.denizk0461.weserplaner.values.AppLayout].
      */
     APP_LAYOUT("app_layout"),
     ;

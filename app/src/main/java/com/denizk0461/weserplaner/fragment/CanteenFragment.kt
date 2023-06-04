@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.adapter.CanteenOfferPageAdapter
@@ -19,6 +20,7 @@ import com.denizk0461.weserplaner.data.showSnackBar
 import com.denizk0461.weserplaner.databinding.FragmentCanteenBinding
 import com.denizk0461.weserplaner.values.DietaryPreferences
 import com.denizk0461.weserplaner.model.*
+import com.denizk0461.weserplaner.values.AppLayout
 import com.denizk0461.weserplaner.values.TextSheetContentId
 import com.denizk0461.weserplaner.viewmodel.CanteenViewModel
 import com.google.android.material.tabs.TabLayoutMediator
@@ -49,6 +51,19 @@ class CanteenFragment : AppFragment<FragmentCanteenBinding>() {
     @androidx.annotation.OptIn(com.google.android.material.badge.ExperimentalBadgeUtils::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Set up back button, if required by the selected layout
+        when (viewModel.preferenceAppLayout) {
+            AppLayout.DEFAULT -> {
+                binding.buttonNavigateBack.visibility = View.GONE
+            }
+            AppLayout.COMPACT -> {
+                binding.buttonNavigateBack.visibility = View.VISIBLE
+                binding.buttonNavigateBack.setOnClickListener {
+                    findNavController().navigate(R.id.action_canteen_to_compact_overview)
+                }
+            }
+        }
 
         // Set progress circle colours
         binding.swipeRefreshLayout.setRainbowProgressCircle()

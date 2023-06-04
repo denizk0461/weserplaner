@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_compact"
-    app:startDestination="@id/schedule">
+    app:startDestination="@id/compact_overview">
 
     <fragment
         android:id="@+id/compact_overview"
@@ -26,16 +26,28 @@
         android:id="@+id/schedule"
         android:name="com.denizk0461.weserplaner.fragment.EventFragment"
         android:label="EventFragment"
-        tools:layout="@layout/fragment_event"/>
+        tools:layout="@layout/fragment_event">
+        <action
+            android:id="@+id/action_schedule_to_compact_overview"
+            app:destination="@id/compact_overview" />
+    </fragment>
     <fragment
         android:id="@+id/canteen"
         android:name="com.denizk0461.weserplaner.fragment.CanteenFragment"
         android:label="CanteenFragment"
-        tools:layout="@layout/fragment_canteen"/>
+        tools:layout="@layout/fragment_canteen">
+        <action
+            android:id="@+id/action_canteen_to_compact_overview"
+            app:destination="@id/compact_overview" />
+    </fragment>
     <fragment
         android:id="@+id/settings"
         android:name="com.denizk0461.weserplaner.fragment.SettingsFragment"
         android:label="SettingsFragment"
-        tools:layout="@layout/fragment_settings"/>
+        tools:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/action_settings_to_compact_overview"
+            app:destination="@id/compact_overview" />
+    </fragment>
 
 </navigation>

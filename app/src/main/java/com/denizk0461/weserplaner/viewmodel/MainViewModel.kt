@@ -1,6 +1,7 @@
 package com.denizk0461.weserplaner.viewmodel
 
 import android.app.Application
+import com.denizk0461.weserplaner.values.AppLayout
 
 /**
  * View model for [com.denizk0461.weserplaner.activity.MainActivity]
@@ -27,4 +28,10 @@ class MainViewModel(application: Application) : AppViewModel(application) {
      */
     val preferenceFirstLaunch: Boolean
         get() = repo.getPreferenceFirstLaunch()
+
+    /**
+     * Determines which layout the user wants the app to use.
+     */
+    val preferenceAppLayout: AppLayout
+        get() = repo.getAppLayout()
 }

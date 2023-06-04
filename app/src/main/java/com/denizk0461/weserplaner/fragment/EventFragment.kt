@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.activity.FetcherActivity
@@ -14,6 +15,7 @@ import com.denizk0461.weserplaner.adapter.StudIPEventPageAdapter
 import com.denizk0461.weserplaner.data.showSnackBar
 import com.denizk0461.weserplaner.databinding.FragmentEventBinding
 import com.denizk0461.weserplaner.sheet.ScheduleUpdateSheet
+import com.denizk0461.weserplaner.values.AppLayout
 import com.denizk0461.weserplaner.viewmodel.EventViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import java.util.*
@@ -40,6 +42,19 @@ class EventFragment : AppFragment<FragmentEventBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Set up back button, if required by the selected layout
+        when (viewModel.preferenceAppLayout) {
+            AppLayout.DEFAULT -> {
+                binding.buttonNavigateBack.visibility = View.GONE
+            }
+            AppLayout.COMPACT -> {
+                binding.buttonNavigateBack.visibility = View.VISIBLE
+                binding.buttonNavigateBack.setOnClickListener {
+                    findNavController().navigate(R.id.action_schedule_to_compact_overview)
+                }
+            }
+        }
 
         // Get localised weekday names
         weekdays = context.resources?.getStringArray(R.array.weekdays) ?: arrayOf()

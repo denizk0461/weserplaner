@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.denizk0461.weserplaner.BuildConfig
 import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.activity.FetcherActivity
@@ -23,6 +24,7 @@ import com.denizk0461.weserplaner.data.showToast
 import com.denizk0461.weserplaner.databinding.FragmentSettingsBinding
 import com.denizk0461.weserplaner.model.FormattedDate
 import com.denizk0461.weserplaner.sheet.AllergenConfigSheet
+import com.denizk0461.weserplaner.values.AppLayout
 import com.denizk0461.weserplaner.viewmodel.SettingsViewModel
 import java.nio.charset.StandardCharsets
 import java.util.*
@@ -55,6 +57,19 @@ class SettingsFragment : AppFragment<FragmentSettingsBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Set up back button, if required by the selected layout
+        when (viewModel.preferenceAppLayout) {
+            AppLayout.DEFAULT -> {
+                binding.buttonNavigateBack.visibility = View.GONE
+            }
+            AppLayout.COMPACT -> {
+                binding.buttonNavigateBack.visibility = View.VISIBLE
+                binding.buttonNavigateBack.setOnClickListener {
+                    findNavController().navigate(R.id.action_settings_to_compact_overview)
+                }
+            }
+        }
 
         // --- schedule settings --- //
 
@@ -418,6 +433,14 @@ class SettingsFragment : AppFragment<FragmentSettingsBinding>() {
                 "NFIRST" -> { // set first launch preference to true
                     viewModel.preferenceFirstLaunch = true
                     showToast(context, "First launch flag cleared")
+                }
+                "LAYDEF" -> {
+                    viewModel.preferenceAppLayout = AppLayout.DEFAULT
+                    showToast(context, "App will use default layout")
+                }
+                "LAYCOM" -> {
+                    viewModel.preferenceAppLayout = AppLayout.COMPACT
+                    showToast(context, "App will use compact layout")
                 }
                 else -> showSnackBar(
                     getString(R.string.settings_dev_codes_invalid)
