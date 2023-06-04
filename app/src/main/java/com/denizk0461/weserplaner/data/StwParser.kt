@@ -95,11 +95,15 @@ class StwParser(application: Application) {
                 insertItems(items)
             }
 
-            // Call action to let the user know the fetch has finished
-            onFinish()
+            /*
+             * Call action to let the user know the fetch has finished. Do this on the main thread
+             * to access UI.
+             */
+            withContext(Dispatchers.Main) {
+                onFinish()
+            }
 
         } catch (e: RuntimeException) {
-//            e.printStackTrace()
             /*
              * Call action to let the user know an error occurred. Do this on the main thread to
              * access UI.

@@ -40,7 +40,13 @@ class MainActivity : FragmentActivity() {
          * tutorial. This value will be changed to 'false' upon completing the tutorial, thus not
          * requiring any changes to the value here.
          */
-        if (true/*viewModel.preferenceFirstLaunch*/) {
+        if (viewModel.preferenceFirstLaunch) {
+            /*
+             * Close this activity to prevent skipping the introduction activity by pressing the
+             * back button.
+             */
+            finish()
+
             // Launch the tutorial activity
             startActivity(Intent(this, IntroductionActivity::class.java))
         }

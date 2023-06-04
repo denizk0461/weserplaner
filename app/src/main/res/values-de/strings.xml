@@ -1,3 +1,7 @@
+<!DOCTYPE resources [
+    <!ENTITY app_name "WeserPlaner">
+]>
+
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <string name="error_generic">Ein Fehler ist aufgetreten.</string>
@@ -19,6 +23,12 @@
         <item>Samstag</item>
         <item>Sonntag</item>
     </string-array>
+
+    <string name="introduction_welcome_header">Willkommen zu &app_name;!</string>
+    <string name="introduction_welcome_description">&app_name; ist eine inoffizielle App für Studierende der Universität Bremen, mit welcher du deinen Stundenplan immer griffbereit hast. Erstelle deine eigenen wöchentlichen Veranstaltungen und bearbeite sie, oder lade sie direkt von Stud.IP herunter.\n\nDu kannst außerdem alle Angebote aus den Mensen in Bremen und Bremerhaven einsehen. Filtere nach Präferenzen mit den Knöpfen oben am Bildschirm, oder gehe in die Einstellungen, um zu konfigurieren, gegen welche Stoffe du allergisch bist, und die App wird so gut wie möglich versuchen, dir nur Angebote zu zeigen, die relevant für dich sind.\n\nKlicke auf den Knopf unten, um deinen Stud.IP-Stundenplan direkt herunterzuladen! Solltest du dies überspringen, kannst du dies jederzeit in den Einstellungen der App nachholen.</string>
+    <string name="introduction_button_download">Lade deinen Stud.IP-Stundenplan herunter</string>
+    <string name="introduction_or">– oder –</string>
+    <string name="introduction_button_continue">Gehe direkt zur App</string>
 
     <string name="fetch_error_snack">Ein Fehler ist aufgetreten!</string>
     <string name="fetch_error_webpage_snack">Du musst deinen Stundenplan öffnen!</string>
