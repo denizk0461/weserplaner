@@ -29,7 +29,9 @@
         tools:layout="@layout/fragment_event">
         <action
             android:id="@+id/action_schedule_to_compact_overview"
-            app:destination="@id/compact_overview" />
+            app:destination="@id/compact_overview"
+            app:popUpTo="@+id/nav_graph_compact"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/canteen"
@@ -38,7 +40,9 @@
         tools:layout="@layout/fragment_canteen">
         <action
             android:id="@+id/action_canteen_to_compact_overview"
-            app:destination="@id/compact_overview" />
+            app:destination="@id/compact_overview"
+            app:popUpTo="@+id/nav_graph_compact"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/settings"
@@ -47,7 +51,9 @@
         tools:layout="@layout/fragment_settings">
         <action
             android:id="@+id/action_settings_to_compact_overview"
-            app:destination="@id/compact_overview" />
+            app:destination="@id/compact_overview"
+            app:popUpTo="@+id/nav_graph_compact"
+            app:popUpToInclusive="true"/>
     </fragment>
 
 </navigation>
