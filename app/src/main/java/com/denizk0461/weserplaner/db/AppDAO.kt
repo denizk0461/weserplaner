@@ -73,6 +73,11 @@ interface AppDAO {
     @Query("DELETE FROM studip_events")
     fun nukeEvents()
 
+    /* --- timetables --- */
+
+    @Insert
+    fun insertTimetable(timetable: Timetable)
+
     /* --- event tasks --- */
 
     /**

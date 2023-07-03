@@ -37,6 +37,12 @@ class MainActivity : FragmentActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+//        if (viewModel.getTimetableCount() == 0) {
+//            viewModel.insertTimetable(
+//                Timetable(0, "default")
+//            )
+//        }
+
         /*
          * Check whether the user is launching the app for the first time in order to show a
          * tutorial. This value will be changed to 'false' upon completing the tutorial, thus not

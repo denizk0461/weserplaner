@@ -4,6 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 /**
@@ -20,10 +21,20 @@ import androidx.room.PrimaryKey
  * @param timeslotId    minute the event starts at - used for ordering
  * @param colour        user-defined colour the event will be shown in - UNIMPLEMENTED
  */
-@Entity(tableName = "studip_events")
+@Entity(
+    tableName = "studip_events",
+    foreignKeys = [
+        ForeignKey(
+            Timetable::class,
+            ["id"],
+            ["timetableId"],
+            ForeignKey.CASCADE,
+        ),
+    ],
+)
 data class StudIPEvent(
     @PrimaryKey(autoGenerate = true) val eventId: Int = 0,
-    @ColumnInfo(defaultValue = "0") val timetableId: Int,
+    val timetableId: Int,
     val title: String,
     val lecturer: String,
     val room: String,

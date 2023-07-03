@@ -159,6 +159,10 @@ class AppRepository(app: Application) {
         dao.delete(event)
     }
 
+    fun insertTimetable(timetable: Timetable) {
+        dao.insertTimetable(timetable)
+    }
+
     /**
      * Retrieves all canteen offer date objects.
      *

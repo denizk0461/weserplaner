@@ -1,6 +1,7 @@
 package com.denizk0461.weserplaner.viewmodel
 
 import android.app.Application
+import com.denizk0461.weserplaner.model.Timetable
 import com.denizk0461.weserplaner.values.AppLayout
 
 /**
