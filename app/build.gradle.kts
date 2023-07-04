@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "com.denizk0461.weserplaner"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.denizk0461.weserplaner"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 9
         versionName = "1.2.0"
 

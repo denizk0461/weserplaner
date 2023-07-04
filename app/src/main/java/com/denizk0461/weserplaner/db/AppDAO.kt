@@ -87,6 +87,15 @@ interface AppDAO {
     @Query("SELECT * FROM timetables ORDER BY id")
     fun getTimetables(): LiveData<List<Timetable>>
 
+    @Query("SELECT * FROM timetables WHERE id = :id LIMIT 1")
+    fun getTimetableForId(id: Int): Timetable
+
+    @Update
+    fun updateTimetable(timetable: Timetable)
+
+    @Query("DELETE FROM timetables WHERE id = :id")
+    fun deleteTimetable(id: Int)
+
     /* --- event tasks --- */
 
     /**

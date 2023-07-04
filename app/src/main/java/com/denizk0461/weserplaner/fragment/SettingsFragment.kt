@@ -20,11 +20,14 @@ import com.denizk0461.weserplaner.activity.FetcherActivity
 import com.denizk0461.weserplaner.activity.ImageActivity
 import com.denizk0461.weserplaner.adapter.DropdownAdapter
 import com.denizk0461.weserplaner.data.getTextSheet
+import com.denizk0461.weserplaner.data.showErrorSnackBar
 import com.denizk0461.weserplaner.data.showSnackBar
 import com.denizk0461.weserplaner.data.showToast
 import com.denizk0461.weserplaner.databinding.FragmentSettingsBinding
 import com.denizk0461.weserplaner.model.FormattedDate
+import com.denizk0461.weserplaner.model.Timetable
 import com.denizk0461.weserplaner.sheet.AllergenConfigSheet
+import com.denizk0461.weserplaner.sheet.TimetableEditSheet
 import com.denizk0461.weserplaner.values.AppLayout
 import com.denizk0461.weserplaner.viewmodel.SettingsViewModel
 import java.nio.charset.StandardCharsets
@@ -51,6 +54,8 @@ class SettingsFragment : AppFragment<FragmentSettingsBinding>() {
     private val mysteryLink = "https://www.youtube.com/watch?v=nhIQMCXJzLI"
 
     private lateinit var timetableAdapter: DropdownAdapter
+
+    private var savedTimetables: List<Timetable> = listOf()
 
     // Instantiate the view binding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -92,16 +97,34 @@ class SettingsFragment : AppFragment<FragmentSettingsBinding>() {
             timetableAdapter.addAll(timetables.map { it.name })
             if (timetables.isNotEmpty()) {
                 binding.autoCompleteTimetable.setText(
-                    timetableAdapter.getItem(viewModel.getSelectedTimetable()).toString(),
+                    timetableAdapter.getItem(timetables.map { it.id }.indexOf(viewModel.getSelectedTimetable())).toString(),//viewModel.getSelectedTimetable()).toString(),
                     false,
                 )
+            } else {
+                binding.autoCompleteTimetable.setText("")
             }
+            savedTimetables = timetables
         }
 
         binding.autoCompleteTimetable.setAdapter(timetableAdapter)
         binding.autoCompleteTimetable.setOnItemClickListener { _, _, position, _ ->
-            viewModel.setSelectedTimetable(position)
+            viewModel.setSelectedTimetable(savedTimetables[position].id)
             binding.autoCompleteTimetable.setText(timetableAdapter.getItem(position), false)
+        }
+
+        binding.buttonEditTimetable.setOnClickListener {
+            if (binding.autoCompleteTimetable.text.isBlank()) {
+                context.theme.showErrorSnackBar(
+                    binding.coordinatorLayout,
+                    getString(R.string.settings_timetable_edit_fail),
+                )
+            } else {
+                openBottomSheet(TimetableEditSheet().also { sheet ->
+                    val bundle = Bundle()
+                    bundle.putInt("timetableId", viewModel.getSelectedTimetable())
+                    sheet.arguments = bundle
+                })
+            }
         }
 
         // Set up switch for highlighting the next course in the schedule

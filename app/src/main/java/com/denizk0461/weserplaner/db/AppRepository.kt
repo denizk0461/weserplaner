@@ -81,7 +81,7 @@ class AppRepository(app: Application) {
     fun getEventsForDay(day: Int): LiveData<List<StudIPEvent>> = dao.getEventsForDay(day)
 
     fun getEventsForDayAndTimetable(day: Int, timetable: Int): LiveData<List<StudIPEvent>> =
-        dao.getEventsForDayAndTimetable(day, timetable + 1) // I'm not sure why I need +1 here but it works
+        dao.getEventsForDayAndTimetable(day, timetable)
 
     /**
      * Inserts a list of Stud.IP events into the database.
@@ -166,9 +166,15 @@ class AppRepository(app: Application) {
         dao.insertTimetable(timetable)
     }
 
+    fun updateTimetable(timetable: Timetable) { dao.updateTimetable(timetable) }
+
     fun getLargestTimetableId(): Int = dao.getLargestTimetableId() ?: 0
 
     fun getTimetables(): LiveData<List<Timetable>> = dao.getTimetables()
+
+    fun getTimetableForId(id: Int): Timetable = dao.getTimetableForId(id)
+
+    fun deleteTimetable(id: Int) { dao.deleteTimetable(id) }
 
     /**
      * Retrieves all canteen offer date objects.

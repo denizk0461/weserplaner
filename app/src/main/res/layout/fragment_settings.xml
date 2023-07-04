@@ -133,7 +133,6 @@
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
                         android:orientation="vertical"
                         android:paddingHorizontal="16dp"
                         android:paddingVertical="8dp">
@@ -145,23 +144,45 @@
                             android:text="@string/settings_selected_timetable_header"
                             android:textSize="16sp" />
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/text_layout_timetable"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        <androidx.appcompat.widget.LinearLayoutCompat
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/settings_selected_timetable_hint"
-                            app:boxStrokeColor="@color/selector_text_input"
-                            app:hintTextColor="@color/selector_text_input">
+                            android:orientation="horizontal">
 
-                            <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                                android:id="@+id/auto_complete_timetable"
-                                android:layout_width="match_parent"
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/text_layout_timetable"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:textColor="?attr/colorOnSurfaceVariant"
-                                android:inputType="none"/>
+                                android:layout_weight="1"
+                                android:layout_marginEnd="8dp"
+                                android:hint="@string/settings_selected_timetable_hint"
+                                app:boxStrokeColor="@color/selector_text_input"
+                                app:hintTextColor="@color/selector_text_input">
 
-                        </com.google.android.material.textfield.TextInputLayout>
+                                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                                    android:id="@+id/auto_complete_timetable"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="?attr/colorOnSurfaceVariant"
+                                    android:inputType="none"/>
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.button.MaterialButton
+                                style="@style/Widget.Material3.Button.IconButton.Outlined"
+                                android:id="@+id/button_edit_timetable"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:minWidth="0dp"
+                                app:icon="@drawable/edit"
+                                app:iconPadding="0dp"
+                                app:strokeColor="?attr/colorOutlineVariant"
+                                app:iconTint="?attr/colorOnSurfaceVariant"
+                                tools:ignore="UnusedAttribute"
+                                android:tooltipText="@string/settings_selected_timetable_edit_button_hint"/>
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
