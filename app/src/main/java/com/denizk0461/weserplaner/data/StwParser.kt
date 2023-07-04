@@ -514,7 +514,7 @@ class StwParser(application: Application) {
     private fun Document.retrieveNews(): String = try {
         getElementsByClass("field__items")[0]
             .getElementsByTag("p")[0]
-            .text()
+            .html()
     } catch (e: IndexOutOfBoundsException) {
         ""
     }

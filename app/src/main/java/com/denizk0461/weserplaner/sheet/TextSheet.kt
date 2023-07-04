@@ -1,7 +1,10 @@
 package com.denizk0461.weserplaner.sheet
 
 import android.os.Bundle
+import android.text.Html
+import android.text.method.LinkMovementMethod
 import android.view.View
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.viewModels
 import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.data.viewBinding
@@ -45,17 +48,6 @@ class TextSheet : AppSheet(R.layout.sheet_text) {
         if (contentId == -1) {
             binding.textHeader.text = header
             binding.textContent.text = content
-//        } else (when (contentId) {
-//            // Observe LiveData if corresponding ID has been passed
-//            TextSheetContentId.OPENING_HOURS -> viewModel.getCanteen()
-//            TextSheetContentId.NEWS -> viewModel.getCanteen()
-//            else -> throw InvalidContentIdException()
-//        }).observe(viewLifecycleOwner) { observedContent ->
-//            // Show the content
-//            binding.textContent.text = (observedContent ?: "")
-//                // If the content is empty, tell the user
-//                .ifBlank { emptyContentStringFor(contentId) }
-//        }
         } else {
             viewModel.getCanteen().observe(viewLifecycleOwner) { canteen ->
                 when (contentId) {
@@ -71,9 +63,10 @@ class TextSheet : AppSheet(R.layout.sheet_text) {
                         binding.textHeader.text = getString(
                             R.string.text_sheet_news_title, canteen.canteen
                         )
-                        binding.textContent.text = canteen.news.ifBlank {
+                        binding.textContent.text = Html.fromHtml(canteen.news.ifBlank {
                             getString(R.string.text_sheet_news_empty)
-                        }
+                        }, HtmlCompat.FROM_HTML_MODE_LEGACY)
+                        binding.textContent.movementMethod = LinkMovementMethod.getInstance()
                     }
                     else -> {} // should not occur
                 }
@@ -93,16 +86,4 @@ class TextSheet : AppSheet(R.layout.sheet_text) {
             binding.buttonCancel.visibility = View.GONE
         }
     }
-
-    /**
-     * Retrieves a string to show to the user if the content is empty.
-     *
-     * @param contentId used to determine which string res should be used
-     * @return          localised string to show the user
-     */
-    private fun emptyContentStringFor(contentId: Int) = getString(when (contentId) {
-        TextSheetContentId.OPENING_HOURS -> R.string.text_sheet_opening_hours_empty
-        TextSheetContentId.NEWS -> R.string.text_sheet_news_empty
-        else -> R.string.error_generic
-    })
 }
