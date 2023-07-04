@@ -37,6 +37,9 @@ interface AppDAO {
     @Query("SELECT * FROM studip_events WHERE day = :day ORDER BY timeslotId, eventId")
     fun getEventsForDay(day: Int): LiveData<List<StudIPEvent>>
 
+    @Query("SELECT * FROM studip_events WHERE day = :day AND timetableId = :timetable ORDER BY timeslotId, eventId")
+    fun getEventsForDayAndTimetable(day: Int, timetable: Int): LiveData<List<StudIPEvent>>
+
     /**
      * Updates a given Stud.IP element.
      *
@@ -77,6 +80,12 @@ interface AppDAO {
 
     @Insert
     fun insertTimetable(timetable: Timetable)
+
+    @Query("SELECT MAX(id) FROM timetables")
+    fun getLargestTimetableId(): Int?
+
+    @Query("SELECT * FROM timetables ORDER BY id")
+    fun getTimetables(): LiveData<List<Timetable>>
 
     /* --- event tasks --- */
 

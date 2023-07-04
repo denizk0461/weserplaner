@@ -18,6 +18,7 @@ import com.denizk0461.weserplaner.BuildConfig
 import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.activity.FetcherActivity
 import com.denizk0461.weserplaner.activity.ImageActivity
+import com.denizk0461.weserplaner.adapter.DropdownAdapter
 import com.denizk0461.weserplaner.data.getTextSheet
 import com.denizk0461.weserplaner.data.showSnackBar
 import com.denizk0461.weserplaner.data.showToast
@@ -49,6 +50,8 @@ class SettingsFragment : AppFragment<FragmentSettingsBinding>() {
     // 222
     private val mysteryLink = "https://www.youtube.com/watch?v=nhIQMCXJzLI"
 
+    private lateinit var timetableAdapter: DropdownAdapter
+
     // Instantiate the view binding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
@@ -76,6 +79,29 @@ class SettingsFragment : AppFragment<FragmentSettingsBinding>() {
         // Launch the Stud.IP schedule fetcher activity
         binding.buttonRefreshSchedule.setOnClickListener {
             launchWebView()
+        }
+
+        // --- selected timetable --- //
+        timetableAdapter = DropdownAdapter(
+            context,
+            mutableListOf(),
+        )
+
+        viewModel.getTimetables().observe(viewLifecycleOwner) { timetables ->
+            timetableAdapter.clear()
+            timetableAdapter.addAll(timetables.map { it.name })
+            if (timetables.isNotEmpty()) {
+                binding.autoCompleteTimetable.setText(
+                    timetableAdapter.getItem(viewModel.getSelectedTimetable()).toString(),
+                    false,
+                )
+            }
+        }
+
+        binding.autoCompleteTimetable.setAdapter(timetableAdapter)
+        binding.autoCompleteTimetable.setOnItemClickListener { _, _, position, _ ->
+            viewModel.setSelectedTimetable(position)
+            binding.autoCompleteTimetable.setText(timetableAdapter.getItem(position), false)
         }
 
         // Set up switch for highlighting the next course in the schedule
@@ -355,7 +381,7 @@ class SettingsFragment : AppFragment<FragmentSettingsBinding>() {
         // Set build version code and time text
         @SuppressLint("SetTextI18n")
         binding.buildTimeText.text = "v${BuildConfig.VERSION_CODE} | ${
-            FormattedDate(BuildConfig.BUILD_TIME_MILLIS).commaSeparatedString(context)
+            FormattedDate(BuildConfig.BUILD_TIME_MILLIS).commaSeparatedString()
         }"
 
         // Set up switch for showing beta screens

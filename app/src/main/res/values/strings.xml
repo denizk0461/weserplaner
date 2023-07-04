@@ -251,6 +251,9 @@
     <string name="refresh_schedule_title">Refresh your Stud.IP schedule</string>
     <string name="refresh_schedule_subtitle">This will clear any customisations!</string>
 
+    <string name="settings_selected_timetable_header">Select which timetable to display</string>
+    <string name="settings_selected_timetable_hint">Timetable</string>
+
     <string name="settings_current_day_title">Launch timetable on current day</string>
     <string name="settings_current_day_subtitle">If unselected, Monday will be shown on launch instead</string>
 

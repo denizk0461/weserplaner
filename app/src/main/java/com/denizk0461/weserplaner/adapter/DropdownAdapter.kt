@@ -11,7 +11,7 @@ import com.denizk0461.weserplaner.R
  * @param context   context reference
  * @param items     list of texts to display
  */
-class DropdownAdapter(context: Context, items: List<String>)
+class DropdownAdapter(context: Context, items: MutableList<String>)
     : ArrayAdapter<String>(context, R.layout.item_dropdown, items) {
 
     private val noOpFilter = object : Filter() {

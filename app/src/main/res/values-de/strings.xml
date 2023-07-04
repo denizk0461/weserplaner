@@ -246,6 +246,9 @@
     <string name="refresh_schedule_title">Aktualisiere deinen Stud.IP-Stundenplan</string>
     <string name="refresh_schedule_subtitle">Dies wird alle Anpassungen löschen!</string>
 
+    <string name="settings_selected_timetable_header">Wähle, welchen Stundenplan einzusehen</string>
+    <string name="settings_selected_timetable_hint">Stundenplan</string>
+
     <string name="settings_current_day_title">Starte Stundenplan am heutigen Tag</string>
     <string name="settings_current_day_subtitle">Ansonsten wird Montag beim Start angezeigt</string>
 

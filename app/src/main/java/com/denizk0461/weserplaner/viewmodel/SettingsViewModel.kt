@@ -1,6 +1,8 @@
 package com.denizk0461.weserplaner.viewmodel
 
 import android.app.Application
+import androidx.lifecycle.LiveData
+import com.denizk0461.weserplaner.model.Timetable
 import com.denizk0461.weserplaner.values.AppLayout
 
 /**
@@ -9,6 +11,11 @@ import com.denizk0461.weserplaner.values.AppLayout
  * @param app   reference to the app
  */
 class SettingsViewModel(app: Application) : AppViewModel(app) {
+
+    fun getTimetables(): LiveData<List<Timetable>> = repo.getTimetables()
+
+    fun getSelectedTimetable(): Int = repo.getPreferenceSelectedTimetable()
+    fun setSelectedTimetable(newValue: Int) = repo.setPreferenceSelectedTimetable(newValue)
 
     /**
      * This value determines whether the user wants their timetable to launch with the current day.

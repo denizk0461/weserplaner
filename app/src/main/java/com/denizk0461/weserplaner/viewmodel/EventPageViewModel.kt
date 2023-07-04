@@ -17,6 +17,10 @@ class EventPageViewModel(app: Application) : AppViewModel(app) {
      * @return  Stud.IP events for a certain day exposed through a LiveData object
      */
     fun getEventsForDay(day: Int): LiveData<List<StudIPEvent>> = repo.getEventsForDay(day)
+    fun getEventsForDayAndTimetable(day: Int, timetable: Int): LiveData<List<StudIPEvent>> =
+        repo.getEventsForDayAndTimetable(day, timetable)
+
+    fun getSelectedTimetable(): Int = repo.getPreferenceSelectedTimetable()
 
     /**
      * This value determines whether the user wants to have the next course in their schedule

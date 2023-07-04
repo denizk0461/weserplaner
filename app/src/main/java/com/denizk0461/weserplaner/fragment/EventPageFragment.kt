@@ -86,7 +86,7 @@ class EventPageFragment : AppFragment<RecyclerViewBinding>(), StudIPEventItemAda
         }
 
         // Set up LiveData observer to refresh the view on update
-        viewModel.getEventsForDay(currentDay).observe(viewLifecycleOwner) { events ->
+        viewModel.getEventsForDayAndTimetable(currentDay, viewModel.getSelectedTimetable()).observe(viewLifecycleOwner) { events ->
             eventAdapter.setNewData(events.ifEmpty { listOf(
                 // Use an event with eventId = -1 to denote that there are no events for this day
                 StudIPEvent(

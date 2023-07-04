@@ -3,11 +3,14 @@ package com.denizk0461.weserplaner.data
 import android.app.Application
 import com.denizk0461.weserplaner.db.AppRepository
 import com.denizk0461.weserplaner.exception.NotLoggedInException
+import com.denizk0461.weserplaner.model.FormattedDate
 import com.denizk0461.weserplaner.model.StudIPEvent
+import com.denizk0461.weserplaner.model.Timetable
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import java.io.IOException
+import java.util.Date
 import kotlin.jvm.Throws
 
 /**
@@ -27,6 +30,7 @@ class StudIPParser(application: Application) {
      */
     @Throws(NotLoggedInException::class, IOException::class)
     fun parse(html: String): Int {
+
         // Counts how many elements could not be successfully fetched
         var elementsNotFetched = 0
 
@@ -37,6 +41,14 @@ class StudIPParser(application: Application) {
         if (doc.body().id() != "calendar-schedule-index") {
             throw NotLoggedInException()
         }
+
+        val timetableId = repo.getLargestTimetableId() + 1
+
+        repo.insertTimetable(
+            Timetable(timetableId, FormattedDate(Date(System.currentTimeMillis())).commaSeparatedString())
+        )
+
+        repo.setPreferenceSelectedTimetable(timetableId)
 
         /*
          * Create the list that all events will be added to temporarily before saving them to
@@ -96,7 +108,7 @@ class StudIPParser(application: Application) {
 
                 // Construct the newly scraped Stud.IP event
                 val event = StudIPEvent(
-                    timetableId = 0, // TODO
+                    timetableId = timetableId,
                     title = parsedTitle,
                     lecturer = parsedLecturers,
                     room = entryInfo.getOrQuestionMark(1),
@@ -110,9 +122,6 @@ class StudIPParser(application: Application) {
                 newEvents.add(event)
             }
         }
-
-        // Delete all previously saved events
-        repo.nukeEvents()
 
         // After fetching has finished, save the list of new items into persistent storage
         repo.insertEvents(newEvents)
@@ -133,10 +142,9 @@ class StudIPParser(application: Application) {
         val list = mutableListOf<Pair<Int, Element>>()
 
         // Find headers that include day information for every schedule column
-        val headers = getElementById("schedule_data")
-            ?.getElementsByTag("thead")
-            ?.get(0)
-            ?.getElementsByTag("td") ?: return list
+        val headers = getElementById("schedule_data")?.let {
+            it.getElementsByTag("thead")[0].getElementsByTag("td")
+        } ?: return list
 
         // Iterate through all headers
         for (index in 1 until headers.size) {

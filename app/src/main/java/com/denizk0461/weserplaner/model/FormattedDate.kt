@@ -24,14 +24,9 @@ class FormattedDate(val date: Date, format: DateFormat = DateFormat.ISO8601) {
      * Produces a string containing date and time of the object, separated by a comma. Example:
      * 24.05.2023, 8:45
      *
-     * @param context   used to retrieve the string resource
      * @return          formatted string
      */
-    fun commaSeparatedString(context: Context): String = context.getString(
-        R.string.formatted_date_string_comma,
-        dateString,
-        timeString,
-    )
+    fun commaSeparatedString(): String = "$dateString, $timeString"
 
     /**
      * Produces a string containing date and time of the object, localised to the user's locale. Example:

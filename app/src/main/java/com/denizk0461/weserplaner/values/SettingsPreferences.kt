@@ -78,5 +78,10 @@ enum class SettingsPreferences(val key: String) {
      * The user's app layout preference. Also see [com.denizk0461.weserplaner.values.AppLayout].
      */
     APP_LAYOUT("app_layout"),
+
+    /**
+     * Which timetable the user has selected.
+     */
+    SELECTED_TIMETABLE("selected_timetable"),
     ;
 }

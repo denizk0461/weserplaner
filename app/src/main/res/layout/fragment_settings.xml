@@ -129,6 +129,42 @@
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
+                    <!-- Selected timetable -->
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/lato_bolditalic"
+                            android:text="@string/settings_selected_timetable_header"
+                            android:textSize="16sp" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/text_layout_timetable"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/settings_selected_timetable_hint"
+                            app:boxStrokeColor="@color/selector_text_input"
+                            app:hintTextColor="@color/selector_text_input">
+
+                            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                                android:id="@+id/auto_complete_timetable"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="?attr/colorOnSurfaceVariant"
+                                android:inputType="none"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
                     <!-- Highlight course -->
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/layout_current_day"
