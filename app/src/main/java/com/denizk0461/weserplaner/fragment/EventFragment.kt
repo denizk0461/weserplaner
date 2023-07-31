@@ -12,6 +12,7 @@ import com.denizk0461.weserplaner.R
 import com.denizk0461.weserplaner.activity.FetcherActivity
 import com.denizk0461.weserplaner.activity.TimetableOverviewActivity
 import com.denizk0461.weserplaner.adapter.StudIPEventPageAdapter
+import com.denizk0461.weserplaner.data.getTextSheet
 import com.denizk0461.weserplaner.data.showSnackBar
 import com.denizk0461.weserplaner.databinding.FragmentEventBinding
 import com.denizk0461.weserplaner.sheet.ScheduleUpdateSheet
@@ -142,6 +143,22 @@ class EventFragment : AppFragment<FragmentEventBinding>() {
                     sheet.arguments = bundle
                 }
             )
+        }
+
+        /*
+         * Notify the user about the new timetables feature if:
+         * - we haven't already done so
+         * - the user has used the app before (don't do this to new users)
+         *
+         * Apparently the first launch thing doesn't work but tbh it doesn't matter, I'll just
+         * remove this whole block with the next update or something and then it won't matter anyway
+         */
+        if (!viewModel.getPreferenceFirstLaunch() && !viewModel.getPreferenceFeatureTimetables()) {
+            openBottomSheet(getTextSheet(
+                getString(R.string.new_feature_timetables_header),
+                getString(R.string.new_feature_timetables_content),
+            ))
+            viewModel.setPreferenceFeatureTimetables(true)
         }
     }
 

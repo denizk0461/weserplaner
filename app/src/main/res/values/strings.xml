@@ -242,6 +242,9 @@
     <string name="nav_room_finder">Room Finder</string>
     <string name="nav_settings">Settings</string>
 
+    <string name="new_feature_timetables_header">Heads up, new feature!</string>
+    <string name="new_feature_timetables_content">As the new semester will start in a couple of weeks, you can prepare in advance by adding your new timetable! You can now add as many timetables to the app as you like.\n\nHead into the settings to find the new \'timetables\' option!</string>
+
     <string name="settings_general">General</string>
     <string name="settings_schedule">Stud.IP Schedule</string>
     <string name="settings_canteen">Canteen Offers</string>

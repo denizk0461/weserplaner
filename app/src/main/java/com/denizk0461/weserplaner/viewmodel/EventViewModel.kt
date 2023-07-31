@@ -37,4 +37,8 @@ class EventViewModel(private val app: Application) : AppViewModel(app) {
      */
     val preferenceAppLayout: AppLayout
         get() = repo.getAppLayout()
+
+    fun getPreferenceFirstLaunch(): Boolean = repo.getPreferenceFirstLaunch()
+    fun getPreferenceFeatureTimetables(): Boolean = repo.getPreferenceFeatureTimetables()
+    fun setPreferenceFeatureTimetables(newValue: Boolean) { repo.setPreferenceFeatureTimetables(newValue) }
 }

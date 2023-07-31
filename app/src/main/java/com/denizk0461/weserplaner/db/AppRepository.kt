@@ -398,6 +398,13 @@ class AppRepository(app: Application) {
         setPreference(SettingsPreferences.FIRST_LAUNCH, newValue)
     }
 
+    fun getPreferenceFeatureTimetables(): Boolean = getBooleanPreference(
+        SettingsPreferences.NEW_FEATURE_TIMETABLES,
+    )
+    fun setPreferenceFeatureTimetables(newValue: Boolean) {
+        setPreference(SettingsPreferences.NEW_FEATURE_TIMETABLES, newValue)
+    }
+
     /**
      * This value determines which fragment the user wants the app to start with. Order is equal to
      * the order that the items are arranged in in the bottom nav bar.

@@ -15,6 +15,11 @@ enum class SettingsPreferences(val key: String) {
     FIRST_LAUNCH("check_first_launch"),
 
     /**
+     * Whether the user has been notified about the new timetables feature.
+     */
+    NEW_FEATURE_TIMETABLES("new_feature_timetables"),
+
+    /**
      * Which allergens the user wants displayed or hidden.
      */
     ALLERGEN_CONFIG("setting_allergen_config"),

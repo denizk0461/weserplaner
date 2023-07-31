@@ -103,6 +103,8 @@ class SettingsViewModel(app: Application) : AppViewModel(app) {
         get() = repo.getAppLayout()
         set(newValue) { repo.setAppLayout(newValue) }
 
+    fun setPreferenceFeatureTimetables(newValue: Boolean) { repo.setPreferenceFeatureTimetables(newValue) }
+
     // --- functions for dev codes --- //
 
     /**

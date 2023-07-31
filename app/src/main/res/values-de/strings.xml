@@ -237,6 +237,9 @@
     <string name="nav_room_finder">Raumfinder</string>
     <string name="nav_settings">Einstellungen</string>
 
+    <string name="new_feature_timetables_header">Neues Feature!</string>
+    <string name="new_feature_timetables_content">Da das neue Semester in ein paar Wochen startet, kannst du dich vorbereiten, indem du deinen neuen Stundenplan einträgst! Du kannst jetzt so viele Stundenpläne in die App eintragen wie du möchtest.\n\nGehe in die Einstellungen, um die neue \'Stundenplan\'-Option zu nutzen!</string>
+
     <string name="settings_general">Allgemein</string>
     <string name="settings_schedule">Stud.IP-Stundenplan</string>
     <string name="settings_canteen">Mensenangebote</string>

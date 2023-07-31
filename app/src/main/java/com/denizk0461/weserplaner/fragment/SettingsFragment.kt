@@ -496,6 +496,10 @@ class SettingsFragment : AppFragment<FragmentSettingsBinding>() {
                     viewModel.preferenceAppLayout = AppLayout.COMPACT
                     showToast(context, "App will use compact layout")
                 }
+                "CLRFTT" -> {
+                    viewModel.setPreferenceFeatureTimetables(false)
+                    showToast(context, "Cleared new feature: timetables flags")
+                }
                 else -> showSnackBar(
                     getString(R.string.settings_dev_codes_invalid)
                 )
