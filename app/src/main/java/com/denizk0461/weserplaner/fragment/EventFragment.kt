@@ -56,6 +56,9 @@ class EventFragment : AppFragment<FragmentEventBinding>() {
             }
         }
 
+        // Set the title to be selected so it scrolls (marquee)
+        binding.appTitleBar.isSelected = true
+
         // Get localised weekday names
         weekdays = context.resources?.getStringArray(R.array.weekdays) ?: arrayOf()
 
@@ -113,6 +116,12 @@ class EventFragment : AppFragment<FragmentEventBinding>() {
 
         // Set visibility of the fetch button depending on whether any events have been stored
         viewModel.getEventCount().observe(viewLifecycleOwner) { eventCount ->
+
+            val timetableName = viewModel.getSelectedTimetableName()
+            if (timetableName.isNotBlank()) {
+                binding.appTitleBar.text = timetableName
+            }
+
             binding.buttonFetchSchedule.visibility = if (eventCount == 0) {
                 View.VISIBLE
             } else {

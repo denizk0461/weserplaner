@@ -164,6 +164,12 @@ class AppRepository(app: Application) {
 
     fun insertTimetable(timetable: Timetable) {
         dao.insertTimetable(timetable)
+
+        /*
+         * require-non-null can be done here as we're adding an entry to this table beforehand,
+         * which guarantees that the element will not be null
+         */
+        setPreferenceSelectedTimetable(dao.getLargestTimetableId()!!)
     }
 
     fun updateTimetable(timetable: Timetable) { dao.updateTimetable(timetable) }
@@ -174,7 +180,10 @@ class AppRepository(app: Application) {
 
     fun getTimetableForId(id: Int): Timetable = dao.getTimetableForId(id)
 
-    fun deleteTimetable(id: Int) { dao.deleteTimetable(id) }
+    fun deleteTimetable(id: Int) {
+        dao.deleteTimetable(id)
+        setPreferenceSelectedTimetable(dao.getLargestTimetableId() ?: 0)
+    }
 
     /**
      * Retrieves all canteen offer date objects.

@@ -9,7 +9,7 @@ import com.denizk0461.weserplaner.values.AppLayout
  *
  * @param app   reference to the app
  */
-class EventViewModel(app: Application) : AppViewModel(app) {
+class EventViewModel(private val app: Application) : AppViewModel(app) {
 
     /**
      * Retrieves the number of Stud.IP events available in the database.
@@ -17,6 +17,14 @@ class EventViewModel(app: Application) : AppViewModel(app) {
      * @return number of Stud.IP events
      */
     fun getEventCount(): LiveData<Int> = repo.getEventCount()
+
+    fun getSelectedTimetableName(): String = returnBlocking {
+        try {
+            repo.getTimetableForId(repo.getPreferenceSelectedTimetable()).name
+        } catch (e: NullPointerException) {
+            ""
+        }
+    }
 
     /**
      * This value determines whether the user wants their timetable to launch with the current day.

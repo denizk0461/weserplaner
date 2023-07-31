@@ -254,11 +254,17 @@
     <string name="settings_selected_timetable_header">Select which timetable to display</string>
     <string name="settings_selected_timetable_hint">Timetable</string>
     <string name="settings_selected_timetable_edit_button_hint">Edit timetable</string>
+    <string name="settings_selected_timetable_edit_text_title">Timetable name</string>
+    <string name="settings_timetable_button_add">Add</string>
+    <string name="settings_timetable_button_edit">Edit</string>
     <string name="settings_timetable_sheet_header">Edit this timetable</string>
+    <string name="settings_timetable_sheet_header_add">Add a new timetable</string>
     <string name="settings_timetable_edit_fail">There is no timetable to edit!</string>
     <string name="settings_timetable_sheet_confirm_save">Timetable has been updated.</string>
+    <string name="settings_timetable_sheet_confirm_add">Timetable has been added.</string>
     <string name="settings_timetable_sheet_confirm_delete">Timetable has been deleted.</string>
     <string name="settings_timetable_sheet_delete_confirm">Sure?</string>
+    <string name="settings_timetable_add_hint">Hint: if you download a timetable from Stud.IP, it automatically gets added as a new timetable, so you won\'t need to do anything here!</string>
 
     <string name="settings_current_day_title">Launch timetable on current day</string>
     <string name="settings_current_day_subtitle">If unselected, Monday will be shown on launch instead</string>

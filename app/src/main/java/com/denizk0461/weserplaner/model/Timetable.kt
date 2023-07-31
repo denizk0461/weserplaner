@@ -12,6 +12,6 @@ import androidx.room.PrimaryKey
  */
 @Entity(tableName = "timetables")
 data class Timetable(
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val name: String,
 )

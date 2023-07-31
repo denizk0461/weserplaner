@@ -249,11 +249,17 @@
     <string name="settings_selected_timetable_header">Wähle, welchen Stundenplan einzusehen</string>
     <string name="settings_selected_timetable_hint">Stundenplan</string>
     <string name="settings_selected_timetable_edit_button_hint">Stundenplan bearbeiten</string>
+    <string name="settings_selected_timetable_edit_text_title">Name des Stundenplans</string>
+    <string name="settings_timetable_button_add">Hinzufügen</string>
+    <string name="settings_timetable_button_edit">Bearbeiten</string>
     <string name="settings_timetable_sheet_header">Diesen Stundenplan bearbeiten</string>
+    <string name="settings_timetable_sheet_header_add">Neuen Stundenplan hinzufügen</string>
     <string name="settings_timetable_edit_fail">Es gibt keinen Stundenplan zum bearbeiten!</string>
     <string name="settings_timetable_sheet_confirm_save">Stundenplan wurde aktualisiert.</string>
+    <string name="settings_timetable_sheet_confirm_add">Stundenplan wurde hinzugefügt.</string>
     <string name="settings_timetable_sheet_confirm_delete">Stundenplan wurde gelöscht.</string>
     <string name="settings_timetable_sheet_delete_confirm">Sicher?</string>
+    <string name="settings_timetable_add_hint">Hinweis: wenn du einen Stundenplan von Stud.IP herunterlädst, wird dieser automatisch als neuer Stundenplan hinzugefügt, also musst du in diesem Fall hier nichts machen!</string>
 
     <string name="settings_current_day_title">Starte Stundenplan am heutigen Tag</string>
     <string name="settings_current_day_subtitle">Ansonsten wird Montag beim Start angezeigt</string>

@@ -27,6 +27,7 @@ import com.denizk0461.weserplaner.databinding.FragmentSettingsBinding
 import com.denizk0461.weserplaner.model.FormattedDate
 import com.denizk0461.weserplaner.model.Timetable
 import com.denizk0461.weserplaner.sheet.AllergenConfigSheet
+import com.denizk0461.weserplaner.sheet.TimetableAddSheet
 import com.denizk0461.weserplaner.sheet.TimetableEditSheet
 import com.denizk0461.weserplaner.values.AppLayout
 import com.denizk0461.weserplaner.viewmodel.SettingsViewModel
@@ -110,6 +111,10 @@ class SettingsFragment : AppFragment<FragmentSettingsBinding>() {
         binding.autoCompleteTimetable.setOnItemClickListener { _, _, position, _ ->
             viewModel.setSelectedTimetable(savedTimetables[position].id)
             binding.autoCompleteTimetable.setText(timetableAdapter.getItem(position), false)
+        }
+
+        binding.buttonAddTimetable.setOnClickListener {
+            openBottomSheet(TimetableAddSheet())
         }
 
         binding.buttonEditTimetable.setOnClickListener {
