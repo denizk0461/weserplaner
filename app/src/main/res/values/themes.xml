@@ -36,6 +36,9 @@
 
         <item name="colorErrorText">@color/md_theme_light_error</item>
 
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+
         <!-- is this correct? -->
         <item name="scheduleColorDefault">@color/md_theme_dark_background</item>
 

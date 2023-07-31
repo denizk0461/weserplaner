@@ -30,6 +30,8 @@
 
         <item name="colorErrorText">@color/md_theme_dark_error</item>
 
+        <item name="android:statusBarColor">@android:color/transparent</item>
+
         <item name="android:textColor">@color/md_theme_dark_onSurfaceVariant</item>
         <item name="android:textColorHighlight">@color/md_theme_dark_primaryContainer</item>
         <item name="colorText">@color/md_theme_dark_onSurfaceVariant</item>
