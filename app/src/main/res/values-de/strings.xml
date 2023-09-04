@@ -94,9 +94,11 @@
     <string name="sheet_schedule_snack_update">Veranstaltung wurde aktualisiert.</string>
     <string name="sheet_schedule_update_header_edit">Bestehende Veranstaltung bearbeiten</string>
     <string name="sheet_schedule_update_header_add">Neue Veranstaltung hinzufügen</string>
+    <string name="sheet_schedule_update_subheader_add">Stundenplan: %s</string>
     <string name="sheet_schedule_update_title_hint">Veranstaltungstitel</string>
     <string name="sheet_schedule_update_lecturers_hint">Dozierende*r</string>
     <string name="sheet_schedule_update_room_hint">Raum</string>
+    <string name="sheet_schedule_update_no_timetable">Du musst einen Stundenplan erstellen, bevor du Veranstaltungen hinzufügst!</string>
     <string name="sheet_schedule_update_hint_quarter">Auf akademisches Viertel umstellen</string>
     <string name="sheet_schedule_update_hint_quarter_error">Sorry, ein Fehler ist aufgetreten!</string>
     <string name="sheet_schedule_update_timestamp_error_mixed">Der Kurs kann nicht enden bevor er aufhört.</string>
@@ -145,6 +147,7 @@
 
     <string name="title_schedule">Dein Stundenplan</string>
     <string name="title_schedule_short">Stundenplan</string>
+    <string name="title_schedule_placeholder">Stundenplan: %s</string>
     <string name="title_exam_overview">Aufgaben &amp; Prüfungen</string>
     <string name="title_exam_overview_short">Aufgaben</string>
     <string name="title_canteen">Mensenangebote</string>

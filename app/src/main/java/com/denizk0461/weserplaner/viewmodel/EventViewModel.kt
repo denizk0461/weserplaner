@@ -26,6 +26,8 @@ class EventViewModel(private val app: Application) : AppViewModel(app) {
         }
     }
 
+    fun getTimetableCount(): Int = returnBlocking { repo.getTimetableCount() }
+
     /**
      * This value determines whether the user wants their timetable to launch with the current day.
      */

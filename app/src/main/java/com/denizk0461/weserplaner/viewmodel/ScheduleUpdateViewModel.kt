@@ -18,4 +18,6 @@ class ScheduleUpdateViewModel(application: Application) : AppViewModel(applicati
      * @param event the event to update
      */
     fun update(event: StudIPEvent) { doAsync { repo.update(event) } }
+
+    fun getCurrentTimetableId(): Int = repo.getPreferenceSelectedTimetable()
 }

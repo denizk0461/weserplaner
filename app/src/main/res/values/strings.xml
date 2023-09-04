@@ -32,7 +32,7 @@
     <string name="introduction_button_continue">Continue to the app</string>
 
     <string name="compact_overview_button_settings_hint">App settings</string>
-    <string name="compact_overview_button_events_hint">Timetable</string>
+    <string name="compact_overview_button_events_hint">Schedule</string>
     <string name="compact_overview_button_refresh_offers_hint">Refresh offers</string>
     <string name="compact_overview_button_offers_hint">All offers</string>
     <string name="compact_overview_header_events">Today\'s events</string>
@@ -67,9 +67,9 @@
     <string name="fetch_bar_help_desc">Show help</string>
     <string name="fetch_bar_schedule_title">Schedule</string>
     <string name="fetch_bar_schedule_desc">Go to your schedule</string>
-    <string name="fetch_bar_help_sheet_title">How to save your timetable in the app</string>
-    <string name="fetch_bar_help_sheet_content"> • Log in with your Stud.IP login\n • Open your timetable view, in case it doesn\'t open automatically, by clicking the rightmost icon in the bottom bar that looks like a pencil and a ruler\n • Click the \'save\' button that appears in the bottom right corner\n • Done!</string>
-    <string name="fetch_bar_save_desc">Save the timetable in the app</string>
+    <string name="fetch_bar_help_sheet_title">How to save your schedule in the app</string>
+    <string name="fetch_bar_help_sheet_content"> • Log in with your Stud.IP login\n • Open your schedule view, in case it doesn\'t open automatically, by clicking the rightmost icon in the bottom bar that looks like a pencil and a ruler\n • Click the \'save\' button that appears in the bottom right corner\n • Done!</string>
+    <string name="fetch_bar_save_desc">Save the schedule in the app</string>
 
     <string name="schedule_button_overview_hint">View full schedule</string>
     <string name="schedule_fab_add_text">New event</string>
@@ -95,10 +95,12 @@
     <string name="sheet_schedule_snack_update">Event has been updated.</string>
     <string name="sheet_schedule_update_header_edit">Edit existing event</string>
     <string name="sheet_schedule_update_header_add">Add new event</string>
+    <string name="sheet_schedule_update_subheader_add">Schedule: %s</string>
     <string name="sheet_schedule_update_title_hint">Event title</string>
     <string name="sheet_schedule_update_lecturers_hint">Lecturer(s)</string>
     <string name="sheet_schedule_update_room_hint">Room</string>
     <string name="sheet_schedule_update_timeslot_middle" translatable="false">–</string>
+    <string name="sheet_schedule_update_no_timetable">You must create a schedule before you add events!</string>
     <string name="sheet_schedule_update_hint_quarter">Change to academic quarter</string>
     <string name="sheet_schedule_update_hint_quarter_error">Sorry, an error occurred!</string>
     <string name="sheet_schedule_update_timestamp_error_mixed">The course cannot end before it begins.</string>
@@ -148,6 +150,7 @@
 
     <string name="title_schedule">Your Schedule</string>
     <string name="title_schedule_short">Schedule</string>
+    <string name="title_schedule_placeholder">Schedule: %s</string>
     <string name="title_exam_overview">Tasks &amp; Exams</string>
     <string name="title_exam_overview_short">Tasks</string>
     <string name="title_canteen">Canteen Offers</string>
@@ -243,7 +246,7 @@
     <string name="nav_settings">Settings</string>
 
     <string name="new_feature_timetables_header">Heads up, new feature!</string>
-    <string name="new_feature_timetables_content">As the new semester will start in a couple of weeks, you can prepare in advance by adding your new timetable! You can now add as many timetables to the app as you like.\n\nHead into the settings to find the new \'timetables\' option!</string>
+    <string name="new_feature_timetables_content">As the new semester will start in a couple of weeks, you can prepare in advance by adding your new schedule! You can now add as many schedules to the app as you like.\n\nHead into the settings to find the new \'schedules\' option!</string>
 
     <string name="settings_general">General</string>
     <string name="settings_schedule">Stud.IP Schedule</string>
@@ -254,22 +257,22 @@
     <string name="refresh_schedule_title">Refresh your Stud.IP schedule</string>
     <string name="refresh_schedule_subtitle">This will clear any customisations!</string>
 
-    <string name="settings_selected_timetable_header">Select which timetable to display</string>
-    <string name="settings_selected_timetable_hint">Timetable</string>
-    <string name="settings_selected_timetable_edit_button_hint">Edit timetable</string>
-    <string name="settings_selected_timetable_edit_text_title">Timetable name</string>
+    <string name="settings_selected_timetable_header">Select which schedule to display</string>
+    <string name="settings_selected_timetable_hint">Schedule</string>
+    <string name="settings_selected_timetable_edit_button_hint">Edit schedule</string>
+    <string name="settings_selected_timetable_edit_text_title">Schedule name</string>
     <string name="settings_timetable_button_add">Add</string>
     <string name="settings_timetable_button_edit">Edit</string>
-    <string name="settings_timetable_sheet_header">Edit this timetable</string>
-    <string name="settings_timetable_sheet_header_add">Add a new timetable</string>
-    <string name="settings_timetable_edit_fail">There is no timetable to edit!</string>
-    <string name="settings_timetable_sheet_confirm_save">Timetable has been updated.</string>
-    <string name="settings_timetable_sheet_confirm_add">Timetable has been added.</string>
-    <string name="settings_timetable_sheet_confirm_delete">Timetable has been deleted.</string>
+    <string name="settings_timetable_sheet_header">Edit this schedule</string>
+    <string name="settings_timetable_sheet_header_add">Add a new schedule</string>
+    <string name="settings_timetable_edit_fail">There is no schedule to edit!</string>
+    <string name="settings_timetable_sheet_confirm_save">Schedule has been updated.</string>
+    <string name="settings_timetable_sheet_confirm_add">Schedule has been added.</string>
+    <string name="settings_timetable_sheet_confirm_delete">Schedule has been deleted.</string>
     <string name="settings_timetable_sheet_delete_confirm">Sure?</string>
-    <string name="settings_timetable_add_hint">Hint: if you download a timetable from Stud.IP, it automatically gets added as a new timetable, so you won\'t need to do anything here!</string>
+    <string name="settings_timetable_add_hint">Hint: if you download a schedule from Stud.IP, it automatically gets added as a new schedule, so you won\'t need to do anything here!</string>
 
-    <string name="settings_current_day_title">Launch timetable on current day</string>
+    <string name="settings_current_day_title">Launch schedule on current day</string>
     <string name="settings_current_day_subtitle">If unselected, Monday will be shown on launch instead</string>
 
     <string name="settings_highlight_title">Highlight next course</string>

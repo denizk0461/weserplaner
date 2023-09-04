@@ -13,6 +13,7 @@ import com.denizk0461.weserplaner.activity.FetcherActivity
 import com.denizk0461.weserplaner.activity.TimetableOverviewActivity
 import com.denizk0461.weserplaner.adapter.StudIPEventPageAdapter
 import com.denizk0461.weserplaner.data.getTextSheet
+import com.denizk0461.weserplaner.data.showErrorSnackBar
 import com.denizk0461.weserplaner.data.showSnackBar
 import com.denizk0461.weserplaner.databinding.FragmentEventBinding
 import com.denizk0461.weserplaner.sheet.ScheduleUpdateSheet
@@ -34,6 +35,9 @@ class EventFragment : AppFragment<FragmentEventBinding>() {
 
     // Titles for the view pager's tabs
     private lateinit var weekdays: Array<String>
+
+    // Name of the currently selected schedule
+    private lateinit var timetableName: String
 
     // Instantiate the view binding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -118,9 +122,9 @@ class EventFragment : AppFragment<FragmentEventBinding>() {
         // Set visibility of the fetch button depending on whether any events have been stored
         viewModel.getEventCount().observe(viewLifecycleOwner) { eventCount ->
 
-            val timetableName = viewModel.getSelectedTimetableName()
+            timetableName = viewModel.getSelectedTimetableName()
             if (timetableName.isNotBlank()) {
-                binding.appTitleBar.text = timetableName
+                binding.appTitleBar.text = getString(R.string.title_schedule_placeholder, timetableName)
             }
 
             binding.buttonFetchSchedule.visibility = if (eventCount == 0) {
@@ -132,6 +136,14 @@ class EventFragment : AppFragment<FragmentEventBinding>() {
 
         // Set up button for adding a new event
         binding.fabAddEvent.setOnClickListener {
+
+            if (viewModel.getTimetableCount() == 0) {
+                context.theme.showErrorSnackBar(
+                    binding.coordinatorLayout,
+                    getString(R.string.sheet_schedule_update_no_timetable),
+                )
+                return@setOnClickListener
+            }
             /*
              * Open the bottom sheet used for editing an event, but tell the sheet that it will be
              * used for creating a new event instead.

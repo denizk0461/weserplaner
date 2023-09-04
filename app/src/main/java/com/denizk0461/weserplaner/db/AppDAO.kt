@@ -87,6 +87,9 @@ interface AppDAO {
     @Query("SELECT * FROM timetables ORDER BY id")
     fun getTimetables(): LiveData<List<Timetable>>
 
+    @Query("SELECT COUNT(*) FROM timetables")
+    fun getTimetableCount(): Int
+
     @Query("SELECT * FROM timetables WHERE id = :id LIMIT 1")
     fun getTimetableForId(id: Int): Timetable
 

@@ -178,6 +178,8 @@ class AppRepository(app: Application) {
 
     fun getTimetables(): LiveData<List<Timetable>> = dao.getTimetables()
 
+    fun getTimetableCount(): Int = dao.getTimetableCount()
+
     fun getTimetableForId(id: Int): Timetable = dao.getTimetableForId(id)
 
     fun deleteTimetable(id: Int) {

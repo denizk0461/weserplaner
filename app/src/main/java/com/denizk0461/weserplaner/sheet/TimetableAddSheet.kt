@@ -2,6 +2,7 @@ package com.denizk0461.weserplaner.sheet
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import com.denizk0461.weserplaner.R
@@ -38,6 +39,16 @@ class TimetableAddSheet : AppSheet(R.layout.sheet_timetable_add) {
         }
 
         binding.buttonSave.setOnClickListener {
+
+            if (binding.editTextTitle.text.toString().isBlank()) {
+                // Set an error on the title field
+                binding.textLayoutTitle.error =
+                    getString(R.string.sheet_schedule_update_text_field_empty_error)
+
+                // action must not be executed
+                return@setOnClickListener
+            }
+
             viewModel.insertTimetable(Timetable(name = binding.editTextTitle.text.toString().trim()))
 
             // Tell the user that the event has been updated
@@ -46,6 +57,10 @@ class TimetableAddSheet : AppSheet(R.layout.sheet_timetable_add) {
             )
 
             dismiss()
+        }
+
+        binding.editTextTitle.addTextChangedListener {
+            binding.textLayoutTitle.error = null
         }
     }
 }
