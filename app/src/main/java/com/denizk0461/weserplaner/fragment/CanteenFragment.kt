@@ -266,6 +266,14 @@ class CanteenFragment : AppFragment<FragmentCanteenBinding>() {
             // Save that the canteen has been opened before
             viewModel.preferenceHasOpenedCanteen = true
         }
+
+        if (!viewModel.getPreferenceFirstLaunch() && !viewModel.getPreferenceFeatureDate()) {
+            openBottomSheet(getTextSheet(
+                getString(R.string.new_feature_timetables_header),
+                getString(R.string.new_feature_dates_content),
+            ))
+            viewModel.setPreferenceFeatureDate(true)
+        }
     }
 
     /**

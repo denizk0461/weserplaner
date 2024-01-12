@@ -101,4 +101,8 @@ class CanteenViewModel(app: Application) : AppViewModel(app) {
      */
     val preferenceCanteenDate: Int
         get() = repo.getPreferenceCanteenDate()
+
+    fun getPreferenceFirstLaunch(): Boolean = repo.getPreferenceFirstLaunch()
+    fun getPreferenceFeatureDate(): Boolean = repo.getPreferenceFeatureDate()
+    fun setPreferenceFeatureDate(newValue: Boolean) { repo.setPreferenceFeatureDate(newValue) }
 }

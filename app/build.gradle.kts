@@ -12,8 +12,8 @@ android {
         applicationId = "com.denizk0461.weserplaner"
         minSdk = 24
         targetSdk = 34
-        versionCode = 10
-        versionName = "1.2.0"
+        versionCode = 11
+        versionName = "1.2.1"
 
         resourceConfigurations += arrayOf("en", "de")
 

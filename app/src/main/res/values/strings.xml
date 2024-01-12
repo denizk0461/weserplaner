@@ -247,6 +247,7 @@
 
     <string name="new_feature_timetables_header">Heads up, new feature!</string>
     <string name="new_feature_timetables_content">As the new semester will start in a couple of weeks, you can prepare in advance by adding your new schedule! You can now add as many schedules to the app as you like.\n\nHead into the settings to find the new \'schedules\' option!</string>
+    <string name="new_feature_dates_content">In order to make it easier to discover canteen offerings across the week, the headers at the top of the screen now show the day alongside the date!\n\nExample: \"Fr., 12.01.\"\n\nThere are more options to select in the settings if you wish to disable this, or if you prefer to show the full day names instead!\n\nSidenote: if you see a question mark \'?\' you may need to refresh your canteen plan once – then the question marks should disappear!\n\nThank you for still using my app :)\n~Deniz</string>
 
     <string name="settings_general">General</string>
     <string name="settings_schedule">Stud.IP Schedule</string>

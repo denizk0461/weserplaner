@@ -20,6 +20,11 @@ enum class SettingsPreferences(val key: String) {
     NEW_FEATURE_TIMETABLES("new_feature_timetables"),
 
     /**
+     * Whether the user has been notified about the new canteen screen date display format.
+     */
+    NEW_FEATURE_DATES("new_feature_dates"),
+
+    /**
      * Which allergens the user wants displayed or hidden.
      */
     ALLERGEN_CONFIG("setting_allergen_config"),
