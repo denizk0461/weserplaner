@@ -291,6 +291,15 @@
     <string name="settings_pricing_student">Students</string>
     <string name="settings_pricing_employee">Employees</string>
 
+    <string name="settings_dates_title">Set how dates are displayed</string>
+    <string name="settings_dates_subtitle">Applies to the daily canteen offers\' tabs</string>
+    <string-array name="settings_dates">
+        <item translatable="false">Fr., 12.01.</item>
+        <item translatable="false">Freitag, 12.01.</item>
+        <item translatable="false">12.01.</item>
+        <item translatable="false">Freitag</item>
+    </string-array>
+
     <string name="settings_allergens_title">Mark offers with allergens with a star*</string>
     <string name="settings_allergens_subtitle">Also applies to additives</string>
     <string name="settings_allergens_title_alt">App developed by denizk0461</string>

@@ -218,6 +218,22 @@ class SettingsFragment : AppFragment<FragmentSettingsBinding>() {
             }
         }
 
+        val dateAdapter = DropdownAdapter(
+            context,
+            context.resources.getStringArray(R.array.settings_dates).toList(),
+        )
+
+        binding.autoCompleteDates.setAdapter(dateAdapter)
+        binding.autoCompleteDates.setText(
+            dateAdapter.getItem(viewModel.preferenceCanteenDate),
+            false,
+        )
+
+        binding.autoCompleteDates.setOnItemClickListener { _, _, position, _ ->
+            viewModel.preferenceCanteenDate = position
+            binding.autoCompleteDates.setText(dateAdapter.getItem(position))
+        }
+
         // --- miscellaneous settings --- //
 
         // Set up button toggle group for changing default fragment

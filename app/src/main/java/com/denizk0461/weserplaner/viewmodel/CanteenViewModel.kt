@@ -95,4 +95,10 @@ class CanteenViewModel(app: Application) : AppViewModel(app) {
      */
     val preferenceAppLayout: AppLayout
         get() = repo.getAppLayout()
+
+    /**
+     * Determines in which format dates should be displayed on the canteen screen.
+     */
+    val preferenceCanteenDate: Int
+        get() = repo.getPreferenceCanteenDate()
 }

@@ -440,6 +440,16 @@ class AppRepository(app: Application) {
     }
 
     /**
+     * User-selected timetable to display.
+     */
+    fun getPreferenceCanteenDate(): Int = getIntPreference(
+        SettingsPreferences.CANTEEN_DATE_PREFERENCE,
+    )
+    fun setPreferenceCanteenDate(newValue: Int) {
+        setPreference(SettingsPreferences.CANTEEN_DATE_PREFERENCE, newValue)
+    }
+
+    /**
      * This value determines which navigation graph will be used for app navigation.
      */
     fun getAppLayout(): AppLayout = AppLayout.values()[getIntPreference(

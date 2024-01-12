@@ -485,6 +485,97 @@
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
+                    <!-- Dates -->
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="8dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:fontFamily="@font/lato_bolditalic"
+                            android:text="@string/settings_dates_title"
+                            android:textSize="16sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/settings_dates_subtitle"
+                            android:textSize="16sp" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/text_layout_dates"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:boxStrokeColor="@color/selector_text_input"
+                            app:hintTextColor="@color/selector_text_input">
+
+                            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                                android:id="@+id/auto_complete_dates"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="?attr/colorOnSurfaceVariant"
+                                android:inputType="none"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+<!--                        <com.google.android.material.button.MaterialButtonToggleGroup-->
+<!--                            android:id="@+id/toggle_date_group"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:gravity="center_horizontal"-->
+<!--                            app:singleSelection="true"-->
+<!--                            app:selectionRequired="true">-->
+
+<!--                            <com.google.android.material.button.MaterialButton-->
+<!--                                style="@style/Widget.Material3.Button.OutlinedButton"-->
+<!--                                android:id="@+id/toggle_date_0"-->
+<!--                                android:layout_width="0dp"-->
+<!--                                android:layout_weight="1"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="@string/settings_dates_0"-->
+<!--                                android:textColor="@color/list_group_button"-->
+<!--                                app:strokeColor="?attr/colorOutlineVariant"/>-->
+
+<!--                            <com.google.android.material.button.MaterialButton-->
+<!--                                style="@style/Widget.Material3.Button.OutlinedButton"-->
+<!--                                android:id="@+id/toggle_date_1"-->
+<!--                                android:layout_width="0dp"-->
+<!--                                android:layout_weight="1"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="@string/settings_dates_1"-->
+<!--                                android:textColor="@color/list_group_button"-->
+<!--                                app:strokeColor="?attr/colorOutlineVariant"/>-->
+
+<!--                            <com.google.android.material.button.MaterialButton-->
+<!--                                style="@style/Widget.Material3.Button.OutlinedButton"-->
+<!--                                android:id="@+id/toggle_date_2"-->
+<!--                                android:layout_width="0dp"-->
+<!--                                android:layout_weight="1"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="@string/settings_dates_2"-->
+<!--                                android:textColor="@color/list_group_button"-->
+<!--                                app:strokeColor="?attr/colorOutlineVariant"/>-->
+
+<!--                            <com.google.android.material.button.MaterialButton-->
+<!--                                style="@style/Widget.Material3.Button.OutlinedButton"-->
+<!--                                android:id="@+id/toggle_date_3"-->
+<!--                                android:layout_width="0dp"-->
+<!--                                android:layout_weight="1"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="@string/settings_dates_3"-->
+<!--                                android:textColor="@color/list_group_button"-->
+<!--                                app:strokeColor="?attr/colorOutlineVariant"/>-->
+
+<!--                        </com.google.android.material.button.MaterialButtonToggleGroup>-->
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
             </com.google.android.material.card.MaterialCardView>

@@ -103,6 +103,13 @@ class SettingsViewModel(app: Application) : AppViewModel(app) {
         get() = repo.getAppLayout()
         set(newValue) { repo.setAppLayout(newValue) }
 
+    /**
+     * Determines in which format dates should be displayed on the canteen screen.
+     */
+    var preferenceCanteenDate: Int
+        get() = repo.getPreferenceCanteenDate()
+        set(newValue) { repo.setPreferenceCanteenDate(newValue) }
+
     fun setPreferenceFeatureTimetables(newValue: Boolean) { repo.setPreferenceFeatureTimetables(newValue) }
 
     // --- functions for dev codes --- //

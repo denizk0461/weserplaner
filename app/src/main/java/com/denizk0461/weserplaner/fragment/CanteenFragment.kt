@@ -230,7 +230,12 @@ class CanteenFragment : AppFragment<FragmentCanteenBinding>() {
 
         // Set up TabLayoutMediator to populate tabs
         TabLayoutMediator(binding.dayTabLayout, binding.viewPager) { tab, position ->
-            tab.text = dates[position].run { "$day, $date" }
+            tab.text = dates[position].let { d -> when (viewModel.preferenceCanteenDate) {
+                0 -> "${d.day.shortenDay()}, ${d.date}"
+                1 -> "${d.day}, ${d.date}"
+                2 -> d.date
+                else -> d.day // 3
+            }}
         }.attach()
 
         // Set extended FAB to extend when the page is changed
@@ -261,6 +266,23 @@ class CanteenFragment : AppFragment<FragmentCanteenBinding>() {
             // Save that the canteen has been opened before
             viewModel.preferenceHasOpenedCanteen = true
         }
+    }
+
+    /**
+     * Shortens a German day name to its shortened form, followed by a period. Example:
+     * Montag -> Mo.
+     *
+     * @receiver    day name to shorten
+     * @return      shortened day name with period following it
+     */
+    private fun String.shortenDay(): String = when (this) {
+        "Montag" -> "Mo."
+        "Dienstag" -> "Di."
+        "Mittwoch" -> "Mi."
+        "Donnerstag" -> "Do."
+        "Freitag" -> "Fr."
+        "Samstag" -> "Sa."
+        else -> "So."
     }
 
     // Invalidate the view binding
