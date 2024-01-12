@@ -299,6 +299,7 @@
         <item translatable="false">Freitag, 12.01.</item>
         <item translatable="false">12.01.</item>
         <item translatable="false">Freitag</item>
+        <item translatable="false">Fr.</item>
     </string-array>
 
     <string name="settings_allergens_title">Mark offers with allergens with a star*</string>

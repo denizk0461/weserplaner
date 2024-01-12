@@ -234,7 +234,8 @@ class CanteenFragment : AppFragment<FragmentCanteenBinding>() {
                 0 -> "${d.day.shortenDay()}, ${d.date}"
                 1 -> "${d.day}, ${d.date}"
                 2 -> d.date
-                else -> d.day // 3
+                3 -> d.day
+                else -> d.day.shortenDay()
             }}
         }.attach()
 
