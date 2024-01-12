@@ -55,9 +55,10 @@ class TextSheet : AppSheet(R.layout.sheet_text) {
                         binding.textHeader.text = getString(
                             R.string.text_sheet_opening_hours_title, canteen.canteen
                         )
-                        binding.textContent.text = canteen.openingHours.ifBlank {
+                        binding.textContent.text = Html.fromHtml(canteen.openingHours.ifBlank {
                             getString(R.string.text_sheet_opening_hours_empty)
-                        }
+                        }, HtmlCompat.FROM_HTML_MODE_LEGACY)
+                        binding.textContent.movementMethod = LinkMovementMethod.getInstance()
                     }
                     TextSheetContentId.NEWS -> {
                         binding.textHeader.text = getString(

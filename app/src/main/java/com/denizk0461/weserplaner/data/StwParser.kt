@@ -452,7 +452,8 @@ class StwParser(application: Application) {
         result = result.replace("</p>", "\n")
 
         // Remove all other characters
-        return result.replace(Regex("</?[a-zA-Z0-9]+>"), "")
+        // 'a' is excluded to avoid removing the <a> tags
+        return result.replace(Regex("</?[c-zA-Z0-9]+>"), "")
     }
 
     /**
@@ -492,7 +493,7 @@ class StwParser(application: Application) {
                 // Confirm that this line only contains information for the opening hours
                 if (!line.contains("Catering")) {
                     // Add the line to the opening hours
-                    openingHours += "${line}\n"
+                    openingHours += "${line}<br>"
                 }
             }
         }
