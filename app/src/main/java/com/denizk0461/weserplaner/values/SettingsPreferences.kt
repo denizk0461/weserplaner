@@ -88,5 +88,10 @@ enum class SettingsPreferences(val key: String) {
      * Which timetable the user has selected.
      */
     SELECTED_TIMETABLE("selected_timetable"),
+
+    /**
+     * How the dates should be shown on the canteen screen.
+     */
+    CANTEEN_DATE_PREFERENCE("date_canteen_preference")
     ;
 }

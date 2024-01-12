@@ -254,6 +254,9 @@ class StwParser(application: Application) {
      * @return      date object
      */
     private fun Document.getDateByIndex(index: Int): OfferDate {
+        val day = getElementsByClass("tabs")[0]
+            .getElementsByClass("tab-title")[index].text()
+
         /*
          * Fetch the date for a given day. It will be in the following format:
          * 24. Apr
@@ -272,7 +275,7 @@ class StwParser(application: Application) {
         val date = "${rawDate[0]}${rawDate[1].monthToNumber()}."
 
         // Save the date to its list
-        return OfferDate(dateId, date)
+        return OfferDate(dateId, day, date)
     }
 
     /**
@@ -438,7 +441,8 @@ class StwParser(application: Application) {
      * Cleans up a HTML source by doing the following:
      * - replace non-breaking spaces '&nbsp;' with a regular space character ' ',
      * - replace closing paragraph tags '</p>' with a line break '\n', and
-     * - remove any other tag.
+     * - remove any other tag that does not start with 'a' or 'b' – this is a hacky way to preserve
+     * <a> and <br> tags.
      * This is used to format the opening hours of the canteens.
      *
      * @receiver    Element to parse the text of

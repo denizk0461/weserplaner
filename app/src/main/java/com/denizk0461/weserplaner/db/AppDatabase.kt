@@ -22,7 +22,7 @@ import com.denizk0461.weserplaner.model.*
         OfferItem::class,
         EventTask::class,
     ],
-    version = 22,
+    version = 23,
     exportSchema = true,
     autoMigrations = [
         AutoMigration(from = 20, to = 21),
@@ -61,6 +61,7 @@ abstract class AppDatabase : RoomDatabase() {
                         ).addMigrations(
                             migrationAddNewsToOfferCanteen_19_20,
                             migration_21_22,
+                            migration_22_23,
 //                            migrationAddTimetableId_20_21,
 //                            migrationAddEventTask_20_21,
                         )
@@ -123,6 +124,14 @@ abstract class AppDatabase : RoomDatabase() {
 
                 // Rename new table to the old table's name
                 database.execSQL("ALTER TABLE studip_events_temp RENAME TO studip_events")
+            }
+        }
+
+        private val migration_22_23 = object : Migration(22, 23) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("""
+                    ALTER TABLE offer_date ADD COLUMN day TEXT NOT NULL DEFAULT '?'
+                """)
             }
         }
     }

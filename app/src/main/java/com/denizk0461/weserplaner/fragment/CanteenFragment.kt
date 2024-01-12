@@ -40,7 +40,7 @@ class CanteenFragment : AppFragment<FragmentCanteenBinding>() {
     /**
      * Locally stored dates to populate the TabLayout with.
      */
-    private var dates: List<String> = listOf()
+    private var dates: List<OfferDate> = listOf()
 
     // Instantiate the view binding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -219,7 +219,7 @@ class CanteenFragment : AppFragment<FragmentCanteenBinding>() {
         viewModel.getDates().observe(viewLifecycleOwner) { newDates ->
 
             // Retrieve the dates individually and store them for the tab mediator to use
-            dates = newDates.map { it.date }
+            dates = newDates
 
             // Let the adapter know of the new amount of dates (pages) to display
             viewPagerAdapter.itemCount = dates.size
@@ -230,7 +230,7 @@ class CanteenFragment : AppFragment<FragmentCanteenBinding>() {
 
         // Set up TabLayoutMediator to populate tabs
         TabLayoutMediator(binding.dayTabLayout, binding.viewPager) { tab, position ->
-            tab.text = dates[position]
+            tab.text = dates[position].run { "$day, $date" }
         }.attach()
 
         // Set extended FAB to extend when the page is changed
