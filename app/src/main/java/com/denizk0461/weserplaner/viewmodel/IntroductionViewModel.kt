@@ -12,5 +12,7 @@ class IntroductionViewModel(application: Application) : AppViewModel(application
      */
     fun completedIntroduction() {
         repo.setPreferenceFirstLaunch(false)
+        repo.setPreferenceFeatureTimetables(true)
+        repo.setPreferenceFeatureDate(true)
     }
 }
